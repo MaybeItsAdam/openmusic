@@ -4,7 +4,6 @@ import 'package:encrypt/encrypt.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:spotube/models/database/database.dart';
 import 'package:spotube/services/wm_tools/wm_tools.dart';
-import 'package:uuid/uuid.dart';
 
 abstract class KVStoreService {
   static SharedPreferences? _sharedPreferences;
@@ -45,37 +44,18 @@ abstract class KVStoreService {
         jsonEncode(value.toJson()),
       );
 
-  static String get encryptionKey {
-    final value = sharedPreferences.getString('encryption');
-
-    final key = const Uuid().v4();
-    if (value == null) {
-      setEncryptionKey(key);
-      return key;
-    }
-
-    return value;
-  }
-
-  static Future<void> setEncryptionKey(String key) async {
-    await sharedPreferences.setString('encryption', key);
-  }
-
-  static IV get ivKey {
+  /// The single IV the legacy Salsa20 scheme reused for every value.
+  ///
+  /// Read-only, and null once nothing is encrypted with it. It deliberately no
+  /// longer generates one on demand: the getter used to mint an IV, hand it
+  /// back, and persist it without awaiting, so a caller could encrypt under an
+  /// IV that never reached storage. Nothing writes in that format any more --
+  /// see [DecryptedText], which uses AES-GCM with a per-value IV.
+  static IV? get ivKey {
     final iv = sharedPreferences.getString('iv');
-    final value = IV.fromSecureRandom(8);
-
-    if (iv == null) {
-      setIVKey(value);
-
-      return value;
-    }
+    if (iv == null) return null;
 
     return IV.fromBase64(iv);
-  }
-
-  static Future<void> setIVKey(IV iv) async {
-    await sharedPreferences.setString('iv', iv.base64);
   }
 
   static double get volume => sharedPreferences.getDouble('volume') ?? 1.0;

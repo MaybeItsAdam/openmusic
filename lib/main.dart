@@ -43,6 +43,7 @@ import 'package:spotube/services/kv_store/encrypted_kv_store.dart';
 import 'package:spotube/services/kv_store/kv_store.dart';
 import 'package:spotube/services/logger/logger.dart';
 import 'package:spotube/services/wm_tools/wm_tools.dart';
+import 'package:spotube/utils/migrations/encryption.dart';
 import 'package:spotube/utils/migrations/sandbox.dart';
 import 'package:spotube/utils/platform.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -108,6 +109,11 @@ Future<void> main(List<String> rawArgs) async {
     await EncryptedKvStoreService.initialize();
 
     final database = AppDatabase();
+
+    // Idempotent and self-describing, so it is safe to run on every launch and
+    // a partial run simply resumes. Deliberately not a schema step: a failure
+    // there would brick launch, and no column type changes.
+    await migrateLegacyEncryptedValues(database);
 
     if (kIsDesktop) {
       await localNotifier.setup(appName: "Spotube");
