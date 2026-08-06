@@ -71,7 +71,9 @@ class PlaybuttonTile extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Tooltip(
-            tooltip: TooltipContainer(child: Text(context.l10n.add_to_queue)).call,
+            tooltip: TooltipContainer(
+              child: Text(context.l10n.add_to_queue),
+            ).call,
             child: IconButton.outline(
               icon: const Icon(SpotubeIcons.queueAdd),
               onPressed: onAddToQueuePressed,
@@ -83,11 +85,9 @@ class PlaybuttonTile extends StatelessWidget {
             tooltip: TooltipContainer(child: Text(context.l10n.play)).call,
             child: IconButton.secondary(
               icon: switch ((isLoading, isPlaying)) {
-                (true, _) => const CircularProgressIndicator(
-                    size: 22,
-                  ),
+                (true, _) => const CircularProgressIndicator(size: 22),
                 (false, false) => const Icon(SpotubeIcons.play),
-                (false, true) => const Icon(SpotubeIcons.pause)
+                (false, true) => const Icon(SpotubeIcons.pause),
               },
               onPressed: onPlaybuttonPressed,
               enabled: !isLoading,

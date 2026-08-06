@@ -6,10 +6,7 @@ import 'package:url_launcher/url_launcher_string.dart';
 
 class AppMarkdown extends StatelessWidget {
   final String data;
-  const AppMarkdown({
-    super.key,
-    required this.data,
-  });
+  const AppMarkdown({super.key, required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -17,10 +14,7 @@ class AppMarkdown extends StatelessWidget {
       data: data,
       imageBuilder: (uri, title, alt) {
         final url = uri.toString();
-        return CachedNetworkImage(
-          imageUrl: url,
-          fit: BoxFit.cover,
-        );
+        return CachedNetworkImage(imageUrl: url, fit: BoxFit.cover);
       },
       onTapLink: (text, href, title) async {
         final allowOpeningLink = await showDialog<bool>(
@@ -31,10 +25,7 @@ class AppMarkdown extends StatelessWidget {
         );
 
         if (href != null && allowOpeningLink == true) {
-          launchUrlString(
-            href,
-            mode: LaunchMode.externalApplication,
-          );
+          launchUrlString(href, mode: LaunchMode.externalApplication);
         }
       },
     );

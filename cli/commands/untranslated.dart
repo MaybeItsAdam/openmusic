@@ -14,13 +14,21 @@ class UntranslatedCommand extends Command {
   @override
   run() async {
     final cwd = Directory.current;
-    final file = jsonDecode(
-      File(join(cwd.path, 'untranslated_messages.json')).readAsStringSync(),
-    ) as Map<String, dynamic>;
+    final file =
+        jsonDecode(
+              File(
+                join(cwd.path, 'untranslated_messages.json'),
+              ).readAsStringSync(),
+            )
+            as Map<String, dynamic>;
 
-    final englishMessages = jsonDecode(
-      File(join(cwd.path, 'lib', 'l10n', 'app_en.arb')).readAsStringSync(),
-    ) as Map<String, dynamic>;
+    final englishMessages =
+        jsonDecode(
+              File(
+                join(cwd.path, 'lib', 'l10n', 'app_en.arb'),
+              ).readAsStringSync(),
+            )
+            as Map<String, dynamic>;
 
     final messagesWithValues = <String, dynamic>{};
 

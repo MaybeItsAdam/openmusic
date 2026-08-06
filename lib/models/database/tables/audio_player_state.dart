@@ -27,8 +27,6 @@ class SpotubeTrackObjectListConverter
 
   @override
   String toSql(List<SpotubeTrackObject> value) {
-    return jsonEncode(
-      value.map((e) => e.toJson()).toList(),
-    );
+    return jsonEncode(value.map((e) => e.toJson()).toList());
   }
 }

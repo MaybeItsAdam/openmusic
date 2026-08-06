@@ -3,10 +3,12 @@ import 'package:spotube/provider/metadata_plugin/audio_source/quality_presets.da
 
 final audioSourceQualityLabelProvider = Provider<String>((ref) {
   final sourceQuality = ref.watch(audioSourcePresetsProvider);
-  final sourceContainer = sourceQuality.presets
-      .elementAtOrNull(sourceQuality.selectedStreamingContainerIndex);
-  final quality = sourceContainer?.qualities
-      .elementAtOrNull(sourceQuality.selectedStreamingQualityIndex);
+  final sourceContainer = sourceQuality.presets.elementAtOrNull(
+    sourceQuality.selectedStreamingContainerIndex,
+  );
+  final quality = sourceContainer?.qualities.elementAtOrNull(
+    sourceQuality.selectedStreamingQualityIndex,
+  );
 
   return "${sourceContainer?.name ?? "Unknown"} • ${quality?.toString() ?? "Unknown"}";
 });

@@ -44,6 +44,4 @@ class SourcedTrackNotifier
 }
 
 final sourcedTrackProvider = AsyncNotifierProviderFamily<SourcedTrackNotifier,
-    SourcedTrack, SpotubeFullTrackObject>(
-  () => SourcedTrackNotifier(),
-);
+    SourcedTrack, SpotubeFullTrackObject>(() => SourcedTrackNotifier());

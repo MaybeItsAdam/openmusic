@@ -3,11 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spotube/services/audio_player/audio_player.dart';
 import 'package:spotube/services/logger/logger.dart';
 
-int useSyncedLyrics(
-  WidgetRef ref,
-  Map<int, String> lyricsMap,
-  int delay,
-) {
+int useSyncedLyrics(WidgetRef ref, Map<int, String> lyricsMap, int delay) {
   final stream = audioPlayer.positionStream;
 
   final currentTime = useState(0);

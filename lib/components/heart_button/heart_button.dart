@@ -44,10 +44,7 @@ class HeartButton extends HookConsumerWidget {
           switchOutCurve: Curves.fastOutSlowIn,
           duration: const Duration(milliseconds: 300),
           transitionBuilder: (child, animation) {
-            return ScaleTransition(
-              scale: animation,
-              child: child,
-            );
+            return ScaleTransition(scale: animation, child: child);
           },
           child: Icon(
             icon ??
@@ -66,17 +63,16 @@ class HeartButton extends HookConsumerWidget {
 
 class TrackHeartButton extends HookConsumerWidget {
   final SpotubeTrackObject track;
-  const TrackHeartButton({
-    super.key,
-    required this.track,
-  });
+  const TrackHeartButton({super.key, required this.track});
 
   @override
   Widget build(BuildContext context, ref) {
     final savedTracks = ref.watch(metadataPluginSavedTracksProvider);
     final me = ref.watch(metadataPluginUserProvider);
-    final (:isLiked, :isLoading, :toggleTrackLike) =
-        useTrackToggleLike(track, ref);
+    final (:isLiked, :isLoading, :toggleTrackLike) = useTrackToggleLike(
+      track,
+      ref,
+    );
 
     if (me.isLoading) {
       return const CircularProgressIndicator();

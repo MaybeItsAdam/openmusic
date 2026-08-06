@@ -19,29 +19,30 @@ class MetadataPluginUpdateAvailableDialog extends HookConsumerWidget {
   Widget build(BuildContext context, ref) {
     final isUpdating = useState(false);
 
-    final showErrorSnackbar = useCallback(
-      (BuildContext context, String message) {
-        showToast(
-            context: context,
-            builder: (context, overlay) {
-              return SurfaceCard(
-                child: Basic(
-                  leading: const Icon(SpotubeIcons.error, color: Colors.red),
-                  title: Text(message),
-                  leadingAlignment: Alignment.center,
-                  trailing: IconButton.ghost(
-                    size: ButtonSize.small,
-                    icon: const Icon(SpotubeIcons.close),
-                    onPressed: () {
-                      overlay.close();
-                    },
-                  ),
-                ),
-              );
-            });
-      },
-      [],
-    );
+    final showErrorSnackbar = useCallback((
+      BuildContext context,
+      String message,
+    ) {
+      showToast(
+        context: context,
+        builder: (context, overlay) {
+          return SurfaceCard(
+            child: Basic(
+              leading: const Icon(SpotubeIcons.error, color: Colors.red),
+              title: Text(message),
+              leadingAlignment: Alignment.center,
+              trailing: IconButton.ghost(
+                size: ButtonSize.small,
+                icon: const Icon(SpotubeIcons.close),
+                onPressed: () {
+                  overlay.close();
+                },
+              ),
+            ),
+          );
+        },
+      );
+    }, []);
 
     return AlertDialog(
       title: const Text('Plugin update available'),
@@ -52,9 +53,7 @@ class MetadataPluginUpdateAvailableDialog extends HookConsumerWidget {
         children: [
           Text('${plugin.name} (${update.version}) available.'),
           if (update.changelog != null && update.changelog!.isNotEmpty)
-            AppMarkdown(
-              data: '### Changelog: \n\n${update.changelog}',
-            ),
+            AppMarkdown(data: '### Changelog: \n\n${update.changelog}'),
         ],
       ),
       actions: [

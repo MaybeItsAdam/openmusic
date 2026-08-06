@@ -43,16 +43,14 @@ class PlayerActions extends HookConsumerWidget {
     final downloader = ref.watch(downloadManagerProvider.notifier);
     final isInQueue = useMemoized(() {
       if (playlist.activeTrack is! SpotubeFullTrackObject) return false;
-      final downloadTask =
-          downloader.getTaskByTrackId(playlist.activeTrack!.id);
+      final downloadTask = downloader.getTaskByTrackId(
+        playlist.activeTrack!.id,
+      );
       return const [
         DownloadStatus.queued,
         DownloadStatus.downloading,
       ].contains(downloadTask?.status);
-    }, [
-      playlist.activeTrack,
-      downloader,
-    ]);
+    }, [playlist.activeTrack, downloader]);
 
     final localTracks = ref.watch(localTracksProvider).value;
     final authenticated = ref.watch(metadataPluginAuthenticatedProvider);
@@ -105,8 +103,9 @@ class PlayerActions extends HookConsumerWidget {
                       child: Consumer(
                         builder: (context, ref, _) {
                           final playlist = ref.watch(audioPlayerProvider);
-                          final playlistNotifier =
-                              ref.read(audioPlayerProvider.notifier);
+                          final playlistNotifier = ref.read(
+                            audioPlayerProvider.notifier,
+                          );
 
                           return PlayerQueue.fromAudioPlayerNotifier(
                             floating: true,
@@ -159,22 +158,21 @@ class PlayerActions extends HookConsumerWidget {
             const SizedBox(
               height: 20,
               width: 20,
-              child: CircularProgressIndicator(
-                size: 2,
-              ),
+              child: CircularProgressIndicator(size: 2),
             )
           else
             Tooltip(
-              tooltip:
-                  TooltipContainer(child: Text(context.l10n.download_track))
-                      .call,
+              tooltip: TooltipContainer(
+                child: Text(context.l10n.download_track),
+              ).call,
               child: IconButton.ghost(
                 icon: Icon(
                   isDownloaded ? SpotubeIcons.done : SpotubeIcons.download,
                 ),
                 onPressed: playlist.activeTrack != null
                     ? () => downloader.addToQueue(
-                        playlist.activeTrack! as SpotubeFullTrackObject)
+                          playlist.activeTrack! as SpotubeFullTrackObject,
+                        )
                     : null,
               ),
             ),
@@ -185,9 +183,7 @@ class PlayerActions extends HookConsumerWidget {
         AdaptivePopSheetList<Duration>(
           tooltip: context.l10n.sleep_timer,
           offset: Offset(0, -50 * (sleepTimerEntries.values.length + 2)),
-          headings: [
-            Text(context.l10n.sleep_timer),
-          ],
+          headings: [Text(context.l10n.sleep_timer)],
           icon: Icon(
             SpotubeIcons.timer,
             color: sleepTimer != null ? Colors.red : null,
@@ -212,36 +208,38 @@ class PlayerActions extends HookConsumerWidget {
                 final currentTime = TimeOfDay.now();
                 final time = await showDialog<TimeOfDay?>(
                   context: context,
-                  builder: (context) => HookBuilder(builder: (context) {
-                    final timeRef = useRef<TimeOfDay?>(null);
-                    return AlertDialog(
-                      trailing: IconButton.ghost(
-                        size: ButtonSize.xSmall,
-                        icon: const Icon(SpotubeIcons.close),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                      title: Text(
-                        ShadcnLocalizations.of(context).placeholderTimePicker,
-                      ),
-                      content: TimePickerDialog(
-                        use24HourFormat: false,
-                        initialValue: TimeOfDay.fromDateTime(
-                          DateTime.now().add(sleepTimer ?? Duration.zero),
-                        ),
-                        onChanged: (value) => timeRef.value = value,
-                      ),
-                      actions: [
-                        Button.primary(
+                  builder: (context) => HookBuilder(
+                    builder: (context) {
+                      final timeRef = useRef<TimeOfDay?>(null);
+                      return AlertDialog(
+                        trailing: IconButton.ghost(
+                          size: ButtonSize.xSmall,
+                          icon: const Icon(SpotubeIcons.close),
                           onPressed: () {
-                            Navigator.of(context).pop(timeRef.value);
+                            Navigator.of(context).pop();
                           },
-                          child: Text(context.l10n.save),
                         ),
-                      ],
-                    );
-                  }),
+                        title: Text(
+                          ShadcnLocalizations.of(context).placeholderTimePicker,
+                        ),
+                        content: TimePickerDialog(
+                          use24HourFormat: false,
+                          initialValue: TimeOfDay.fromDateTime(
+                            DateTime.now().add(sleepTimer ?? Duration.zero),
+                          ),
+                          onChanged: (value) => timeRef.value = value,
+                        ),
+                        actions: [
+                          Button.primary(
+                            onPressed: () {
+                              Navigator.of(context).pop(timeRef.value);
+                            },
+                            child: Text(context.l10n.save),
+                          ),
+                        ],
+                      );
+                    },
+                  ),
                 );
 
                 if (time != null) {
@@ -269,7 +267,7 @@ class PlayerActions extends HookConsumerWidget {
             ),
           ],
         ),
-        ...(extraActions ?? [])
+        ...(extraActions ?? []),
       ],
     );
   }

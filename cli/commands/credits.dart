@@ -9,11 +9,7 @@ import 'package:pub_api_client/pub_api_client.dart';
 import 'package:pubspec_parse/pubspec_parse.dart';
 
 class CreditsCommand extends Command {
-  final dio = Dio(
-    BaseOptions(
-      responseType: ResponseType.plain,
-    ),
-  );
+  final dio = Dio(BaseOptions(responseType: ResponseType.plain));
 
   @override
   String get description => "Generate credits for used Library's authors";
@@ -41,58 +37,60 @@ class CreditsCommand extends Command {
         .toSet();
     final packageInfo = await Future.wait(dependencies.map(client.packageInfo));
 
-    final gitDepsList = List.castFrom<MapEntry<String, Dependency>,
-        MapEntry<String, GitDependency>>(
-      allDeps
-          .where((d) => d.value is GitDependency)
-          .map((d) => MapEntry(d.key, d.value as GitDependency))
-          .toList(),
-    );
+    final gitDepsList =
+        List.castFrom<
+          MapEntry<String, Dependency>,
+          MapEntry<String, GitDependency>
+        >(
+          allDeps
+              .where((d) => d.value is GitDependency)
+              .map((d) => MapEntry(d.key, d.value as GitDependency))
+              .toList(),
+        );
 
-    final gitDeps = gitDepsList.map(
-      (d) {
-        final uri = Uri.parse(
-          d.value.url.toString().replaceAll('.git', ''),
-        );
-        return MapEntry(
-          d.key,
-          uri.replace(
-            pathSegments: [
-              ...uri.pathSegments,
-              'raw',
-              d.value.ref ?? 'main',
-              d.value.path ?? '',
-              'pubspec.yaml',
-            ],
-          ).toString(),
-        );
-      },
-    ).toList();
+    final gitDeps = gitDepsList.map((d) {
+      final uri = Uri.parse(d.value.url.toString().replaceAll('.git', ''));
+      return MapEntry(
+        d.key,
+        uri
+            .replace(
+              pathSegments: [
+                ...uri.pathSegments,
+                'raw',
+                d.value.ref ?? 'main',
+                d.value.path ?? '',
+                'pubspec.yaml',
+              ],
+            )
+            .toString(),
+      );
+    }).toList();
 
     final gitPubspecs = await Future.wait(
-      gitDeps.map(
-        (d) {
-          Pubspec parser(Response res) {
-            try {
-              return Pubspec.parse(res.data);
-            } catch (e) {
-              final document = parse(res.data);
-              final pre = document.querySelector('pre');
-              if (pre == null) {
-                stdout.writeln(d.toString());
-                rethrow;
-              }
-              return Pubspec.parse(pre.text);
+      gitDeps.map((d) {
+        Pubspec parser(Response res) {
+          try {
+            return Pubspec.parse(res.data);
+          } catch (e) {
+            final document = parse(res.data);
+            final pre = document.querySelector('pre');
+            if (pre == null) {
+              stdout.writeln(d.toString());
+              rethrow;
             }
+            return Pubspec.parse(pre.text);
           }
+        }
 
-          return dio.get(d.value).then(parser).catchError(
-                (_) => dio
-                    .get(d.value.replaceFirst('/main', '/master'))
-                    .then(parser),
-              );
-        },
-      ),
+        return dio
+            .get(d.value)
+            .then(parser)
+            .catchError(
+              (_) => dio
+                  .get(d.value.replaceFirst('/main', '/master'))
+                  .then(parser),
+            );
+      }),
     );
 
     stdout.writeln(
@@ -105,17 +103,18 @@ class CreditsCommand extends Command {
     );
 
     stdout.writeln(
-      gitPubspecs.map(
-        (package) {
-          final packageUrl = package.homepage ??
-              gitDepsList
-                  .firstWhereOrNull((dep) => dep.key == package.name)
-                  ?.value
-                  .url
-                  .toString();
-          return '1. [${package.name}]($packageUrl) - ${package.description?.replaceAll('\n', '')}';
-        },
-      ).join('\n'),
+      gitPubspecs
+          .map((package) {
+            final packageUrl =
+                package.homepage ??
+                gitDepsList
+                    .firstWhereOrNull((dep) => dep.key == package.name)
+                    ?.value
+                    .url
+                    .toString();
+            return '1. [${package.name}]($packageUrl) - ${package.description?.replaceAll('\n', '')}';
+          })
+          .join('\n'),
     );
   }
 }

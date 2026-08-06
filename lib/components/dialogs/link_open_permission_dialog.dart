@@ -53,10 +53,7 @@ class LinkOpenPermissionDialog extends StatelessWidget {
           Button.destructive(
             onPressed: () {
               if (href != null) {
-                launchUrlString(
-                  href!,
-                  mode: LaunchMode.externalApplication,
-                );
+                launchUrlString(href!, mode: LaunchMode.externalApplication);
               }
               Navigator.of(context).pop(true);
             },

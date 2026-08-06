@@ -13,10 +13,7 @@ import 'package:spotube/utils/platform.dart';
 
 class TrackPresentation extends HookConsumerWidget {
   final TrackPresentationOptions options;
-  const TrackPresentation({
-    super.key,
-    required this.options,
-  });
+  const TrackPresentation({super.key, required this.options});
 
   @override
   Widget build(BuildContext context, ref) {
@@ -57,32 +54,32 @@ class TrackPresentation extends HookConsumerWidget {
               const SliverGap(16),
               SliverList.list(
                 children: [
-                  TrackPresentationModifiersSection(
-                    focusNode: focusNode,
-                  ),
-                  LayoutBuilder(builder: (context, constrains) {
-                    return Basic(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 8,
-                        horizontal: 16,
-                      ),
-                      leading: constrains.mdAndUp ? const Text("  #") : null,
-                      title: Row(
-                        children: [
-                          Expanded(
-                            flex: constrains.lgAndUp ? 5 : 6,
-                            child: Text(context.l10n.title),
-                          ),
-                          if (constrains.mdAndUp)
+                  TrackPresentationModifiersSection(focusNode: focusNode),
+                  LayoutBuilder(
+                    builder: (context, constrains) {
+                      return Basic(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 8,
+                          horizontal: 16,
+                        ),
+                        leading: constrains.mdAndUp ? const Text("  #") : null,
+                        title: Row(
+                          children: [
                             Expanded(
-                              flex: 3,
-                              child: Text(context.l10n.album),
+                              flex: constrains.lgAndUp ? 5 : 6,
+                              child: Text(context.l10n.title),
                             ),
-                          Text(context.l10n.duration),
-                        ],
-                      ),
-                    ).small().muted();
-                  }),
+                            if (constrains.mdAndUp)
+                              Expanded(
+                                flex: 3,
+                                child: Text(context.l10n.album),
+                              ),
+                            Text(context.l10n.duration),
+                          ],
+                        ),
+                      ).small().muted();
+                    },
+                  ),
                 ],
               ),
               const PresentationListSection(),

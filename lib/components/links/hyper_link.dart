@@ -25,10 +25,7 @@ class Hyperlink extends StatelessWidget {
     return AnchorButton(
       text,
       onTap: () async {
-        await launchUrlString(
-          url,
-          mode: LaunchMode.externalApplication,
-        );
+        await launchUrlString(url, mode: LaunchMode.externalApplication);
       },
       key: key,
       overflow: overflow,

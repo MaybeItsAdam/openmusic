@@ -24,15 +24,11 @@ class YtDlpEngine implements YouTubeEngine {
               (f["protocol"] == "m3u8_native" ? "m3u8" : "mp4"),
         ),
         filesize != null ? FileSize(filesize) : FileSize.unknown,
-        Bitrate(
-          (((f["abr"] ?? f["tbr"] ?? 0) * 1000) as num).toInt(),
-        ),
+        Bitrate((((f["abr"] ?? f["tbr"] ?? 0) * 1000) as num).toInt()),
         f["acodec"] ?? "aac",
         f["format_note"],
         [],
-        MediaType.parse(
-          "audio/${f["audio_ext"]}",
-        ),
+        MediaType.parse("audio/${f["audio_ext"]}"),
         null,
       );
     });
@@ -58,11 +54,7 @@ class YtDlpEngine implements YouTubeEngine {
       Duration(seconds: (info["duration"] as num).toInt()),
       ThumbnailSet(info["id"]),
       info["tags"]?.cast<String>() ?? <String>[],
-      Engagement(
-        info["view_count"],
-        info["like_count"],
-        null,
-      ),
+      Engagement(info["view_count"], info["like_count"], null),
       info["is_live"] ?? false,
     );
   }
@@ -83,7 +75,7 @@ class YtDlpEngine implements YouTubeEngine {
         "--no-check-certificate",
         "--geo-bypass",
         "--quiet",
-        "--ignore-errors"
+        "--ignore-errors",
       ],
     ) as List;
 

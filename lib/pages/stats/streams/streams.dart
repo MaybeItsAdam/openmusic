@@ -23,19 +23,16 @@ class StatsStreamsPage extends HookConsumerWidget {
     final topTracks = ref.watch(
       historyTopTracksProvider(HistoryDuration.allTime),
     );
-    final topTracksNotifier =
-        ref.watch(historyTopTracksProvider(HistoryDuration.allTime).notifier);
+    final topTracksNotifier = ref.watch(
+      historyTopTracksProvider(HistoryDuration.allTime).notifier,
+    );
 
     final tracksData = topTracks.asData?.value.items ?? [];
 
     return SafeArea(
       bottom: false,
       child: Scaffold(
-        headers: [
-          TitleBar(
-            title: Text(context.l10n.streamed_songs),
-          )
-        ],
+        headers: [TitleBar(title: Text(context.l10n.streamed_songs))],
         child: Skeletonizer(
           enabled: topTracks.isLoading && !topTracks.isLoadingNextPage,
           child: InfiniteList(
@@ -52,8 +49,9 @@ class StatsStreamsPage extends HookConsumerWidget {
               return StatsTrackItem(
                 track: track.track,
                 info: Text(
-                  context.l10n
-                      .count_plays(compactNumberFormatter.format(track.count)),
+                  context.l10n.count_plays(
+                    compactNumberFormatter.format(track.count),
+                  ),
                 ),
               );
             },

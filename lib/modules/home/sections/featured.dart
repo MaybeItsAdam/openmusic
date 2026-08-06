@@ -7,7 +7,8 @@ import 'package:spotube/components/horizontal_playbutton_card_view/horizontal_pl
 import 'package:spotube/extensions/context.dart';
 
 @Deprecated(
-    "Later a featured playlists API will be added for metadata plugins.")
+  "Later a featured playlists API will be added for metadata plugins.",
+)
 class HomeFeaturedSection extends HookConsumerWidget {
   const HomeFeaturedSection({super.key});
 

@@ -24,8 +24,9 @@ class PresentationListSection extends HookConsumerWidget {
     final options = TrackPresentationOptions.of(context);
     final playlist = ref.watch(audioPlayerProvider);
     final state = ref.watch(presentationStateProvider(options.collection));
-    final notifier =
-        ref.read(presentationStateProvider(options.collection).notifier);
+    final notifier = ref.read(
+      presentationStateProvider(options.collection).notifier,
+    );
     final isUserPlaylist = useIsUserPlaylist(ref, options.collectionId);
 
     final onTileTap = useTrackTilePlayCallback(ref);
@@ -75,11 +76,7 @@ class PresentationListSection extends HookConsumerWidget {
       loadingBuilder: (context) {
         return Skeletonizer(
           enabled: true,
-          child: TrackTile(
-            index: 0,
-            playlist: playlist,
-            track: FakeData.track,
-          ),
+          child: TrackTile(index: 0, playlist: playlist, track: FakeData.track),
         );
       },
       emptyBuilder: (context) => Skeletonizer(
@@ -95,35 +92,37 @@ class PresentationListSection extends HookConsumerWidget {
           ),
         ),
       ),
-      itemBuilder: (context, index) => HookBuilder(builder: (context) {
-        final track = state.presentationTracks[index];
-        final isSelected = useMemoized(
-          () => state.selectedTracks.any((e) => e.id == track.id),
-          [track.id, state.selectedTracks],
-        );
-        return TrackTile(
-          userPlaylist: isUserPlaylist,
-          playlistId: options.collectionId,
-          index: index,
-          playlist: playlist,
-          track: track,
-          selected: isSelected,
-          onTap: () => onTileTap(track, index),
-          onChanged: state.selectedTracks.isEmpty
-              ? null
-              : (isSelected) {
-                  if (isSelected == true) {
-                    notifier.selectTrack(track);
-                  } else {
-                    notifier.deselectTrack(track);
-                  }
-                },
-          onLongPress: () {
-            notifier.selectTrack(track);
-            HapticFeedback.selectionClick();
-          },
-        );
-      }),
+      itemBuilder: (context, index) => HookBuilder(
+        builder: (context) {
+          final track = state.presentationTracks[index];
+          final isSelected = useMemoized(
+            () => state.selectedTracks.any((e) => e.id == track.id),
+            [track.id, state.selectedTracks],
+          );
+          return TrackTile(
+            userPlaylist: isUserPlaylist,
+            playlistId: options.collectionId,
+            index: index,
+            playlist: playlist,
+            track: track,
+            selected: isSelected,
+            onTap: () => onTileTap(track, index),
+            onChanged: state.selectedTracks.isEmpty
+                ? null
+                : (isSelected) {
+                    if (isSelected == true) {
+                      notifier.selectTrack(track);
+                    } else {
+                      notifier.deselectTrack(track);
+                    }
+                  },
+            onLongPress: () {
+              notifier.selectTrack(track);
+              HapticFeedback.selectionClick();
+            },
+          );
+        },
+      ),
     );
   }
 }

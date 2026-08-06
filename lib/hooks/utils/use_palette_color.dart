@@ -5,11 +5,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:palette_generator/palette_generator.dart';
 import 'package:spotube/components/image/universal_image.dart';
 
-final _paletteColorState = StateProvider<PaletteColor>(
-  (ref) {
-    return PaletteColor(Colors.gray[300], 0);
-  },
-);
+final _paletteColorState = StateProvider<PaletteColor>((ref) {
+  return PaletteColor(Colors.gray[300], 0);
+});
 
 PaletteColor usePaletteColor(String imageUrl, WidgetRef ref) {
   final context = useContext();
@@ -19,11 +17,7 @@ PaletteColor usePaletteColor(String imageUrl, WidgetRef ref) {
   useEffect(() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       final palette = await PaletteGenerator.fromImageProvider(
-        UniversalImage.imageProvider(
-          imageUrl,
-          height: 50,
-          width: 50,
-        ),
+        UniversalImage.imageProvider(imageUrl, height: 50, width: 50),
       );
       if (!context.mounted) return;
       final color = theme.brightness == Brightness.light
@@ -46,11 +40,7 @@ PaletteGenerator usePaletteGenerator(String imageUrl) {
   useEffect(() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       final newPalette = await PaletteGenerator.fromImageProvider(
-        UniversalImage.imageProvider(
-          imageUrl,
-          height: 50,
-          width: 50,
-        ),
+        UniversalImage.imageProvider(imageUrl, height: 50, width: 50),
       );
       if (!context.mounted) return;
 

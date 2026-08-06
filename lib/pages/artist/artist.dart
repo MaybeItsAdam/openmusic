@@ -27,10 +27,7 @@ class ArtistPage extends HookConsumerWidget {
   static const name = "artist";
 
   final String artistId;
-  const ArtistPage(
-    @PathParam("id") this.artistId, {
-    super.key,
-  });
+  const ArtistPage(@PathParam("id") this.artistId, {super.key});
 
   @override
   Widget build(BuildContext context, ref) {
@@ -45,7 +42,7 @@ class ArtistPage extends HookConsumerWidget {
           TitleBar(
             leading: [BackButton()],
             backgroundColor: Colors.transparent,
-          )
+          ),
         ],
         floatingHeader: true,
         child: material.RefreshIndicator.adaptive(
@@ -63,47 +60,50 @@ class ArtistPage extends HookConsumerWidget {
               );
             }
           },
-          child: Builder(builder: (context) {
-            if (artistQuery.hasError && artistQuery.asData?.value == null) {
-              return Center(child: Text(artistQuery.error.toString()));
-            }
-            return Skeletonizer(
-              enabled: artistQuery.isLoading,
-              child: CustomScrollView(
-                controller: scrollController,
-                slivers: [
-                  const SliverGap(material.kToolbarHeight),
-                  SliverToBoxAdapter(
-                    child: SafeArea(
-                      bottom: false,
-                      child: ArtistPageHeader(artistId: artistId),
-                    ),
-                  ),
-                  const SliverGap(20),
-                  ArtistPageTopTracks(artistId: artistId),
-                  const SliverGap(20),
-                  SliverToBoxAdapter(child: ArtistAlbumList(artistId)),
-                  SliverPadding(
-                    padding: const EdgeInsets.all(8.0),
-                    sliver: SliverToBoxAdapter(
-                      child: Text(
-                        context.l10n.fans_also_like,
-                        style: context.theme.typography.h4,
+          child: Builder(
+            builder: (context) {
+              if (artistQuery.hasError && artistQuery.asData?.value == null) {
+                return Center(child: Text(artistQuery.error.toString()));
+              }
+              return Skeletonizer(
+                enabled: artistQuery.isLoading,
+                child: CustomScrollView(
+                  controller: scrollController,
+                  slivers: [
+                    const SliverGap(material.kToolbarHeight),
+                    SliverToBoxAdapter(
+                      child: SafeArea(
+                        bottom: false,
+                        child: ArtistPageHeader(artistId: artistId),
                       ),
                     ),
-                  ),
-                  ArtistPageRelatedArtists(artistId: artistId),
-                  const SliverGap(20),
-                  if (artistQuery.asData?.value != null)
-                    SliverToBoxAdapter(
-                      child:
-                          ArtistPageFooter(artist: artistQuery.asData!.value),
+                    const SliverGap(20),
+                    ArtistPageTopTracks(artistId: artistId),
+                    const SliverGap(20),
+                    SliverToBoxAdapter(child: ArtistAlbumList(artistId)),
+                    SliverPadding(
+                      padding: const EdgeInsets.all(8.0),
+                      sliver: SliverToBoxAdapter(
+                        child: Text(
+                          context.l10n.fans_also_like,
+                          style: context.theme.typography.h4,
+                        ),
+                      ),
                     ),
-                  const SliverSafeArea(sliver: SliverGap(10)),
-                ],
-              ),
-            );
-          }),
+                    ArtistPageRelatedArtists(artistId: artistId),
+                    const SliverGap(20),
+                    if (artistQuery.asData?.value != null)
+                      SliverToBoxAdapter(
+                        child: ArtistPageFooter(
+                          artist: artistQuery.asData!.value,
+                        ),
+                      ),
+                    const SliverSafeArea(sliver: SliverGap(10)),
+                  ],
+                ),
+              );
+            },
+          ),
         ),
       ),
     );

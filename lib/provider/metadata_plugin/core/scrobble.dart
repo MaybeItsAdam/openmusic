@@ -29,15 +29,9 @@ class MetadataPluginScrobbleNotifier
           "id": event.id,
           "title": event.name,
           "artists": event.artists
-              .map((artist) => {
-                    "id": artist.id,
-                    "name": artist.name,
-                  })
+              .map((artist) => {"id": artist.id, "name": artist.name})
               .toList(),
-          "album": {
-            "id": event.album.id,
-            "name": event.album.name,
-          },
+          "album": {"id": event.album.id, "name": event.album.name},
           "timestamp": DateTime.now().millisecondsSinceEpoch ~/ 1000,
           "duration_ms": event.durationMs,
           "isrc": event is SpotubeFullTrackObject ? event.isrc : null,
@@ -61,6 +55,5 @@ class MetadataPluginScrobbleNotifier
 }
 
 final metadataPluginScrobbleProvider = NotifierProvider<
-    MetadataPluginScrobbleNotifier, StreamController<SpotubeTrackObject>?>(
-  MetadataPluginScrobbleNotifier.new,
-);
+    MetadataPluginScrobbleNotifier,
+    StreamController<SpotubeTrackObject>?>(MetadataPluginScrobbleNotifier.new);

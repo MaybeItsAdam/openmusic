@@ -44,12 +44,9 @@ class SearchPage extends HookConsumerWidget {
       searchChipSnapshot.asData?.value.first ?? "all",
     );
 
-    ref.listen(
-      metadataPluginSearchChipsProvider,
-      (previous, next) {
-        selectedChip.value = next.asData?.value.first ?? "all";
-      },
-    );
+    ref.listen(metadataPluginSearchChipsProvider, (previous, next) {
+      selectedChip.value = next.asData?.value.first ?? "all";
+    });
 
     useEffect(() {
       controller.text = searchTerm;
@@ -64,10 +61,7 @@ class SearchPage extends HookConsumerWidget {
         return;
       }
       KVStoreService.setRecentSearches(
-        {
-          value,
-          ...KVStoreService.recentSearches,
-        }.toList(),
+        {value, ...KVStoreService.recentSearches}.toList(),
       );
     }
 
@@ -81,38 +75,39 @@ class SearchPage extends HookConsumerWidget {
         child: Scaffold(
           headers: [
             if (kTitlebarVisible)
-              const TitleBar(automaticallyImplyLeading: false, height: 30)
+              const TitleBar(automaticallyImplyLeading: false, height: 30),
           ],
-          child: Builder(builder: (context) {
-            if (searchChipSnapshot.error
-                case MetadataPluginException(
-                  errorCode: MetadataPluginErrorCode.noDefaultMetadataPlugin,
-                  message: _
-                )) {
-              return const NoDefaultMetadataPlugin();
-            }
+          child: Builder(
+            builder: (context) {
+              if (searchChipSnapshot.error
+                  case MetadataPluginException(
+                    errorCode: MetadataPluginErrorCode.noDefaultMetadataPlugin,
+                    message: _,
+                  )) {
+                return const NoDefaultMetadataPlugin();
+              }
 
-            if (searchChipSnapshot.hasError) {
-              return ErrorBox(
-                error: searchChipSnapshot.error!,
-                onRetry: () {
-                  ref.invalidate(metadataPluginSearchChipsProvider);
-                },
-              );
-            }
+              if (searchChipSnapshot.hasError) {
+                return ErrorBox(
+                  error: searchChipSnapshot.error!,
+                  onRetry: () {
+                    ref.invalidate(metadataPluginSearchChipsProvider);
+                  },
+                );
+              }
 
-            return Column(
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 20,
-                          vertical: 10,
-                        ),
-                        child: ListenableBuilder(
+              return Column(
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 20,
+                            vertical: 10,
+                          ),
+                          child: ListenableBuilder(
                             listenable: controller,
                             builder: (context, _) {
                               final suggestions = controller.text.isEmpty
@@ -148,8 +143,9 @@ class SearchPage extends HookConsumerWidget {
                                     ),
                                     InputFeature.trailing(
                                       AnimatedCrossFade(
-                                        duration:
-                                            const Duration(milliseconds: 300),
+                                        duration: const Duration(
+                                          milliseconds: 300,
+                                        ),
                                         crossFadeState:
                                             controller.text.isNotEmpty
                                                 ? CrossFadeState.showFirst
@@ -162,70 +158,75 @@ class SearchPage extends HookConsumerWidget {
                                           },
                                         ),
                                         secondChild: const SizedBox.square(
-                                            dimension: 28),
+                                          dimension: 28,
+                                        ),
                                       ),
-                                    )
+                                    ),
                                   ],
                                   textInputAction: TextInputAction.search,
                                   placeholder: Text(context.l10n.search),
                                   onSubmitted: onSubmitted,
                                 ),
                               );
-                            }),
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  spacing: 8,
-                  children: [
-                    const Gap(12),
-                    if (searchChipSnapshot.asData?.value != null)
-                      for (final chip in searchChipSnapshot.asData!.value)
-                        Chip(
-                          style: selectedChip.value == chip
-                              ? ButtonVariance.primary.copyWith(
-                                  decoration: (context, states, value) {
-                                    return ButtonVariance.primary
-                                        .decoration(context, states)
-                                        .copyWithIfBoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(100),
-                                        );
-                                  },
-                                )
-                              : ButtonVariance.secondary.copyWith(
-                                  decoration: (context, states, value) {
-                                    return ButtonVariance.secondary
-                                        .decoration(context, states)
-                                        .copyWithIfBoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(100),
-                                        );
-                                  },
-                                ),
-                          child: Text(chip.capitalize()),
-                          onPressed: () {
-                            selectedChip.value = chip;
-                          },
+                            },
+                          ),
                         ),
-                  ],
-                ),
-                Expanded(
-                  child: AnimatedSwitcher(
-                    duration: const Duration(milliseconds: 300),
-                    child: switch (selectedChip.value) {
-                      "tracks" => const SearchPageTracksTab(),
-                      "albums" => const SearchPageAlbumsTab(),
-                      "artists" => const SearchPageArtistsTab(),
-                      "playlists" => const SearchPagePlaylistsTab(),
-                      _ => const SearchPageAllTab(),
-                    },
+                      ),
+                    ],
                   ),
-                ),
-              ],
-            );
-          }),
+                  Row(
+                    spacing: 8,
+                    children: [
+                      const Gap(12),
+                      if (searchChipSnapshot.asData?.value != null)
+                        for (final chip in searchChipSnapshot.asData!.value)
+                          Chip(
+                            style: selectedChip.value == chip
+                                ? ButtonVariance.primary.copyWith(
+                                    decoration: (context, states, value) {
+                                      return ButtonVariance.primary
+                                          .decoration(context, states)
+                                          .copyWithIfBoxDecoration(
+                                            borderRadius: BorderRadius.circular(
+                                              100,
+                                            ),
+                                          );
+                                    },
+                                  )
+                                : ButtonVariance.secondary.copyWith(
+                                    decoration: (context, states, value) {
+                                      return ButtonVariance.secondary
+                                          .decoration(context, states)
+                                          .copyWithIfBoxDecoration(
+                                            borderRadius: BorderRadius.circular(
+                                              100,
+                                            ),
+                                          );
+                                    },
+                                  ),
+                            child: Text(chip.capitalize()),
+                            onPressed: () {
+                              selectedChip.value = chip;
+                            },
+                          ),
+                    ],
+                  ),
+                  Expanded(
+                    child: AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 300),
+                      child: switch (selectedChip.value) {
+                        "tracks" => const SearchPageTracksTab(),
+                        "albums" => const SearchPageAlbumsTab(),
+                        "artists" => const SearchPageArtistsTab(),
+                        "playlists" => const SearchPagePlaylistsTab(),
+                        _ => const SearchPageAllTab(),
+                      },
+                    ),
+                  ),
+                ],
+              );
+            },
+          ),
         ),
       ),
     );

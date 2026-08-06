@@ -26,10 +26,7 @@ class SettingsAboutSection extends HookConsumerWidget {
       children: [
         if (!Env.hideDonations)
           AdaptiveListTile(
-            leading: const Icon(
-              SpotubeIcons.heart,
-              color: Colors.pink,
-            ),
+            leading: const Icon(SpotubeIcons.heart, color: Colors.pink),
             title: SizedBox(
               height: 50,
               width: 200,
@@ -92,7 +89,7 @@ class SettingsAboutSection extends HookConsumerWidget {
           onTap: () {
             context.navigateTo(const AboutSpotubeRoute());
           },
-        )
+        ),
       ],
     );
   }

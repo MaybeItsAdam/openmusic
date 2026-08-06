@@ -8,11 +8,7 @@ import 'package:spotube/models/metadata/metadata.dart';
 class StatsArtistItem extends StatelessWidget {
   final SpotubeSimpleArtistObject artist;
   final Widget info;
-  const StatsArtistItem({
-    super.key,
-    required this.artist,
-    required this.info,
-  });
+  const StatsArtistItem({super.key, required this.artist, required this.info});
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +18,7 @@ class StatsArtistItem extends StatelessWidget {
       leading: Avatar(
         initials: artist.name.substring(0, 1),
         provider: UniversalImage.imageProvider(
-          (artist.images).asUrlString(
-            placeholder: ImagePlaceholder.artist,
-          ),
+          (artist.images).asUrlString(placeholder: ImagePlaceholder.artist),
         ),
       ),
       trailing: info,

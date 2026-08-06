@@ -61,11 +61,7 @@ class NewPipeEngine implements YouTubeEngine {
       Duration(seconds: info.duration),
       ThumbnailSet(info.id),
       info.tags,
-      Engagement(
-        info.viewCount,
-        info.likeCount,
-        info.dislikeCount,
-      ),
+      Engagement(info.viewCount, info.likeCount, info.dislikeCount),
       !info.streamType.name.toLowerCase().contains("live"),
     );
   }
@@ -93,12 +89,14 @@ class NewPipeEngine implements YouTubeEngine {
   Future<StreamManifest> getStreamManifest(String videoId) async {
     final video = await NewPipeExtractor.getVideoInfo(videoId);
 
-    final streams =
-        video.audioStreams.map((stream) => _parseAudioStream(stream, videoId));
+    final streams = video.audioStreams.map(
+      (stream) => _parseAudioStream(stream, videoId),
+    );
 
     if (streams.isEmpty) {
-      final videoStreams = video.videoStreams
-          .map((stream) => _parseVideoStream(stream, videoId));
+      final videoStreams = video.videoStreams.map(
+        (stream) => _parseVideoStream(stream, videoId),
+      );
       if (videoStreams.isNotEmpty) {
         return StreamManifest(videoStreams);
       }
@@ -118,12 +116,14 @@ class NewPipeEngine implements YouTubeEngine {
   Future<(Video, StreamManifest)> getVideoWithStreamInfo(String videoId) async {
     final video = await NewPipeExtractor.getVideoInfo(videoId);
 
-    final streams =
-        video.audioStreams.map((stream) => _parseAudioStream(stream, videoId));
+    final streams = video.audioStreams.map(
+      (stream) => _parseAudioStream(stream, videoId),
+    );
 
     if (streams.isEmpty) {
-      final videoStreams = video.videoStreams
-          .map((stream) => _parseVideoStream(stream, videoId));
+      final videoStreams = video.videoStreams.map(
+        (stream) => _parseVideoStream(stream, videoId),
+      );
       if (videoStreams.isNotEmpty) {
         return (_parseVideo(video), StreamManifest(videoStreams));
       }

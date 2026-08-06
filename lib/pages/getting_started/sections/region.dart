@@ -10,8 +10,10 @@ import 'package:spotube/provider/user_preferences/user_preferences_provider.dart
 
 class GettingStartedPageLanguageRegionSection extends HookConsumerWidget {
   final void Function() onNext;
-  const GettingStartedPageLanguageRegionSection(
-      {super.key, required this.onNext});
+  const GettingStartedPageLanguageRegionSection({
+    super.key,
+    required this.onNext,
+  });
 
   bool filterMarkets(dynamic item, String query) {
     final market =
@@ -41,10 +43,7 @@ class GettingStartedPageLanguageRegionSection extends HookConsumerWidget {
             children: [
               Row(
                 children: [
-                  const Icon(
-                    SpotubeIcons.language,
-                    size: 16,
-                  ),
+                  const Icon(SpotubeIcons.language, size: 16),
                   const SizedBox(width: 8),
                   Text(context.l10n.language_region).semiBold(),
                 ],
@@ -80,15 +79,17 @@ class GettingStartedPageLanguageRegionSection extends HookConsumerWidget {
                       popup: SelectPopup.builder(
                         searchPlaceholder: Text(context.l10n.search),
                         builder: (context, searchQuery) {
-                          final filteredMarkets = searchQuery == null ||
-                                  searchQuery.isEmpty
-                              ? marketsMap
-                              : marketsMap
-                                  .where(
-                                    (element) =>
-                                        filterMarkets(element.$1, searchQuery),
-                                  )
-                                  .toList();
+                          final filteredMarkets =
+                              searchQuery == null || searchQuery.isEmpty
+                                  ? marketsMap
+                                  : marketsMap
+                                      .where(
+                                        (element) => filterMarkets(
+                                          element.$1,
+                                          searchQuery,
+                                        ),
+                                      )
+                                      .toList();
                           return SelectItemBuilder(
                             childCount: filteredMarkets.length,
                             builder: (context, index) {
@@ -104,9 +105,7 @@ class GettingStartedPageLanguageRegionSection extends HookConsumerWidget {
                     ),
                   ),
                   const Gap(36),
-                  Text(
-                    context.l10n.choose_your_language,
-                  ).semiBold(),
+                  Text(context.l10n.choose_your_language).semiBold(),
                   const Gap(16),
                   Text(context.l10n.language).small(),
                   const Gap(8),
@@ -136,10 +135,7 @@ class GettingStartedPageLanguageRegionSection extends HookConsumerWidget {
                           final hasNotQueried =
                               searchQuery == null || searchQuery.trim().isEmpty;
                           final filteredLocale = hasNotQueried
-                              ? [
-                                  const Locale("system", "system"),
-                                  ...L10n.all,
-                                ]
+                              ? [const Locale("system", "system"), ...L10n.all]
                               : L10n.all
                                   .where(
                                     (element) => filterLocale(

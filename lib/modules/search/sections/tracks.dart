@@ -13,9 +13,7 @@ import 'package:spotube/provider/audio_player/audio_player.dart';
 import 'package:spotube/provider/metadata_plugin/search/all.dart';
 
 class SearchTracksSection extends HookConsumerWidget {
-  const SearchTracksSection({
-    super.key,
-  });
+  const SearchTracksSection({super.key});
 
   @override
   Widget build(BuildContext context, ref) {
@@ -33,10 +31,7 @@ class SearchTracksSection extends HookConsumerWidget {
         if (tracks.isNotEmpty)
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: Text(
-              context.l10n.songs,
-              style: theme.typography.h4,
-            ),
+            child: Text(context.l10n.songs, style: theme.typography.h4),
           ),
         if (search.isLoading)
           const CircularProgressIndicator()
@@ -47,8 +42,10 @@ class SearchTracksSection extends HookConsumerWidget {
               track: track,
               playlist: playlist,
               onTap: () async {
-                final isRemoteDevice =
-                    await showSelectDeviceDialog(context, ref);
+                final isRemoteDevice = await showSelectDeviceDialog(
+                  context,
+                  ref,
+                );
 
                 if (isRemoteDevice == null) return;
 
@@ -63,9 +60,7 @@ class SearchTracksSection extends HookConsumerWidget {
                     final shouldPlay = (playlist.tracks.length) > 20
                         ? await showPromptDialog(
                             context: context,
-                            title: context.l10n.playing_track(
-                              track.name,
-                            ),
+                            title: context.l10n.playing_track(track.name),
                             message: context.l10n.queue_clear_alert(
                               playlist.tracks.length,
                             ),
@@ -74,9 +69,7 @@ class SearchTracksSection extends HookConsumerWidget {
 
                     if (shouldPlay) {
                       await remotePlayback.load(
-                        WebSocketLoadEventData.playlist(
-                          tracks: [track],
-                        ),
+                        WebSocketLoadEventData.playlist(tracks: [track]),
                       );
                     }
                   }
@@ -86,9 +79,7 @@ class SearchTracksSection extends HookConsumerWidget {
                     final shouldPlay = (playlist.tracks.length) > 20
                         ? await showPromptDialog(
                             context: context,
-                            title: context.l10n.playing_track(
-                              track.name,
-                            ),
+                            title: context.l10n.playing_track(track.name),
                             message: context.l10n.queue_clear_alert(
                               playlist.tracks.length,
                             ),
@@ -96,10 +87,7 @@ class SearchTracksSection extends HookConsumerWidget {
                         : true;
 
                     if (shouldPlay) {
-                      await playlistNotifier.load(
-                        [track],
-                        autoPlay: true,
-                      );
+                      await playlistNotifier.load([track], autoPlay: true);
                     }
                   }
                 }

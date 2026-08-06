@@ -35,11 +35,7 @@ const imgMimeToExt = {
   "image/gif": ".gif",
 };
 
-typedef MetadataFile = ({
-  Metadata? metadata,
-  File file,
-  String? art,
-});
+typedef MetadataFile = ({Metadata? metadata, File file, String? art});
 
 final localTracksProvider =
     FutureProvider<Map<String, List<SpotubeLocalTrackObject>>>((ref) async {
@@ -56,8 +52,9 @@ final localTracksProvider =
     }
 
     final downloadDir = Directory(downloadLocation);
-    final cacheDir =
-        Directory(await UserPreferencesNotifier.getMusicCacheDir());
+    final cacheDir = Directory(
+      await UserPreferencesNotifier.getMusicCacheDir(),
+    );
     if (!await downloadDir.exists()) {
       await downloadDir.create(recursive: true);
     }
@@ -71,24 +68,23 @@ final localTracksProvider =
     for (final location in [
       downloadLocation,
       cacheDir.path,
-      ...localLibraryLocations
+      ...localLibraryLocations,
     ]) {
       if (location.isEmpty) continue;
       final entities = <File>[];
       if (await Directory(location).exists()) {
         try {
-          final dirEntities =
-              await Directory(location).list(recursive: true).toList();
+          final dirEntities = await Directory(
+            location,
+          ).list(recursive: true).toList();
 
           entities.addAll(
-            dirEntities.where(
-              (e) {
-                final mime = lookupMimeType(e.path) ??
-                    (extension(e.path) == ".opus" ? "audio/opus" : null);
+            dirEntities.where((e) {
+              final mime = lookupMimeType(e.path) ??
+                  (extension(e.path) == ".opus" ? "audio/opus" : null);
 
-                return e is File && supportedAudioTypes.contains(mime);
-              },
-            ).cast<File>(),
+              return e is File && supportedAudioTypes.contains(mime);
+            }).cast<File>(),
           );
         } catch (e, stack) {
           AppLogger.reportError(e, stack);
@@ -98,14 +94,17 @@ final localTracksProvider =
       final List<MetadataFile> filesWithMetadata = await Future.wait(
         entities.map((file) async {
           try {
-            final metadata = await MetadataGod.readMetadata(file: file.path);
+            final metadata = await MetadataGod.readMetadata(
+              file: file.path,
+            );
 
             final imageFile = File(
               join(
                 (await getTemporaryDirectory()).path,
                 "spotube",
                 ServiceUtils.sanitizeFilename(
-                        basenameWithoutExtension(file.path)) +
+                      basenameWithoutExtension(file.path),
+                    ) +
                     imgMimeToExt[metadata.picture?.mimeType ?? "image/jpeg"]!,
               ),
             );

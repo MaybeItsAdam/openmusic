@@ -23,22 +23,18 @@ class StatsArtistsPage extends HookConsumerWidget {
     final topTracks = ref.watch(
       historyTopTracksProvider(HistoryDuration.allTime),
     );
-    final topTracksNotifier =
-        ref.watch(historyTopTracksProvider(HistoryDuration.allTime).notifier);
-
-    final artistsData = useMemoized(
-      () => topTracksNotifier.artists,
-      [topTracks.asData?.value],
+    final topTracksNotifier = ref.watch(
+      historyTopTracksProvider(HistoryDuration.allTime).notifier,
     );
+
+    final artistsData = useMemoized(() => topTracksNotifier.artists, [
+      topTracks.asData?.value,
+    ]);
 
     return SafeArea(
       bottom: false,
       child: Scaffold(
-        headers: [
-          TitleBar(
-            title: Text(context.l10n.artists),
-          )
-        ],
+        headers: [TitleBar(title: Text(context.l10n.artists))],
         child: Skeletonizer(
           enabled: topTracks.isLoading && !topTracks.isLoadingNextPage,
           child: InfiniteList(
@@ -53,8 +49,11 @@ class StatsArtistsPage extends HookConsumerWidget {
               final artist = artistsData[index];
               return StatsArtistItem(
                 artist: artist.artist,
-                info: Text(context.l10n
-                    .count_plays(compactNumberFormatter.format(artist.count))),
+                info: Text(
+                  context.l10n.count_plays(
+                    compactNumberFormatter.format(artist.count),
+                  ),
+                ),
               );
             },
           ),

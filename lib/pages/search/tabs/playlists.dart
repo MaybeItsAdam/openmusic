@@ -17,10 +17,12 @@ class SearchPagePlaylistsTab extends HookConsumerWidget {
     final controller = useScrollController();
 
     final searchTerm = ref.watch(searchTermStateProvider);
-    final searchPlaylistsSnapshot =
-        ref.watch(metadataPluginSearchPlaylistsProvider(searchTerm));
-    final searchPlaylistsNotifier =
-        ref.read(metadataPluginSearchPlaylistsProvider(searchTerm).notifier);
+    final searchPlaylistsSnapshot = ref.watch(
+      metadataPluginSearchPlaylistsProvider(searchTerm),
+    );
+    final searchPlaylistsNotifier = ref.read(
+      metadataPluginSearchPlaylistsProvider(searchTerm).notifier,
+    );
     final searchPlaylists = searchPlaylistsSnapshot.asData?.value.items ??
         [FakeData.playlistSimple];
 

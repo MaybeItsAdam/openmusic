@@ -20,8 +20,9 @@ final audioPlayerPlaying = StreamProvider<bool>((ref) {
 
 final trayMenuProvider = Provider((ref) {
   final playlistNotifier = ref.watch(audioPlayerProvider.notifier);
-  final isPlaybackPlaying =
-      ref.watch(audioPlayerProvider.select((s) => s.activeTrack != null));
+  final isPlaybackPlaying = ref.watch(
+    audioPlayerProvider.select((s) => s.activeTrack != null),
+  );
   final isLoopOne =
       ref.watch(audioPlayerLoopMode).asData?.value == PlaylistMode.single;
   final isShuffled = ref.watch(audioPlayerShuffleMode).asData?.value ?? false;

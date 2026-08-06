@@ -14,18 +14,16 @@ import 'package:spotube/provider/user_preferences/user_preferences_provider.dart
 class Sidebar extends HookConsumerWidget {
   final Widget child;
 
-  const Sidebar({
-    required this.child,
-    super.key,
-  });
+  const Sidebar({required this.child, super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final ThemeData(:colorScheme) = Theme.of(context);
     final mediaQuery = MediaQuery.sizeOf(context);
 
-    final layoutMode =
-        ref.watch(userPreferencesProvider.select((s) => s.layoutMode));
+    final layoutMode = ref.watch(
+      userPreferencesProvider.select((s) => s.layoutMode),
+    );
 
     final sidebarTileList = useMemoized(
       () => getSidebarTileList(context.l10n),

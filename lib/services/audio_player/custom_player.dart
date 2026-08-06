@@ -75,7 +75,7 @@ class CustomPlayer extends Player {
               : "android.media.action.CLOSE_AUDIO_EFFECT_CONTROL_SESSION",
           data: {
             "android.media.extra.AUDIO_SESSION": _androidAudioSessionId,
-            "android.media.extra.PACKAGE_NAME": _packageName
+            "android.media.extra.PACKAGE_NAME": _packageName,
           },
         ),
       );
@@ -122,15 +122,14 @@ class CustomPlayer extends Player {
 
   Future<void> insert(int index, Media media) async {
     final addedMediaCompleter = Completer<int>();
-    final playlistStream = stream.playlist.listen(
-      (event) {
-        final mediaAddedIndex =
-            event.medias.indexWhere((m) => m.uri == media.uri);
-        if (mediaAddedIndex != -1 && !addedMediaCompleter.isCompleted) {
-          addedMediaCompleter.complete(mediaAddedIndex);
-        }
-      },
-    );
+    final playlistStream = stream.playlist.listen((event) {
+      final mediaAddedIndex = event.medias.indexWhere(
+        (m) => m.uri == media.uri,
+      );
+      if (mediaAddedIndex != -1 && !addedMediaCompleter.isCompleted) {
+        addedMediaCompleter.complete(mediaAddedIndex);
+      }
+    });
     try {
       await add(media);
       final mediaAddedIndex = await addedMediaCompleter.future;

@@ -9,10 +9,7 @@ class SystemTrayManager with TrayListener {
   final Ref ref;
   final bool enabled;
 
-  SystemTrayManager(
-    this.ref, {
-    required this.enabled,
-  }) {
+  SystemTrayManager(this.ref, {required this.enabled}) {
     initialize();
   }
 
@@ -56,24 +53,19 @@ class SystemTrayManager with TrayListener {
   }
 }
 
-final trayManagerProvider = Provider(
-  (ref) {
-    final enabled = ref.watch(
-      userPreferencesProvider.select((s) => s.showSystemTrayIcon),
-    );
+final trayManagerProvider = Provider((ref) {
+  final enabled = ref.watch(
+    userPreferencesProvider.select((s) => s.showSystemTrayIcon),
+  );
 
-    ref.listen(trayMenuProvider, (_, menu) {
-      if (!enabled || !kIsDesktop) return;
-      trayManager.setContextMenu(menu);
-    });
+  ref.listen(trayMenuProvider, (_, menu) {
+    if (!enabled || !kIsDesktop) return;
+    trayManager.setContextMenu(menu);
+  });
 
-    final manager = SystemTrayManager(
-      ref,
-      enabled: enabled,
-    );
+  final manager = SystemTrayManager(ref, enabled: enabled);
 
-    ref.onDispose(manager.dispose);
+  ref.onDispose(manager.dispose);
 
-    return manager;
-  },
-);
+  return manager;
+});

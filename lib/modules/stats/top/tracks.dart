@@ -17,11 +17,10 @@ class TopTracks extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, ref) {
     final historyDuration = ref.watch(playbackHistoryTopDurationProvider);
-    final topTracks = ref.watch(
-      historyTopTracksProvider(historyDuration),
+    final topTracks = ref.watch(historyTopTracksProvider(historyDuration));
+    final topTracksNotifier = ref.watch(
+      historyTopTracksProvider(historyDuration).notifier,
     );
-    final topTracksNotifier =
-        ref.watch(historyTopTracksProvider(historyDuration).notifier);
 
     final tracksData = topTracks.asData?.value.items ?? [];
 
@@ -58,8 +57,9 @@ class TopTracks extends HookConsumerWidget {
           return StatsTrackItem(
             track: track.track,
             info: Text(
-              context.l10n
-                  .count_plays(compactNumberFormatter.format(track.count)),
+              context.l10n.count_plays(
+                compactNumberFormatter.format(track.count),
+              ),
             ),
           );
         },

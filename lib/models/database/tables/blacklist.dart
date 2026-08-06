@@ -1,9 +1,6 @@
 part of '../database.dart';
 
-enum BlacklistedType {
-  artist,
-  track;
-}
+enum BlacklistedType { artist, track }
 
 @TableIndex(
   name: "unique_blacklist",

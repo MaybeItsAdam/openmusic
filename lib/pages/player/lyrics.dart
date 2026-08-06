@@ -32,12 +32,8 @@ class PlayerLyricsPage extends HookConsumerWidget {
       index: selectedIndex.value,
       onChanged: (index) => selectedIndex.value = index,
       children: [
-        TabItem(
-          child: Text(context.l10n.synced),
-        ),
-        TabItem(
-          child: Text(context.l10n.plain),
-        ),
+        TabItem(child: Text(context.l10n.synced)),
+        TabItem(child: Text(context.l10n.plain)),
       ],
     );
 
@@ -45,9 +41,7 @@ class PlayerLyricsPage extends HookConsumerWidget {
       headers: [
         AppBar(
           leading: [tabbar],
-          trailing: const [
-            BackButton(icon: SpotubeIcons.angleDown),
-          ],
+          trailing: const [BackButton(icon: SpotubeIcons.angleDown)],
         ),
       ],
       child: IndexedStack(

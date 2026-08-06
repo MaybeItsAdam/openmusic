@@ -16,9 +16,9 @@ class TranslatedCommand extends Command {
   @override
   FutureOr? run() async {
     final cwd = Directory.current;
-    final translatedFile = jsonDecode(
-      await File(join(cwd.path, 'tm.json')).readAsString(),
-    ) as Map<String, dynamic>;
+    final translatedFile =
+        jsonDecode(await File(join(cwd.path, 'tm.json')).readAsString())
+            as Map<String, dynamic>;
 
     for (final MapEntry(:key, :value) in translatedFile.entries) {
       stdout.writeln('Updating locale: $key');

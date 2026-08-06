@@ -39,8 +39,9 @@ class WindowsAudioService {
       }
     });
 
-    final playerStateStream =
-        audioPlayer.playerStateStream.listen((state) async {
+    final playerStateStream = audioPlayer.playerStateStream.listen((
+      state,
+    ) async {
       switch (state) {
         case AudioPlaybackState.playing:
           await smtc.setPlaybackStatus(PlaybackStatus.playing);

@@ -88,9 +88,9 @@ class MiniLyricsPage extends HookConsumerWidget {
                       ),
                     const Spacer(),
                     Tooltip(
-                      tooltip:
-                          TooltipContainer(child: Text(context.l10n.lyrics))
-                              .call,
+                      tooltip: TooltipContainer(
+                        child: Text(context.l10n.lyrics),
+                      ).call,
                       child: IconButton(
                         variance: showLyrics.value
                             ? ButtonVariance.secondary
@@ -221,8 +221,9 @@ class MiniLyricsPage extends HookConsumerWidget {
                                     final playlist = ref.watch(
                                       audioPlayerProvider,
                                     );
-                                    final playlistNotifier =
-                                        ref.read(audioPlayerProvider.notifier);
+                                    final playlistNotifier = ref.read(
+                                      audioPlayerProvider.notifier,
+                                    );
                                     return ConstrainedBox(
                                       constraints: BoxConstraints(
                                         maxHeight:
@@ -246,16 +247,17 @@ class MiniLyricsPage extends HookConsumerWidget {
                   const Flexible(child: PlayerControls(compact: true)),
                   Tooltip(
                     tooltip: TooltipContainer(
-                            child: Text(context.l10n.exit_mini_player))
-                        .call,
+                      child: Text(context.l10n.exit_mini_player),
+                    ).call,
                     child: IconButton.ghost(
                       icon: const Icon(SpotubeIcons.maximize),
                       onPressed: () async {
                         if (!kIsDesktop) return;
 
                         try {
-                          await windowManager
-                              .setMinimumSize(const Size(300, 700));
+                          await windowManager.setMinimumSize(
+                            const Size(300, 700),
+                          );
                           await windowManager.setAlwaysOnTop(false);
                           if (wasMaximized.value) {
                             await windowManager.maximize();
@@ -267,7 +269,8 @@ class MiniLyricsPage extends HookConsumerWidget {
                             await windowManager.setHasShadow(true);
                           }
                           await Future.delayed(
-                              const Duration(milliseconds: 200));
+                            const Duration(milliseconds: 200),
+                          );
                         } finally {
                           if (context.mounted) {
                             context.navigateTo(const LyricsRoute());
@@ -278,7 +281,7 @@ class MiniLyricsPage extends HookConsumerWidget {
                   ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),

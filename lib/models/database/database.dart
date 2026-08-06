@@ -226,13 +226,11 @@ class AppDatabase extends _$AppDatabase {
               .dropColumn(schema.preferencesTable, "invidious_instance")
               .catchError((e, stack) => AppLogger.reportError(e, stack));
           await m
-              .addColumn(
-                schema.sourceMatchTable,
-                sourceMatchTable.sourceInfo,
-              )
+              .addColumn(schema.sourceMatchTable, sourceMatchTable.sourceInfo)
               .catchError((e, stack) => AppLogger.reportError(e, stack));
-          await customStatement("DROP INDEX IF EXISTS uniq_track_match;")
-              .catchError((e, stack) => AppLogger.reportError(e, stack));
+          await customStatement(
+            "DROP INDEX IF EXISTS uniq_track_match;",
+          ).catchError((e, stack) => AppLogger.reportError(e, stack));
           await m
               .dropColumn(schema.sourceMatchTable, "source_id")
               .catchError((e, stack) => AppLogger.reportError(e, stack));

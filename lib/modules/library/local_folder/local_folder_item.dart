@@ -25,8 +25,9 @@ class LocalFolderItem extends HookConsumerWidget {
     final ThemeData(:colorScheme) = Theme.of(context);
     final mediaQuery = MediaQuery.of(context);
 
-    final downloadFolder =
-        ref.watch(userPreferencesProvider.select((s) => s.downloadLocation));
+    final downloadFolder = ref.watch(
+      userPreferencesProvider.select((s) => s.downloadLocation),
+    );
     final cacheFolder = useFuture(UserPreferencesNotifier.getMusicCacheDir());
 
     final isDownloadFolder = folder == downloadFolder;
@@ -120,10 +121,13 @@ class LocalFolderItem extends HookConsumerWidget {
                           return DropdownMenu(
                             children: [
                               MenuButton(
-                                leading: Icon(SpotubeIcons.folderRemove,
-                                    color: colorScheme.destructive),
-                                child:
-                                    Text(context.l10n.remove_library_location),
+                                leading: Icon(
+                                  SpotubeIcons.folderRemove,
+                                  color: colorScheme.destructive,
+                                ),
+                                child: Text(
+                                  context.l10n.remove_library_location,
+                                ),
                                 onPressed: (context) {
                                   final libraryLocations = ref
                                       .read(userPreferencesProvider)
@@ -136,7 +140,7 @@ class LocalFolderItem extends HookConsumerWidget {
                                             .toList(),
                                       );
                                 },
-                              )
+                              ),
                             ],
                           );
                         },

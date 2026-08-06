@@ -19,10 +19,14 @@ class LastFMLoginPage extends HookConsumerWidget {
   Widget build(BuildContext context, ref) {
     final scrobblerNotifier = ref.read(scrobblerProvider.notifier);
 
-    final usernameKey =
-        useMemoized(() => const FormKey<String>("username"), []);
-    final passwordKey =
-        useMemoized(() => const FormKey<String>("password"), []);
+    final usernameKey = useMemoized(
+      () => const FormKey<String>("username"),
+      [],
+    );
+    final passwordKey = useMemoized(
+      () => const FormKey<String>("password"),
+      [],
+    );
 
     final passwordVisible = useState(false);
 
@@ -30,12 +34,7 @@ class LastFMLoginPage extends HookConsumerWidget {
 
     return Scaffold(
       headers: const [
-        SafeArea(
-          bottom: false,
-          child: TitleBar(
-            leading: [BackButton()],
-          ),
-        ),
+        SafeArea(bottom: false, child: TitleBar(leading: [BackButton()])),
       ],
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -114,9 +113,7 @@ class LastFMLoginPage extends HookConsumerWidget {
                               ),
                               label: Text(context.l10n.password),
                               child: TextField(
-                                autofillHints: const [
-                                  AutofillHints.password,
-                                ],
+                                autofillHints: const [AutofillHints.password],
                                 obscureText: !passwordVisible.value,
                                 placeholder: Text(context.l10n.password),
                                 features: [
@@ -137,13 +134,15 @@ class LastFMLoginPage extends HookConsumerWidget {
                           ],
                         ),
                       ),
-                      FormErrorBuilder(builder: (context, errors, child) {
-                        return Button.primary(
-                          onPressed: () => context.submitForm(),
-                          enabled: errors.isEmpty && !isLoading.value,
-                          child: Text(context.l10n.login),
-                        );
-                      }),
+                      FormErrorBuilder(
+                        builder: (context, errors, child) {
+                          return Button.primary(
+                            onPressed: () => context.submitForm(),
+                            enabled: errors.isEmpty && !isLoading.value,
+                            child: Text(context.l10n.login),
+                          );
+                        },
+                      ),
                     ],
                   ),
                 ),

@@ -7,19 +7,13 @@ import 'package:spotube/extensions/context.dart';
 class SortTracksDropdown extends StatelessWidget {
   final SortBy? value;
   final void Function(SortBy)? onChanged;
-  const SortTracksDropdown({
-    this.onChanged,
-    this.value,
-    super.key,
-  });
+  const SortTracksDropdown({this.onChanged, this.value, super.key});
 
   @override
   Widget build(BuildContext context) {
     return AdaptivePopSheetList<SortBy>(
       variance: ButtonVariance.outline,
-      headings: [
-        Text(context.l10n.sort_tracks),
-      ],
+      headings: [Text(context.l10n.sort_tracks)],
       onSelected: onChanged,
       tooltip: context.l10n.sort_tracks,
       icon: const Icon(SpotubeIcons.sort),

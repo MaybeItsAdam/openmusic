@@ -9,7 +9,7 @@ import 'package:spotube/provider/metadata_plugin/utils/family_paginated.dart';
 
 typedef PlaybackHistoryPlaylist = ({
   int count,
-  SpotubeSimplePlaylistObject playlist
+  SpotubeSimplePlaylistObject playlist,
 });
 
 class HistoryTopPlaylistsNotifier extends FamilyPaginatedAsyncNotifier<
@@ -49,10 +49,12 @@ class HistoryTopPlaylistsNotifier extends FamilyPaginatedAsyncNotifier<
   build(arg) async {
     final subscription = createPlaylistsQuery().watch().listen((event) {
       if (state.asData == null) return;
-      state = AsyncData(state.asData!.value.copyWith(
-        items: getPlaylistsWithCount(event),
-        hasMore: false,
-      ));
+      state = AsyncData(
+        state.asData!.value.copyWith(
+          items: getPlaylistsWithCount(event),
+          hasMore: false,
+        ),
+      );
     });
 
     ref.onDispose(() {
@@ -81,6 +83,4 @@ class HistoryTopPlaylistsNotifier extends FamilyPaginatedAsyncNotifier<
 final historyTopPlaylistsProvider = AsyncNotifierProviderFamily<
     HistoryTopPlaylistsNotifier,
     SpotubePaginationResponseObject<PlaybackHistoryPlaylist>,
-    HistoryDuration>(
-  () => HistoryTopPlaylistsNotifier(),
-);
+    HistoryDuration>(() => HistoryTopPlaylistsNotifier());

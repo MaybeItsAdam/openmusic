@@ -39,21 +39,28 @@ class SourcedTrack extends BasicSourcedTrack {
     required Ref ref,
   }) async {
     final audioSource = await ref.read(audioSourcePluginProvider.future);
-    final audioSourceConfig = await ref.read(metadataPluginsProvider
-        .selectAsync((data) => data.defaultAudioSourcePluginConfig));
+    final audioSourceConfig = await ref.read(
+      metadataPluginsProvider.selectAsync(
+        (data) => data.defaultAudioSourcePluginConfig,
+      ),
+    );
     if (audioSource == null || audioSourceConfig == null) {
       throw MetadataPluginException.noDefaultAudioSourcePlugin();
     }
 
     final database = ref.read(databaseProvider);
     final cachedSource = await (database.select(database.sourceMatchTable)
-          ..where((s) =>
-              s.trackId.equals(query.id) &
-              s.sourceType.equals(audioSourceConfig.slug))
+          ..where(
+            (s) =>
+                s.trackId.equals(query.id) &
+                s.sourceType.equals(audioSourceConfig.slug),
+          )
           ..limit(1)
           ..orderBy([
-            (s) =>
-                OrderingTerm(expression: s.createdAt, mode: OrderingMode.desc),
+            (s) => OrderingTerm(
+                  expression: s.createdAt,
+                  mode: OrderingMode.desc,
+                ),
           ]))
         .get()
         .then((s) => s.firstOrNull);
@@ -111,26 +118,30 @@ class SourcedTrack extends BasicSourcedTrack {
           int score = 0;
 
           for (final artist in track.artists) {
-            final isSameChannelArtist =
-                sibling.artists.any((a) => a.toLowerCase() == artist.name);
+            final isSameChannelArtist = sibling.artists.any(
+              (a) => a.toLowerCase() == artist.name,
+            );
 
             if (isSameChannelArtist) {
               score += 1;
             }
 
-            final titleContainsArtist =
-                sibling.title.toLowerCase().contains(artist.name.toLowerCase());
+            final titleContainsArtist = sibling.title.toLowerCase().contains(
+                  artist.name.toLowerCase(),
+                );
 
             if (titleContainsArtist) {
               score += 1;
             }
           }
 
-          final titleContainsTrackName =
-              sibling.title.toLowerCase().contains(track.name.toLowerCase());
+          final titleContainsTrackName = sibling.title.toLowerCase().contains(
+                track.name.toLowerCase(),
+              );
 
-          final hasOfficialFlag =
-              officialMusicRegex.hasMatch(sibling.title.toLowerCase());
+          final hasOfficialFlag = officialMusicRegex.hasMatch(
+            sibling.title.toLowerCase(),
+          );
 
           if (titleContainsTrackName) {
             score += 3;
@@ -198,8 +209,11 @@ class SourcedTrack extends BasicSourcedTrack {
     }
 
     final audioSource = await ref.read(audioSourcePluginProvider.future);
-    final audioSourceConfig = await ref.read(metadataPluginsProvider
-        .selectAsync((data) => data.defaultAudioSourcePluginConfig));
+    final audioSourceConfig = await ref.read(
+      metadataPluginsProvider.selectAsync(
+        (data) => data.defaultAudioSourcePluginConfig,
+      ),
+    );
     if (audioSource == null || audioSourceConfig == null) {
       throw MetadataPluginException.noDefaultAudioSourcePlugin();
     }
@@ -253,8 +267,11 @@ class SourcedTrack extends BasicSourcedTrack {
 
   Future<SourcedTrack> refreshStream() async {
     final audioSource = await ref.read(audioSourcePluginProvider.future);
-    final audioSourceConfig = await ref.read(metadataPluginsProvider
-        .selectAsync((data) => data.defaultAudioSourcePluginConfig));
+    final audioSourceConfig = await ref.read(
+      metadataPluginsProvider.selectAsync(
+        (data) => data.defaultAudioSourcePluginConfig,
+      ),
+    );
     if (audioSource == null || audioSourceConfig == null) {
       throw MetadataPluginException.noDefaultAudioSourcePlugin();
     }
@@ -265,8 +282,9 @@ class SourcedTrack extends BasicSourcedTrack {
     for (final source in sources) {
       final res = await globalDio.head(
         source.url,
-        options:
-            Options(validateStatus: (status) => status != null && status < 500),
+        options: Options(
+          validateStatus: (status) => status != null && status < 500,
+        ),
       );
 
       stringBuffer.writeln(
@@ -321,19 +339,17 @@ class SourcedTrack extends BasicSourcedTrack {
 
     final quality = preset.qualities[qualityIndex];
 
-    final exactMatch = sources.firstWhereOrNull(
-      (source) {
-        if (source.container != preset.name) return false;
+    final exactMatch = sources.firstWhereOrNull((source) {
+      if (source.container != preset.name) return false;
 
-        if (quality case SpotubeAudioLosslessContainerQuality()) {
-          return source.sampleRate == quality.sampleRate &&
-              source.bitDepth == quality.bitDepth;
-        } else {
-          return source.bitrate ==
-              (quality as SpotubeAudioLossyContainerQuality).bitrate;
-        }
-      },
-    );
+      if (quality case SpotubeAudioLosslessContainerQuality()) {
+        return source.sampleRate == quality.sampleRate &&
+            source.bitDepth == quality.bitDepth;
+      } else {
+        return source.bitrate ==
+            (quality as SpotubeAudioLossyContainerQuality).bitrate;
+      }
+    });
 
     if (exactMatch != null) {
       return exactMatch;
@@ -368,7 +384,8 @@ class SourcedTrack extends BasicSourcedTrack {
 
   SpotubeAudioSourceContainerPreset? get qualityPreset {
     final presetState = ref.read(audioSourcePresetsProvider);
-    return presetState.presets
-        .elementAtOrNull(presetState.selectedStreamingContainerIndex);
+    return presetState.presets.elementAtOrNull(
+      presetState.selectedStreamingContainerIndex,
+    );
   }
 }

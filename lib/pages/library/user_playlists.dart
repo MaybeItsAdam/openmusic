@@ -36,8 +36,9 @@ class UserPlaylistsPage extends HookConsumerWidget {
 
     final me = ref.watch(metadataPluginUserProvider);
     final playlistsQuery = ref.watch(metadataPluginSavedPlaylistsProvider);
-    final playlistsQueryNotifier =
-        ref.watch(metadataPluginSavedPlaylistsProvider.notifier);
+    final playlistsQueryNotifier = ref.watch(
+      metadataPluginSavedPlaylistsProvider.notifier,
+    );
 
     final likedTracksPlaylist = useMemoized(
       () => me.asData?.value == null
@@ -49,35 +50,33 @@ class UserPlaylistsPage extends HookConsumerWidget {
               externalUri: "",
               owner: me.asData!.value!,
               images: [
-                  SpotubeImageObject(
-                    url: Assets.images.likedTracks.path,
-                    width: 300,
-                    height: 300,
-                  )
-                ]),
+                SpotubeImageObject(
+                  url: Assets.images.likedTracks.path,
+                  width: 300,
+                  height: 300,
+                ),
+              ],
+            ),
       [context.l10n, me.asData?.value],
     );
 
-    final playlists = useMemoized(
-      () {
-        if (searchText.value.isEmpty) {
-          return [
-            if (likedTracksPlaylist != null) likedTracksPlaylist,
-            ...?playlistsQuery.asData?.value.items,
-          ];
-        }
+    final playlists = useMemoized(() {
+      if (searchText.value.isEmpty) {
         return [
           if (likedTracksPlaylist != null) likedTracksPlaylist,
           ...?playlistsQuery.asData?.value.items,
-        ]
-            .map((e) => (weightedRatio(e.name, searchText.value), e))
-            .sorted((a, b) => b.$1.compareTo(a.$1))
-            .where((e) => e.$1 > 50)
-            .map((e) => e.$2)
-            .toList();
-      },
-      [playlistsQuery, searchText.value],
-    );
+        ];
+      }
+      return [
+        if (likedTracksPlaylist != null) likedTracksPlaylist,
+        ...?playlistsQuery.asData?.value.items,
+      ]
+          .map((e) => (weightedRatio(e.name, searchText.value), e))
+          .sorted((a, b) => b.$1.compareTo(a.$1))
+          .where((e) => e.$1 > 50)
+          .map((e) => e.$2)
+          .toList();
+    }, [playlistsQuery, searchText.value]);
 
     final controller = useScrollController();
 

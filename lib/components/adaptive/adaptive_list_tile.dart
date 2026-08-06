@@ -39,22 +39,24 @@ class AdaptiveListTile extends HookWidget {
           context: context,
           barrierDismissible: true,
           builder: (context) {
-            return StatefulBuilder(builder: (context, update) {
-              return AlertDialog(
-                title: title != null
-                    ? Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        spacing: 5,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          if (leading != null) leading!,
-                          Flexible(child: title!),
-                        ],
-                      )
-                    : const SizedBox.shrink(),
-                content: Center(child: trailing?.call(context, update)),
-              );
-            });
+            return StatefulBuilder(
+              builder: (context, update) {
+                return AlertDialog(
+                  title: title != null
+                      ? Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          spacing: 5,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            if (leading != null) leading!,
+                            Flexible(child: title!),
+                          ],
+                        )
+                      : const SizedBox.shrink(),
+                  content: Center(child: trailing?.call(context, update)),
+                );
+              },
+            );
           },
         );
       },

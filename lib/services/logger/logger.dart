@@ -39,17 +39,15 @@ class AppLogger {
     logging.hierarchicalLoggingEnabled = true;
     logging.Logger('YoutubeExplode.StreamsClient')
       ..level = logging.Level.SEVERE
-      ..onRecord.listen(
-        (record) {
-          log.log(
-            _loggingToLoggerLevel[record.level] ?? Level.info,
-            record.message,
-            error: record.error,
-            stackTrace: record.stackTrace,
-            time: record.time,
-          );
-        },
-      );
+      ..onRecord.listen((record) {
+        log.log(
+          _loggingToLoggerLevel[record.level] ?? Level.info,
+          record.message,
+          error: record.error,
+          stackTrace: record.stackTrace,
+          time: record.time,
+        );
+      });
   }
 
   static R? runZoned<R>(R Function() body) {
@@ -70,10 +68,7 @@ class AppLogger {
           Isolate.current.addErrorListener(
             RawReceivePort((pair) async {
               final isolateError = pair as List<dynamic>;
-              reportError(
-                isolateError.first.toString(),
-                isolateError.last,
-              );
+              reportError(isolateError.first.toString(), isolateError.last);
             }).sendPort,
           );
         }

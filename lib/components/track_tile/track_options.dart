@@ -42,8 +42,10 @@ class TrackOptions extends HookConsumerWidget {
       :isActiveTrack,
       :isAuthenticated,
       :isLiked,
-      :downloadTask
-    ) = ref.watch(trackOptionsStateProvider(track));
+      :downloadTask,
+    ) = ref.watch(
+      trackOptionsStateProvider(track),
+    );
     final isLocalTrack = track is SpotubeLocalTrackObject;
 
     return Column(
@@ -82,10 +84,7 @@ class TrackOptions extends HookConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(context.l10n.go_to_album),
-                Text(
-                  track.album.name,
-                  style: context.theme.typography.xSmall,
-                ),
+                Text(track.album.name, style: context.theme.typography.xSmall),
               ],
             ),
           ),
@@ -143,10 +142,7 @@ class TrackOptions extends HookConsumerWidget {
               onTapItem?.call();
             },
             leading: isLiked
-                ? const Icon(
-                    SpotubeIcons.heartFilled,
-                    color: Colors.pink,
-                  )
+                ? const Icon(SpotubeIcons.heartFilled, color: Colors.pink)
                 : const Icon(SpotubeIcons.heart),
             title: Text(
               isLiked

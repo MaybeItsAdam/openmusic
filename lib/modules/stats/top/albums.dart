@@ -18,8 +18,9 @@ class TopAlbums extends HookConsumerWidget {
   Widget build(BuildContext context, ref) {
     final historyDuration = ref.watch(playbackHistoryTopDurationProvider);
     final topAlbums = ref.watch(historyTopAlbumsProvider(historyDuration));
-    final topAlbumsNotifier =
-        ref.watch(historyTopAlbumsProvider(historyDuration).notifier);
+    final topAlbumsNotifier = ref.watch(
+      historyTopAlbumsProvider(historyDuration).notifier,
+    );
 
     final albumsData = topAlbums.asData?.value.items ?? [];
 
@@ -56,8 +57,9 @@ class TopAlbums extends HookConsumerWidget {
           return StatsAlbumItem(
             album: album.album,
             info: Text(
-              context.l10n
-                  .count_plays(compactNumberFormatter.format(album.count)),
+              context.l10n.count_plays(
+                compactNumberFormatter.format(album.count),
+              ),
             ),
           );
         },

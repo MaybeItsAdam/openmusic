@@ -8,9 +8,7 @@ class DecryptedText {
 
   factory DecryptedText.decrypted(String value) {
     _encrypter ??= Encrypter(
-      Salsa20(
-        Key.fromUtf8(EncryptedKvStoreService.encryptionKeySync),
-      ),
+      Salsa20(Key.fromUtf8(EncryptedKvStoreService.encryptionKeySync)),
     );
 
     return DecryptedText(
@@ -23,9 +21,7 @@ class DecryptedText {
 
   String encrypt() {
     _encrypter ??= Encrypter(
-      Salsa20(
-        Key.fromUtf8(EncryptedKvStoreService.encryptionKeySync),
-      ),
+      Salsa20(Key.fromUtf8(EncryptedKvStoreService.encryptionKeySync)),
     );
     return _encrypter!.encrypt(value, iv: KVStoreService.ivKey).base64;
   }

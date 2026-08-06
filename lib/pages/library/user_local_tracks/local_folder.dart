@@ -58,11 +58,7 @@ class LocalLibraryPage extends HookConsumerWidget {
     final isPlaylistPlaying = playlist.containsTracks(tracks);
     if (!isPlaylistPlaying) {
       var indexWhere = tracks.indexWhere((s) => s.id == currentTrack?.id);
-      await playback.load(
-        tracks,
-        initialIndex: indexWhere,
-        autoPlay: true,
-      );
+      await playback.load(tracks, initialIndex: indexWhere, autoPlay: true);
     } else if (isPlaylistPlaying &&
         currentTrack.id != playlist.activeTrack?.id) {
       await playback.jumpToTrack(currentTrack);
@@ -79,11 +75,7 @@ class LocalLibraryPage extends HookConsumerWidget {
     final shuffledTracks = tracks.shuffled();
     if (isPlaylistPlaying) return;
 
-    await playback.load(
-      shuffledTracks,
-      initialIndex: 0,
-      autoPlay: true,
-    );
+    await playback.load(shuffledTracks, initialIndex: 0, autoPlay: true);
   }
 
   Future<void> addToQueueLocalTracks(
@@ -108,9 +100,8 @@ class LocalLibraryPage extends HookConsumerWidget {
     final playlist = ref.watch(audioPlayerProvider);
     final trackSnapshot = ref.watch(localTracksProvider);
     final isPlaylistPlaying = useMemoized(
-      () => playlist.containsTracks(
-        trackSnapshot.asData?.value[location] ?? [],
-      ),
+      () =>
+          playlist.containsTracks(trackSnapshot.asData?.value[location] ?? []),
       [playlist, trackSnapshot, location],
     );
 
@@ -125,8 +116,9 @@ class LocalLibraryPage extends HookConsumerWidget {
       final dir = Directory(location);
       final files = await dir.list(recursive: true).toList();
 
-      final filesLength =
-          await Future.wait(files.whereType<File>().map((e) => e.length()));
+      final filesLength = await Future.wait(
+        files.whereType<File>().map((e) => e.length()),
+      );
 
       return (filesLength.sum.toInt() / pow(10, 9)).toStringAsFixed(2);
     }, [location]);
@@ -136,10 +128,7 @@ class LocalLibraryPage extends HookConsumerWidget {
       child: Scaffold(
         headers: [
           TitleBar(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 10,
-              vertical: 0,
-            ),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
             surfaceBlur: 0,
             leading: const [BackButton()],
             title: Column(
@@ -156,11 +145,9 @@ class LocalLibraryPage extends HookConsumerWidget {
                 FutureBuilder<String>(
                   future: directorySize,
                   builder: (context, snapshot) {
-                    return Text(
-                      "${(snapshot.data ?? 0)} GB",
-                    ).xSmall().muted();
+                    return Text("${(snapshot.data ?? 0)} GB").xSmall().muted();
                   },
-                )
+                ),
               ],
             ),
             backgroundColor: Colors.transparent,
@@ -173,7 +160,7 @@ class LocalLibraryPage extends HookConsumerWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       const Icon(SpotubeIcons.delete),
-                      Text(context.l10n.clear_cache)
+                      Text(context.l10n.clear_cache),
                     ],
                   ).xSmall().iconSmall(),
                   onPressed: () async {
@@ -217,9 +204,7 @@ class LocalLibraryPage extends HookConsumerWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       const Icon(SpotubeIcons.export),
-                      Text(
-                        context.l10n.export,
-                      )
+                      Text(context.l10n.export),
                     ],
                   ).xSmall().iconSmall(),
                   onPressed: () async {
@@ -234,7 +219,8 @@ class LocalLibraryPage extends HookConsumerWidget {
                     }
 
                     final cacheDir = Directory(
-                        await UserPreferencesNotifier.getMusicCacheDir());
+                      await UserPreferencesNotifier.getMusicCacheDir(),
+                    );
 
                     if (!context.mounted) return;
                     await showDialog(
@@ -248,7 +234,7 @@ class LocalLibraryPage extends HookConsumerWidget {
                     );
                   },
                 ),
-              ]
+              ],
             ],
           ),
         ],
@@ -261,8 +247,9 @@ class LocalLibraryPage extends HookConsumerWidget {
                   children: [
                     const Gap(5),
                     Tooltip(
-                      tooltip:
-                          TooltipContainer(child: Text(context.l10n.play)).call,
+                      tooltip: TooltipContainer(
+                        child: Text(context.l10n.play),
+                      ).call,
                       child: IconButton.primary(
                         onPressed: trackSnapshot.asData?.value != null
                             ? () async {
@@ -287,9 +274,9 @@ class LocalLibraryPage extends HookConsumerWidget {
                     ),
                     const Gap(5),
                     Tooltip(
-                      tooltip:
-                          TooltipContainer(child: Text(context.l10n.shuffle))
-                              .call,
+                      tooltip: TooltipContainer(
+                        child: Text(context.l10n.shuffle),
+                      ).call,
                       child: IconButton.outline(
                         onPressed: trackSnapshot.asData?.value != null
                             ? () async {
@@ -312,8 +299,8 @@ class LocalLibraryPage extends HookConsumerWidget {
                     const Gap(5),
                     Tooltip(
                       tooltip: TooltipContainer(
-                              child: Text(context.l10n.add_to_queue))
-                          .call,
+                        child: Text(context.l10n.add_to_queue),
+                      ).call,
                       child: IconButton.outline(
                         onPressed: trackSnapshot.asData?.value != null
                             ? () async {
@@ -367,7 +354,7 @@ class LocalLibraryPage extends HookConsumerWidget {
                       onPressed: () {
                         ref.invalidate(localTracksProvider);
                       },
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -377,124 +364,127 @@ class LocalLibraryPage extends HookConsumerWidget {
                 isFiltering: isFiltering.value,
                 onChangeFiltering: (value) => isFiltering.value = value,
               ),
-              HookBuilder(builder: (context) {
-                return trackSnapshot.when(
-                  data: (tracks) {
-                    final sortedTracks = useMemoized(() {
-                      return ServiceUtils.sortTracks(
+              HookBuilder(
+                builder: (context) {
+                  return trackSnapshot.when(
+                    data: (tracks) {
+                      final sortedTracks = useMemoized(() {
+                        return ServiceUtils.sortTracks(
                           tracks[location] ?? <SpotubeLocalTrackObject>[],
-                          sortBy.value);
-                    }, [sortBy.value, tracks]);
+                          sortBy.value,
+                        );
+                      }, [sortBy.value, tracks]);
 
-                    final filteredTracks = useMemoized(() {
-                      if (searchController.text.isEmpty) {
-                        return sortedTracks;
-                      }
-                      return sortedTracks
-                          .map((e) => (
+                      final filteredTracks = useMemoized(() {
+                        if (searchController.text.isEmpty) {
+                          return sortedTracks;
+                        }
+                        return sortedTracks
+                            .map(
+                              (e) => (
                                 weightedRatio(
                                   "${e.name} - ${e.artists.asString()}",
                                   searchController.text,
                                 ),
                                 e,
-                              ))
-                          .toList()
-                          .sorted(
-                            (a, b) => b.$1.compareTo(a.$1),
-                          )
-                          .where((e) => e.$1 > 50)
-                          .map((e) => e.$2)
-                          .toList()
-                          .toList();
-                    }, [searchController.text, sortedTracks]);
+                              ),
+                            )
+                            .toList()
+                            .sorted((a, b) => b.$1.compareTo(a.$1))
+                            .where((e) => e.$1 > 50)
+                            .map((e) => e.$2)
+                            .toList()
+                            .toList();
+                      }, [searchController.text, sortedTracks]);
 
-                    if (!trackSnapshot.isLoading && filteredTracks.isEmpty) {
+                      if (!trackSnapshot.isLoading && filteredTracks.isEmpty) {
+                        return Expanded(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Undraw(
+                                illustration: UndrawIllustration.empty,
+                                height: 200 * scale,
+                                color: context.theme.colorScheme.primary,
+                              ),
+                              const Gap(10),
+                              Text(
+                                context.l10n.nothing_found,
+                                textAlign: TextAlign.center,
+                              ).muted().small(),
+                            ],
+                          ),
+                        );
+                      }
+
                       return Expanded(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Undraw(
-                              illustration: UndrawIllustration.empty,
-                              height: 200 * scale,
-                              color: context.theme.colorScheme.primary,
-                            ),
-                            const Gap(10),
-                            Text(
-                              context.l10n.nothing_found,
-                              textAlign: TextAlign.center,
-                            ).muted().small()
-                          ],
-                        ),
-                      );
-                    }
-
-                    return Expanded(
-                      child: material.RefreshIndicator.adaptive(
-                        onRefresh: () async {
-                          ref.invalidate(localTracksProvider);
-                        },
-                        child: InterScrollbar(
-                          controller: controller,
-                          child: Skeletonizer(
-                            enabled: trackSnapshot.isLoading,
-                            child: CustomScrollView(
-                              controller: controller,
-                              physics: const AlwaysScrollableScrollPhysics(),
-                              slivers: [
-                                SliverList.builder(
-                                  itemCount: trackSnapshot.isLoading
-                                      ? 5
-                                      : filteredTracks.length,
-                                  itemBuilder: (context, index) {
-                                    if (trackSnapshot.isLoading) {
-                                      return TrackTile(
-                                        playlist: playlist,
-                                        track: FakeData.track,
-                                        index: index,
-                                      );
-                                    }
-
-                                    final track = filteredTracks[index];
-                                    return TrackTile(
-                                      index: index,
-                                      playlist: playlist,
-                                      track: track,
-                                      userPlaylist: false,
-                                      onTap: () async {
-                                        await playLocalTracks(
-                                          ref,
-                                          sortedTracks,
-                                          currentTrack: track,
+                        child: material.RefreshIndicator.adaptive(
+                          onRefresh: () async {
+                            ref.invalidate(localTracksProvider);
+                          },
+                          child: InterScrollbar(
+                            controller: controller,
+                            child: Skeletonizer(
+                              enabled: trackSnapshot.isLoading,
+                              child: CustomScrollView(
+                                controller: controller,
+                                physics: const AlwaysScrollableScrollPhysics(),
+                                slivers: [
+                                  SliverList.builder(
+                                    itemCount: trackSnapshot.isLoading
+                                        ? 5
+                                        : filteredTracks.length,
+                                    itemBuilder: (context, index) {
+                                      if (trackSnapshot.isLoading) {
+                                        return TrackTile(
+                                          playlist: playlist,
+                                          track: FakeData.track,
+                                          index: index,
                                         );
-                                      },
-                                    );
-                                  },
-                                ),
-                                const SliverGap(200),
-                              ],
+                                      }
+
+                                      final track = filteredTracks[index];
+                                      return TrackTile(
+                                        index: index,
+                                        playlist: playlist,
+                                        track: track,
+                                        userPlaylist: false,
+                                        onTap: () async {
+                                          await playLocalTracks(
+                                            ref,
+                                            sortedTracks,
+                                            currentTrack: track,
+                                          );
+                                        },
+                                      );
+                                    },
+                                  ),
+                                  const SliverGap(200),
+                                ],
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    );
-                  },
-                  loading: () => Expanded(
-                    child: Skeletonizer(
-                      enabled: true,
-                      child: ListView.builder(
-                        itemCount: 5,
-                        itemBuilder: (context, index) => TrackTile(
-                          track: FakeData.track,
-                          index: index,
-                          playlist: playlist,
+                      );
+                    },
+                    loading: () => Expanded(
+                      child: Skeletonizer(
+                        enabled: true,
+                        child: ListView.builder(
+                          itemCount: 5,
+                          itemBuilder: (context, index) => TrackTile(
+                            track: FakeData.track,
+                            index: index,
+                            playlist: playlist,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  error: (error, stackTrace) =>
-                      Text(error.toString() + stackTrace.toString()),
-                );
-              }),
+                    error: (error, stackTrace) =>
+                        Text(error.toString() + stackTrace.toString()),
+                  );
+                },
+              ),
             ],
           ),
         ),

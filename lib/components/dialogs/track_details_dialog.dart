@@ -11,10 +11,7 @@ import 'package:spotube/provider/server/sourced_track_provider.dart';
 
 class TrackDetailsDialog extends HookConsumerWidget {
   final SpotubeFullTrackObject track;
-  const TrackDetailsDialog({
-    super.key,
-    required this.track,
-  });
+  const TrackDetailsDialog({super.key, required this.track});
 
   @override
   Widget build(BuildContext context, ref) {
@@ -71,10 +68,7 @@ class TrackDetailsDialog extends HookConsumerWidget {
         spacing: 8,
         children: [
           const Icon(SpotubeIcons.info),
-          Text(
-            context.l10n.details,
-            style: theme.typography.h4,
-          ),
+          Text(context.l10n.details, style: theme.typography.h4),
         ],
       ),
       content: SizedBox(
@@ -97,14 +91,9 @@ class TrackDetailsDialog extends HookConsumerWidget {
               TableRow(
                 cells: [
                   TableCell(
-                    child: Text(
-                      entry.key,
-                      style: theme.typography.bold,
-                    ),
+                    child: Text(entry.key, style: theme.typography.bold),
                   ),
-                  const TableCell(
-                    child: Text(":"),
-                  ),
+                  const TableCell(child: Text(":")),
                   TableCell(
                     child: entry.value is Widget
                         ? entry.value as Widget
@@ -121,14 +110,9 @@ class TrackDetailsDialog extends HookConsumerWidget {
               TableRow(
                 cells: [
                   TableCell(
-                    child: Text(
-                      entry.key,
-                      style: theme.typography.bold,
-                    ),
+                    child: Text(entry.key, style: theme.typography.bold),
                   ),
-                  const TableCell(
-                    child: Text(":"),
-                  ),
+                  const TableCell(child: Text(":")),
                   TableCell(
                     child: entry.value is Widget
                         ? entry.value as Widget

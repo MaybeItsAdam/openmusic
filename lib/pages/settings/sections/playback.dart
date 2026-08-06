@@ -29,8 +29,9 @@ class SettingsPlaybackSection extends HookConsumerWidget {
     final preferences = ref.watch(userPreferencesProvider);
     final preferencesNotifier = ref.watch(userPreferencesProvider.notifier);
     final sourcePresets = ref.watch(audioSourcePresetsProvider);
-    final sourcePresetsNotifier =
-        ref.watch(audioSourcePresetsProvider.notifier);
+    final sourcePresetsNotifier = ref.watch(
+      audioSourcePresetsProvider.notifier,
+    );
     final theme = Theme.of(context);
 
     return SectionCardWithHeading(
@@ -42,10 +43,7 @@ class SettingsPlaybackSection extends HookConsumerWidget {
           value: preferences.youtubeClientEngine,
           options: YoutubeClientEngine.values
               .where((e) => e.isAvailableForPlatform())
-              .map((e) => SelectItemButton(
-                    value: e,
-                    child: Text(e.label),
-                  ))
+              .map((e) => SelectItemButton(value: e, child: Text(e.label)))
               .toList(),
           onChanged: (value) async {
             if (value == null) return;
@@ -145,7 +143,7 @@ class SettingsPlaybackSection extends HookConsumerWidget {
                           color: theme.colorScheme.primary,
                           decoration: TextDecoration.underline,
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),
@@ -173,12 +171,13 @@ class SettingsPlaybackSection extends HookConsumerWidget {
           ),
         ),
         ListTile(
-            leading: const Icon(SpotubeIcons.repeat),
-            title: Text(context.l10n.endless_playback),
-            trailing: Switch(
-              value: preferences.endlessPlayback,
-              onChanged: preferencesNotifier.setEndlessPlayback,
-            )),
+          leading: const Icon(SpotubeIcons.repeat),
+          title: Text(context.l10n.endless_playback),
+          trailing: Switch(
+            value: preferences.endlessPlayback,
+            onChanged: preferencesNotifier.setEndlessPlayback,
+          ),
+        ),
         ListTile(
           title: Text(context.l10n.enable_connect),
           subtitle: Text(context.l10n.enable_connect_description),

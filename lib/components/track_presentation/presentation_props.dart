@@ -69,8 +69,10 @@ class TrackPresentationOptions {
     this.isLiked = false,
     this.onHeart,
     this.error,
-  }) : assert(collection is SpotubeSimpleAlbumObject ||
-            collection is SpotubeSimplePlaylistObject);
+  }) : assert(
+          collection is SpotubeSimpleAlbumObject ||
+              collection is SpotubeSimplePlaylistObject,
+        );
 
   String get collectionId => collection is SpotubeSimpleAlbumObject
       ? (collection as SpotubeSimpleAlbumObject).id

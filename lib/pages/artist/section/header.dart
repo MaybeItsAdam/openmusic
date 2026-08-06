@@ -47,8 +47,9 @@ class ArtistPageHeader extends HookConsumerWidget {
                 final isFollowingQuery = ref.watch(
                   metadataPluginIsSavedArtistProvider(artist.id),
                 );
-                final followingArtistNotifier =
-                    ref.watch(metadataPluginSavedArtistsProvider.notifier);
+                final followingArtistNotifier = ref.watch(
+                  metadataPluginSavedArtistsProvider.notifier,
+                );
 
                 return switch (isFollowingQuery) {
                   AsyncData(value: final following) => Builder(
@@ -56,8 +57,9 @@ class ArtistPageHeader extends HookConsumerWidget {
                         if (following) {
                           return Button.outline(
                             onPressed: () async {
-                              await followingArtistNotifier
-                                  .removeFavorite([artist]);
+                              await followingArtistNotifier.removeFavorite([
+                                artist,
+                              ]);
                             },
                             child: Text(context.l10n.following),
                           );
@@ -75,7 +77,7 @@ class ArtistPageHeader extends HookConsumerWidget {
                   _ => const SizedBox.square(
                       dimension: 20,
                       child: CircularProgressIndicator(),
-                    )
+                    ),
                 };
               },
             ),
@@ -110,11 +112,7 @@ class ArtistPageHeader extends HookConsumerWidget {
           IconButton.ghost(
             icon: const Icon(SpotubeIcons.share),
             onPressed: () async {
-              await Clipboard.setData(
-                ClipboardData(
-                  text: artist.externalUri,
-                ),
-              );
+              await Clipboard.setData(ClipboardData(text: artist.externalUri));
 
               if (!context.mounted) return;
 
@@ -132,7 +130,7 @@ class ArtistPageHeader extends HookConsumerWidget {
                 },
               );
             },
-          )
+          ),
         ],
       ),
     );
@@ -168,15 +166,16 @@ class ArtistPageHeader extends HookConsumerWidget {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               OutlineBadge(
-                                child:
-                                    Text(context.l10n.artist).small().muted(),
+                                child: Text(
+                                  context.l10n.artist,
+                                ).small().muted(),
                               ),
                               if (isBlackListed) ...[
                                 const Gap(5),
                                 DestructiveBadge(
                                   child: Text(context.l10n.blacklisted).small(),
                                 ),
-                              ]
+                              ],
                             ],
                           ),
                           const Gap(10),
@@ -206,19 +205,13 @@ class ArtistPageHeader extends HookConsumerWidget {
                               minFontSize: 12,
                             ).muted(),
                           ),
-                          if (constrains.mdAndUp) ...[
-                            const Gap(20),
-                            actions,
-                          ]
+                          if (constrains.mdAndUp) ...[const Gap(20), actions],
                         ],
                       ),
                     ),
                   ],
                 ),
-                if (constrains.smAndDown) ...[
-                  const Gap(20),
-                  actions,
-                ]
+                if (constrains.smAndDown) ...[const Gap(20), actions],
               ],
             ),
           ),

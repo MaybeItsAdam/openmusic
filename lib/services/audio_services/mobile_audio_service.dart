@@ -139,9 +139,7 @@ class MobileAudioService extends BaseAudioHandler {
           MediaControl.skipToNext,
           MediaControl.stop,
         ],
-        systemActions: {
-          MediaAction.seek,
-        },
+        systemActions: {MediaAction.seek},
         androidCompactActionIndices: const [0, 1, 2],
         playing: audioPlayer.isPlaying,
         updatePosition: audioPlayer.position,

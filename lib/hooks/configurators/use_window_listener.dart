@@ -155,47 +155,50 @@ void useWindowListener({
   VoidCallback? onWindowUndocked,
   VoidCallback? onWindowEvent,
 }) {
-  useEffect(() {
-    if (!kIsDesktop) return null;
+  useEffect(
+    () {
+      if (!kIsDesktop) return null;
 
-    final listener = CallbackWindowListener(
-      onWindowClose: onWindowClose,
-      onWindowFocus: onWindowFocus,
-      onWindowBlur: onWindowBlur,
-      onWindowMaximize: onWindowMaximize,
-      onWindowUnmaximize: onWindowUnmaximize,
-      onWindowMinimize: onWindowMinimize,
-      onWindowRestore: onWindowRestore,
-      onWindowResize: onWindowResize,
-      onWindowResized: onWindowResized,
-      onWindowMove: onWindowMove,
-      onWindowMoved: onWindowMoved,
-      onWindowEnterFullScreen: onWindowEnterFullScreen,
-      onWindowLeaveFullScreen: onWindowLeaveFullScreen,
-      onWindowDocked: onWindowDocked,
-      onWindowUndocked: onWindowUndocked,
-      onWindowEvent: onWindowEvent,
-    );
-    windowManager.addListener(listener);
-    return () {
-      windowManager.removeListener(listener);
-    };
-  }, [
-    onWindowClose,
-    onWindowFocus,
-    onWindowBlur,
-    onWindowMaximize,
-    onWindowUnmaximize,
-    onWindowMinimize,
-    onWindowRestore,
-    onWindowResize,
-    onWindowResized,
-    onWindowMove,
-    onWindowMoved,
-    onWindowEnterFullScreen,
-    onWindowLeaveFullScreen,
-    onWindowDocked,
-    onWindowUndocked,
-    onWindowEvent,
-  ]);
+      final listener = CallbackWindowListener(
+        onWindowClose: onWindowClose,
+        onWindowFocus: onWindowFocus,
+        onWindowBlur: onWindowBlur,
+        onWindowMaximize: onWindowMaximize,
+        onWindowUnmaximize: onWindowUnmaximize,
+        onWindowMinimize: onWindowMinimize,
+        onWindowRestore: onWindowRestore,
+        onWindowResize: onWindowResize,
+        onWindowResized: onWindowResized,
+        onWindowMove: onWindowMove,
+        onWindowMoved: onWindowMoved,
+        onWindowEnterFullScreen: onWindowEnterFullScreen,
+        onWindowLeaveFullScreen: onWindowLeaveFullScreen,
+        onWindowDocked: onWindowDocked,
+        onWindowUndocked: onWindowUndocked,
+        onWindowEvent: onWindowEvent,
+      );
+      windowManager.addListener(listener);
+      return () {
+        windowManager.removeListener(listener);
+      };
+    },
+    [
+      onWindowClose,
+      onWindowFocus,
+      onWindowBlur,
+      onWindowMaximize,
+      onWindowUnmaximize,
+      onWindowMinimize,
+      onWindowRestore,
+      onWindowResize,
+      onWindowResized,
+      onWindowMove,
+      onWindowMoved,
+      onWindowEnterFullScreen,
+      onWindowLeaveFullScreen,
+      onWindowDocked,
+      onWindowUndocked,
+      onWindowEvent,
+    ],
+  );
 }

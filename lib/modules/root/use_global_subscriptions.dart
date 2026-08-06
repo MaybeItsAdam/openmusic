@@ -22,8 +22,9 @@ void useGlobalSubscriptions(WidgetRef ref) {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       ServiceUtils.checkForUpdates(context, ref);
 
-      final pluginUpdate =
-          await ref.read(metadataPluginUpdateCheckerProvider.future);
+      final pluginUpdate = await ref.read(
+        metadataPluginUpdateCheckerProvider.future,
+      );
 
       if (pluginUpdate != null) {
         final pluginConfig = await ref.read(metadataPluginsProvider.future);
@@ -43,8 +44,9 @@ void useGlobalSubscriptions(WidgetRef ref) {
     bool pausedByStream = false;
 
     final subscriptions = [
-      ConnectionCheckerService.instance.onConnectivityChanged
-          .listen((connected) async {
+      ConnectionCheckerService.instance.onConnectivityChanged.listen((
+        connected,
+      ) async {
         audioPlayerSubscription?.cancel();
 
         /// Pausing or resuming based on connectivity to avoid MPV skipping
@@ -59,8 +61,9 @@ void useGlobalSubscriptions(WidgetRef ref) {
               await audioPlayer.pause();
               pausedByStream = true;
             } else {
-              audioPlayerSubscription =
-                  audioPlayer.positionStream.listen((position) async {
+              audioPlayerSubscription = audioPlayer.positionStream.listen((
+                position,
+              ) async {
                 if (ConnectionCheckerService.instance.isConnectedSync) return;
 
                 final bufferedPosition =
@@ -122,10 +125,7 @@ void useGlobalSubscriptions(WidgetRef ref) {
               fillColor: Colors.yellow[600],
               filled: true,
               child: Basic(
-                leading: const Icon(
-                  SpotubeIcons.error,
-                  color: Colors.black,
-                ),
+                leading: const Icon(SpotubeIcons.error, color: Colors.black),
                 title: Text(
                   context.l10n.connect_client_alert(clientOrigin),
                   style: const TextStyle(color: Colors.black),
@@ -134,7 +134,7 @@ void useGlobalSubscriptions(WidgetRef ref) {
             );
           },
         );
-      })
+      }),
     ];
 
     return () {

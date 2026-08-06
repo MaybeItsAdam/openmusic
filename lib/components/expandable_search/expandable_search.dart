@@ -34,14 +34,14 @@ class ExpandableSearchField extends StatelessWidget {
                   onChangeFiltering(false);
                   searchController.clear();
                   searchFocus.unfocus();
-                }
+                },
               },
               child: TextField(
                 focusNode: searchFocus,
                 controller: searchController,
                 placeholder: Text(context.l10n.search_tracks),
                 features: const [
-                  InputFeature.leading(Icon(SpotubeIcons.search))
+                  InputFeature.leading(Icon(SpotubeIcons.search)),
                 ],
               ),
             ),

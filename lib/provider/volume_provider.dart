@@ -20,5 +20,6 @@ class VolumeProvider extends Notifier<double> {
   }
 }
 
-final volumeProvider =
-    NotifierProvider<VolumeProvider, double>(() => VolumeProvider());
+final volumeProvider = NotifierProvider<VolumeProvider, double>(
+  () => VolumeProvider(),
+);

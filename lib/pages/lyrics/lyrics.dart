@@ -83,7 +83,7 @@ class LyricsPage extends HookConsumerWidget {
                   surfaceBlur: 0,
                   automaticallyImplyLeading: false,
                 )
-              : tabbar
+              : tabbar,
         ],
         child: Container(
           clipBehavior: Clip.hardEdge,

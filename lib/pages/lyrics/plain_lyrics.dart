@@ -45,20 +45,16 @@ class PlainLyrics extends HookConsumerWidget {
                   playlist.activeTrack?.name ?? "",
                   style: mediaQuery.mdAndUp
                       ? typography.h3
-                      : typography.h4.copyWith(
-                          color: palette.titleTextColor,
-                        ),
+                      : typography.h4.copyWith(color: palette.titleTextColor),
                 ),
               ),
               Center(
                 child: Text(
                   playlist.activeTrack?.artists.asString() ?? "",
                   style: (mediaQuery.mdAndUp ? typography.h4 : typography.large)
-                      .copyWith(
-                    color: palette.bodyTextColor,
-                  ),
+                      .copyWith(color: palette.bodyTextColor),
                 ),
-              )
+              ),
             ],
             Expanded(
               child: SingleChildScrollView(

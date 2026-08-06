@@ -26,10 +26,7 @@ import 'package:spotube/collections/env.dart';
 
 import 'package:version/version.dart';
 
-enum UserAgentDevice {
-  desktop,
-  mobile,
-}
+enum UserAgentDevice { desktop, mobile }
 
 abstract class ServiceUtils {
   static final _englishMatcherRegex = RegExp(
@@ -51,14 +48,12 @@ abstract class ServiceUtils {
     bool onlyCleanArtist = false,
   }) {
     final match = RegExp(r"(?<=\().+?(?=\))").firstMatch(title)?.group(0);
-    final artistInBracket =
-        artists.any((artist) => match?.contains(artist) ?? false);
+    final artistInBracket = artists.any(
+      (artist) => match?.contains(artist) ?? false,
+    );
 
     if (artistInBracket) {
-      title = title.replaceAll(
-        RegExp(" *\\([^)]*\\) *"),
-        '',
-      );
+      title = title.replaceAll(RegExp(" *\\([^)]*\\) *"), '');
     }
 
     title = clearArtistsOfTitle(title, artists);
@@ -83,9 +78,9 @@ abstract class ServiceUtils {
     String? lyrics = document.querySelector('div.lyrics')?.text.trim();
     if (lyrics == null) {
       lyrics = "";
-      document
-          .querySelectorAll("div[class^=\"Lyrics__Container\"]")
-          .forEach((element) {
+      document.querySelectorAll("div[class^=\"Lyrics__Container\"]").forEach((
+        element,
+      ) {
         if (element.text.trim().isNotEmpty) {
           final snippet = element.innerHtml.replaceAll("<br>", "\n").replaceAll(
                 RegExp("<(?!\\s*br\\s*\\/?)[^>]+>", caseSensitive: false),
@@ -155,20 +150,18 @@ abstract class ServiceUtils {
       authHeader: authHeader,
     );
     if (results == null) return null;
-    title = getTitle(
-      title,
-      artists: artists,
-      onlyCleanArtist: true,
-    ).trim();
+    title = getTitle(title, artists: artists, onlyCleanArtist: true).trim();
     final ratedLyrics = results.map((result) {
       final gTitle = (result["full_title"] as String).toLowerCase();
       int points = 0;
       final hasTitle = gTitle.contains(title);
-      final hasAllArtists =
-          artists.every((artist) => gTitle.contains(artist.toLowerCase()));
+      final hasAllArtists = artists.every(
+        (artist) => gTitle.contains(artist.toLowerCase()),
+      );
       final String lyricAuthor = result["author"].toLowerCase();
-      final fromOriginalAuthor =
-          lyricAuthor.contains(artists.first.toLowerCase());
+      final fromOriginalAuthor = lyricAuthor.contains(
+        artists.first.toLowerCase(),
+      );
 
       for (final criteria in [
         hasTitle,
@@ -178,9 +171,7 @@ abstract class ServiceUtils {
         if (criteria) points++;
       }
       return {"result": result, "points": points};
-    }).sorted(
-      (a, b) => ((a["points"] as int).compareTo(a["points"] as int)),
-    );
+    }).sorted((a, b) => ((a["points"] as int).compareTo(a["points"] as int)));
     final worthyOne = ratedLyrics.first["result"];
 
     String? lyrics = await extractLyrics(Uri.parse(worthyOne["url"]));
@@ -196,7 +187,9 @@ abstract class ServiceUtils {
   }
 
   static List<T> sortTracks<T extends SpotubeTrackObject>(
-      List<T> tracks, SortBy sortBy) {
+    List<T> tracks,
+    SortBy sortBy,
+  ) {
     if (sortBy == SortBy.none) return tracks;
     return List<T>.from(tracks)
       ..sort((a, b) {
@@ -246,9 +239,7 @@ abstract class ServiceUtils {
         Uri.parse(
           "https://api.github.com/repos/KRTirtho/spotube/actions/workflows/spotube-release-binary.yml/runs?status=success&per_page=1",
         ),
-        options: Options(
-          responseType: ResponseType.json,
-        ),
+        options: Options(responseType: ResponseType.json),
       );
 
       final buildNum = value.data["workflow_runs"][0]["run_number"] as int;
@@ -298,9 +289,7 @@ abstract class ServiceUtils {
     }
   }
 
-  static Future<Uint8List?> downloadImage(
-    String imageUrl,
-  ) async {
+  static Future<Uint8List?> downloadImage(String imageUrl) async {
     try {
       final fileStream = DefaultCacheManager().getImageFile(imageUrl);
 
@@ -335,22 +324,11 @@ abstract class ServiceUtils {
   static String sanitizeFilename(String input, {String replacement = ''}) {
     final result = input
         // illegalRe
-        .replaceAll(
-          RegExp(r'[\/\?<>\\:\*\|"]'),
-          replacement,
-        )
+        .replaceAll(RegExp(r'[\/\?<>\\:\*\|"]'), replacement)
         // controlRe
-        .replaceAll(
-          RegExp(
-            r'[\x00-\x1f\x80-\x9f]',
-          ),
-          replacement,
-        )
+        .replaceAll(RegExp(r'[\x00-\x1f\x80-\x9f]'), replacement)
         // reservedRe
-        .replaceFirst(
-          RegExp(r'^\.+$'),
-          replacement,
-        )
+        .replaceFirst(RegExp(r'^\.+$'), replacement)
         // windowsReservedRe
         .replaceFirst(
           RegExp(

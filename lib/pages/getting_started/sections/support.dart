@@ -43,17 +43,20 @@ class GettingStartedScreenSupportSection extends HookConsumerWidget {
                     Button(
                       leading: const Icon(SpotubeIcons.github),
                       style: ButtonVariance.primary.copyWith(
-                          decoration: (context, states, value) {
-                        if (states.isNotEmpty) {
-                          return ButtonVariance.primary
-                              .decoration(context, states);
-                        }
+                        decoration: (context, states, value) {
+                          if (states.isNotEmpty) {
+                            return ButtonVariance.primary.decoration(
+                              context,
+                              states,
+                            );
+                          }
 
-                        return BoxDecoration(
-                          color: Colors.black,
-                          borderRadius: BorderRadius.circular(8),
-                        );
-                      }),
+                          return BoxDecoration(
+                            color: Colors.black,
+                            borderRadius: BorderRadius.circular(8),
+                          );
+                        },
+                      ),
                       onPressed: () async {
                         await launchUrlString(
                           "https://github.com/KRTirtho/spotube",
@@ -70,17 +73,20 @@ class GettingStartedScreenSupportSection extends HookConsumerWidget {
                       Button(
                         leading: const Icon(SpotubeIcons.openCollective),
                         style: ButtonVariance.primary.copyWith(
-                            decoration: (context, states, value) {
-                          if (states.isNotEmpty) {
-                            return ButtonVariance.primary
-                                .decoration(context, states);
-                          }
+                          decoration: (context, states, value) {
+                            if (states.isNotEmpty) {
+                              return ButtonVariance.primary.decoration(
+                                context,
+                                states,
+                              );
+                            }
 
-                          return BoxDecoration(
-                            color: const Color(0xff4cb7f6),
-                            borderRadius: BorderRadius.circular(8),
-                          );
-                        }),
+                            return BoxDecoration(
+                              color: const Color(0xff4cb7f6),
+                              borderRadius: BorderRadius.circular(8),
+                            );
+                          },
+                        ),
                         onPressed: () async {
                           await launchUrlString(
                             "https://opencollective.com/spotube",
@@ -92,7 +98,7 @@ class GettingStartedScreenSupportSection extends HookConsumerWidget {
                           style: const TextStyle(color: Colors.white),
                         ),
                       ),
-                    ]
+                    ],
                   ],
                 ),
               ],

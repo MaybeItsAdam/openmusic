@@ -37,8 +37,9 @@ class SettingsMetadataProviderPage extends HookConsumerWidget {
     final pluginsNotifier = ref.watch(metadataPluginsProvider.notifier);
 
     final pluginReposSnapshot = ref.watch(metadataPluginRepositoriesProvider);
-    final pluginReposNotifier =
-        ref.watch(metadataPluginRepositoriesProvider.notifier);
+    final pluginReposNotifier = ref.watch(
+      metadataPluginRepositoriesProvider.notifier,
+    );
 
     final pluginRepos = useMemoized(
       () {
@@ -56,15 +57,13 @@ class SettingsMetadataProviderPage extends HookConsumerWidget {
 
         if (tabState.value != 0) {
           // metadata only plugins
-          return availablePlugins.where(
-            (d) {
-              return d.topics.contains(
-                tabState.value == 1
-                    ? "spotube-metadata-plugin"
-                    : "spotube-audio-source-plugin",
-              );
-            },
-          ).toList();
+          return availablePlugins.where((d) {
+            return d.topics.contains(
+              tabState.value == 1
+                  ? "spotube-metadata-plugin"
+                  : "spotube-audio-source-plugin",
+            );
+          }).toList();
         }
 
         return availablePlugins; // all plugins
@@ -91,11 +90,7 @@ class SettingsMetadataProviderPage extends HookConsumerWidget {
     return SafeArea(
       bottom: false,
       child: Scaffold(
-        headers: [
-          TitleBar(
-            title: Text(context.l10n.plugins),
-          )
-        ],
+        headers: [TitleBar(title: Text(context.l10n.plugins))],
         child: Padding(
           padding: const EdgeInsets.all(8),
           child: CustomScrollView(
@@ -110,77 +105,86 @@ class SettingsMetadataProviderPage extends HookConsumerWidget {
                         child: TextFormBuilderField(
                           name: "plugin_url",
                           validator: FormBuilderValidators.url(
-                              protocols: ["http", "https"]),
-                          placeholder:
-                              Text(context.l10n.paste_plugin_download_url),
+                            protocols: ["http", "https"],
+                          ),
+                          placeholder: Text(
+                            context.l10n.paste_plugin_download_url,
+                          ),
                         ),
                       ),
                     ),
-                    HookBuilder(builder: (context) {
-                      final isLoading = useState(false);
+                    HookBuilder(
+                      builder: (context) {
+                        final isLoading = useState(false);
 
-                      return Tooltip(
-                        tooltip: TooltipContainer(
-                          child: Text(context
-                              .l10n.download_and_install_plugin_from_url),
-                        ).call,
-                        child: IconButton.secondary(
-                          icon: isLoading.value
-                              ? const SizedBox.square(
-                                  dimension: 22,
-                                  child:
-                                      CircularProgressIndicator(strokeWidth: 2),
-                                )
-                              : const Icon(SpotubeIcons.download),
-                          enabled: !isLoading.value,
-                          onPressed: () async {
-                            try {
-                              if (formKey.currentState?.saveAndValidate() ??
-                                  false) {
-                                final url = formKey.currentState
-                                    ?.fields["plugin_url"]?.value as String;
+                        return Tooltip(
+                          tooltip: TooltipContainer(
+                            child: Text(
+                              context.l10n.download_and_install_plugin_from_url,
+                            ),
+                          ).call,
+                          child: IconButton.secondary(
+                            icon: isLoading.value
+                                ? const SizedBox.square(
+                                    dimension: 22,
+                                    child: CircularProgressIndicator(
+                                      strokeWidth: 2,
+                                    ),
+                                  )
+                                : const Icon(SpotubeIcons.download),
+                            enabled: !isLoading.value,
+                            onPressed: () async {
+                              try {
+                                if (formKey.currentState?.saveAndValidate() ??
+                                    false) {
+                                  final url = formKey.currentState
+                                      ?.fields["plugin_url"]?.value as String;
 
-                                if (url.isNotEmpty) {
-                                  isLoading.value = true;
-                                  final pluginConfig = await pluginsNotifier
-                                      .downloadAndCachePlugin(url);
+                                  if (url.isNotEmpty) {
+                                    isLoading.value = true;
+                                    final pluginConfig = await pluginsNotifier
+                                        .downloadAndCachePlugin(url);
 
-                                  await pluginsNotifier.addPlugin(pluginConfig);
-
-                                  formKey.currentState?.fields["plugin_url"]
-                                      ?.reset();
-                                }
-                              }
-                            } catch (e, stackTrace) {
-                              AppLogger.reportError(e, stackTrace);
-                              if (context.mounted) {
-                                showToast(
-                                  showDuration: const Duration(seconds: 5),
-                                  context: context,
-                                  builder: (context, overlay) {
-                                    return SurfaceCard(
-                                      child: Basic(
-                                        leading: const Icon(
-                                          SpotubeIcons.error,
-                                          color: Colors.red,
-                                        ),
-                                        title: Text(
-                                          context.l10n
-                                              .failed_to_add_plugin_error(
-                                                  e.toString()),
-                                        ),
-                                      ),
+                                    await pluginsNotifier.addPlugin(
+                                      pluginConfig,
                                     );
-                                  },
-                                );
+
+                                    formKey.currentState?.fields["plugin_url"]
+                                        ?.reset();
+                                  }
+                                }
+                              } catch (e, stackTrace) {
+                                AppLogger.reportError(e, stackTrace);
+                                if (context.mounted) {
+                                  showToast(
+                                    showDuration: const Duration(seconds: 5),
+                                    context: context,
+                                    builder: (context, overlay) {
+                                      return SurfaceCard(
+                                        child: Basic(
+                                          leading: const Icon(
+                                            SpotubeIcons.error,
+                                            color: Colors.red,
+                                          ),
+                                          title: Text(
+                                            context.l10n
+                                                .failed_to_add_plugin_error(
+                                              e.toString(),
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  );
+                                }
+                              } finally {
+                                isLoading.value = false;
                               }
-                            } finally {
-                              isLoading.value = false;
-                            }
-                          },
-                        ),
-                      );
-                    }),
+                            },
+                          ),
+                        );
+                      },
+                    ),
                     Tooltip(
                       tooltip: TooltipContainer(
                         child: Text(context.l10n.upload_plugin_from_file),
@@ -308,9 +312,7 @@ class SettingsMetadataProviderPage extends HookConsumerWidget {
                 itemBuilder: (context, index) {
                   final pluginRepo = pluginRepos[index];
 
-                  return MetadataPluginRepositoryItem(
-                    pluginRepo: pluginRepo,
-                  );
+                  return MetadataPluginRepositoryItem(pluginRepo: pluginRepo);
                 },
               ),
               const SliverGap(20),
@@ -335,13 +337,14 @@ class SettingsMetadataProviderPage extends HookConsumerWidget {
                                 Text(
                                   context.l10n.disclaimer,
                                   style: const TextStyle(
-                                      fontWeight: FontWeight.bold),
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ).bold,
                               ],
                             ),
-                            Text(context.l10n.third_party_plugin_dmca_notice)
-                                .muted
-                                .xSmall,
+                            Text(
+                              context.l10n.third_party_plugin_dmca_notice,
+                            ).muted.xSmall,
                           ],
                         ),
                       ),

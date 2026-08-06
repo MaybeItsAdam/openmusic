@@ -9,11 +9,7 @@ import 'package:spotube/models/metadata/metadata.dart';
 class StatsTrackItem extends StatelessWidget {
   final SpotubeTrackObject track;
   final Widget info;
-  const StatsTrackItem({
-    super.key,
-    required this.track,
-    required this.info,
-  });
+  const StatsTrackItem({super.key, required this.track, required this.info});
 
   @override
   Widget build(BuildContext context) {

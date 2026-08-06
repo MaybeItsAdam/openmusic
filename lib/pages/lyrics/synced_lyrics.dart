@@ -41,38 +41,40 @@ class SyncedLyrics extends HookConsumerWidget {
 
     final delay = ref.watch(syncedLyricsDelayProvider);
 
-    final timedLyricsQuery =
-        ref.watch(syncedLyricsProvider(playlist.activeTrack));
+    final timedLyricsQuery = ref.watch(
+      syncedLyricsProvider(playlist.activeTrack),
+    );
 
     final lyricValue = timedLyricsQuery.asData?.value;
 
     final lyricsState = ref.watch(
       syncedLyricsMapProvider(playlist.activeTrack),
     );
-    final currentTime =
-        useSyncedLyrics(ref, lyricsState.asData?.value.lyricsMap ?? {}, delay);
+    final currentTime = useSyncedLyrics(
+      ref,
+      lyricsState.asData?.value.lyricsMap ?? {},
+      delay,
+    );
     final textZoomLevel = useState<int>(defaultTextZoom);
 
     final typography = Theme.of(context).typography;
 
-    ref.listen(
-      audioPlayerProvider.select((s) => s.activeTrack),
-      (previous, next) {
-        controller.animateTo(
-          0,
-          duration: const Duration(milliseconds: 500),
-          curve: Curves.easeInOut,
-        );
-        ref.read(syncedLyricsDelayProvider.notifier).state = 0;
-      },
-    );
+    ref.listen(audioPlayerProvider.select((s) => s.activeTrack), (
+      previous,
+      next,
+    ) {
+      controller.animateTo(
+        0,
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+      );
+      ref.read(syncedLyricsDelayProvider.notifier).state = 0;
+    });
 
     final headlineTextStyle = (mediaQuery.mdAndUp
             ? typography.h3
             : typography.h4.copyWith(fontSize: 25))
-        .copyWith(
-      color: palette.titleTextColor,
-    );
+        .copyWith(color: palette.titleTextColor);
 
     final bodyTextTheme = typography.large.copyWith(
       color: palette.bodyTextColor,
@@ -143,17 +145,15 @@ class SyncedLyrics extends HookConsumerWidget {
                     child: lyricSlice.text.isEmpty
                         ? Container(
                             padding: index == lyricValue.lyrics.length - 1
-                                ? EdgeInsets.only(
-                                    bottom: mediaQuery.height / 2,
-                                  )
+                                ? EdgeInsets.only(bottom: mediaQuery.height / 2)
                                 : null,
                           )
                         : Center(
                             child: Padding(
                               padding: index == lyricValue.lyrics.length - 1
-                                  ? const EdgeInsets.all(8.0).copyWith(
-                                      bottom: 100,
-                                    )
+                                  ? const EdgeInsets.all(
+                                      8.0,
+                                    ).copyWith(bottom: 100)
                                   : const EdgeInsets.all(8.0),
                               child: AnimatedDefaultTextStyle(
                                 duration: const Duration(milliseconds: 250),
@@ -239,38 +239,41 @@ class SyncedLyrics extends HookConsumerWidget {
         ),
         Align(
           alignment: Alignment.bottomRight,
-          child: Builder(builder: (context) {
-            final actions = [
-              ZoomControls(
-                value: delay,
-                onChanged: (value) =>
-                    ref.read(syncedLyricsDelayProvider.notifier).state = value,
-                interval: 1,
-                unit: "s",
-                increaseIcon: const Icon(SpotubeIcons.add),
-                decreaseIcon: const Icon(SpotubeIcons.remove),
-                direction: isModal == true ? Axis.horizontal : Axis.vertical,
-              ),
-              ZoomControls(
-                value: textZoomLevel.value,
-                onChanged: (value) => textZoomLevel.value = value,
-                min: 50,
-                max: 200,
-              ),
-            ];
+          child: Builder(
+            builder: (context) {
+              final actions = [
+                ZoomControls(
+                  value: delay,
+                  onChanged: (value) => ref
+                      .read(syncedLyricsDelayProvider.notifier)
+                      .state = value,
+                  interval: 1,
+                  unit: "s",
+                  increaseIcon: const Icon(SpotubeIcons.add),
+                  decreaseIcon: const Icon(SpotubeIcons.remove),
+                  direction: isModal == true ? Axis.horizontal : Axis.vertical,
+                ),
+                ZoomControls(
+                  value: textZoomLevel.value,
+                  onChanged: (value) => textZoomLevel.value = value,
+                  min: 50,
+                  max: 200,
+                ),
+              ];
 
-            return isModal == true
-                ? Row(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: actions,
-                  )
-                : Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: actions,
-                  );
-          }),
+              return isModal == true
+                  ? Row(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: actions,
+                    )
+                  : Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: actions,
+                    );
+            },
+          ),
         ),
       ],
     );

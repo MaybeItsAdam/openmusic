@@ -70,9 +70,7 @@ class LocalFolderCacheExportDialog extends HookConsumerWidget {
                   Text.rich(
                     TextSpan(
                       children: [
-                        TextSpan(
-                          text: context.l10n.export_cache_confirmation,
-                        ),
+                        TextSpan(text: context.l10n.export_cache_confirmation),
                         TextSpan(
                           text: "\n${exportDir.path}?",
                           style: typography.small.copyWith(

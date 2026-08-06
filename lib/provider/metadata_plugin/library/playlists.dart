@@ -13,9 +13,10 @@ class MetadataPluginSavedPlaylistsNotifier
 
   @override
   fetch(int offset, int limit) async {
-    final playlists = await (await metadataPlugin)
-        .user
-        .savedPlaylists(limit: limit, offset: offset);
+    final playlists = await (await metadataPlugin).user.savedPlaylists(
+          limit: limit,
+          offset: offset,
+        );
 
     return playlists;
   }
@@ -49,12 +50,7 @@ class MetadataPluginSavedPlaylistsNotifier
     final oldState = state.value;
 
     state = AsyncData(
-      state.value!.copyWith(
-        items: [
-          playlist,
-          ...state.value!.items,
-        ],
-      ),
+      state.value!.copyWith(items: [playlist, ...state.value!.items]),
     );
 
     try {
@@ -101,9 +97,10 @@ class MetadataPluginSavedPlaylistsNotifier
   Future<void> addTracks(String playlistId, List<String> trackIds) async {
     if (state.value == null) return;
 
-    await (await metadataPlugin)
-        .playlist
-        .addTracks(playlistId, trackIds: trackIds);
+    await (await metadataPlugin).playlist.addTracks(
+          playlistId,
+          trackIds: trackIds,
+        );
 
     ref.invalidate(metadataPluginPlaylistTracksProvider(playlistId));
   }
@@ -111,39 +108,39 @@ class MetadataPluginSavedPlaylistsNotifier
   Future<void> removeTracks(String playlistId, List<String> trackIds) async {
     if (state.value == null) return;
 
-    await (await metadataPlugin)
-        .playlist
-        .removeTracks(playlistId, trackIds: trackIds);
+    await (await metadataPlugin).playlist.removeTracks(
+          playlistId,
+          trackIds: trackIds,
+        );
 
     ref.invalidate(metadataPluginPlaylistTracksProvider(playlistId));
   }
 }
 
 final metadataPluginSavedPlaylistsProvider = AsyncNotifierProvider<
-    MetadataPluginSavedPlaylistsNotifier,
-    SpotubePaginationResponseObject<SpotubeSimplePlaylistObject>>(
-  () => MetadataPluginSavedPlaylistsNotifier(),
-);
+        MetadataPluginSavedPlaylistsNotifier,
+        SpotubePaginationResponseObject<SpotubeSimplePlaylistObject>>(
+    () => MetadataPluginSavedPlaylistsNotifier());
 
 final metadataPluginIsSavedPlaylistProvider =
-    FutureProvider.family<bool, String>(
-  (ref, id) async {
-    final plugin = await ref.watch(metadataPluginProvider.future);
+    FutureProvider.family<bool, String>((ref, id) async {
+  final plugin = await ref.watch(metadataPluginProvider.future);
 
-    if (plugin == null) {
-      throw MetadataPluginException.noDefaultMetadataPlugin();
-    }
+  if (plugin == null) {
+    throw MetadataPluginException.noDefaultMetadataPlugin();
+  }
 
-    final savedPlaylists =
-        await ref.watch(metadataPluginSavedPlaylistsProvider.future);
+  final savedPlaylists = await ref.watch(
+    metadataPluginSavedPlaylistsProvider.future,
+  );
 
-    final savedPlaylistsNotifier =
-        ref.read(metadataPluginSavedPlaylistsProvider.notifier);
+  final savedPlaylistsNotifier = ref.read(
+    metadataPluginSavedPlaylistsProvider.notifier,
+  );
 
-    final allSavedPlaylists = savedPlaylists.hasMore
-        ? await savedPlaylistsNotifier.fetchAll()
-        : savedPlaylists.items;
+  final allSavedPlaylists = savedPlaylists.hasMore
+      ? await savedPlaylistsNotifier.fetchAll()
+      : savedPlaylists.items;
 
-    return allSavedPlaylists.any((element) => element.id == id);
-  },
-);
+  return allSavedPlaylists.any((element) => element.id == id);
+});

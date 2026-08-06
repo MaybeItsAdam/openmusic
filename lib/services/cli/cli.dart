@@ -15,11 +15,7 @@ Future<ArgResults> startCLI(List<String> args) async {
     help: 'Verbose mode',
     defaultsTo: !kReleaseMode,
   );
-  parser.addFlag(
-    "version",
-    help: "Print version and exit",
-    negatable: false,
-  );
+  parser.addFlag("version", help: "Print version and exit", negatable: false);
 
   parser.addFlag("help", abbr: "h", negatable: false);
 

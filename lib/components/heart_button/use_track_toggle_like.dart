@@ -9,8 +9,9 @@ typedef UseTrackToggleLike = ({
 });
 
 UseTrackToggleLike useTrackToggleLike(SpotubeTrackObject track, WidgetRef ref) {
-  final savedTracksNotifier =
-      ref.watch(metadataPluginSavedTracksProvider.notifier);
+  final savedTracksNotifier = ref.watch(
+    metadataPluginSavedTracksProvider.notifier,
+  );
 
   final isSavedTrack = ref.watch(metadataPluginIsSavedTrackProvider(track.id));
 

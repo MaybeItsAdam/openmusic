@@ -53,7 +53,8 @@ UseActionCallbacks useActionCallbacks(WidgetRef ref) {
               ? WebSocketLoadEventData.album(
                   tracks: allTracks,
                   collection: options.collection as SpotubeSimpleAlbumObject,
-                  initialIndex: Random().nextInt(allTracks.length))
+                  initialIndex: Random().nextInt(allTracks.length),
+                )
               : WebSocketLoadEventData.playlist(
                   tracks: allTracks,
                   collection: options.collection as SpotubeSimplePlaylistObject,
@@ -70,11 +71,13 @@ UseActionCallbacks useActionCallbacks(WidgetRef ref) {
         await audioPlayer.setShuffle(true);
         playlistNotifier.addCollection(options.collectionId);
         if (options.collection is SpotubeSimpleAlbumObject) {
-          historyNotifier
-              .addAlbums([options.collection as SpotubeSimpleAlbumObject]);
+          historyNotifier.addAlbums([
+            options.collection as SpotubeSimpleAlbumObject,
+          ]);
         } else {
-          historyNotifier.addPlaylists(
-              [options.collection as SpotubeSimplePlaylistObject]);
+          historyNotifier.addPlaylists([
+            options.collection as SpotubeSimplePlaylistObject,
+          ]);
         }
 
         final allTracks = await options.pagination.onFetchAll();
@@ -123,13 +126,13 @@ UseActionCallbacks useActionCallbacks(WidgetRef ref) {
         playlistNotifier.addCollection(options.collectionId);
 
         if (options.collection is SpotubeSimpleAlbumObject) {
-          historyNotifier.addAlbums(
-            [options.collection as SpotubeSimpleAlbumObject],
-          );
+          historyNotifier.addAlbums([
+            options.collection as SpotubeSimpleAlbumObject,
+          ]);
         } else {
-          historyNotifier.addPlaylists(
-            [options.collection as SpotubeSimplePlaylistObject],
-          );
+          historyNotifier.addPlaylists([
+            options.collection as SpotubeSimplePlaylistObject,
+          ]);
         }
 
         final allTracks = await options.pagination.onFetchAll();
@@ -153,11 +156,13 @@ UseActionCallbacks useActionCallbacks(WidgetRef ref) {
     playlistNotifier.addTracks(tracks);
     playlistNotifier.addCollection(options.collectionId);
     if (options.collection is SpotubeSimpleAlbumObject) {
-      historyNotifier
-          .addAlbums([options.collection as SpotubeSimpleAlbumObject]);
+      historyNotifier.addAlbums([
+        options.collection as SpotubeSimpleAlbumObject,
+      ]);
     } else {
-      historyNotifier
-          .addPlaylists([options.collection as SpotubeSimplePlaylistObject]);
+      historyNotifier.addPlaylists([
+        options.collection as SpotubeSimplePlaylistObject,
+      ]);
     }
     if (!context.mounted) return;
     showToastForAction(context, "add-to-queue", tracks.length);

@@ -72,10 +72,7 @@ class AudioPlayerNotifier extends Notifier<AudioPlayerState> {
         ),
       );
     } else if (tracks.isNotEmpty) {
-      state = state.copyWith(
-        tracks: tracks,
-        currentIndex: currentIndex,
-      );
+      state = state.copyWith(tracks: tracks, currentIndex: currentIndex);
       await audioPlayer.openPlaylist(
         tracks.asMediaList(),
         initialIndex: currentIndex,
@@ -84,9 +81,7 @@ class AudioPlayerNotifier extends Notifier<AudioPlayerState> {
     }
 
     if (playerState.collections.isNotEmpty) {
-      state = state.copyWith(
-        collections: playerState.collections,
-      );
+      state = state.copyWith(collections: playerState.collections);
     }
   }
 
@@ -95,8 +90,9 @@ class AudioPlayerNotifier extends Notifier<AudioPlayerState> {
   ) async {
     final database = ref.read(databaseProvider);
 
-    await (database.update(database.audioPlayerStateTable)
-          ..where((tb) => tb.id.equals(0)))
+    await (database.update(
+      database.audioPlayerStateTable,
+    )..where((tb) => tb.id.equals(0)))
         .write(companion);
   }
 
@@ -108,9 +104,7 @@ class AudioPlayerNotifier extends Notifier<AudioPlayerState> {
           state = state.copyWith(playing: playing);
 
           await _updatePlayerState(
-            AudioPlayerStateTableCompanion(
-              playing: Value(playing),
-            ),
+            AudioPlayerStateTableCompanion(playing: Value(playing)),
           );
         } catch (e, stack) {
           AppLogger.reportError(e, stack);
@@ -121,9 +115,7 @@ class AudioPlayerNotifier extends Notifier<AudioPlayerState> {
           state = state.copyWith(loopMode: loopMode);
 
           await _updatePlayerState(
-            AudioPlayerStateTableCompanion(
-              loopMode: Value(loopMode),
-            ),
+            AudioPlayerStateTableCompanion(loopMode: Value(loopMode)),
           );
         } catch (e, stack) {
           AppLogger.reportError(e, stack);
@@ -134,9 +126,7 @@ class AudioPlayerNotifier extends Notifier<AudioPlayerState> {
           state = state.copyWith(shuffled: shuffled);
 
           await _updatePlayerState(
-            AudioPlayerStateTableCompanion(
-              shuffled: Value(shuffled),
-            ),
+            AudioPlayerStateTableCompanion(shuffled: Value(shuffled)),
           );
         } catch (e, stack) {
           AppLogger.reportError(e, stack);
@@ -147,10 +137,7 @@ class AudioPlayerNotifier extends Notifier<AudioPlayerState> {
           final tracks =
               playlist.medias.map((e) => SpotubeMedia.media(e).track).toList();
 
-          state = state.copyWith(
-            tracks: tracks,
-            currentIndex: playlist.index,
-          );
+          state = state.copyWith(tracks: tracks, currentIndex: playlist.index);
 
           await _updatePlayerState(
             AudioPlayerStateTableCompanion(
@@ -183,15 +170,12 @@ class AudioPlayerNotifier extends Notifier<AudioPlayerState> {
 
   // Collection related methods
   Future<void> addCollections(List<String> collectionIds) async {
-    state = state.copyWith(collections: [
-      ...state.collections,
-      ...collectionIds,
-    ]);
+    state = state.copyWith(
+      collections: [...state.collections, ...collectionIds],
+    );
 
     await _updatePlayerState(
-      AudioPlayerStateTableCompanion(
-        collections: Value(state.collections),
-      ),
+      AudioPlayerStateTableCompanion(collections: Value(state.collections)),
     );
   }
 
@@ -207,9 +191,7 @@ class AudioPlayerNotifier extends Notifier<AudioPlayerState> {
     );
 
     await _updatePlayerState(
-      AudioPlayerStateTableCompanion(
-        collections: Value(state.collections),
-      ),
+      AudioPlayerStateTableCompanion(collections: Value(state.collections)),
     );
   }
 
@@ -235,9 +217,7 @@ class AudioPlayerNotifier extends Notifier<AudioPlayerState> {
         )
         .toList();
 
-    state = state.copyWith(
-      tracks: [...addableTracks, ...state.tracks],
-    );
+    state = state.copyWith(tracks: [...addableTracks, ...state.tracks]);
 
     for (int i = 0; i < addableTracks.length; i++) {
       final track = addableTracks.elementAt(i);
@@ -262,9 +242,7 @@ class AudioPlayerNotifier extends Notifier<AudioPlayerState> {
     if (_blacklist.contains(track)) return;
     if (state.tracks.any((element) => _compareTracks(element, track))) return;
 
-    state = state.copyWith(
-      tracks: [...state.tracks, track],
-    );
+    state = state.copyWith(tracks: [...state.tracks, track]);
 
     await audioPlayer.addTrack(SpotubeMedia(track));
 
@@ -280,9 +258,7 @@ class AudioPlayerNotifier extends Notifier<AudioPlayerState> {
     _assertAllowedTracks(tracks);
 
     tracks = _blacklist.filter(tracks).toList();
-    state = state.copyWith(
-      tracks: [...state.tracks, ...tracks],
-    );
+    state = state.copyWith(tracks: [...state.tracks, ...tracks]);
 
     for (final track in tracks) {
       await audioPlayer.addTrack(SpotubeMedia(track));
@@ -301,9 +277,7 @@ class AudioPlayerNotifier extends Notifier<AudioPlayerState> {
 
     if (index == -1) return;
 
-    state = state.copyWith(
-      tracks: List.of(state.tracks)..removeAt(index),
-    );
+    state = state.copyWith(tracks: List.of(state.tracks)..removeAt(index));
 
     await audioPlayer.removeTrack(index);
 
@@ -324,9 +298,7 @@ class AudioPlayerNotifier extends Notifier<AudioPlayerState> {
       (element) => !trackIds.contains(element.id),
     );
 
-    state = state.copyWith(
-      tracks: tracks.toList(),
-    );
+    state = state.copyWith(tracks: tracks.toList());
 
     for (final index in trackIndexes) {
       await audioPlayer.removeTrack(index);
@@ -430,8 +402,9 @@ class AudioPlayerNotifier extends Notifier<AudioPlayerState> {
   }
 
   Future<void> jumpToTrack(SpotubeTrackObject track) async {
-    final index =
-        state.tracks.toList().indexWhere((element) => element.id == track.id);
+    final index = state.tracks.toList().indexWhere(
+          (element) => element.id == track.id,
+        );
     if (index == -1) return;
     await audioPlayer.jumpTo(index);
   }

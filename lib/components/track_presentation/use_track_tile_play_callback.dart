@@ -13,9 +13,7 @@ import 'package:spotube/provider/connect/connect.dart';
 import 'package:spotube/provider/history/history.dart';
 
 Future<void> Function(SpotubeTrackObject track, int index)
-    useTrackTilePlayCallback(
-  WidgetRef ref,
-) {
+    useTrackTilePlayCallback(WidgetRef ref) {
   final context = useContext();
   final options = TrackPresentationOptions.of(context);
   final playlist = ref.watch(audioPlayerProvider);
@@ -27,11 +25,14 @@ Future<void> Function(SpotubeTrackObject track, int index)
     [playlist.collections, options.collectionId],
   );
 
-  final onTapTrackTile =
-      useCallback((SpotubeTrackObject track, int index) async {
+  final onTapTrackTile = useCallback((
+    SpotubeTrackObject track,
+    int index,
+  ) async {
     final state = ref.read(presentationStateProvider(options.collection));
-    final notifier =
-        ref.read(presentationStateProvider(options.collection).notifier);
+    final notifier = ref.read(
+      presentationStateProvider(options.collection).notifier,
+    );
 
     if (state.selectedTracks.isNotEmpty) {
       if (state.selectedTracks.contains(track)) {
@@ -79,11 +80,13 @@ Future<void> Function(SpotubeTrackObject track, int index)
         );
         playlistNotifier.addCollection(options.collectionId);
         if (options.collection is SpotubeSimpleAlbumObject) {
-          historyNotifier
-              .addAlbums([options.collection as SpotubeSimpleAlbumObject]);
+          historyNotifier.addAlbums([
+            options.collection as SpotubeSimpleAlbumObject,
+          ]);
         } else {
-          historyNotifier.addPlaylists(
-              [options.collection as SpotubeSimplePlaylistObject]);
+          historyNotifier.addPlaylists([
+            options.collection as SpotubeSimplePlaylistObject,
+          ]);
         }
       }
     }

@@ -28,15 +28,13 @@ class PlayerTrackDetails extends HookConsumerWidget {
         if (playback.activeTrack != null)
           Container(
             padding: const EdgeInsets.all(6),
-            constraints: const BoxConstraints(
-              maxWidth: 80,
-              maxHeight: 80,
-            ),
+            constraints: const BoxConstraints(maxWidth: 80, maxHeight: 80),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(4),
               child: UniversalImage(
-                path: (track?.album.images)
-                    .asUrlString(placeholder: ImagePlaceholder.albumArt),
+                path: (track?.album.images).asUrlString(
+                  placeholder: ImagePlaceholder.albumArt,
+                ),
                 placeholder: Assets.images.albumPlaceholder.path,
               ),
             ),
@@ -50,15 +48,13 @@ class PlayerTrackDetails extends HookConsumerWidget {
                 Text(
                   playback.activeTrack?.name ?? "",
                   overflow: TextOverflow.ellipsis,
-                  style: theme.typography.normal.copyWith(
-                    color: color,
-                  ),
+                  style: theme.typography.normal.copyWith(color: color),
                 ),
                 Text(
                   playback.activeTrack?.artists.asString() ?? "",
                   overflow: TextOverflow.ellipsis,
                   style: theme.typography.small.copyWith(color: color),
-                )
+                ),
               ],
             ),
           ),
@@ -81,7 +77,7 @@ class PlayerTrackDetails extends HookConsumerWidget {
                   },
                   onOverflowArtistClick: () =>
                       context.navigateTo(TrackRoute(trackId: track!.id)),
-                )
+                ),
               ],
             ),
           ),

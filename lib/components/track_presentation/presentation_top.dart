@@ -43,8 +43,10 @@ class TrackPresentationTopSection extends HookConsumerWidget {
           child: IconButton.secondary(
             icon: isLoading
                 ? const Center(
-                    child:
-                        CircularProgressIndicator(onSurface: false, size: 20),
+                    child: CircularProgressIndicator(
+                      onSurface: false,
+                      size: 20,
+                    ),
                   )
                 : const Icon(SpotubeIcons.shuffle),
             enabled: !isLoading && !isActive,
@@ -106,16 +108,12 @@ class TrackPresentationTopSection extends HookConsumerWidget {
           ),
         if (options.shareUrl != null)
           Tooltip(
-            tooltip: TooltipContainer(
-              child: Text(context.l10n.share),
-            ).call,
+            tooltip: TooltipContainer(child: Text(context.l10n.share)).call,
             child: IconButton.outline(
               icon: const Icon(SpotubeIcons.share),
               size: ButtonSize.small,
               onPressed: () async {
-                await Clipboard.setData(
-                  ClipboardData(text: options.shareUrl!),
-                );
+                await Clipboard.setData(ClipboardData(text: options.shareUrl!));
 
                 if (!context.mounted) return;
 
@@ -125,8 +123,9 @@ class TrackPresentationTopSection extends HookConsumerWidget {
                   builder: (context, overlay) {
                     return SurfaceCard(
                       child: Text(
-                        context.l10n
-                            .copied_shareurl_to_clipboard(options.shareUrl!),
+                        context.l10n.copied_shareurl_to_clipboard(
+                          options.shareUrl!,
+                        ),
                       ).small(),
                     );
                   },
@@ -240,7 +239,7 @@ class TrackPresentationTopSection extends HookConsumerWidget {
                                 ),
                                 if (mediaQuery.mdAndUp) ...[
                                   const Gap(16),
-                                  playbackActions
+                                  playbackActions,
                                 ],
                               ],
                             ),
@@ -254,7 +253,7 @@ class TrackPresentationTopSection extends HookConsumerWidget {
               ),
             ],
           ),
-        )
+        ),
       ],
     );
   }

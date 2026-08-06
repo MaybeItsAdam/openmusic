@@ -17,13 +17,7 @@ import 'package:spotube/provider/user_preferences/user_preferences_provider.dart
 import 'package:spotube/services/logger/logger.dart';
 import 'package:spotube/utils/service_utils.dart';
 
-enum DownloadStatus {
-  queued,
-  downloading,
-  completed,
-  failed,
-  canceled,
-}
+enum DownloadStatus { queued, downloading, completed, failed, canceled }
 
 class DownloadTask {
   final SpotubeFullTrackObject track;
@@ -105,11 +99,13 @@ class DownloadManagerNotifier extends Notifier<List<DownloadTask>> {
   void addAllToQueue(List<SpotubeFullTrackObject> tracks) {
     state = [
       ...state,
-      ...tracks.map((e) => DownloadTask(
-            track: e,
-            status: DownloadStatus.queued,
-            cancelToken: CancelToken(),
-          )),
+      ...tracks.map(
+        (e) => DownloadTask(
+          track: e,
+          status: DownloadStatus.queued,
+          cancelToken: CancelToken(),
+        ),
+      ),
     ];
 
     ref.read(sourcedTrackProvider(tracks.first));
@@ -166,9 +162,7 @@ class DownloadManagerNotifier extends Notifier<List<DownloadTask>> {
     try {
       return await showDialog<bool>(
             context: rootNavigatorKey.currentContext!,
-            builder: (context) => ReplaceDownloadedDialog(
-              track: task.track,
-            ),
+            builder: (context) => ReplaceDownloadedDialog(track: task.track),
           ) ??
           false;
     } finally {
@@ -187,7 +181,8 @@ class DownloadManagerNotifier extends Notifier<List<DownloadTask>> {
       final container =
           presets.presets[presets.selectedDownloadingContainerIndex];
       final downloadLocation = ref.read(
-          userPreferencesProvider.select((value) => value.downloadLocation));
+        userPreferencesProvider.select((value) => value.downloadLocation),
+      );
 
       final url = track.getUrlOfQuality(
         container,

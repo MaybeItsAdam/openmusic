@@ -39,10 +39,12 @@ class HomeBrowseSectionItemsPage extends HookConsumerWidget {
   Widget build(BuildContext context, ref) {
     final scale = context.theme.scaling;
 
-    final sectionItems =
-        ref.watch(metadataPluginBrowseSectionItemsProvider(sectionId));
-    final sectionItemsNotifier =
-        ref.watch(metadataPluginBrowseSectionItemsProvider(sectionId).notifier);
+    final sectionItems = ref.watch(
+      metadataPluginBrowseSectionItemsProvider(sectionId),
+    );
+    final sectionItemsNotifier = ref.watch(
+      metadataPluginBrowseSectionItemsProvider(sectionId).notifier,
+    );
     final items = sectionItems.asData?.value.items ?? [];
     final controller = useScrollController();
 
@@ -55,11 +57,7 @@ class HomeBrowseSectionItemsPage extends HookConsumerWidget {
       child: Skeletonizer(
         enabled: sectionItems.isLoading,
         child: Scaffold(
-          headers: [
-            TitleBar(
-              title: Text(section.title),
-            )
-          ],
+          headers: [TitleBar(title: Text(section.title))],
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: CustomScrollView(
@@ -107,11 +105,7 @@ class HomeBrowseSectionItemsPage extends HookConsumerWidget {
                     };
                   },
                 ),
-                const SliverToBoxAdapter(
-                  child: SafeArea(
-                    child: SizedBox(),
-                  ),
-                ),
+                const SliverToBoxAdapter(child: SafeArea(child: SizedBox())),
               ],
             ),
           ),

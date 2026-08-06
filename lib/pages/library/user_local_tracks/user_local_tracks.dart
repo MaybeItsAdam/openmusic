@@ -43,16 +43,20 @@ class UserLocalLibraryPage extends HookConsumerWidget {
         );
         if (dirStr == null) return;
         if (preferences.localLibraryLocation.contains(dirStr)) return;
-        preferencesNotifier.setLocalLibraryLocation(
-            [...preferences.localLibraryLocation, dirStr]);
+        preferencesNotifier.setLocalLibraryLocation([
+          ...preferences.localLibraryLocation,
+          dirStr,
+        ]);
       } else {
         String? dirStr = await getDirectoryPath(
           initialDirectory: preferences.downloadLocation,
         );
         if (dirStr == null) return;
         if (preferences.localLibraryLocation.contains(dirStr)) return;
-        preferencesNotifier.setLocalLibraryLocation(
-            [...preferences.localLibraryLocation, dirStr]);
+        preferencesNotifier.setLocalLibraryLocation([
+          ...preferences.localLibraryLocation,
+          dirStr,
+        ]);
       }
     }, [preferences.localLibraryLocation]);
 
@@ -67,41 +71,40 @@ class UserLocalLibraryPage extends HookConsumerWidget {
     ];
 
     return LayoutBuilder(
-        builder: (context, constrains) => Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12.0),
-              child: Column(
-                children: [
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: Button.secondary(
-                      leading: const Icon(SpotubeIcons.folderAdd),
-                      onPressed: addLocalLibraryLocation,
-                      child: Text(context.l10n.add_library_location),
-                    ),
-                  ),
-                  const Gap(8),
-                  Expanded(
-                    child: GridView.builder(
-                      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                        maxCrossAxisExtent: 200,
-                        mainAxisExtent: constrains.isXs
-                            ? 230 * context.theme.scaling
-                            : constrains.mdAndDown
-                                ? 280 * context.theme.scaling
-                                : 250 * context.theme.scaling,
-                        crossAxisSpacing: 10,
-                        mainAxisSpacing: 10,
-                      ),
-                      itemCount: locations.length,
-                      itemBuilder: (context, index) {
-                        return LocalFolderItem(
-                          folder: locations[index],
-                        );
-                      },
-                    ),
-                  ),
-                ],
+      builder: (context, constrains) => Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+        child: Column(
+          children: [
+            Align(
+              alignment: Alignment.centerRight,
+              child: Button.secondary(
+                leading: const Icon(SpotubeIcons.folderAdd),
+                onPressed: addLocalLibraryLocation,
+                child: Text(context.l10n.add_library_location),
               ),
-            ));
+            ),
+            const Gap(8),
+            Expanded(
+              child: GridView.builder(
+                gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent: 200,
+                  mainAxisExtent: constrains.isXs
+                      ? 230 * context.theme.scaling
+                      : constrains.mdAndDown
+                          ? 280 * context.theme.scaling
+                          : 250 * context.theme.scaling,
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10,
+                ),
+                itemCount: locations.length,
+                itemBuilder: (context, index) {
+                  return LocalFolderItem(folder: locations[index]);
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

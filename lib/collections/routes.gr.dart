@@ -60,7 +60,7 @@ import 'package:spotube/pages/track/track.dart' as _i35;
 /// [_i1.AboutSpotubePage]
 class AboutSpotubeRoute extends _i41.PageRouteInfo<void> {
   const AboutSpotubeRoute({List<_i41.PageRouteInfo>? children})
-    : super(AboutSpotubeRoute.name, initialChildren: children);
+      : super(AboutSpotubeRoute.name, initialChildren: children);
 
   static const String name = 'AboutSpotubeRoute';
 
@@ -81,11 +81,11 @@ class AlbumRoute extends _i41.PageRouteInfo<AlbumRouteArgs> {
     required _i43.SpotubeSimpleAlbumObject album,
     List<_i41.PageRouteInfo>? children,
   }) : super(
-         AlbumRoute.name,
-         args: AlbumRouteArgs(key: key, id: id, album: album),
-         rawPathParams: {'id': id},
-         initialChildren: children,
-       );
+          AlbumRoute.name,
+          args: AlbumRouteArgs(key: key, id: id, album: album),
+          rawPathParams: {'id': id},
+          initialChildren: children,
+        );
 
   static const String name = 'AlbumRoute';
 
@@ -121,11 +121,11 @@ class ArtistRoute extends _i41.PageRouteInfo<ArtistRouteArgs> {
     _i42.Key? key,
     List<_i41.PageRouteInfo>? children,
   }) : super(
-         ArtistRoute.name,
-         args: ArtistRouteArgs(artistId: artistId, key: key),
-         rawPathParams: {'id': artistId},
-         initialChildren: children,
-       );
+          ArtistRoute.name,
+          args: ArtistRouteArgs(artistId: artistId, key: key),
+          rawPathParams: {'id': artistId},
+          initialChildren: children,
+        );
 
   static const String name = 'ArtistRoute';
 
@@ -158,7 +158,7 @@ class ArtistRouteArgs {
 /// [_i4.BlackListPage]
 class BlackListRoute extends _i41.PageRouteInfo<void> {
   const BlackListRoute({List<_i41.PageRouteInfo>? children})
-    : super(BlackListRoute.name, initialChildren: children);
+      : super(BlackListRoute.name, initialChildren: children);
 
   static const String name = 'BlackListRoute';
 
@@ -174,7 +174,7 @@ class BlackListRoute extends _i41.PageRouteInfo<void> {
 /// [_i5.ConnectControlPage]
 class ConnectControlRoute extends _i41.PageRouteInfo<void> {
   const ConnectControlRoute({List<_i41.PageRouteInfo>? children})
-    : super(ConnectControlRoute.name, initialChildren: children);
+      : super(ConnectControlRoute.name, initialChildren: children);
 
   static const String name = 'ConnectControlRoute';
 
@@ -190,7 +190,7 @@ class ConnectControlRoute extends _i41.PageRouteInfo<void> {
 /// [_i6.ConnectPage]
 class ConnectRoute extends _i41.PageRouteInfo<void> {
   const ConnectRoute({List<_i41.PageRouteInfo>? children})
-    : super(ConnectRoute.name, initialChildren: children);
+      : super(ConnectRoute.name, initialChildren: children);
 
   static const String name = 'ConnectRoute';
 
@@ -206,7 +206,7 @@ class ConnectRoute extends _i41.PageRouteInfo<void> {
 /// [_i7.GettingStartedPage]
 class GettingStartedRoute extends _i41.PageRouteInfo<void> {
   const GettingStartedRoute({List<_i41.PageRouteInfo>? children})
-    : super(GettingStartedRoute.name, initialChildren: children);
+      : super(GettingStartedRoute.name, initialChildren: children);
 
   static const String name = 'GettingStartedRoute';
 
@@ -228,15 +228,15 @@ class HomeBrowseSectionItemsRoute
     required _i43.SpotubeBrowseSectionObject<Object> section,
     List<_i41.PageRouteInfo>? children,
   }) : super(
-         HomeBrowseSectionItemsRoute.name,
-         args: HomeBrowseSectionItemsRouteArgs(
-           key: key,
-           sectionId: sectionId,
-           section: section,
-         ),
-         rawPathParams: {'sectionId': sectionId},
-         initialChildren: children,
-       );
+          HomeBrowseSectionItemsRoute.name,
+          args: HomeBrowseSectionItemsRouteArgs(
+            key: key,
+            sectionId: sectionId,
+            section: section,
+          ),
+          rawPathParams: {'sectionId': sectionId},
+          initialChildren: children,
+        );
 
   static const String name = 'HomeBrowseSectionItemsRoute';
 
@@ -276,7 +276,7 @@ class HomeBrowseSectionItemsRouteArgs {
 /// [_i9.HomePage]
 class HomeRoute extends _i41.PageRouteInfo<void> {
   const HomeRoute({List<_i41.PageRouteInfo>? children})
-    : super(HomeRoute.name, initialChildren: children);
+      : super(HomeRoute.name, initialChildren: children);
 
   static const String name = 'HomeRoute';
 
@@ -292,7 +292,7 @@ class HomeRoute extends _i41.PageRouteInfo<void> {
 /// [_i10.LastFMLoginPage]
 class LastFMLoginRoute extends _i41.PageRouteInfo<void> {
   const LastFMLoginRoute({List<_i41.PageRouteInfo>? children})
-    : super(LastFMLoginRoute.name, initialChildren: children);
+      : super(LastFMLoginRoute.name, initialChildren: children);
 
   static const String name = 'LastFMLoginRoute';
 
@@ -308,7 +308,7 @@ class LastFMLoginRoute extends _i41.PageRouteInfo<void> {
 /// [_i11.LibraryPage]
 class LibraryRoute extends _i41.PageRouteInfo<void> {
   const LibraryRoute({List<_i41.PageRouteInfo>? children})
-    : super(LibraryRoute.name, initialChildren: children);
+      : super(LibraryRoute.name, initialChildren: children);
 
   static const String name = 'LibraryRoute';
 
@@ -328,10 +328,10 @@ class LikedPlaylistRoute extends _i41.PageRouteInfo<LikedPlaylistRouteArgs> {
     required _i43.SpotubeSimplePlaylistObject playlist,
     List<_i41.PageRouteInfo>? children,
   }) : super(
-         LikedPlaylistRoute.name,
-         args: LikedPlaylistRouteArgs(key: key, playlist: playlist),
-         initialChildren: children,
-       );
+          LikedPlaylistRoute.name,
+          args: LikedPlaylistRouteArgs(key: key, playlist: playlist),
+          initialChildren: children,
+        );
 
   static const String name = 'LikedPlaylistRoute';
 
@@ -367,15 +367,15 @@ class LocalLibraryRoute extends _i41.PageRouteInfo<LocalLibraryRouteArgs> {
     bool isCache = false,
     List<_i41.PageRouteInfo>? children,
   }) : super(
-         LocalLibraryRoute.name,
-         args: LocalLibraryRouteArgs(
-           location: location,
-           key: key,
-           isDownloads: isDownloads,
-           isCache: isCache,
-         ),
-         initialChildren: children,
-       );
+          LocalLibraryRoute.name,
+          args: LocalLibraryRouteArgs(
+            location: location,
+            key: key,
+            isDownloads: isDownloads,
+            isCache: isCache,
+          ),
+          initialChildren: children,
+        );
 
   static const String name = 'LocalLibraryRoute';
 
@@ -419,7 +419,7 @@ class LocalLibraryRouteArgs {
 /// [_i14.LogsPage]
 class LogsRoute extends _i41.PageRouteInfo<void> {
   const LogsRoute({List<_i41.PageRouteInfo>? children})
-    : super(LogsRoute.name, initialChildren: children);
+      : super(LogsRoute.name, initialChildren: children);
 
   static const String name = 'LogsRoute';
 
@@ -435,7 +435,7 @@ class LogsRoute extends _i41.PageRouteInfo<void> {
 /// [_i15.LyricsPage]
 class LyricsRoute extends _i41.PageRouteInfo<void> {
   const LyricsRoute({List<_i41.PageRouteInfo>? children})
-    : super(LyricsRoute.name, initialChildren: children);
+      : super(LyricsRoute.name, initialChildren: children);
 
   static const String name = 'LyricsRoute';
 
@@ -455,10 +455,10 @@ class MiniLyricsRoute extends _i41.PageRouteInfo<MiniLyricsRouteArgs> {
     required _i44.Size prevSize,
     List<_i41.PageRouteInfo>? children,
   }) : super(
-         MiniLyricsRoute.name,
-         args: MiniLyricsRouteArgs(key: key, prevSize: prevSize),
-         initialChildren: children,
-       );
+          MiniLyricsRoute.name,
+          args: MiniLyricsRouteArgs(key: key, prevSize: prevSize),
+          initialChildren: children,
+        );
 
   static const String name = 'MiniLyricsRoute';
 
@@ -488,7 +488,7 @@ class MiniLyricsRouteArgs {
 /// [_i17.PlayerLyricsPage]
 class PlayerLyricsRoute extends _i41.PageRouteInfo<void> {
   const PlayerLyricsRoute({List<_i41.PageRouteInfo>? children})
-    : super(PlayerLyricsRoute.name, initialChildren: children);
+      : super(PlayerLyricsRoute.name, initialChildren: children);
 
   static const String name = 'PlayerLyricsRoute';
 
@@ -504,7 +504,7 @@ class PlayerLyricsRoute extends _i41.PageRouteInfo<void> {
 /// [_i18.PlayerQueuePage]
 class PlayerQueueRoute extends _i41.PageRouteInfo<void> {
   const PlayerQueueRoute({List<_i41.PageRouteInfo>? children})
-    : super(PlayerQueueRoute.name, initialChildren: children);
+      : super(PlayerQueueRoute.name, initialChildren: children);
 
   static const String name = 'PlayerQueueRoute';
 
@@ -520,7 +520,7 @@ class PlayerQueueRoute extends _i41.PageRouteInfo<void> {
 /// [_i19.PlayerTrackSourcesPage]
 class PlayerTrackSourcesRoute extends _i41.PageRouteInfo<void> {
   const PlayerTrackSourcesRoute({List<_i41.PageRouteInfo>? children})
-    : super(PlayerTrackSourcesRoute.name, initialChildren: children);
+      : super(PlayerTrackSourcesRoute.name, initialChildren: children);
 
   static const String name = 'PlayerTrackSourcesRoute';
 
@@ -541,11 +541,11 @@ class PlaylistRoute extends _i41.PageRouteInfo<PlaylistRouteArgs> {
     required _i43.SpotubeSimplePlaylistObject playlist,
     List<_i41.PageRouteInfo>? children,
   }) : super(
-         PlaylistRoute.name,
-         args: PlaylistRouteArgs(key: key, id: id, playlist: playlist),
-         rawPathParams: {'id': id},
-         initialChildren: children,
-       );
+          PlaylistRoute.name,
+          args: PlaylistRouteArgs(key: key, id: id, playlist: playlist),
+          rawPathParams: {'id': id},
+          initialChildren: children,
+        );
 
   static const String name = 'PlaylistRoute';
 
@@ -581,7 +581,7 @@ class PlaylistRouteArgs {
 /// [_i21.ProfilePage]
 class ProfileRoute extends _i41.PageRouteInfo<void> {
   const ProfileRoute({List<_i41.PageRouteInfo>? children})
-    : super(ProfileRoute.name, initialChildren: children);
+      : super(ProfileRoute.name, initialChildren: children);
 
   static const String name = 'ProfileRoute';
 
@@ -597,7 +597,7 @@ class ProfileRoute extends _i41.PageRouteInfo<void> {
 /// [_i22.RootAppPage]
 class RootAppRoute extends _i41.PageRouteInfo<void> {
   const RootAppRoute({List<_i41.PageRouteInfo>? children})
-    : super(RootAppRoute.name, initialChildren: children);
+      : super(RootAppRoute.name, initialChildren: children);
 
   static const String name = 'RootAppRoute';
 
@@ -613,7 +613,7 @@ class RootAppRoute extends _i41.PageRouteInfo<void> {
 /// [_i23.SearchPage]
 class SearchRoute extends _i41.PageRouteInfo<void> {
   const SearchRoute({List<_i41.PageRouteInfo>? children})
-    : super(SearchRoute.name, initialChildren: children);
+      : super(SearchRoute.name, initialChildren: children);
 
   static const String name = 'SearchRoute';
 
@@ -635,14 +635,14 @@ class SettingsMetadataProviderFormRoute
     required List<_i43.MetadataFormFieldObject> fields,
     List<_i41.PageRouteInfo>? children,
   }) : super(
-         SettingsMetadataProviderFormRoute.name,
-         args: SettingsMetadataProviderFormRouteArgs(
-           key: key,
-           title: title,
-           fields: fields,
-         ),
-         initialChildren: children,
-       );
+          SettingsMetadataProviderFormRoute.name,
+          args: SettingsMetadataProviderFormRouteArgs(
+            key: key,
+            title: title,
+            fields: fields,
+          ),
+          initialChildren: children,
+        );
 
   static const String name = 'SettingsMetadataProviderFormRoute';
 
@@ -682,7 +682,7 @@ class SettingsMetadataProviderFormRouteArgs {
 /// [_i25.SettingsMetadataProviderPage]
 class SettingsMetadataProviderRoute extends _i41.PageRouteInfo<void> {
   const SettingsMetadataProviderRoute({List<_i41.PageRouteInfo>? children})
-    : super(SettingsMetadataProviderRoute.name, initialChildren: children);
+      : super(SettingsMetadataProviderRoute.name, initialChildren: children);
 
   static const String name = 'SettingsMetadataProviderRoute';
 
@@ -698,7 +698,7 @@ class SettingsMetadataProviderRoute extends _i41.PageRouteInfo<void> {
 /// [_i26.SettingsPage]
 class SettingsRoute extends _i41.PageRouteInfo<void> {
   const SettingsRoute({List<_i41.PageRouteInfo>? children})
-    : super(SettingsRoute.name, initialChildren: children);
+      : super(SettingsRoute.name, initialChildren: children);
 
   static const String name = 'SettingsRoute';
 
@@ -714,7 +714,7 @@ class SettingsRoute extends _i41.PageRouteInfo<void> {
 /// [_i27.SettingsScrobblingPage]
 class SettingsScrobblingRoute extends _i41.PageRouteInfo<void> {
   const SettingsScrobblingRoute({List<_i41.PageRouteInfo>? children})
-    : super(SettingsScrobblingRoute.name, initialChildren: children);
+      : super(SettingsScrobblingRoute.name, initialChildren: children);
 
   static const String name = 'SettingsScrobblingRoute';
 
@@ -730,7 +730,7 @@ class SettingsScrobblingRoute extends _i41.PageRouteInfo<void> {
 /// [_i28.StatsAlbumsPage]
 class StatsAlbumsRoute extends _i41.PageRouteInfo<void> {
   const StatsAlbumsRoute({List<_i41.PageRouteInfo>? children})
-    : super(StatsAlbumsRoute.name, initialChildren: children);
+      : super(StatsAlbumsRoute.name, initialChildren: children);
 
   static const String name = 'StatsAlbumsRoute';
 
@@ -746,7 +746,7 @@ class StatsAlbumsRoute extends _i41.PageRouteInfo<void> {
 /// [_i29.StatsArtistsPage]
 class StatsArtistsRoute extends _i41.PageRouteInfo<void> {
   const StatsArtistsRoute({List<_i41.PageRouteInfo>? children})
-    : super(StatsArtistsRoute.name, initialChildren: children);
+      : super(StatsArtistsRoute.name, initialChildren: children);
 
   static const String name = 'StatsArtistsRoute';
 
@@ -762,7 +762,7 @@ class StatsArtistsRoute extends _i41.PageRouteInfo<void> {
 /// [_i30.StatsMinutesPage]
 class StatsMinutesRoute extends _i41.PageRouteInfo<void> {
   const StatsMinutesRoute({List<_i41.PageRouteInfo>? children})
-    : super(StatsMinutesRoute.name, initialChildren: children);
+      : super(StatsMinutesRoute.name, initialChildren: children);
 
   static const String name = 'StatsMinutesRoute';
 
@@ -778,7 +778,7 @@ class StatsMinutesRoute extends _i41.PageRouteInfo<void> {
 /// [_i31.StatsPage]
 class StatsRoute extends _i41.PageRouteInfo<void> {
   const StatsRoute({List<_i41.PageRouteInfo>? children})
-    : super(StatsRoute.name, initialChildren: children);
+      : super(StatsRoute.name, initialChildren: children);
 
   static const String name = 'StatsRoute';
 
@@ -794,7 +794,7 @@ class StatsRoute extends _i41.PageRouteInfo<void> {
 /// [_i32.StatsPlaylistsPage]
 class StatsPlaylistsRoute extends _i41.PageRouteInfo<void> {
   const StatsPlaylistsRoute({List<_i41.PageRouteInfo>? children})
-    : super(StatsPlaylistsRoute.name, initialChildren: children);
+      : super(StatsPlaylistsRoute.name, initialChildren: children);
 
   static const String name = 'StatsPlaylistsRoute';
 
@@ -810,7 +810,7 @@ class StatsPlaylistsRoute extends _i41.PageRouteInfo<void> {
 /// [_i33.StatsStreamFeesPage]
 class StatsStreamFeesRoute extends _i41.PageRouteInfo<void> {
   const StatsStreamFeesRoute({List<_i41.PageRouteInfo>? children})
-    : super(StatsStreamFeesRoute.name, initialChildren: children);
+      : super(StatsStreamFeesRoute.name, initialChildren: children);
 
   static const String name = 'StatsStreamFeesRoute';
 
@@ -826,7 +826,7 @@ class StatsStreamFeesRoute extends _i41.PageRouteInfo<void> {
 /// [_i34.StatsStreamsPage]
 class StatsStreamsRoute extends _i41.PageRouteInfo<void> {
   const StatsStreamsRoute({List<_i41.PageRouteInfo>? children})
-    : super(StatsStreamsRoute.name, initialChildren: children);
+      : super(StatsStreamsRoute.name, initialChildren: children);
 
   static const String name = 'StatsStreamsRoute';
 
@@ -846,11 +846,11 @@ class TrackRoute extends _i41.PageRouteInfo<TrackRouteArgs> {
     required String trackId,
     List<_i41.PageRouteInfo>? children,
   }) : super(
-         TrackRoute.name,
-         args: TrackRouteArgs(key: key, trackId: trackId),
-         rawPathParams: {'id': trackId},
-         initialChildren: children,
-       );
+          TrackRoute.name,
+          args: TrackRouteArgs(key: key, trackId: trackId),
+          rawPathParams: {'id': trackId},
+          initialChildren: children,
+        );
 
   static const String name = 'TrackRoute';
 
@@ -883,7 +883,7 @@ class TrackRouteArgs {
 /// [_i36.UserAlbumsPage]
 class UserAlbumsRoute extends _i41.PageRouteInfo<void> {
   const UserAlbumsRoute({List<_i41.PageRouteInfo>? children})
-    : super(UserAlbumsRoute.name, initialChildren: children);
+      : super(UserAlbumsRoute.name, initialChildren: children);
 
   static const String name = 'UserAlbumsRoute';
 
@@ -899,7 +899,7 @@ class UserAlbumsRoute extends _i41.PageRouteInfo<void> {
 /// [_i37.UserArtistsPage]
 class UserArtistsRoute extends _i41.PageRouteInfo<void> {
   const UserArtistsRoute({List<_i41.PageRouteInfo>? children})
-    : super(UserArtistsRoute.name, initialChildren: children);
+      : super(UserArtistsRoute.name, initialChildren: children);
 
   static const String name = 'UserArtistsRoute';
 
@@ -915,7 +915,7 @@ class UserArtistsRoute extends _i41.PageRouteInfo<void> {
 /// [_i38.UserDownloadsPage]
 class UserDownloadsRoute extends _i41.PageRouteInfo<void> {
   const UserDownloadsRoute({List<_i41.PageRouteInfo>? children})
-    : super(UserDownloadsRoute.name, initialChildren: children);
+      : super(UserDownloadsRoute.name, initialChildren: children);
 
   static const String name = 'UserDownloadsRoute';
 
@@ -931,7 +931,7 @@ class UserDownloadsRoute extends _i41.PageRouteInfo<void> {
 /// [_i39.UserLocalLibraryPage]
 class UserLocalLibraryRoute extends _i41.PageRouteInfo<void> {
   const UserLocalLibraryRoute({List<_i41.PageRouteInfo>? children})
-    : super(UserLocalLibraryRoute.name, initialChildren: children);
+      : super(UserLocalLibraryRoute.name, initialChildren: children);
 
   static const String name = 'UserLocalLibraryRoute';
 
@@ -947,7 +947,7 @@ class UserLocalLibraryRoute extends _i41.PageRouteInfo<void> {
 /// [_i40.UserPlaylistsPage]
 class UserPlaylistsRoute extends _i41.PageRouteInfo<void> {
   const UserPlaylistsRoute({List<_i41.PageRouteInfo>? children})
-    : super(UserPlaylistsRoute.name, initialChildren: children);
+      : super(UserPlaylistsRoute.name, initialChildren: children);
 
   static const String name = 'UserPlaylistsRoute';
 

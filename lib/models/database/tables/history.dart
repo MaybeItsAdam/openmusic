@@ -1,10 +1,6 @@
 part of '../database.dart';
 
-enum HistoryEntryType {
-  playlist,
-  album,
-  track,
-}
+enum HistoryEntryType { playlist, album, track }
 
 class HistoryTable extends Table {
   IntColumn get id => integer().autoIncrement()();

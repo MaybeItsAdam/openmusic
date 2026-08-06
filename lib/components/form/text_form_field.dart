@@ -173,9 +173,7 @@ class TextFormBuilderField extends StatelessWidget {
           if (field.hasError)
             Text(
               field.errorText ?? "",
-              style: TextStyle(
-                color: context.theme.colorScheme.destructive,
-              ),
+              style: TextStyle(color: context.theme.colorScheme.destructive),
             ),
         ],
       ),

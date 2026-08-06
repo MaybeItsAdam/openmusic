@@ -22,15 +22,15 @@ ToastOverlay showToastForAction(
     "download" => (context.l10n.download_count(count), SpotubeIcons.download),
     "add-to-playlist" => (
         context.l10n.add_count_to_playlist(count),
-        SpotubeIcons.playlistAdd
+        SpotubeIcons.playlistAdd,
       ),
     "add-to-queue" => (
         context.l10n.add_count_to_queue(count),
-        SpotubeIcons.queueAdd
+        SpotubeIcons.queueAdd,
       ),
     "play-next" => (
         context.l10n.play_count_next(count),
-        SpotubeIcons.lightning
+        SpotubeIcons.lightning,
       ),
     _ => ("", SpotubeIcons.error),
   };
@@ -70,8 +70,9 @@ class TrackPresentationActionsSection extends HookConsumerWidget {
     final historyNotifier = ref.watch(playbackHistoryActionsProvider);
 
     final state = ref.watch(presentationStateProvider(options.collection));
-    final notifier =
-        ref.watch(presentationStateProvider(options.collection).notifier);
+    final notifier = ref.watch(
+      presentationStateProvider(options.collection).notifier,
+    );
     final selectedTracks = state.selectedTracks;
 
     Future<void> actionDownloadTracks({
@@ -98,10 +99,7 @@ class TrackPresentationActionsSection extends HookConsumerWidget {
     return AdaptivePopSheetList(
       tooltip: context.l10n.more_actions,
       headings: [
-        Text(
-          context.l10n.more_actions,
-          style: context.theme.typography.large,
-        ),
+        Text(context.l10n.more_actions, style: context.theme.typography.large),
       ],
       onSelected: (action) async {
         var tracks = selectedTracks;
@@ -145,11 +143,13 @@ class TrackPresentationActionsSection extends HookConsumerWidget {
               playlistNotifier.addTracksAtFirst(tracks);
               playlistNotifier.addCollection(options.collectionId);
               if (options.collection is SpotubeSimpleAlbumObject) {
-                historyNotifier.addAlbums(
-                    [options.collection as SpotubeSimpleAlbumObject]);
+                historyNotifier.addAlbums([
+                  options.collection as SpotubeSimpleAlbumObject,
+                ]);
               } else {
-                historyNotifier.addPlaylists(
-                    [options.collection as SpotubeSimplePlaylistObject]);
+                historyNotifier.addPlaylists([
+                  options.collection as SpotubeSimplePlaylistObject,
+                ]);
               }
               notifier.deselectAllTracks();
               if (!context.mounted) return;
@@ -161,11 +161,13 @@ class TrackPresentationActionsSection extends HookConsumerWidget {
               playlistNotifier.addTracks(tracks);
               playlistNotifier.addCollection(options.collectionId);
               if (options.collection is SpotubeSimpleAlbumObject) {
-                historyNotifier.addAlbums(
-                    [options.collection as SpotubeSimpleAlbumObject]);
+                historyNotifier.addAlbums([
+                  options.collection as SpotubeSimpleAlbumObject,
+                ]);
               } else {
-                historyNotifier.addPlaylists(
-                    [options.collection as SpotubeSimplePlaylistObject]);
+                historyNotifier.addPlaylists([
+                  options.collection as SpotubeSimplePlaylistObject,
+                ]);
               }
               notifier.deselectAllTracks();
               if (!context.mounted) return;
@@ -185,48 +187,32 @@ class TrackPresentationActionsSection extends HookConsumerWidget {
           leading: const Icon(SpotubeIcons.download),
           child: selectedTracks.isEmpty ||
                   selectedTracks.length == options.tracks.length
-              ? Text(
-                  context.l10n.download_all,
-                )
-              : Text(
-                  context.l10n.download_count(selectedTracks.length),
-                ),
+              ? Text(context.l10n.download_all)
+              : Text(context.l10n.download_count(selectedTracks.length)),
         ),
         AdaptiveMenuButton(
           value: "add-to-playlist",
           leading: const Icon(SpotubeIcons.playlistAdd),
           child: selectedTracks.isEmpty ||
                   selectedTracks.length == options.tracks.length
-              ? Text(
-                  context.l10n.add_all_to_playlist,
-                )
-              : Text(
-                  context.l10n.add_count_to_playlist(selectedTracks.length),
-                ),
+              ? Text(context.l10n.add_all_to_playlist)
+              : Text(context.l10n.add_count_to_playlist(selectedTracks.length)),
         ),
         AdaptiveMenuButton(
           value: "add-to-queue",
           leading: const Icon(SpotubeIcons.queueAdd),
           child: selectedTracks.isEmpty ||
                   selectedTracks.length == options.tracks.length
-              ? Text(
-                  context.l10n.add_all_to_queue,
-                )
-              : Text(
-                  context.l10n.add_count_to_queue(selectedTracks.length),
-                ),
+              ? Text(context.l10n.add_all_to_queue)
+              : Text(context.l10n.add_count_to_queue(selectedTracks.length)),
         ),
         AdaptiveMenuButton(
           value: "play-next",
           leading: const Icon(SpotubeIcons.lightning),
           child: selectedTracks.isEmpty ||
                   selectedTracks.length == options.tracks.length
-              ? Text(
-                  context.l10n.play_all_next,
-                )
-              : Text(
-                  context.l10n.play_count_next(selectedTracks.length),
-                ),
+              ? Text(context.l10n.play_all_next)
+              : Text(context.l10n.play_count_next(selectedTracks.length)),
         ),
       ],
     );

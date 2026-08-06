@@ -22,15 +22,9 @@ class PlaylistCard extends HookConsumerWidget {
   final SpotubeSimplePlaylistObject playlist;
   final bool _isTile;
 
-  const PlaylistCard(
-    this.playlist, {
-    super.key,
-  }) : _isTile = false;
+  const PlaylistCard(this.playlist, {super.key}) : _isTile = false;
 
-  const PlaylistCard.tile(
-    this.playlist, {
-    super.key,
-  }) : _isTile = true;
+  const PlaylistCard.tile(this.playlist, {super.key}) : _isTile = true;
 
   @override
   Widget build(BuildContext context, ref) {
@@ -56,8 +50,9 @@ class PlaylistCard extends HookConsumerWidget {
         return tracks.items;
       }
 
-      final result = await ref
-          .read(metadataPluginPlaylistTracksProvider(playlist.id).future);
+      final result = await ref.read(
+        metadataPluginPlaylistTracksProvider(playlist.id).future,
+      );
 
       return result.items;
     }, [playlist.id, ref]);
@@ -78,108 +73,117 @@ class PlaylistCard extends HookConsumerWidget {
       context.navigateTo(PlaylistRoute(id: playlist.id, playlist: playlist));
     }, [context, playlist]);
 
-    final onPlaybuttonPressed = useCallback(() async {
-      try {
-        updating.value = true;
-        if (isPlaylistPlaying && playing) {
-          return audioPlayer.pause();
-        } else if (isPlaylistPlaying && !playing) {
-          return audioPlayer.resume();
+    final onPlaybuttonPressed = useCallback(
+      () async {
+        try {
+          updating.value = true;
+          if (isPlaylistPlaying && playing) {
+            return audioPlayer.pause();
+          } else if (isPlaylistPlaying && !playing) {
+            return audioPlayer.resume();
+          }
+
+          final fetchedInitialTracks = await fetchInitialTracks();
+
+          if (fetchedInitialTracks.isEmpty || !context.mounted) return;
+
+          final isRemoteDevice = await showSelectDeviceDialog(context, ref);
+          if (isRemoteDevice == null) return;
+          if (isRemoteDevice) {
+            final remotePlayback = ref.read(connectProvider.notifier);
+            final allTracks = await fetchAllTracks();
+            await remotePlayback.load(
+              WebSocketLoadEventData.playlist(
+                tracks: allTracks,
+                collection: playlist,
+              ),
+            );
+          } else {
+            await playlistNotifier.load(fetchedInitialTracks, autoPlay: true);
+            playlistNotifier.addCollection(playlist.id);
+            historyNotifier.addPlaylists([playlist]);
+
+            final allTracks = await fetchAllTracks();
+
+            await playlistNotifier.addTracks(
+              allTracks.sublist(fetchedInitialTracks.length),
+            );
+          }
+        } finally {
+          if (context.mounted) {
+            updating.value = false;
+          }
         }
+      },
+      [
+        isPlaylistPlaying,
+        playing,
+        fetchInitialTracks,
+        context,
+        showSelectDeviceDialog,
+        ref,
+        connectProvider,
+        fetchAllTracks,
+        playlistNotifier,
+        playlist.id,
+        historyNotifier,
+        playlist,
+        updating,
+      ],
+    );
 
-        final fetchedInitialTracks = await fetchInitialTracks();
+    final onAddToQueuePressed = useCallback(
+      () async {
+        updating.value = true;
+        try {
+          if (isPlaylistPlaying) return;
 
-        if (fetchedInitialTracks.isEmpty || !context.mounted) return;
+          final fetchedInitialTracks = await fetchAllTracks();
 
-        final isRemoteDevice = await showSelectDeviceDialog(context, ref);
-        if (isRemoteDevice == null) return;
-        if (isRemoteDevice) {
-          final remotePlayback = ref.read(connectProvider.notifier);
-          final allTracks = await fetchAllTracks();
-          await remotePlayback.load(
-            WebSocketLoadEventData.playlist(
-              tracks: allTracks,
-              collection: playlist,
-            ),
-          );
-        } else {
-          await playlistNotifier.load(fetchedInitialTracks, autoPlay: true);
+          if (fetchedInitialTracks.isEmpty) return;
+
+          playlistNotifier.addTracks(fetchedInitialTracks);
           playlistNotifier.addCollection(playlist.id);
           historyNotifier.addPlaylists([playlist]);
-
-          final allTracks = await fetchAllTracks();
-
-          await playlistNotifier
-              .addTracks(allTracks.sublist(fetchedInitialTracks.length));
-        }
-      } finally {
-        if (context.mounted) {
+          if (context.mounted) {
+            showToast(
+              context: context,
+              builder: (context, overlay) {
+                return SurfaceCard(
+                  child: Basic(
+                    content: Text(
+                      context.l10n.added_num_tracks_to_queue(
+                        fetchedInitialTracks.length,
+                      ),
+                    ),
+                    trailing: Button.outline(
+                      child: Text(context.l10n.undo),
+                      onPressed: () {
+                        playlistNotifier.removeTracks(
+                          fetchedInitialTracks.map((e) => e.id),
+                        );
+                      },
+                    ),
+                  ),
+                );
+              },
+            );
+          }
+        } finally {
           updating.value = false;
         }
-      }
-    }, [
-      isPlaylistPlaying,
-      playing,
-      fetchInitialTracks,
-      context,
-      showSelectDeviceDialog,
-      ref,
-      connectProvider,
-      fetchAllTracks,
-      playlistNotifier,
-      playlist.id,
-      historyNotifier,
-      playlist,
-      updating
-    ]);
-
-    final onAddToQueuePressed = useCallback(() async {
-      updating.value = true;
-      try {
-        if (isPlaylistPlaying) return;
-
-        final fetchedInitialTracks = await fetchAllTracks();
-
-        if (fetchedInitialTracks.isEmpty) return;
-
-        playlistNotifier.addTracks(fetchedInitialTracks);
-        playlistNotifier.addCollection(playlist.id);
-        historyNotifier.addPlaylists([playlist]);
-        if (context.mounted) {
-          showToast(
-            context: context,
-            builder: (context, overlay) {
-              return SurfaceCard(
-                child: Basic(
-                  content: Text(
-                    context.l10n
-                        .added_num_tracks_to_queue(fetchedInitialTracks.length),
-                  ),
-                  trailing: Button.outline(
-                    child: Text(context.l10n.undo),
-                    onPressed: () {
-                      playlistNotifier
-                          .removeTracks(fetchedInitialTracks.map((e) => e.id));
-                    },
-                  ),
-                ),
-              );
-            },
-          );
-        }
-      } finally {
-        updating.value = false;
-      }
-    }, [
-      isPlaylistPlaying,
-      fetchAllTracks,
-      playlistNotifier,
-      playlist.id,
-      historyNotifier,
-      playlist,
-      context,
-      updating
-    ]);
+      },
+      [
+        isPlaylistPlaying,
+        fetchAllTracks,
+        playlistNotifier,
+        playlist.id,
+        historyNotifier,
+        playlist,
+        context,
+        updating,
+      ],
+    );
 
     final imageUrl = useMemoized(
       () => playlist.images.from200PxTo300PxOrSmallestImage(

@@ -93,8 +93,9 @@ class GettingStartedPagePlaybackSection extends HookConsumerWidget {
                 context.l10n.endless_playback_description,
               ).small().muted(),
               onPressed: () {
-                preferencesNotifier
-                    .setEndlessPlayback(!preferences.endlessPlayback);
+                preferencesNotifier.setEndlessPlayback(
+                  !preferences.endlessPlayback,
+                );
               },
               trailing: Switch(
                 value: preferences.endlessPlayback,

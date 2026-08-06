@@ -9,8 +9,11 @@ import 'package:spotube/models/metadata/metadata.dart';
 class StatsPlaylistItem extends StatelessWidget {
   final SpotubeSimplePlaylistObject playlist;
   final Widget info;
-  const StatsPlaylistItem(
-      {super.key, required this.playlist, required this.info});
+  const StatsPlaylistItem({
+    super.key,
+    required this.playlist,
+    required this.info,
+  });
 
   @override
   Widget build(BuildContext context) {

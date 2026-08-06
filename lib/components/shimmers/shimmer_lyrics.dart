@@ -15,12 +15,8 @@ class ShimmerLyrics extends HookWidget {
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         itemBuilder: (context, index) {
-          final texts = [
-            "Lorem ipsum",
-            "consectetur.",
-            "Sed",
-            "Sed non risus",
-          ]..shuffle();
+          final texts = ["Lorem ipsum", "consectetur.", "Sed", "Sed non risus"]
+            ..shuffle();
           return Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

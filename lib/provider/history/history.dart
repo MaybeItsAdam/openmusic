@@ -10,7 +10,8 @@ class PlaybackHistoryActions {
   PlaybackHistoryActions(this.ref);
 
   Future<void> _batchInsertHistoryEntries(
-      List<HistoryTableCompanion> entries) async {
+    List<HistoryTableCompanion> entries,
+  ) async {
     await _db.batch((batch) {
       batch.insertAll(_db.historyTable, entries);
     });
@@ -74,5 +75,6 @@ class PlaybackHistoryActions {
   }
 }
 
-final playbackHistoryActionsProvider =
-    Provider((ref) => PlaybackHistoryActions(ref));
+final playbackHistoryActionsProvider = Provider(
+  (ref) => PlaybackHistoryActions(ref),
+);

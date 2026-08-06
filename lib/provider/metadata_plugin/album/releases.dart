@@ -10,9 +10,10 @@ class MetadataPluginAlbumReleasesNotifier
     int offset,
     int limit,
   ) async {
-    return await (await metadataPlugin)
-        .album
-        .releases(limit: limit, offset: offset);
+    return await (await metadataPlugin).album.releases(
+          limit: limit,
+          offset: offset,
+        );
   }
 
   @override
@@ -23,7 +24,6 @@ class MetadataPluginAlbumReleasesNotifier
 }
 
 final metadataPluginAlbumReleasesProvider = AsyncNotifierProvider<
-    MetadataPluginAlbumReleasesNotifier,
-    SpotubePaginationResponseObject<SpotubeSimpleAlbumObject>>(
-  () => MetadataPluginAlbumReleasesNotifier(),
-);
+        MetadataPluginAlbumReleasesNotifier,
+        SpotubePaginationResponseObject<SpotubeSimpleAlbumObject>>(
+    () => MetadataPluginAlbumReleasesNotifier());

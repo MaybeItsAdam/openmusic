@@ -57,7 +57,7 @@ abstract class FakeData {
         height: 1,
         width: 1,
         url: "https://dummyimage.com/100x100/cfcfcf/cfcfcf.jpg",
-      )
+      ),
     ],
   );
 
@@ -79,15 +79,16 @@ abstract class FakeData {
   );
 
   static final SpotubeFullPlaylistObject playlist = SpotubeFullPlaylistObject(
-      id: "1",
-      name: "A good playlist",
-      description: "A very good playlist description",
-      externalUri: "https://example.com",
-      collaborative: false,
-      public: true,
-      owner: user,
-      images: [image],
-      collaborators: [user]);
+    id: "1",
+    name: "A good playlist",
+    description: "A very good playlist description",
+    externalUri: "https://example.com",
+    collaborative: false,
+    public: true,
+    owner: user,
+    images: [image],
+    collaborators: [user],
+  );
 
   static final SpotubeSimplePlaylistObject playlistSimple =
       SpotubeSimplePlaylistObject(
@@ -101,11 +102,12 @@ abstract class FakeData {
 
   static final SpotubeBrowseSectionObject browseSection =
       SpotubeBrowseSectionObject(
-          id: "section-id",
-          title: "Browse Section",
-          browseMore: true,
-          externalUri: "https://example.com/browse/section",
-          items: [playlistSimple, playlistSimple, playlistSimple]);
+    id: "section-id",
+    title: "Browse Section",
+    browseMore: true,
+    externalUri: "https://example.com/browse/section",
+    items: [playlistSimple, playlistSimple, playlistSimple],
+  );
 
   static const historySummary = PlaybackHistorySummary(
     albums: 1,

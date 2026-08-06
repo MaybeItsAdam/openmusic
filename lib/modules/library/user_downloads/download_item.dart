@@ -12,10 +12,7 @@ import 'package:spotube/provider/download_manager_provider.dart';
 
 class DownloadItem extends HookConsumerWidget {
   final DownloadTask task;
-  const DownloadItem({
-    super.key,
-    required this.task,
-  });
+  const DownloadItem({super.key, required this.task});
 
   @override
   Widget build(BuildContext context, ref) {
@@ -45,8 +42,9 @@ class DownloadItem extends HookConsumerWidget {
         },
       ),
       trailing: switch (task.status) {
-        DownloadStatus.downloading => HookBuilder(builder: (context) {
-            return StreamBuilder(
+        DownloadStatus.downloading => HookBuilder(
+            builder: (context) {
+              return StreamBuilder(
                 stream: task.downloadedBytesStream,
                 builder: (context, asyncSnapshot) {
                   final progress =
@@ -56,28 +54,26 @@ class DownloadItem extends HookConsumerWidget {
 
                   return Row(
                     children: [
-                      CircularProgressIndicator(
-                        value: progress.toDouble(),
-                      ),
+                      CircularProgressIndicator(value: progress.toDouble()),
                       const SizedBox(width: 10),
                       const SizedBox(width: 10),
                       IconButton.ghost(
-                          icon: const Icon(SpotubeIcons.close),
-                          onPressed: () {
-                            downloadManager.cancel(task.track);
-                          }),
+                        icon: const Icon(SpotubeIcons.close),
+                        onPressed: () {
+                          downloadManager.cancel(task.track);
+                        },
+                      ),
                     ],
                   );
-                });
-          }),
+                },
+              );
+            },
+          ),
         DownloadStatus.failed || DownloadStatus.canceled => SizedBox(
             width: 100,
             child: Row(
               children: [
-                Icon(
-                  SpotubeIcons.error,
-                  color: Colors.red[400],
-                ),
+                Icon(SpotubeIcons.error, color: Colors.red[400]),
                 const SizedBox(width: 10),
                 IconButton.ghost(
                   icon: const Icon(SpotubeIcons.refresh),
@@ -88,13 +84,16 @@ class DownloadItem extends HookConsumerWidget {
               ],
             ),
           ),
-        DownloadStatus.completed =>
-          Icon(SpotubeIcons.done, color: Colors.green[400]),
+        DownloadStatus.completed => Icon(
+            SpotubeIcons.done,
+            color: Colors.green[400],
+          ),
         DownloadStatus.queued => IconButton.ghost(
             icon: const Icon(SpotubeIcons.close),
             onPressed: () {
               downloadManager.cancel(task.track);
-            }),
+            },
+          ),
       },
     );
   }

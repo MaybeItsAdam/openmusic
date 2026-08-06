@@ -42,22 +42,21 @@ mixin PaginatedAsyncNotifierMixin<K>
 
     bool hasMore = true;
     while (hasMore) {
-      final newState = await fetch(
-        state.value!.nextOffset!,
-        max(state.value!.limit, 100),
-      )
-          .catchError(
-            (e) => fetch(state.value!.nextOffset!, max(state.value!.limit, 50)),
-          )
-          .catchError(
-            (e) => fetch(state.value!.nextOffset!, state.value!.limit),
-          )
-          .catchError(
-        (e) async {
-          await Future.delayed(const Duration(milliseconds: 500));
-          return fetch(state.value!.nextOffset!, state.value!.limit);
-        },
-      );
+      final newState =
+          await fetch(state.value!.nextOffset!, max(state.value!.limit, 100))
+              .catchError(
+                (e) => fetch(
+                  state.value!.nextOffset!,
+                  max(state.value!.limit, 50),
+                ),
+              )
+              .catchError(
+                (e) => fetch(state.value!.nextOffset!, state.value!.limit),
+              )
+              .catchError((e) async {
+        await Future.delayed(const Duration(milliseconds: 500));
+        return fetch(state.value!.nextOffset!, state.value!.limit);
+      });
 
       hasMore = newState.hasMore;
 
@@ -65,9 +64,7 @@ mixin PaginatedAsyncNotifierMixin<K>
           state.value!.items.isEmpty ? <K>[] : state.value!.items.cast<K>();
       final items = newState.items.isEmpty ? <K>[] : newState.items.cast<K>();
 
-      state = AsyncData(
-        newState.copyWith(items: [...oldItems, ...items]),
-      );
+      state = AsyncData(newState.copyWith(items: [...oldItems, ...items]));
     }
 
     return state.value!.items.cast<K>();

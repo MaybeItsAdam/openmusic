@@ -27,12 +27,7 @@ class MetadataPluginSavedAlbumNotifier
     final oldState = state.value;
 
     state = AsyncData(
-      state.value!.copyWith(
-        items: [
-          ...albums,
-          ...state.value!.items,
-        ],
-      ),
+      state.value!.copyWith(items: [...albums, ...state.value!.items]),
     );
     try {
       await (await metadataPlugin).album.save(albums.map((e) => e.id).toList());
@@ -51,9 +46,7 @@ class MetadataPluginSavedAlbumNotifier
     state = AsyncData(
       state.value!.copyWith(
         items: state.value!.items
-            .where(
-              (e) => albumIds.contains((e).id) == false,
-            )
+            .where((e) => albumIds.contains((e).id) == false)
             .toList(),
       ),
     );
@@ -67,22 +60,21 @@ class MetadataPluginSavedAlbumNotifier
 }
 
 final metadataPluginSavedAlbumsProvider = AsyncNotifierProvider<
-    MetadataPluginSavedAlbumNotifier,
-    SpotubePaginationResponseObject<SpotubeSimpleAlbumObject>>(
-  () => MetadataPluginSavedAlbumNotifier(),
-);
+        MetadataPluginSavedAlbumNotifier,
+        SpotubePaginationResponseObject<SpotubeSimpleAlbumObject>>(
+    () => MetadataPluginSavedAlbumNotifier());
 
 final metadataPluginIsSavedAlbumProvider =
-    FutureProvider.autoDispose.family<bool, String>(
-  (ref, albumId) async {
-    final savedAlbums =
-        await ref.watch(metadataPluginSavedAlbumsProvider.future);
-    final savedAlbumsNotifier =
-        ref.read(metadataPluginSavedAlbumsProvider.notifier);
-    final allSavedAlbums = savedAlbums.hasMore
-        ? await savedAlbumsNotifier.fetchAll()
-        : savedAlbums.items;
+    FutureProvider.autoDispose.family<bool, String>((ref, albumId) async {
+  final savedAlbums = await ref.watch(
+    metadataPluginSavedAlbumsProvider.future,
+  );
+  final savedAlbumsNotifier = ref.read(
+    metadataPluginSavedAlbumsProvider.notifier,
+  );
+  final allSavedAlbums = savedAlbums.hasMore
+      ? await savedAlbumsNotifier.fetchAll()
+      : savedAlbums.items;
 
-    return allSavedAlbums.any((element) => element.id == albumId);
-  },
-);
+  return allSavedAlbums.any((element) => element.id == albumId);
+});

@@ -14,9 +14,7 @@ class MetadataPluginPlaylistEndpoint {
     final raw = await hetuMetadataPlaylist
         .invoke("getPlaylist", positionalArgs: [id]) as Map;
 
-    return SpotubeFullPlaylistObject.fromJson(
-      raw.cast<String, dynamic>(),
-    );
+    return SpotubeFullPlaylistObject.fromJson(raw.cast<String, dynamic>());
   }
 
   Future<SpotubePaginationResponseObject<SpotubeFullTrackObject>> tracks(
@@ -27,10 +25,8 @@ class MetadataPluginPlaylistEndpoint {
     final raw = await hetuMetadataPlaylist.invoke(
       "tracks",
       positionalArgs: [id],
-      namedArgs: {
-        "offset": offset,
-        "limit": limit,
-      }..removeWhere((key, value) => value == null),
+      namedArgs: {"offset": offset, "limit": limit}
+        ..removeWhere((key, value) => value == null),
     ) as Map;
 
     return SpotubePaginationResponseObject<SpotubeFullTrackObject>.fromJson(
@@ -60,9 +56,7 @@ class MetadataPluginPlaylistEndpoint {
 
     if (raw == null) return null;
 
-    return SpotubeFullPlaylistObject.fromJson(
-      raw.cast<String, dynamic>(),
-    );
+    return SpotubeFullPlaylistObject.fromJson(raw.cast<String, dynamic>());
   }
 
   Future<void> update(
@@ -92,10 +86,8 @@ class MetadataPluginPlaylistEndpoint {
     await hetuMetadataPlaylist.invoke(
       "addTracks",
       positionalArgs: [playlistId],
-      namedArgs: {
-        "trackIds": trackIds,
-        "position": position,
-      }..removeWhere((key, value) => value == null),
+      namedArgs: {"trackIds": trackIds, "position": position}
+        ..removeWhere((key, value) => value == null),
     );
   }
 
@@ -106,24 +98,17 @@ class MetadataPluginPlaylistEndpoint {
     await hetuMetadataPlaylist.invoke(
       "removeTracks",
       positionalArgs: [playlistId],
-      namedArgs: {
-        "trackIds": trackIds,
-      }..removeWhere((key, value) => value == null),
+      namedArgs: {"trackIds": trackIds}
+        ..removeWhere((key, value) => value == null),
     );
   }
 
   Future<void> save(String playlistId) async {
-    await hetuMetadataPlaylist.invoke(
-      "save",
-      positionalArgs: [playlistId],
-    );
+    await hetuMetadataPlaylist.invoke("save", positionalArgs: [playlistId]);
   }
 
   Future<void> unsave(String playlistId) async {
-    await hetuMetadataPlaylist.invoke(
-      "unsave",
-      positionalArgs: [playlistId],
-    );
+    await hetuMetadataPlaylist.invoke("unsave", positionalArgs: [playlistId]);
   }
 
   Future<void> deletePlaylist(String playlistId) async {

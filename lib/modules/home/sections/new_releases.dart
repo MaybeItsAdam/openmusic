@@ -17,8 +17,9 @@ class HomeNewReleasesSection extends HookConsumerWidget {
     final authenticated = ref.watch(metadataPluginAuthenticatedProvider);
 
     final newReleases = ref.watch(metadataPluginAlbumReleasesProvider);
-    final newReleasesNotifier =
-        ref.read(metadataPluginAlbumReleasesProvider.notifier);
+    final newReleasesNotifier = ref.read(
+      metadataPluginAlbumReleasesProvider.notifier,
+    );
 
     if (authenticated.asData?.value != true ||
         newReleases.isLoading ||

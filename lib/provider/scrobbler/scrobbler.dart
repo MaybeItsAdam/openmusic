@@ -16,8 +16,9 @@ class ScrobblerNotifier extends AsyncNotifier<Scrobblenaut?> {
   build() async {
     final database = ref.watch(databaseProvider);
 
-    final loginInfo = await (database.select(database.scrobblerTable)
-          ..where((t) => t.id.equals(0)))
+    final loginInfo = await (database.select(
+      database.scrobblerTable,
+    )..where((t) => t.id.equals(0)))
         .getSingleOrNull();
 
     final subscription =
@@ -42,8 +43,9 @@ class ScrobblerNotifier extends AsyncNotifier<Scrobblenaut?> {
       }
     });
 
-    final scrobblerSubscription =
-        _scrobbleController.stream.listen((track) async {
+    final scrobblerSubscription = _scrobbleController.stream.listen((
+      track,
+    ) async {
       try {
         await state.asData?.value?.track.scrobble(
           artist: track.artists.first.name,
@@ -77,10 +79,7 @@ class ScrobblerNotifier extends AsyncNotifier<Scrobblenaut?> {
     );
   }
 
-  Future<void> login(
-    String username,
-    String password,
-  ) async {
+  Future<void> login(String username, String password) async {
     final database = ref.read(databaseProvider);
 
     final lastFm = await LastFM.authenticate(

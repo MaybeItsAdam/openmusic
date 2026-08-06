@@ -27,11 +27,7 @@ class SettingsMetadataProviderFormPage extends HookConsumerWidget {
     return SafeArea(
       bottom: false,
       child: Scaffold(
-        headers: [
-          TitleBar(
-            title: Text(title),
-          ),
-        ],
+        headers: [TitleBar(title: Text(title))],
         child: FormBuilder(
           key: formKey,
           child: Center(
@@ -106,7 +102,9 @@ class SettingsMetadataProviderFormPage extends HookConsumerWidget {
                                 Text(
                                   formField.errorText ?? '',
                                   style: const TextStyle(
-                                      color: Colors.red, fontSize: 12),
+                                    color: Colors.red,
+                                    fontSize: 12,
+                                  ),
                                 ),
                             ],
                           );
@@ -123,10 +121,12 @@ class SettingsMetadataProviderFormPage extends HookConsumerWidget {
                         }
 
                         final data = formKey.currentState!.value.entries
-                            .map((e) => <String, dynamic>{
-                                  "id": e.key,
-                                  "value": e.value,
-                                })
+                            .map(
+                              (e) => <String, dynamic>{
+                                "id": e.key,
+                                "value": e.value,
+                              },
+                            )
                             .toList();
 
                         context.router.maybePop(data);
@@ -134,7 +134,7 @@ class SettingsMetadataProviderFormPage extends HookConsumerWidget {
                       child: Text(context.l10n.submit),
                     ),
                   ),
-                  const SliverGap(200)
+                  const SliverGap(200),
                 ],
               ),
             ),

@@ -14,8 +14,10 @@ class HistoryTopAlbumsNotifier extends FamilyPaginatedAsyncNotifier<
     PlaybackHistoryAlbum, HistoryDuration> {
   HistoryTopAlbumsNotifier() : super();
 
-  Selectable<SpotubeSimpleAlbumObject> createAlbumsQuery(
-      {int? limit, int? offset}) {
+  Selectable<SpotubeSimpleAlbumObject> createAlbumsQuery({
+    int? limit,
+    int? offset,
+  }) {
     final database = ref.read(databaseProvider);
 
     final duration = switch (arg) {
@@ -82,10 +84,12 @@ class HistoryTopAlbumsNotifier extends FamilyPaginatedAsyncNotifier<
   build(arg) async {
     final subscription = createAlbumsQuery().watch().listen((event) {
       if (state.asData == null) return;
-      state = AsyncData(state.asData!.value.copyWith(
-        items: getAlbumsWithCount(event),
-        hasMore: false,
-      ));
+      state = AsyncData(
+        state.asData!.value.copyWith(
+          items: getAlbumsWithCount(event),
+          hasMore: false,
+        ),
+      );
     });
 
     ref.onDispose(() {
@@ -111,6 +115,4 @@ class HistoryTopAlbumsNotifier extends FamilyPaginatedAsyncNotifier<
 final historyTopAlbumsProvider = AsyncNotifierProviderFamily<
     HistoryTopAlbumsNotifier,
     SpotubePaginationResponseObject<PlaybackHistoryAlbum>,
-    HistoryDuration>(
-  () => HistoryTopAlbumsNotifier(),
-);
+    HistoryDuration>(() => HistoryTopAlbumsNotifier());

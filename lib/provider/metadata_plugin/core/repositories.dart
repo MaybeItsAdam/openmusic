@@ -68,7 +68,9 @@ class MetadataPluginRepositoriesNotifier
         0,
         (previousValue, response) => previousValue +
             (response.data["total_count"] ??
-                int.tryParse(response.headers["x-total-count"]?[0] ?? "") ??
+                int.tryParse(
+                  response.headers["x-total-count"]?[0] ?? "",
+                ) ??
                 0) as int,
       ),
       hasMore: hasMore,
@@ -84,7 +86,6 @@ class MetadataPluginRepositoriesNotifier
 }
 
 final metadataPluginRepositoriesProvider = AsyncNotifierProvider<
-    MetadataPluginRepositoriesNotifier,
-    SpotubePaginationResponseObject<MetadataPluginRepository>>(
-  () => MetadataPluginRepositoriesNotifier(),
-);
+        MetadataPluginRepositoriesNotifier,
+        SpotubePaginationResponseObject<MetadataPluginRepository>>(
+    () => MetadataPluginRepositoriesNotifier());

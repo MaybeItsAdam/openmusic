@@ -32,8 +32,10 @@ class WindowsBuildCommand extends Command with BuildCommandCommonSteps {
     for (final filePath in chocoFiles) {
       final file = File(filePath);
       final content = file.readAsStringSync();
-      final newContent =
-          content.replaceAll(versionVarRegExp, versionWithoutBuildNumber);
+      final newContent = content.replaceAll(
+        versionVarRegExp,
+        versionWithoutBuildNumber,
+      );
 
       file.writeAsStringSync(newContent);
     }
@@ -41,9 +43,7 @@ class WindowsBuildCommand extends Command with BuildCommandCommonSteps {
     await bootstrap();
     await innoDependInstall();
 
-    final runnerRCFile = File(
-      join(cwd.path, "windows", "runner", "Runner.rc"),
-    );
+    final runnerRCFile = File(join(cwd.path, "windows", "runner", "Runner.rc"));
 
     runnerRCFile.writeAsStringSync(
       runnerRCFile
@@ -55,7 +55,7 @@ class WindowsBuildCommand extends Command with BuildCommandCommonSteps {
               pubspec.version!.major,
               pubspec.version!.minor,
               pubspec.version!.patch,
-              0
+              0,
             ].join(","),
           ),
     );
@@ -88,9 +88,9 @@ class WindowsBuildCommand extends Command with BuildCommandCommonSteps {
 
     chocoVerificationFile.writeAsStringSync(
       chocoVerificationFile.readAsStringSync().replaceAll(
-            RegExp(r"\%\{\{WIN_SHA256\}\}\%"),
-            hash,
-          ),
+        RegExp(r"\%\{\{WIN_SHA256\}\}\%"),
+        hash,
+      ),
     );
 
     await exeFile.copy(

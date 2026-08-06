@@ -56,9 +56,7 @@ class SummaryCard extends StatelessWidget {
                   children: [
                     TextSpan(
                       text: title,
-                      style: typography.h2.copyWith(
-                        color: color.shade900,
-                      ),
+                      style: typography.h2.copyWith(color: color.shade900),
                     ),
                     TextSpan(
                       text: " $unit",
@@ -77,9 +75,7 @@ class SummaryCard extends StatelessWidget {
                     ? descriptionNewLines.length + 1
                     : 1,
                 minFontSize: 9,
-                style: typography.small.copyWith(
-                  color: color.shade900,
-                ),
+                style: typography.small.copyWith(color: color.shade900),
               ),
             ],
           ),

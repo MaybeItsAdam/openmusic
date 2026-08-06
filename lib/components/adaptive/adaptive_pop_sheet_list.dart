@@ -92,9 +92,7 @@ class AdaptivePopSheetList<T> extends StatelessWidget {
         position: position,
         builder: (context) {
           return WidgetStatesProvider.boundary(
-            child: DropdownMenu(
-              children: childrenModified(context),
-            ),
+            child: DropdownMenu(children: childrenModified(context)),
           );
         },
       ).future;
@@ -144,9 +142,7 @@ class AdaptivePopSheetList<T> extends StatelessWidget {
 
     if (mediaQuery.mdAndUp) {
       return Tooltip(
-        tooltip: TooltipContainer(
-          child: Text(tooltip),
-        ).call,
+        tooltip: TooltipContainer(child: Text(tooltip)).call,
         child: IconButton(
           variance: variance,
           icon: icon ?? const Icon(SpotubeIcons.moreVertical),
@@ -154,10 +150,14 @@ class AdaptivePopSheetList<T> extends StatelessWidget {
             final renderBox = context.findRenderObject() as RenderBox;
             final position = RelativeRect.fromRect(
               Rect.fromPoints(
-                renderBox.localToGlobal(Offset.zero,
-                    ancestor: context.findRenderObject()),
-                renderBox.localToGlobal(renderBox.size.bottomRight(Offset.zero),
-                    ancestor: context.findRenderObject()),
+                renderBox.localToGlobal(
+                  Offset.zero,
+                  ancestor: context.findRenderObject(),
+                ),
+                renderBox.localToGlobal(
+                  renderBox.size.bottomRight(Offset.zero),
+                  ancestor: context.findRenderObject(),
+                ),
               ),
               Offset.zero & mediaQuery.size,
             );

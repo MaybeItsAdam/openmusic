@@ -23,19 +23,16 @@ class StatsMinutesPage extends HookConsumerWidget {
     final topTracks = ref.watch(
       historyTopTracksProvider(HistoryDuration.allTime),
     );
-    final topTracksNotifier =
-        ref.watch(historyTopTracksProvider(HistoryDuration.allTime).notifier);
+    final topTracksNotifier = ref.watch(
+      historyTopTracksProvider(HistoryDuration.allTime).notifier,
+    );
 
     final tracksData = topTracks.asData?.value.items ?? [];
 
     return SafeArea(
       bottom: false,
       child: Scaffold(
-        headers: [
-          TitleBar(
-            title: Text(context.l10n.minutes_listened),
-          )
-        ],
+        headers: [TitleBar(title: Text(context.l10n.minutes_listened))],
         child: Skeletonizer(
           enabled: topTracks.isLoading && !topTracks.isLoadingNextPage,
           child: InfiniteList(
@@ -55,8 +52,9 @@ class StatsMinutesPage extends HookConsumerWidget {
                   context.l10n.count_mins(
                     compactNumberFormatter.format(
                       track.count *
-                          Duration(milliseconds: track.track.durationMs)
-                              .inMinutes,
+                          Duration(
+                            milliseconds: track.track.durationMs,
+                          ).inMinutes,
                     ),
                   ),
                 ),

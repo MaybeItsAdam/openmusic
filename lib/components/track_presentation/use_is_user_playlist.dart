@@ -9,10 +9,12 @@ bool useIsUserPlaylist(WidgetRef ref, String playlistId) {
 
   return useMemoized(
     () =>
-        userPlaylistsQuery.asData?.value.items.any((e) =>
-            e.id == playlistId &&
-            me.asData?.value != null &&
-            e.owner.id == me.asData?.value?.id) ??
+        userPlaylistsQuery.asData?.value.items.any(
+          (e) =>
+              e.id == playlistId &&
+              me.asData?.value != null &&
+              e.owner.id == me.asData?.value?.id,
+        ) ??
         false,
     [userPlaylistsQuery.asData?.value, playlistId, me.asData?.value],
   );

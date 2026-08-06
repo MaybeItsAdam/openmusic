@@ -46,22 +46,20 @@ mixin BuildCommandCommonSteps on Command {
 
       pubspecFile.writeAsStringSync(
         pubspecFile.readAsStringSync().replaceAll(
-              "version: ${pubspec.version!.canonicalizedVersion}",
-              "version: $versionWithoutBuildNumber+${CliEnv.ghRunNumber}",
-            ),
+          "version: ${pubspec.version!.canonicalizedVersion}",
+          "version: $versionWithoutBuildNumber+${CliEnv.ghRunNumber}",
+        ),
       );
 
       _pubspec = null;
       pubspec;
     }
 
-    await shell.run(
-      """
+    await shell.run("""
       flutter pub get
       dart run build_runner build --delete-conflicting-outputs
       dart pub global activate fastforge
-      """,
-    );
+      """);
   }
 
   String get architecture => parent?.argResults?.option("arch") as String;

@@ -17,7 +17,8 @@ final queryingTrackInfoProvider = Provider<bool>((ref) {
   return ref
       .watch(
         sourcedTrackProvider(
-            audioPlayer.activeTrack! as SpotubeFullTrackObject),
+          audioPlayer.activeTrack! as SpotubeFullTrackObject,
+        ),
       )
       .isLoading;
 });

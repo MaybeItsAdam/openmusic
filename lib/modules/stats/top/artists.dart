@@ -18,14 +18,14 @@ class TopArtists extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, ref) {
     final historyDuration = ref.watch(playbackHistoryTopDurationProvider);
-    final topTracks = ref.watch(
-      historyTopTracksProvider(historyDuration),
+    final topTracks = ref.watch(historyTopTracksProvider(historyDuration));
+    final topTracksNotifier = ref.watch(
+      historyTopTracksProvider(historyDuration).notifier,
     );
-    final topTracksNotifier =
-        ref.watch(historyTopTracksProvider(historyDuration).notifier);
 
-    final artistsData =
-        useMemoized(() => topTracksNotifier.artists, [topTracks.asData?.value]);
+    final artistsData = useMemoized(() => topTracksNotifier.artists, [
+      topTracks.asData?.value,
+    ]);
 
     return Skeletonizer.sliver(
       enabled: topTracks.isLoading && !topTracks.isLoadingNextPage,
@@ -60,8 +60,9 @@ class TopArtists extends HookConsumerWidget {
           return StatsArtistItem(
             artist: artist.artist,
             info: Text(
-              context.l10n
-                  .count_plays(compactNumberFormatter.format(artist.count)),
+              context.l10n.count_plays(
+                compactNumberFormatter.format(artist.count),
+              ),
             ),
           );
         },

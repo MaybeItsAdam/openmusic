@@ -83,9 +83,8 @@ class ConnectionCheckerService with WidgetsBindingObserver {
     }
 
     return interfaces.any(
-      (interface) => vpnNames.any(
-        (name) => interface.name.toLowerCase().contains(name),
-      ),
+      (interface) =>
+          vpnNames.any((name) => interface.name.toLowerCase().contains(name)),
     );
   }
 

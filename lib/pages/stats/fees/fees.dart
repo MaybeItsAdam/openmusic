@@ -24,16 +24,14 @@ class StatsStreamFeesPage extends HookConsumerWidget {
   Widget build(BuildContext context, ref) {
     final duration = useState<HistoryDuration>(HistoryDuration.days30);
 
-    final topTracks = ref.watch(
-      historyTopTracksProvider(duration.value),
+    final topTracks = ref.watch(historyTopTracksProvider(duration.value));
+    final topTracksNotifier = ref.watch(
+      historyTopTracksProvider(duration.value).notifier,
     );
-    final topTracksNotifier =
-        ref.watch(historyTopTracksProvider(duration.value).notifier);
 
-    final artistsData = useMemoized(
-      () => topTracksNotifier.artists,
-      [topTracks.asData?.value],
-    );
+    final artistsData = useMemoized(() => topTracksNotifier.artists, [
+      topTracks.asData?.value,
+    ]);
 
     final total = useMemoized(
       () => artistsData.fold<double>(
@@ -56,9 +54,7 @@ class StatsStreamFeesPage extends HookConsumerWidget {
       bottom: false,
       child: Scaffold(
         headers: [
-          TitleBar(
-            title: Text(context.l10n.streaming_fees_hypothetical),
-          )
+          TitleBar(title: Text(context.l10n.streaming_fees_hypothetical)),
         ],
         child: CustomScrollView(
           slivers: [

@@ -19,21 +19,19 @@ class StatsAlbumsPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
-    final topAlbums =
-        ref.watch(historyTopAlbumsProvider(HistoryDuration.allTime));
-    final topAlbumsNotifier =
-        ref.watch(historyTopAlbumsProvider(HistoryDuration.allTime).notifier);
+    final topAlbums = ref.watch(
+      historyTopAlbumsProvider(HistoryDuration.allTime),
+    );
+    final topAlbumsNotifier = ref.watch(
+      historyTopAlbumsProvider(HistoryDuration.allTime).notifier,
+    );
 
     final albumsData = topAlbums.asData?.value.items ?? [];
 
     return SafeArea(
       bottom: false,
       child: Scaffold(
-        headers: [
-          TitleBar(
-            title: Text(context.l10n.albums),
-          )
-        ],
+        headers: [TitleBar(title: Text(context.l10n.albums))],
         child: Skeletonizer(
           enabled: topAlbums.isLoading && !topAlbums.isLoadingNextPage,
           child: InfiniteList(
@@ -48,8 +46,11 @@ class StatsAlbumsPage extends HookConsumerWidget {
               final album = albumsData[index];
               return StatsAlbumItem(
                 album: album.album,
-                info: Text(context.l10n
-                    .count_plays(compactNumberFormatter.format(album.count))),
+                info: Text(
+                  context.l10n.count_plays(
+                    compactNumberFormatter.format(album.count),
+                  ),
+                ),
               );
             },
           ),

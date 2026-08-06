@@ -5,9 +5,7 @@ import 'package:spotube/utils/platform.dart';
 
 abstract class EncryptedKvStoreService {
   static const _storage = FlutterSecureStorage(
-    aOptions: AndroidOptions(
-      encryptedSharedPreferences: true,
-    ),
+    aOptions: AndroidOptions(encryptedSharedPreferences: true),
   );
 
   static FlutterSecureStorage get storage => _storage;

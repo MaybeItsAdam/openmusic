@@ -45,10 +45,7 @@ class WebSocketEvent<T> {
   }
 
   String toJson() {
-    return jsonEncode({
-      "type": type.name,
-      "data": data,
-    });
+    return jsonEncode({"type": type.name, "data": data});
   }
 
   Future<void> onPosition(
@@ -59,41 +56,31 @@ class WebSocketEvent<T> {
     }
   }
 
-  Future<void> onPlaying(
-    EventCallback<WebSocketPlayingEvent> callback,
-  ) async {
+  Future<void> onPlaying(EventCallback<WebSocketPlayingEvent> callback) async {
     if (type == WsEvent.playing) {
       await callback(WebSocketPlayingEvent(data as bool));
     }
   }
 
-  Future<void> onResume(
-    EventCallback<WebSocketResumeEvent> callback,
-  ) async {
+  Future<void> onResume(EventCallback<WebSocketResumeEvent> callback) async {
     if (type == WsEvent.resume) {
       await callback(WebSocketResumeEvent());
     }
   }
 
-  Future<void> onPause(
-    EventCallback<WebSocketPauseEvent> callback,
-  ) async {
+  Future<void> onPause(EventCallback<WebSocketPauseEvent> callback) async {
     if (type == WsEvent.pause) {
       await callback(WebSocketPauseEvent());
     }
   }
 
-  Future<void> onStop(
-    EventCallback<WebSocketStopEvent> callback,
-  ) async {
+  Future<void> onStop(EventCallback<WebSocketStopEvent> callback) async {
     if (type == WsEvent.stop) {
       await callback(WebSocketStopEvent());
     }
   }
 
-  Future<void> onLoad(
-    EventCallback<WebSocketLoadEvent> callback,
-  ) async {
+  Future<void> onLoad(EventCallback<WebSocketLoadEvent> callback) async {
     if (type == WsEvent.load) {
       await callback(
         WebSocketLoadEvent(
@@ -103,9 +90,7 @@ class WebSocketEvent<T> {
     }
   }
 
-  Future<void> onNext(
-    EventCallback<WebSocketNextEvent> callback,
-  ) async {
+  Future<void> onNext(EventCallback<WebSocketNextEvent> callback) async {
     if (type == WsEvent.next) {
       await callback(WebSocketNextEvent());
     }
@@ -119,25 +104,19 @@ class WebSocketEvent<T> {
     }
   }
 
-  Future<void> onJump(
-    EventCallback<WebSocketJumpEvent> callback,
-  ) async {
+  Future<void> onJump(EventCallback<WebSocketJumpEvent> callback) async {
     if (type == WsEvent.jump) {
       await callback(WebSocketJumpEvent(data as int));
     }
   }
 
-  Future<void> onError(
-    EventCallback<WebSocketErrorEvent> callback,
-  ) async {
+  Future<void> onError(EventCallback<WebSocketErrorEvent> callback) async {
     if (type == WsEvent.error) {
       await callback(WebSocketErrorEvent(data as String));
     }
   }
 
-  Future<void> onQueue(
-    EventCallback<WebSocketQueueEvent> callback,
-  ) async {
+  Future<void> onQueue(EventCallback<WebSocketQueueEvent> callback) async {
     if (type == WsEvent.queue) {
       await callback(
         WebSocketQueueEvent.fromJson(data as Map<String, dynamic>),
@@ -149,37 +128,23 @@ class WebSocketEvent<T> {
     EventCallback<WebSocketDurationEvent> callback,
   ) async {
     if (type == WsEvent.duration) {
-      await callback(
-        WebSocketDurationEvent(
-          Duration(seconds: data as int),
-        ),
-      );
+      await callback(WebSocketDurationEvent(Duration(seconds: data as int)));
     }
   }
 
-  Future<void> onSeek(
-    EventCallback<WebSocketSeekEvent> callback,
-  ) async {
+  Future<void> onSeek(EventCallback<WebSocketSeekEvent> callback) async {
     if (type == WsEvent.seek) {
-      await callback(
-        WebSocketSeekEvent(
-          Duration(seconds: data as int),
-        ),
-      );
+      await callback(WebSocketSeekEvent(Duration(seconds: data as int)));
     }
   }
 
-  Future<void> onShuffle(
-    EventCallback<WebSocketShuffleEvent> callback,
-  ) async {
+  Future<void> onShuffle(EventCallback<WebSocketShuffleEvent> callback) async {
     if (type == WsEvent.shuffle) {
       await callback(WebSocketShuffleEvent(data as bool));
     }
   }
 
-  Future<void> onLoop(
-    EventCallback<WebSocketLoopEvent> callback,
-  ) async {
+  Future<void> onLoop(EventCallback<WebSocketLoopEvent> callback) async {
     if (type == WsEvent.loop) {
       await callback(
         WebSocketLoopEvent(
@@ -202,22 +167,20 @@ class WebSocketEvent<T> {
   ) async {
     if (type == WsEvent.addTrack) {
       await callback(
-          WebSocketAddTrackEvent.fromJson(data as Map<String, dynamic>));
+        WebSocketAddTrackEvent.fromJson(data as Map<String, dynamic>),
+      );
     }
   }
 
-  Future<void> onReorder(
-    EventCallback<WebSocketReorderEvent> callback,
-  ) async {
+  Future<void> onReorder(EventCallback<WebSocketReorderEvent> callback) async {
     if (type == WsEvent.reorder) {
       await callback(
-          WebSocketReorderEvent.fromJson(data as Map<String, dynamic>));
+        WebSocketReorderEvent.fromJson(data as Map<String, dynamic>),
+      );
     }
   }
 
-  Future<void> onVolume(
-    EventCallback<WebSocketVolumeEvent> callback,
-  ) async {
+  Future<void> onVolume(EventCallback<WebSocketVolumeEvent> callback) async {
     if (type == WsEvent.volume) {
       await callback(WebSocketVolumeEvent(data as double));
     }
@@ -230,17 +193,13 @@ class WebSocketLoopEvent extends WebSocketEvent<PlaylistMode> {
   WebSocketLoopEvent.fromJson(Map<String, dynamic> json)
       : super(
           WsEvent.loop,
-          PlaylistMode.values.firstWhere(
-            (e) => e.name == json["data"] as String,
-          ),
+          PlaylistMode.values
+              .firstWhere((e) => e.name == json["data"] as String),
         );
 
   @override
   String toJson() {
-    return jsonEncode({
-      "type": type.name,
-      "data": data.name,
-    });
+    return jsonEncode({"type": type.name, "data": data.name});
   }
 }
 
@@ -252,10 +211,7 @@ class WebSocketPositionEvent extends WebSocketEvent<Duration> {
 
   @override
   String toJson() {
-    return jsonEncode({
-      "type": type.name,
-      "data": data.inSeconds,
-    });
+    return jsonEncode({"type": type.name, "data": data.inSeconds});
   }
 }
 
@@ -267,10 +223,7 @@ class WebSocketDurationEvent extends WebSocketEvent<Duration> {
 
   @override
   String toJson() {
-    return jsonEncode({
-      "type": type.name,
-      "data": data.inSeconds,
-    });
+    return jsonEncode({"type": type.name, "data": data.inSeconds});
   }
 }
 
@@ -282,10 +235,7 @@ class WebSocketSeekEvent extends WebSocketEvent<Duration> {
 
   @override
   String toJson() {
-    return jsonEncode({
-      "type": type.name,
-      "data": data.inSeconds,
-    });
+    return jsonEncode({"type": type.name, "data": data.inSeconds});
   }
 }
 
@@ -329,9 +279,7 @@ class WebSocketQueueEvent extends WebSocketEvent<AudioPlayerState> {
   WebSocketQueueEvent(AudioPlayerState data) : super(WsEvent.queue, data);
 
   factory WebSocketQueueEvent.fromJson(Map<String, dynamic> json) =>
-      WebSocketQueueEvent(
-        AudioPlayerState.fromJson(json),
-      );
+      WebSocketQueueEvent(AudioPlayerState.fromJson(json));
 }
 
 class WebSocketRemoveTrackEvent extends WebSocketEvent<String> {
@@ -345,9 +293,7 @@ class WebSocketAddTrackEvent extends WebSocketEvent<SpotubeFullTrackObject> {
   WebSocketAddTrackEvent.fromJson(Map<String, dynamic> json)
       : super(
           WsEvent.addTrack,
-          SpotubeFullTrackObject.fromJson(
-            json["data"] as Map<String, dynamic>,
-          ),
+          SpotubeFullTrackObject.fromJson(json["data"] as Map<String, dynamic>),
         );
 }
 
@@ -357,21 +303,16 @@ class WebSocketReorderEvent extends WebSocketEvent<ReorderData> {
   WebSocketReorderEvent(ReorderData data) : super(WsEvent.reorder, data);
 
   factory WebSocketReorderEvent.fromJson(Map<String, dynamic> json) =>
-      WebSocketReorderEvent(
-        (
-          oldIndex: json["oldIndex"] as int,
-          newIndex: json["newIndex"] as int,
-        ),
-      );
+      WebSocketReorderEvent((
+        oldIndex: json["oldIndex"] as int,
+        newIndex: json["newIndex"] as int,
+      ));
 
   @override
   String toJson() {
     return jsonEncode({
       "type": type.name,
-      "data": {
-        "oldIndex": data.oldIndex,
-        "newIndex": data.newIndex,
-      },
+      "data": {"oldIndex": data.oldIndex, "newIndex": data.newIndex},
     });
   }
 }

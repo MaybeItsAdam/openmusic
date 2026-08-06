@@ -55,8 +55,9 @@ class TitleBar extends HookConsumerWidget implements PreferredSizeWidget {
   });
 
   void onDrag(WidgetRef ref) {
-    final systemTitleBar =
-        ref.read(userPreferencesProvider.select((s) => s.systemTitleBar));
+    final systemTitleBar = ref.read(
+      userPreferencesProvider.select((s) => s.systemTitleBar),
+    );
     if (kIsDesktop && !systemTitleBar) {
       windowManager.startDragging();
     }
@@ -83,7 +84,8 @@ class TitleBar extends HookConsumerWidget implements PreferredSizeWidget {
             onVerticalDragStart: (_) => onDrag(ref),
             onTapDown: (details) async {
               final systemTitlebar = ref.read(
-                  userPreferencesProvider.select((s) => s.systemTitleBar));
+                userPreferencesProvider.select((s) => s.systemTitleBar),
+              );
               if (!kIsDesktop || systemTitlebar) return;
 
               int currMills = DateTime.now().millisecondsSinceEpoch;
@@ -104,8 +106,9 @@ class TitleBar extends HookConsumerWidget implements PreferredSizeWidget {
                 ...trailing,
                 Align(
                   alignment: Alignment.topRight,
-                  child:
-                      WindowTitleBarButtons(foregroundColor: foregroundColor),
+                  child: WindowTitleBarButtons(
+                    foregroundColor: foregroundColor,
+                  ),
                 ),
               ],
               title: title,
@@ -123,7 +126,8 @@ class TitleBar extends HookConsumerWidget implements PreferredSizeWidget {
               useSafeArea: useSafeArea,
               child: child,
             ).withPadding(
-                left: kIsMacOS && hasFullscreen && hasLeadingOrCanPop ? 65 : 0),
+              left: kIsMacOS && hasFullscreen && hasLeadingOrCanPop ? 65 : 0,
+            ),
           );
         },
       ),

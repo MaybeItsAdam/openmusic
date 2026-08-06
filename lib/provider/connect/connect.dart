@@ -16,21 +16,13 @@ import 'package:spotube/provider/connect/clients.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:web_socket_channel/status.dart' as status;
 
-final playingProvider = StateProvider<bool>(
-  (ref) => false,
-);
+final playingProvider = StateProvider<bool>((ref) => false);
 
-final positionProvider = StateProvider<Duration>(
-  (ref) => Duration.zero,
-);
+final positionProvider = StateProvider<Duration>((ref) => Duration.zero);
 
-final durationProvider = StateProvider<Duration>(
-  (ref) => Duration.zero,
-);
+final durationProvider = StateProvider<Duration>((ref) => Duration.zero);
 
-final shuffleProvider = StateProvider<bool>(
-  (ref) => false,
-);
+final shuffleProvider = StateProvider<bool>((ref) => false);
 
 final loopModeProvider = StateProvider<PlaylistMode>(
   (ref) => PlaylistMode.none,
@@ -47,9 +39,7 @@ final queueProvider = StateProvider<AudioPlayerState>(
   ),
 );
 
-final volumeProvider = StateProvider<double>(
-  (ref) => 1.0,
-);
+final volumeProvider = StateProvider<double>((ref) => 1.0);
 
 typedef ConnectState = ({WebSocketChannel channel, Stream stream});
 
@@ -81,8 +71,10 @@ class ConnectNotifier extends AsyncNotifier<ConnectState?> {
 
       final subscription = stream.listen(
         (message) {
-          final event =
-              WebSocketEvent.fromJson(jsonDecode(message), (data) => data);
+          final event = WebSocketEvent.fromJson(
+            jsonDecode(message),
+            (data) => data,
+          );
 
           event.onQueue((event) {
             ref.read(queueProvider.notifier).state = event.data;

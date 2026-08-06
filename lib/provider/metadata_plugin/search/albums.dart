@@ -40,7 +40,7 @@ class MetadataPluginSearchAlbumsNotifier
 }
 
 final metadataPluginSearchAlbumsProvider =
-    AutoDisposeAsyncNotifierProviderFamily<MetadataPluginSearchAlbumsNotifier,
-        SpotubePaginationResponseObject<SpotubeSimpleAlbumObject>, String>(
-  () => MetadataPluginSearchAlbumsNotifier(),
-);
+    AutoDisposeAsyncNotifierProviderFamily<
+        MetadataPluginSearchAlbumsNotifier,
+        SpotubePaginationResponseObject<SpotubeSimpleAlbumObject>,
+        String>(() => MetadataPluginSearchAlbumsNotifier());

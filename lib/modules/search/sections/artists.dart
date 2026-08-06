@@ -7,9 +7,7 @@ import 'package:spotube/pages/search/search.dart';
 import 'package:spotube/provider/metadata_plugin/search/all.dart';
 
 class SearchArtistsSection extends HookConsumerWidget {
-  const SearchArtistsSection({
-    super.key,
-  });
+  const SearchArtistsSection({super.key});
 
   @override
   Widget build(BuildContext context, ref) {

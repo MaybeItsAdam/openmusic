@@ -22,7 +22,7 @@ class ConfirmDownloadDialog extends StatelessWidget {
                   "https://c.tenor.com/kHcmsxlKHEAAAAAM/rock-one-eyebrow-raised-rock-staring.gif",
               height: 40,
               width: 40,
-            )
+            ),
           ],
         ),
         content: Expanded(
@@ -46,9 +46,7 @@ class ConfirmDownloadDialog extends StatelessWidget {
                   textAlign: TextAlign.justify,
                 ),
                 const SizedBox(height: 10),
-                Text(
-                  context.l10n.by_clicking_accept_terms,
-                ),
+                Text(context.l10n.by_clicking_accept_terms),
                 const SizedBox(height: 10),
                 BulletPoint(context.l10n.download_agreement_1),
                 const SizedBox(height: 10),

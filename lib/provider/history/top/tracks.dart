@@ -26,11 +26,13 @@ class HistoryTopTracksNotifier extends FamilyPaginatedAsyncNotifier<
             tbl.createdAt.isBiggerOrEqualValue(switch (arg) {
               HistoryDuration.allTime => DateTime(1970),
               // from start of the week
-              HistoryDuration.days7 => DateTime.now()
-                  .subtract(Duration(days: DateTime.now().weekday - 1)),
+              HistoryDuration.days7 => DateTime.now().subtract(
+                  Duration(days: DateTime.now().weekday - 1),
+                ),
               // from start of the month
-              HistoryDuration.days30 =>
-                DateTime.now().subtract(Duration(days: DateTime.now().day - 1)),
+              HistoryDuration.days30 => DateTime.now().subtract(
+                  Duration(days: DateTime.now().day - 1),
+                ),
               // from start of the 6th month
               HistoryDuration.months6 => DateTime.now()
                   .subtract(Duration(days: DateTime.now().day - 1))
@@ -49,8 +51,9 @@ class HistoryTopTracksNotifier extends FamilyPaginatedAsyncNotifier<
   Future<void> fixImageNotLoadingForArtistIssue(
     List<HistoryTableData> entries,
   ) async {
-    final nonImageArtistTracks =
-        entries.where((e) => e.track!.artists.any((a) => a.images == null));
+    final nonImageArtistTracks = entries.where(
+      (e) => e.track!.artists.any((a) => a.images == null),
+    );
 
     if (nonImageArtistTracks.isEmpty) return;
 
@@ -71,8 +74,9 @@ class HistoryTopTracksNotifier extends FamilyPaginatedAsyncNotifier<
       var track = e.track!;
       final includedArtists = track.artists
           .map((a) {
-            final fullArtist =
-                artists.firstWhereOrNull((artist) => artist.id == a.id);
+            final fullArtist = artists.firstWhereOrNull(
+              (artist) => artist.id == a.id,
+            );
 
             return fullArtist != null
                 ? a.copyWith(images: fullArtist.images)
@@ -87,8 +91,9 @@ class HistoryTopTracksNotifier extends FamilyPaginatedAsyncNotifier<
     });
 
     assert(
-      imagedArtistTracks
-          .every((e) => e.track!.artists.every((a) => a.images != null)),
+      imagedArtistTracks.every(
+        (e) => e.track!.artists.every((a) => a.images != null),
+      ),
       'Tracks artists should have images',
     );
 
@@ -122,10 +127,12 @@ class HistoryTopTracksNotifier extends FamilyPaginatedAsyncNotifier<
   build(arg) async {
     final subscription = createTracksQuery().watch().listen((event) {
       if (state.asData == null) return;
-      state = AsyncData(state.asData!.value.copyWith(
-        items: getTracksWithCount(event),
-        hasMore: false,
-      ));
+      state = AsyncData(
+        state.asData!.value.copyWith(
+          items: getTracksWithCount(event),
+          hasMore: false,
+        ),
+      );
     });
 
     ref.onDispose(() {
@@ -164,10 +171,7 @@ class HistoryTopTracksNotifier extends FamilyPaginatedAsyncNotifier<
   List<PlaybackHistoryTrack> getTracksWithCount(List<HistoryTableData> tracks) {
     fixImageNotLoadingForArtistIssue(tracks);
 
-    return groupBy(
-      tracks,
-      (track) => track.track!.id,
-    )
+    return groupBy(tracks, (track) => track.track!.id)
         .entries
         .map((entry) {
           return (
@@ -178,7 +182,8 @@ class HistoryTopTracksNotifier extends FamilyPaginatedAsyncNotifier<
             /// So we take the first artist with images if available, otherwise the first one.
             track: entry.value
                     .firstWhereOrNull(
-                        (t) => t.track!.artists.every((a) => a.images != null))
+                      (t) => t.track!.artists.every((a) => a.images != null),
+                    )
                     ?.track! ??
                 entry.value.first.track!,
           );
@@ -191,6 +196,4 @@ class HistoryTopTracksNotifier extends FamilyPaginatedAsyncNotifier<
 final historyTopTracksProvider = AsyncNotifierProviderFamily<
     HistoryTopTracksNotifier,
     SpotubePaginationResponseObject<PlaybackHistoryTrack>,
-    HistoryDuration>(
-  () => HistoryTopTracksNotifier(),
-);
+    HistoryDuration>(() => HistoryTopTracksNotifier());

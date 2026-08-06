@@ -17,10 +17,12 @@ class SearchPageAlbumsTab extends HookConsumerWidget {
     final controller = useScrollController();
 
     final searchTerm = ref.watch(searchTermStateProvider);
-    final searchAlbumsSnapshot =
-        ref.watch(metadataPluginSearchAlbumsProvider(searchTerm));
-    final searchAlbumsNotifier =
-        ref.read(metadataPluginSearchAlbumsProvider(searchTerm).notifier);
+    final searchAlbumsSnapshot = ref.watch(
+      metadataPluginSearchAlbumsProvider(searchTerm),
+    );
+    final searchAlbumsNotifier = ref.read(
+      metadataPluginSearchAlbumsProvider(searchTerm).notifier,
+    );
     final searchAlbums =
         searchAlbumsSnapshot.asData?.value.items ?? [FakeData.albumSimple];
 

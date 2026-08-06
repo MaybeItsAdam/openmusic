@@ -26,12 +26,12 @@ class LinuxBuildCommand extends Command with BuildCommandCommonSteps {
 
     appDataFile.writeAsStringSync(
       appDataFile.readAsStringSync().replaceAll(
-            versionVarRegExp,
-            '<release'
-            ' version="$versionWithoutBuildNumber"'
-            ' date="${DateFormat("yyyy-MM-dd").format(DateTime.now())}"'
-            '/>',
-          ),
+        versionVarRegExp,
+        '<release'
+        ' version="$versionWithoutBuildNumber"'
+        ' date="${DateFormat("yyyy-MM-dd").format(DateTime.now())}"'
+        '/>',
+      ),
     );
 
     await bootstrap();
@@ -40,9 +40,7 @@ class LinuxBuildCommand extends Command with BuildCommandCommonSteps {
       "fastforge package --platform=linux --targets=deb,appimage",
     );
     if (architecture == "x86") {
-      await shell.run(
-        "fastforge package --platform=linux --targets=rpm",
-      );
+      await shell.run("fastforge package --platform=linux --targets=rpm");
     }
 
     final tempDir = join(Directory.systemTemp.path, "spotube-tar");
@@ -56,30 +54,28 @@ class LinuxBuildCommand extends Command with BuildCommandCommonSteps {
       "bundle",
     );
 
-    final tarFile = File(join(
-      cwd.path,
-      "dist",
-      "spotube-linux-"
-          "${CliEnv.channel == BuildChannel.nightly ? "nightly" : versionWithoutBuildNumber}"
-          "-$bundleArchName.tar.xz",
-    ));
+    final tarFile = File(
+      join(
+        cwd.path,
+        "dist",
+        "spotube-linux-"
+            "${CliEnv.channel == BuildChannel.nightly ? "nightly" : versionWithoutBuildNumber}"
+            "-$bundleArchName.tar.xz",
+      ),
+    );
 
     await copyPath(bundleDirPath, tempDir);
-    await File(join(cwd.path, "linux", "spotube.desktop")).copy(
-      join(tempDir, "spotube.desktop"),
-    );
+    await File(
+      join(cwd.path, "linux", "spotube.desktop"),
+    ).copy(join(tempDir, "spotube.desktop"));
     await File(
       join(cwd.path, "linux", "com.github.KRTirtho.Spotube.appdata.xml"),
-    ).copy(
-      join(tempDir, "com.github.KRTirtho.Spotube.appdata.xml"),
-    );
-    await File(join(cwd.path, "assets", "branding", "spotube-logo.png")).copy(
-      join(tempDir, "spotube-logo.png"),
-    );
+    ).copy(join(tempDir, "com.github.KRTirtho.Spotube.appdata.xml"));
+    await File(
+      join(cwd.path, "assets", "branding", "spotube-logo.png"),
+    ).copy(join(tempDir, "spotube-logo.png"));
 
-    await shell.run(
-      "tar -cJf ${tarFile.path} -C $tempDir .",
-    );
+    await shell.run("tar -cJf ${tarFile.path} -C $tempDir .");
 
     final ogDeb = File(
       join(
@@ -90,11 +86,7 @@ class LinuxBuildCommand extends Command with BuildCommandCommonSteps {
       ),
     );
     await ogDeb.copy(
-      join(
-        cwd.path,
-        "dist",
-        "Spotube-linux-$bundleArchName.deb",
-      ),
+      join(cwd.path, "dist", "Spotube-linux-$bundleArchName.deb"),
     );
     await ogDeb.delete();
 
@@ -124,11 +116,7 @@ class LinuxBuildCommand extends Command with BuildCommandCommonSteps {
       ),
     );
     await ogAppImage.copy(
-      join(
-        cwd.path,
-        "dist",
-        "Spotube-linux-$bundleArchName.AppImage",
-      ),
+      join(cwd.path, "dist", "Spotube-linux-$bundleArchName.AppImage"),
     );
     await ogAppImage.delete();
 

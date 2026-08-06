@@ -70,10 +70,14 @@ class TrackOptionsButton extends HookConsumerWidget {
           final renderBox = context.findRenderObject() as RenderBox;
           final position = RelativeRect.fromRect(
             Rect.fromPoints(
-              renderBox.localToGlobal(Offset.zero,
-                  ancestor: context.findRenderObject()),
-              renderBox.localToGlobal(renderBox.size.bottomRight(Offset.zero),
-                  ancestor: context.findRenderObject()),
+              renderBox.localToGlobal(
+                Offset.zero,
+                ancestor: context.findRenderObject(),
+              ),
+              renderBox.localToGlobal(
+                renderBox.size.bottomRight(Offset.zero),
+                ancestor: context.findRenderObject(),
+              ),
             ),
             Offset.zero & mediaQuery,
           );
@@ -125,9 +129,8 @@ class TrackOptionsButton extends HookConsumerWidget {
                         alignment: Alignment.centerLeft,
                         child: ArtistLink(
                           artists: track.artists,
-                          onOverflowArtistClick: () => context.navigateTo(
-                            TrackRoute(trackId: track.id),
-                          ),
+                          onOverflowArtistClick: () =>
+                              context.navigateTo(TrackRoute(trackId: track.id)),
                         ),
                       ),
                     ),

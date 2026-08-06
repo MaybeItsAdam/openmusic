@@ -3,10 +3,7 @@ import 'package:spotube/utils/platform.dart';
 
 part 'env.g.dart';
 
-enum ReleaseChannel {
-  nightly,
-  stable,
-}
+enum ReleaseChannel { nightly, stable }
 
 @Envied(obfuscate: true, requireEnvFile: true, path: ".env")
 abstract class Env {

@@ -8,8 +8,6 @@ class PlayerTrackSourcesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      child: SiblingTracksSheet(floating: false),
-    );
+    return const Scaffold(child: SiblingTracksSheet(floating: false));
   }
 }

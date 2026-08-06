@@ -48,9 +48,7 @@ class ArtistPageFooter extends ConsumerWidget {
       alignment: Alignment.center,
       child: RichText(
         text: TextSpan(
-          style: typography.semiBold.copyWith(
-            color: Colors.white,
-          ),
+          style: typography.semiBold.copyWith(color: Colors.white),
           children: [
             // icon
             const WidgetSpan(
@@ -62,14 +60,10 @@ class ArtistPageFooter extends ConsumerWidget {
             ),
             TextSpan(
               text: " Wikipedia",
-              style: typography.large.copyWith(
-                color: Colors.white,
-              ),
+              style: typography.large.copyWith(color: Colors.white),
             ),
             const TextSpan(text: '\n\n'),
-            TextSpan(
-              text: summary.asData?.value!.extract,
-            ),
+            TextSpan(text: summary.asData?.value!.extract),
             TextSpan(
               text: '\n...read more at wikipedia',
               style: typography.semiBold.copyWith(

@@ -18,9 +18,7 @@ class AndroidBuildCommand extends Command with BuildCommandCommonSteps {
   FutureOr? run() async {
     await bootstrap();
 
-    await shell.run(
-      "flutter build apk --flavor ${CliEnv.channel.name}",
-    );
+    await shell.run("flutter build apk --flavor ${CliEnv.channel.name}");
 
     final ogApkFile = File(
       join(

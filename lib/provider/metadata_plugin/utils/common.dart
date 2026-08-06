@@ -14,7 +14,7 @@ extension PaginationExtension<T> on AsyncValue<T> {
 }
 
 mixin MetadataPluginMixin<K>
-// ignore: invalid_use_of_internal_member
+    // ignore: invalid_use_of_internal_member
     on AsyncNotifierBase<SpotubePaginationResponseObject<K>> {
   Future<MetadataPlugin> get metadataPlugin async {
     final plugin = await ref.read(metadataPluginProvider.future);
@@ -28,7 +28,7 @@ mixin MetadataPluginMixin<K>
 }
 
 extension AutoDisposeAsyncNotifierCacheFor
-// ignore: deprecated_member_use
+    // ignore: deprecated_member_use
     on AutoDisposeAsyncNotifierProviderRef {
   // When invoked keeps your provider alive for [duration]
   // ignore: unused_element

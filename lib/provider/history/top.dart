@@ -13,5 +13,6 @@ enum HistoryDuration {
   const HistoryDuration(this.duration);
 }
 
-final playbackHistoryTopDurationProvider =
-    StateProvider((ref) => HistoryDuration.days30);
+final playbackHistoryTopDurationProvider = StateProvider(
+  (ref) => HistoryDuration.days30,
+);

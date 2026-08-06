@@ -25,12 +25,15 @@ class AlbumPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, ref) {
     final tracks = ref.watch(metadataPluginAlbumTracksProvider(album.id));
-    final tracksNotifier =
-        ref.watch(metadataPluginAlbumTracksProvider(album.id).notifier);
-    final favoriteAlbumsNotifier =
-        ref.watch(metadataPluginSavedAlbumsProvider.notifier);
-    final isSavedAlbum =
-        ref.watch(metadataPluginIsSavedAlbumProvider(album.id));
+    final tracksNotifier = ref.watch(
+      metadataPluginAlbumTracksProvider(album.id).notifier,
+    );
+    final favoriteAlbumsNotifier = ref.watch(
+      metadataPluginSavedAlbumsProvider.notifier,
+    );
+    final isSavedAlbum = ref.watch(
+      metadataPluginIsSavedAlbumProvider(album.id),
+    );
 
     return material.RefreshIndicator.adaptive(
       onRefresh: () async {

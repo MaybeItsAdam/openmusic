@@ -9,18 +9,13 @@ class BlurCard extends HookConsumerWidget {
   Widget build(BuildContext context, ref) {
     return Container(
       margin: const EdgeInsets.all(16.0),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
-      ),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(16)),
       constraints: const BoxConstraints(maxWidth: 400),
       clipBehavior: Clip.antiAlias,
       child: SizedBox(
         width: double.infinity,
         child: SurfaceCard(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: child,
-          ),
+          child: Padding(padding: const EdgeInsets.all(16.0), child: child),
         ),
       ),
     );

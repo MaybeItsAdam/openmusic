@@ -22,10 +22,12 @@ class SearchPageTracksTab extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, ref) {
     final searchTerm = ref.watch(searchTermStateProvider);
-    final searchTracksSnapshot =
-        ref.watch(metadataPluginSearchTracksProvider(searchTerm));
-    final searchTracksNotifier =
-        ref.read(metadataPluginSearchTracksProvider(searchTerm).notifier);
+    final searchTracksSnapshot = ref.watch(
+      metadataPluginSearchTracksProvider(searchTerm),
+    );
+    final searchTracksNotifier = ref.read(
+      metadataPluginSearchTracksProvider(searchTerm).notifier,
+    );
     final searchTracks =
         searchTracksSnapshot.asData?.value.items ?? [FakeData.track];
 
@@ -80,9 +82,7 @@ class SearchPageTracksTab extends HookConsumerWidget {
                   final shouldPlay = (playlist.tracks.length) > 20
                       ? await showPromptDialog(
                           context: context,
-                          title: context.l10n.playing_track(
-                            track.name,
-                          ),
+                          title: context.l10n.playing_track(track.name),
                           message: context.l10n.queue_clear_alert(
                             playlist.tracks.length,
                           ),
@@ -91,9 +91,7 @@ class SearchPageTracksTab extends HookConsumerWidget {
 
                   if (shouldPlay) {
                     await remotePlayback.load(
-                      WebSocketLoadEventData.playlist(
-                        tracks: [track],
-                      ),
+                      WebSocketLoadEventData.playlist(tracks: [track]),
                     );
                   }
                 }
@@ -103,9 +101,7 @@ class SearchPageTracksTab extends HookConsumerWidget {
                   final shouldPlay = (playlist.tracks.length) > 20
                       ? await showPromptDialog(
                           context: context,
-                          title: context.l10n.playing_track(
-                            track.name,
-                          ),
+                          title: context.l10n.playing_track(track.name),
                           message: context.l10n.queue_clear_alert(
                             playlist.tracks.length,
                           ),
@@ -113,10 +109,7 @@ class SearchPageTracksTab extends HookConsumerWidget {
                       : true;
 
                   if (shouldPlay) {
-                    await playlistNotifier.load(
-                      [track],
-                      autoPlay: true,
-                    );
+                    await playlistNotifier.load([track], autoPlay: true);
                   }
                 }
               }

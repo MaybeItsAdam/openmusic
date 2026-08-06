@@ -117,10 +117,7 @@ class IsolatedYoutubeExplode {
     return completer.future;
   }
 
-  Future<List<Video>> search(
-    String query, {
-    SearchFilter? filter,
-  }) async {
+  Future<List<Video>> search(String query, {SearchFilter? filter}) async {
     return _runMethod<List<Video>>("search", [query]);
   }
 
@@ -217,10 +214,7 @@ class YouTubeExplodeEngine implements YouTubeEngine {
     await IsolatedYoutubeExplode.initialize();
 
     return _youtubeExplode
-        .search(
-          query,
-          filter: TypeFilters.video,
-        )
+        .search(query, filter: TypeFilters.video)
         .then((searchList) => searchList.toList());
   }
 

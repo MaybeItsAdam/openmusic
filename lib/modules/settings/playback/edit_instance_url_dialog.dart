@@ -21,9 +21,7 @@ class SettingsPlaybackEditInstanceUrlDialog extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
-    final controller = useShadcnTextEditingController(
-      text: initialValue,
-    );
+    final controller = useShadcnTextEditingController(text: initialValue);
     final formKey = useMemoized(() => GlobalKey<FormBuilderState>(), []);
 
     return Alert(
@@ -57,16 +55,14 @@ class SettingsPlaybackEditInstanceUrlDialog extends HookConsumerWidget {
                       if (!formKey.currentState!.saveAndValidate()) {
                         return;
                       }
-                      onSave(
-                        controller.text,
-                      );
+                      onSave(controller.text);
                       Navigator.of(context).pop();
                     },
                     child: Text(context.l10n.save),
                   ),
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),

@@ -15,16 +15,14 @@ class LikedPlaylistPage extends HookConsumerWidget {
   static const name = PlaylistPage.name;
 
   final SpotubeSimplePlaylistObject playlist;
-  const LikedPlaylistPage({
-    super.key,
-    required this.playlist,
-  });
+  const LikedPlaylistPage({super.key, required this.playlist});
 
   @override
   Widget build(BuildContext context, ref) {
     final likedTracks = ref.watch(metadataPluginSavedTracksProvider);
-    final likedTracksNotifier =
-        ref.watch(metadataPluginSavedTracksProvider.notifier);
+    final likedTracksNotifier = ref.watch(
+      metadataPluginSavedTracksProvider.notifier,
+    );
     final tracks = likedTracks.asData?.value.items ?? [];
 
     return material.RefreshIndicator.adaptive(

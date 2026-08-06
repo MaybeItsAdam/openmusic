@@ -25,27 +25,26 @@ class BlackListPage extends HookConsumerWidget {
     final blacklist = ref.watch(blacklistProvider);
     final searchText = useState("");
 
-    final filteredBlacklist = useMemoized(
-      () {
-        if (searchText.value.isEmpty) {
-          return blacklist.asData?.value ?? [];
-        }
-        return blacklist.asData?.value
-                .map(
-                  (e) => (
-                    weightedRatio(
-                        "${e.name} ${e.elementType.name}", searchText.value),
-                    e,
+    final filteredBlacklist = useMemoized(() {
+      if (searchText.value.isEmpty) {
+        return blacklist.asData?.value ?? [];
+      }
+      return blacklist.asData?.value
+              .map(
+                (e) => (
+                  weightedRatio(
+                    "${e.name} ${e.elementType.name}",
+                    searchText.value,
                   ),
-                )
-                .sorted((a, b) => b.$1.compareTo(a.$1))
-                .where((e) => e.$1 > 50)
-                .map((e) => e.$2)
-                .toList() ??
-            [];
-      },
-      [blacklist, searchText.value],
-    );
+                  e,
+                ),
+              )
+              .sorted((a, b) => b.$1.compareTo(a.$1))
+              .where((e) => e.$1 > 50)
+              .map((e) => e.$2)
+              .toList() ??
+          [];
+    }, [blacklist, searchText.value]);
 
     return SafeArea(
       bottom: false,
@@ -54,7 +53,7 @@ class BlackListPage extends HookConsumerWidget {
           TitleBar(
             title: Text(context.l10n.blacklist),
             leading: const [BackButton()],
-          )
+          ),
         ],
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -84,7 +83,8 @@ class BlackListPage extends HookConsumerWidget {
                       icon: Icon(SpotubeIcons.trash, color: Colors.red[400]),
                       onPressed: () {
                         ref.read(blacklistProvider.notifier).remove(
-                            filteredBlacklist.elementAt(index).elementId);
+                              filteredBlacklist.elementAt(index).elementId,
+                            );
                       },
                     ),
                   );

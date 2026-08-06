@@ -25,8 +25,9 @@ class ArtistPageTopTracks extends HookConsumerWidget {
 
     final playlist = ref.watch(audioPlayerProvider);
     final playlistNotifier = ref.watch(audioPlayerProvider.notifier);
-    final topTracksQuery =
-        ref.watch(metadataPluginArtistTopTracksProvider(artistId));
+    final topTracksQuery = ref.watch(
+      metadataPluginArtistTopTracksProvider(artistId),
+    );
 
     final isPlaylistPlaying = playlist.containsTracks(
       topTracksQuery.asData?.value.items ?? <SpotubeTrackObject>[],
@@ -34,9 +35,7 @@ class ArtistPageTopTracks extends HookConsumerWidget {
 
     if (topTracksQuery.hasError) {
       return SliverToBoxAdapter(
-        child: Center(
-          child: Text(topTracksQuery.error.toString()),
-        ),
+        child: Center(child: Text(topTracksQuery.error.toString())),
       );
     }
 
@@ -66,15 +65,16 @@ class ArtistPageTopTracks extends HookConsumerWidget {
               WebSocketLoadEventData.playlist(
                 tracks: tracks,
                 collection: null,
-                initialIndex:
-                    tracks.indexWhere((s) => s.id == currentTrack?.id),
+                initialIndex: tracks.indexWhere(
+                  (s) => s.id == currentTrack?.id,
+                ),
               ),
             );
           } else if (isPlaylistPlaying &&
               currentTrack.id != remotePlaylist.activeTrack?.id) {
-            final index = playlist.tracks
-                .toList()
-                .indexWhere((s) => s.id == currentTrack!.id);
+            final index = playlist.tracks.toList().indexWhere(
+                  (s) => s.id == currentTrack!.id,
+                );
             await remotePlayback.jumpTo(index);
           }
         } else {
@@ -108,9 +108,7 @@ class ArtistPageTopTracks extends HookConsumerWidget {
               ),
               if (!isPlaylistPlaying)
                 IconButton.outline(
-                  icon: const Icon(
-                    SpotubeIcons.queueAdd,
-                  ),
+                  icon: const Icon(SpotubeIcons.queueAdd),
                   onPressed: () {
                     playlistNotifier.addTracks(topTracks.toList());
                     showToast(
@@ -119,9 +117,7 @@ class ArtistPageTopTracks extends HookConsumerWidget {
                       builder: (context, overlay) {
                         return SurfaceCard(
                           child: Text(
-                            context.l10n.added_to_queue(
-                              topTracks.length,
-                            ),
+                            context.l10n.added_to_queue(topTracks.length),
                           ),
                         );
                       },
@@ -145,7 +141,7 @@ class ArtistPageTopTracks extends HookConsumerWidget {
                         ),
                       ),
                 onPressed: () => playPlaylist(topTracks.toList()),
-              )
+              ),
             ],
           ),
         ),
@@ -159,10 +155,7 @@ class ArtistPageTopTracks extends HookConsumerWidget {
               playlist: playlist,
               track: track,
               onTap: () async {
-                playPlaylist(
-                  topTracks.toList(),
-                  currentTrack: track,
-                );
+                playPlaylist(topTracks.toList(), currentTrack: track);
               },
             );
           },

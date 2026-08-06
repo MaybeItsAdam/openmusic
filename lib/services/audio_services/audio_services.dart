@@ -27,7 +27,7 @@ class AudioServices with WidgetsBindingObserver {
             config: AudioServiceConfig(
               androidNotificationChannelId: switch ((
                 kIsLinux,
-                Env.releaseChannel
+                Env.releaseChannel,
               )) {
                 (true, _) => "spotube",
                 (_, ReleaseChannel.stable) => "oss.krtirtho.spotube",
@@ -47,17 +47,19 @@ class AudioServices with WidgetsBindingObserver {
 
   Future<void> addTrack(SpotubeTrackObject track) async {
     await smtc?.addTrack(track);
-    mobile?.addItem(MediaItem(
-      id: track.id,
-      album: track.album.name,
-      title: track.name,
-      artist: track.artists.asString(),
-      duration: Duration(milliseconds: track.durationMs),
-      artUri: (track.album.images).asUri(
-        placeholder: ImagePlaceholder.albumArt,
+    mobile?.addItem(
+      MediaItem(
+        id: track.id,
+        album: track.album.name,
+        title: track.name,
+        artist: track.artists.asString(),
+        duration: Duration(milliseconds: track.durationMs),
+        artUri: (track.album.images).asUri(
+          placeholder: ImagePlaceholder.albumArt,
+        ),
+        playable: true,
       ),
-      playable: true,
-    ));
+    );
   }
 
   void activateSession() {

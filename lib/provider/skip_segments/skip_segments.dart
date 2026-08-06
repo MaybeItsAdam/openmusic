@@ -17,11 +17,14 @@ class SourcedSegments {
 }
 
 Future<List<SkipSegmentTableData>> getAndCacheSkipSegments(
-    String id, Ref ref) async {
+  String id,
+  Ref ref,
+) async {
   final database = ref.read(databaseProvider);
   try {
-    final cached = await (database.select(database.skipSegmentTable)
-          ..where((s) => s.trackId.equals(id)))
+    final cached = await (database.select(
+      database.skipSegmentTable,
+    )..where((s) => s.trackId.equals(id)))
         .get();
 
     if (cached.isNotEmpty) {
@@ -41,9 +44,9 @@ Future<List<SkipSegmentTableData>> getAndCacheSkipSegments(
             'interaction',
             'intro',
             'outro',
-            'music_offtopic'
+            'music_offtopic',
           ],
-          "actionType": 'skip'
+          "actionType": 'skip',
         },
       ),
       options: Options(
@@ -71,8 +74,9 @@ Future<List<SkipSegmentTableData>> getAndCacheSkipSegments(
       b.insertAll(database.skipSegmentTable, segments);
     });
 
-    return await (database.select(database.skipSegmentTable)
-          ..where((s) => s.trackId.equals(id)))
+    return await (database.select(
+      database.skipSegmentTable,
+    )..where((s) => s.trackId.equals(id)))
         .get();
   } catch (e, stack) {
     AppLogger.reportError(e, stack);
@@ -80,26 +84,22 @@ Future<List<SkipSegmentTableData>> getAndCacheSkipSegments(
   }
 }
 
-final segmentProvider = FutureProvider<SourcedSegments?>(
-  (ref) async {
-    final snapshot = await ref.watch(activeTrackSourcesProvider.future);
-    if (snapshot == null) return null;
-    final (:track, :source, :notifier) = snapshot;
-    if (track is SpotubeLocalTrackObject) return null;
-    if (!source!.source.toLowerCase().contains("youtube")) return null;
+final segmentProvider = FutureProvider<SourcedSegments?>((ref) async {
+  final snapshot = await ref.watch(activeTrackSourcesProvider.future);
+  if (snapshot == null) return null;
+  final (:track, :source, :notifier) = snapshot;
+  if (track is SpotubeLocalTrackObject) return null;
+  if (!source!.source.toLowerCase().contains("youtube")) return null;
 
-    final skipNonMusic =
-        ref.watch(userPreferencesProvider.select((s) => s.skipNonMusic));
+  final skipNonMusic = ref.watch(
+    userPreferencesProvider.select((s) => s.skipNonMusic),
+  );
 
-    if (!skipNonMusic) {
-      return SourcedSegments(segments: [], source: source.info.id);
-    }
+  if (!skipNonMusic) {
+    return SourcedSegments(segments: [], source: source.info.id);
+  }
 
-    final segments = await getAndCacheSkipSegments(source.info.id, ref);
+  final segments = await getAndCacheSkipSegments(source.info.id, ref);
 
-    return SourcedSegments(
-      source: source.info.id,
-      segments: segments,
-    );
-  },
-);
+  return SourcedSegments(source: source.info.id, segments: segments);
+});

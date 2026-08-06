@@ -10,21 +10,37 @@ class AuthenticationTable extends Table
   final String? _alias;
   AuthenticationTable(this.attachedDatabase, [this._alias]);
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
-      'id', aliasedName, false,
-      hasAutoIncrement: true,
-      type: DriftSqlType.int,
-      requiredDuringInsert: false,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
+    'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'PRIMARY KEY AUTOINCREMENT',
+    ),
+  );
   late final GeneratedColumn<String> cookie = GeneratedColumn<String>(
-      'cookie', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
+    'cookie',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
   late final GeneratedColumn<String> accessToken = GeneratedColumn<String>(
-      'access_token', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
+    'access_token',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
   late final GeneratedColumn<DateTime> expiration = GeneratedColumn<DateTime>(
-      'expiration', aliasedName, false,
-      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+    'expiration',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
   @override
   List<GeneratedColumn> get $columns => [id, cookie, accessToken, expiration];
   @override
@@ -35,18 +51,28 @@ class AuthenticationTable extends Table
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  AuthenticationTableData map(Map<String, dynamic> data,
-      {String? tablePrefix}) {
+  AuthenticationTableData map(
+    Map<String, dynamic> data, {
+    String? tablePrefix,
+  }) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return AuthenticationTableData(
-      id: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
-      cookie: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}cookie'])!,
-      accessToken: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}access_token'])!,
-      expiration: attachedDatabase.typeMapping
-          .read(DriftSqlType.dateTime, data['${effectivePrefix}expiration'])!,
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      cookie: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}cookie'],
+      )!,
+      accessToken: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}access_token'],
+      )!,
+      expiration: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}expiration'],
+      )!,
     );
   }
 
@@ -62,11 +88,12 @@ class AuthenticationTableData extends DataClass
   final String cookie;
   final String accessToken;
   final DateTime expiration;
-  const AuthenticationTableData(
-      {required this.id,
-      required this.cookie,
-      required this.accessToken,
-      required this.expiration});
+  const AuthenticationTableData({
+    required this.id,
+    required this.cookie,
+    required this.accessToken,
+    required this.expiration,
+  });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -86,8 +113,10 @@ class AuthenticationTableData extends DataClass
     );
   }
 
-  factory AuthenticationTableData.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
+  factory AuthenticationTableData.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return AuthenticationTableData(
       id: serializer.fromJson<int>(json['id']),
@@ -107,25 +136,27 @@ class AuthenticationTableData extends DataClass
     };
   }
 
-  AuthenticationTableData copyWith(
-          {int? id,
-          String? cookie,
-          String? accessToken,
-          DateTime? expiration}) =>
-      AuthenticationTableData(
-        id: id ?? this.id,
-        cookie: cookie ?? this.cookie,
-        accessToken: accessToken ?? this.accessToken,
-        expiration: expiration ?? this.expiration,
-      );
+  AuthenticationTableData copyWith({
+    int? id,
+    String? cookie,
+    String? accessToken,
+    DateTime? expiration,
+  }) => AuthenticationTableData(
+    id: id ?? this.id,
+    cookie: cookie ?? this.cookie,
+    accessToken: accessToken ?? this.accessToken,
+    expiration: expiration ?? this.expiration,
+  );
   AuthenticationTableData copyWithCompanion(AuthenticationTableCompanion data) {
     return AuthenticationTableData(
       id: data.id.present ? data.id.value : this.id,
       cookie: data.cookie.present ? data.cookie.value : this.cookie,
-      accessToken:
-          data.accessToken.present ? data.accessToken.value : this.accessToken,
-      expiration:
-          data.expiration.present ? data.expiration.value : this.expiration,
+      accessToken: data.accessToken.present
+          ? data.accessToken.value
+          : this.accessToken,
+      expiration: data.expiration.present
+          ? data.expiration.value
+          : this.expiration,
     );
   }
 
@@ -169,9 +200,9 @@ class AuthenticationTableCompanion
     required String cookie,
     required String accessToken,
     required DateTime expiration,
-  })  : cookie = Value(cookie),
-        accessToken = Value(accessToken),
-        expiration = Value(expiration);
+  }) : cookie = Value(cookie),
+       accessToken = Value(accessToken),
+       expiration = Value(expiration);
   static Insertable<AuthenticationTableData> custom({
     Expression<int>? id,
     Expression<String>? cookie,
@@ -186,11 +217,12 @@ class AuthenticationTableCompanion
     });
   }
 
-  AuthenticationTableCompanion copyWith(
-      {Value<int>? id,
-      Value<String>? cookie,
-      Value<String>? accessToken,
-      Value<DateTime>? expiration}) {
+  AuthenticationTableCompanion copyWith({
+    Value<int>? id,
+    Value<String>? cookie,
+    Value<String>? accessToken,
+    Value<DateTime>? expiration,
+  }) {
     return AuthenticationTableCompanion(
       id: id ?? this.id,
       cookie: cookie ?? this.cookie,
@@ -236,21 +268,37 @@ class BlacklistTable extends Table
   final String? _alias;
   BlacklistTable(this.attachedDatabase, [this._alias]);
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
-      'id', aliasedName, false,
-      hasAutoIncrement: true,
-      type: DriftSqlType.int,
-      requiredDuringInsert: false,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
+    'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'PRIMARY KEY AUTOINCREMENT',
+    ),
+  );
   late final GeneratedColumn<String> name = GeneratedColumn<String>(
-      'name', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
+    'name',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
   late final GeneratedColumn<String> elementType = GeneratedColumn<String>(
-      'element_type', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
+    'element_type',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
   late final GeneratedColumn<String> elementId = GeneratedColumn<String>(
-      'element_id', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
+    'element_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
   @override
   List<GeneratedColumn> get $columns => [id, name, elementType, elementId];
   @override
@@ -264,14 +312,22 @@ class BlacklistTable extends Table
   BlacklistTableData map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return BlacklistTableData(
-      id: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
-      name: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
-      elementType: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}element_type'])!,
-      elementId: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}element_id'])!,
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      name: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}name'],
+      )!,
+      elementType: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}element_type'],
+      )!,
+      elementId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}element_id'],
+      )!,
     );
   }
 
@@ -287,11 +343,12 @@ class BlacklistTableData extends DataClass
   final String name;
   final String elementType;
   final String elementId;
-  const BlacklistTableData(
-      {required this.id,
-      required this.name,
-      required this.elementType,
-      required this.elementId});
+  const BlacklistTableData({
+    required this.id,
+    required this.name,
+    required this.elementType,
+    required this.elementId,
+  });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -311,8 +368,10 @@ class BlacklistTableData extends DataClass
     );
   }
 
-  factory BlacklistTableData.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
+  factory BlacklistTableData.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return BlacklistTableData(
       id: serializer.fromJson<int>(json['id']),
@@ -332,20 +391,24 @@ class BlacklistTableData extends DataClass
     };
   }
 
-  BlacklistTableData copyWith(
-          {int? id, String? name, String? elementType, String? elementId}) =>
-      BlacklistTableData(
-        id: id ?? this.id,
-        name: name ?? this.name,
-        elementType: elementType ?? this.elementType,
-        elementId: elementId ?? this.elementId,
-      );
+  BlacklistTableData copyWith({
+    int? id,
+    String? name,
+    String? elementType,
+    String? elementId,
+  }) => BlacklistTableData(
+    id: id ?? this.id,
+    name: name ?? this.name,
+    elementType: elementType ?? this.elementType,
+    elementId: elementId ?? this.elementId,
+  );
   BlacklistTableData copyWithCompanion(BlacklistTableCompanion data) {
     return BlacklistTableData(
       id: data.id.present ? data.id.value : this.id,
       name: data.name.present ? data.name.value : this.name,
-      elementType:
-          data.elementType.present ? data.elementType.value : this.elementType,
+      elementType: data.elementType.present
+          ? data.elementType.value
+          : this.elementType,
       elementId: data.elementId.present ? data.elementId.value : this.elementId,
     );
   }
@@ -389,9 +452,9 @@ class BlacklistTableCompanion extends UpdateCompanion<BlacklistTableData> {
     required String name,
     required String elementType,
     required String elementId,
-  })  : name = Value(name),
-        elementType = Value(elementType),
-        elementId = Value(elementId);
+  }) : name = Value(name),
+       elementType = Value(elementType),
+       elementId = Value(elementId);
   static Insertable<BlacklistTableData> custom({
     Expression<int>? id,
     Expression<String>? name,
@@ -406,11 +469,12 @@ class BlacklistTableCompanion extends UpdateCompanion<BlacklistTableData> {
     });
   }
 
-  BlacklistTableCompanion copyWith(
-      {Value<int>? id,
-      Value<String>? name,
-      Value<String>? elementType,
-      Value<String>? elementId}) {
+  BlacklistTableCompanion copyWith({
+    Value<int>? id,
+    Value<String>? name,
+    Value<String>? elementType,
+    Value<String>? elementId,
+  }) {
     return BlacklistTableCompanion(
       id: id ?? this.id,
       name: name ?? this.name,
@@ -456,207 +520,312 @@ class PreferencesTable extends Table
   final String? _alias;
   PreferencesTable(this.attachedDatabase, [this._alias]);
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
-      'id', aliasedName, false,
-      hasAutoIncrement: true,
-      type: DriftSqlType.int,
-      requiredDuringInsert: false,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
+    'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'PRIMARY KEY AUTOINCREMENT',
+    ),
+  );
   late final GeneratedColumn<String> audioQuality = GeneratedColumn<String>(
-      'audio_quality', aliasedName, false,
-      type: DriftSqlType.string,
-      requiredDuringInsert: false,
-      defaultValue: Constant(SourceQualities.high.name));
+    'audio_quality',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: Constant(SourceQualities.high.name),
+  );
   late final GeneratedColumn<bool> albumColorSync = GeneratedColumn<bool>(
-      'album_color_sync', aliasedName, false,
-      type: DriftSqlType.bool,
-      requiredDuringInsert: false,
-      defaultConstraints: GeneratedColumn.constraintIsAlways(
-          'CHECK ("album_color_sync" IN (0, 1))'),
-      defaultValue: const Constant(true));
+    'album_color_sync',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("album_color_sync" IN (0, 1))',
+    ),
+    defaultValue: const Constant(true),
+  );
   late final GeneratedColumn<bool> amoledDarkTheme = GeneratedColumn<bool>(
-      'amoled_dark_theme', aliasedName, false,
-      type: DriftSqlType.bool,
-      requiredDuringInsert: false,
-      defaultConstraints: GeneratedColumn.constraintIsAlways(
-          'CHECK ("amoled_dark_theme" IN (0, 1))'),
-      defaultValue: const Constant(false));
+    'amoled_dark_theme',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("amoled_dark_theme" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
   late final GeneratedColumn<bool> checkUpdate = GeneratedColumn<bool>(
-      'check_update', aliasedName, false,
-      type: DriftSqlType.bool,
-      requiredDuringInsert: false,
-      defaultConstraints: GeneratedColumn.constraintIsAlways(
-          'CHECK ("check_update" IN (0, 1))'),
-      defaultValue: const Constant(true));
+    'check_update',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("check_update" IN (0, 1))',
+    ),
+    defaultValue: const Constant(true),
+  );
   late final GeneratedColumn<bool> normalizeAudio = GeneratedColumn<bool>(
-      'normalize_audio', aliasedName, false,
-      type: DriftSqlType.bool,
-      requiredDuringInsert: false,
-      defaultConstraints: GeneratedColumn.constraintIsAlways(
-          'CHECK ("normalize_audio" IN (0, 1))'),
-      defaultValue: const Constant(false));
+    'normalize_audio',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("normalize_audio" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
   late final GeneratedColumn<bool> showSystemTrayIcon = GeneratedColumn<bool>(
-      'show_system_tray_icon', aliasedName, false,
-      type: DriftSqlType.bool,
-      requiredDuringInsert: false,
-      defaultConstraints: GeneratedColumn.constraintIsAlways(
-          'CHECK ("show_system_tray_icon" IN (0, 1))'),
-      defaultValue: const Constant(false));
+    'show_system_tray_icon',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("show_system_tray_icon" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
   late final GeneratedColumn<bool> systemTitleBar = GeneratedColumn<bool>(
-      'system_title_bar', aliasedName, false,
-      type: DriftSqlType.bool,
-      requiredDuringInsert: false,
-      defaultConstraints: GeneratedColumn.constraintIsAlways(
-          'CHECK ("system_title_bar" IN (0, 1))'),
-      defaultValue: const Constant(false));
+    'system_title_bar',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("system_title_bar" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
   late final GeneratedColumn<bool> skipNonMusic = GeneratedColumn<bool>(
-      'skip_non_music', aliasedName, false,
-      type: DriftSqlType.bool,
-      requiredDuringInsert: false,
-      defaultConstraints: GeneratedColumn.constraintIsAlways(
-          'CHECK ("skip_non_music" IN (0, 1))'),
-      defaultValue: const Constant(false));
+    'skip_non_music',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("skip_non_music" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
   late final GeneratedColumn<String> closeBehavior = GeneratedColumn<String>(
-      'close_behavior', aliasedName, false,
-      type: DriftSqlType.string,
-      requiredDuringInsert: false,
-      defaultValue: Constant(CloseBehavior.close.name));
+    'close_behavior',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: Constant(CloseBehavior.close.name),
+  );
   late final GeneratedColumn<String> accentColorScheme =
-      GeneratedColumn<String>('accent_color_scheme', aliasedName, false,
-          type: DriftSqlType.string,
-          requiredDuringInsert: false,
-          defaultValue: const Constant("Slate:0xff64748b"));
+      GeneratedColumn<String>(
+        'accent_color_scheme',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+        defaultValue: const Constant("Slate:0xff64748b"),
+      );
   late final GeneratedColumn<String> layoutMode = GeneratedColumn<String>(
-      'layout_mode', aliasedName, false,
-      type: DriftSqlType.string,
-      requiredDuringInsert: false,
-      defaultValue: Constant(LayoutMode.adaptive.name));
+    'layout_mode',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: Constant(LayoutMode.adaptive.name),
+  );
   late final GeneratedColumn<String> locale = GeneratedColumn<String>(
-      'locale', aliasedName, false,
-      type: DriftSqlType.string,
-      requiredDuringInsert: false,
-      defaultValue:
-          const Constant('{"languageCode":"system","countryCode":"system"}'));
+    'locale',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(
+      '{"languageCode":"system","countryCode":"system"}',
+    ),
+  );
   late final GeneratedColumn<String> market = GeneratedColumn<String>(
-      'market', aliasedName, false,
-      type: DriftSqlType.string,
-      requiredDuringInsert: false,
-      defaultValue: Constant(Market.US.name));
+    'market',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: Constant(Market.US.name),
+  );
   late final GeneratedColumn<String> searchMode = GeneratedColumn<String>(
-      'search_mode', aliasedName, false,
-      type: DriftSqlType.string,
-      requiredDuringInsert: false,
-      defaultValue: Constant(SearchMode.youtube.name));
+    'search_mode',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: Constant(SearchMode.youtube.name),
+  );
   late final GeneratedColumn<String> downloadLocation = GeneratedColumn<String>(
-      'download_location', aliasedName, false,
-      type: DriftSqlType.string,
-      requiredDuringInsert: false,
-      defaultValue: const Constant(""));
+    'download_location',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(""),
+  );
   late final GeneratedColumn<String> localLibraryLocation =
-      GeneratedColumn<String>('local_library_location', aliasedName, false,
-          type: DriftSqlType.string,
-          requiredDuringInsert: false,
-          defaultValue: const Constant(""));
+      GeneratedColumn<String>(
+        'local_library_location',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+        defaultValue: const Constant(""),
+      );
   late final GeneratedColumn<String> pipedInstance = GeneratedColumn<String>(
-      'piped_instance', aliasedName, false,
-      type: DriftSqlType.string,
-      requiredDuringInsert: false,
-      defaultValue: const Constant("https://pipedapi.kavin.rocks"));
+    'piped_instance',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant("https://pipedapi.kavin.rocks"),
+  );
   late final GeneratedColumn<String> invidiousInstance =
-      GeneratedColumn<String>('invidious_instance', aliasedName, false,
-          type: DriftSqlType.string,
-          requiredDuringInsert: false,
-          defaultValue: const Constant("https://inv.nadeko.net"));
+      GeneratedColumn<String>(
+        'invidious_instance',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+        defaultValue: const Constant("https://inv.nadeko.net"),
+      );
   late final GeneratedColumn<String> themeMode = GeneratedColumn<String>(
-      'theme_mode', aliasedName, false,
-      type: DriftSqlType.string,
-      requiredDuringInsert: false,
-      defaultValue: Constant(ThemeMode.system.name));
+    'theme_mode',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: Constant(ThemeMode.system.name),
+  );
   late final GeneratedColumn<String> audioSource = GeneratedColumn<String>(
-      'audio_source', aliasedName, false,
-      type: DriftSqlType.string,
-      requiredDuringInsert: false,
-      defaultValue: Constant(AudioSource.youtube.name));
+    'audio_source',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: Constant(AudioSource.youtube.name),
+  );
   late final GeneratedColumn<String> youtubeClientEngine =
-      GeneratedColumn<String>('youtube_client_engine', aliasedName, false,
-          type: DriftSqlType.string,
-          requiredDuringInsert: false,
-          defaultValue: Constant(YoutubeClientEngine.youtubeExplode.name));
+      GeneratedColumn<String>(
+        'youtube_client_engine',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+        defaultValue: Constant(YoutubeClientEngine.youtubeExplode.name),
+      );
   late final GeneratedColumn<String> streamMusicCodec = GeneratedColumn<String>(
-      'stream_music_codec', aliasedName, false,
-      type: DriftSqlType.string,
-      requiredDuringInsert: false,
-      defaultValue: Constant(SourceCodecs.weba.name));
+    'stream_music_codec',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: Constant(SourceCodecs.weba.name),
+  );
   late final GeneratedColumn<String> downloadMusicCodec =
-      GeneratedColumn<String>('download_music_codec', aliasedName, false,
-          type: DriftSqlType.string,
-          requiredDuringInsert: false,
-          defaultValue: Constant(SourceCodecs.m4a.name));
+      GeneratedColumn<String>(
+        'download_music_codec',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+        defaultValue: Constant(SourceCodecs.m4a.name),
+      );
   late final GeneratedColumn<bool> discordPresence = GeneratedColumn<bool>(
-      'discord_presence', aliasedName, false,
-      type: DriftSqlType.bool,
-      requiredDuringInsert: false,
-      defaultConstraints: GeneratedColumn.constraintIsAlways(
-          'CHECK ("discord_presence" IN (0, 1))'),
-      defaultValue: const Constant(true));
+    'discord_presence',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("discord_presence" IN (0, 1))',
+    ),
+    defaultValue: const Constant(true),
+  );
   late final GeneratedColumn<bool> endlessPlayback = GeneratedColumn<bool>(
-      'endless_playback', aliasedName, false,
-      type: DriftSqlType.bool,
-      requiredDuringInsert: false,
-      defaultConstraints: GeneratedColumn.constraintIsAlways(
-          'CHECK ("endless_playback" IN (0, 1))'),
-      defaultValue: const Constant(true));
+    'endless_playback',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("endless_playback" IN (0, 1))',
+    ),
+    defaultValue: const Constant(true),
+  );
   late final GeneratedColumn<bool> enableConnect = GeneratedColumn<bool>(
-      'enable_connect', aliasedName, false,
-      type: DriftSqlType.bool,
-      requiredDuringInsert: false,
-      defaultConstraints: GeneratedColumn.constraintIsAlways(
-          'CHECK ("enable_connect" IN (0, 1))'),
-      defaultValue: const Constant(false));
+    'enable_connect',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("enable_connect" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
   late final GeneratedColumn<int> connectPort = GeneratedColumn<int>(
-      'connect_port', aliasedName, false,
-      type: DriftSqlType.int,
-      requiredDuringInsert: false,
-      defaultValue: const Constant(-1));
+    'connect_port',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(-1),
+  );
   late final GeneratedColumn<bool> cacheMusic = GeneratedColumn<bool>(
-      'cache_music', aliasedName, false,
-      type: DriftSqlType.bool,
-      requiredDuringInsert: false,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('CHECK ("cache_music" IN (0, 1))'),
-      defaultValue: const Constant(true));
+    'cache_music',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("cache_music" IN (0, 1))',
+    ),
+    defaultValue: const Constant(true),
+  );
   @override
   List<GeneratedColumn> get $columns => [
-        id,
-        audioQuality,
-        albumColorSync,
-        amoledDarkTheme,
-        checkUpdate,
-        normalizeAudio,
-        showSystemTrayIcon,
-        systemTitleBar,
-        skipNonMusic,
-        closeBehavior,
-        accentColorScheme,
-        layoutMode,
-        locale,
-        market,
-        searchMode,
-        downloadLocation,
-        localLibraryLocation,
-        pipedInstance,
-        invidiousInstance,
-        themeMode,
-        audioSource,
-        youtubeClientEngine,
-        streamMusicCodec,
-        downloadMusicCodec,
-        discordPresence,
-        endlessPlayback,
-        enableConnect,
-        connectPort,
-        cacheMusic
-      ];
+    id,
+    audioQuality,
+    albumColorSync,
+    amoledDarkTheme,
+    checkUpdate,
+    normalizeAudio,
+    showSystemTrayIcon,
+    systemTitleBar,
+    skipNonMusic,
+    closeBehavior,
+    accentColorScheme,
+    layoutMode,
+    locale,
+    market,
+    searchMode,
+    downloadLocation,
+    localLibraryLocation,
+    pipedInstance,
+    invidiousInstance,
+    themeMode,
+    audioSource,
+    youtubeClientEngine,
+    streamMusicCodec,
+    downloadMusicCodec,
+    discordPresence,
+    endlessPlayback,
+    enableConnect,
+    connectPort,
+    cacheMusic,
+  ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -668,66 +837,122 @@ class PreferencesTable extends Table
   PreferencesTableData map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return PreferencesTableData(
-      id: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
-      audioQuality: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}audio_quality'])!,
-      albumColorSync: attachedDatabase.typeMapping
-          .read(DriftSqlType.bool, data['${effectivePrefix}album_color_sync'])!,
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      audioQuality: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}audio_quality'],
+      )!,
+      albumColorSync: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}album_color_sync'],
+      )!,
       amoledDarkTheme: attachedDatabase.typeMapping.read(
-          DriftSqlType.bool, data['${effectivePrefix}amoled_dark_theme'])!,
-      checkUpdate: attachedDatabase.typeMapping
-          .read(DriftSqlType.bool, data['${effectivePrefix}check_update'])!,
-      normalizeAudio: attachedDatabase.typeMapping
-          .read(DriftSqlType.bool, data['${effectivePrefix}normalize_audio'])!,
+        DriftSqlType.bool,
+        data['${effectivePrefix}amoled_dark_theme'],
+      )!,
+      checkUpdate: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}check_update'],
+      )!,
+      normalizeAudio: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}normalize_audio'],
+      )!,
       showSystemTrayIcon: attachedDatabase.typeMapping.read(
-          DriftSqlType.bool, data['${effectivePrefix}show_system_tray_icon'])!,
-      systemTitleBar: attachedDatabase.typeMapping
-          .read(DriftSqlType.bool, data['${effectivePrefix}system_title_bar'])!,
-      skipNonMusic: attachedDatabase.typeMapping
-          .read(DriftSqlType.bool, data['${effectivePrefix}skip_non_music'])!,
-      closeBehavior: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}close_behavior'])!,
+        DriftSqlType.bool,
+        data['${effectivePrefix}show_system_tray_icon'],
+      )!,
+      systemTitleBar: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}system_title_bar'],
+      )!,
+      skipNonMusic: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}skip_non_music'],
+      )!,
+      closeBehavior: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}close_behavior'],
+      )!,
       accentColorScheme: attachedDatabase.typeMapping.read(
-          DriftSqlType.string, data['${effectivePrefix}accent_color_scheme'])!,
-      layoutMode: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}layout_mode'])!,
-      locale: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}locale'])!,
-      market: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}market'])!,
-      searchMode: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}search_mode'])!,
+        DriftSqlType.string,
+        data['${effectivePrefix}accent_color_scheme'],
+      )!,
+      layoutMode: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}layout_mode'],
+      )!,
+      locale: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}locale'],
+      )!,
+      market: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}market'],
+      )!,
+      searchMode: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}search_mode'],
+      )!,
       downloadLocation: attachedDatabase.typeMapping.read(
-          DriftSqlType.string, data['${effectivePrefix}download_location'])!,
+        DriftSqlType.string,
+        data['${effectivePrefix}download_location'],
+      )!,
       localLibraryLocation: attachedDatabase.typeMapping.read(
-          DriftSqlType.string,
-          data['${effectivePrefix}local_library_location'])!,
-      pipedInstance: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}piped_instance'])!,
+        DriftSqlType.string,
+        data['${effectivePrefix}local_library_location'],
+      )!,
+      pipedInstance: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}piped_instance'],
+      )!,
       invidiousInstance: attachedDatabase.typeMapping.read(
-          DriftSqlType.string, data['${effectivePrefix}invidious_instance'])!,
-      themeMode: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}theme_mode'])!,
-      audioSource: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}audio_source'])!,
+        DriftSqlType.string,
+        data['${effectivePrefix}invidious_instance'],
+      )!,
+      themeMode: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}theme_mode'],
+      )!,
+      audioSource: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}audio_source'],
+      )!,
       youtubeClientEngine: attachedDatabase.typeMapping.read(
-          DriftSqlType.string,
-          data['${effectivePrefix}youtube_client_engine'])!,
+        DriftSqlType.string,
+        data['${effectivePrefix}youtube_client_engine'],
+      )!,
       streamMusicCodec: attachedDatabase.typeMapping.read(
-          DriftSqlType.string, data['${effectivePrefix}stream_music_codec'])!,
+        DriftSqlType.string,
+        data['${effectivePrefix}stream_music_codec'],
+      )!,
       downloadMusicCodec: attachedDatabase.typeMapping.read(
-          DriftSqlType.string, data['${effectivePrefix}download_music_codec'])!,
-      discordPresence: attachedDatabase.typeMapping
-          .read(DriftSqlType.bool, data['${effectivePrefix}discord_presence'])!,
-      endlessPlayback: attachedDatabase.typeMapping
-          .read(DriftSqlType.bool, data['${effectivePrefix}endless_playback'])!,
-      enableConnect: attachedDatabase.typeMapping
-          .read(DriftSqlType.bool, data['${effectivePrefix}enable_connect'])!,
-      connectPort: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}connect_port'])!,
-      cacheMusic: attachedDatabase.typeMapping
-          .read(DriftSqlType.bool, data['${effectivePrefix}cache_music'])!,
+        DriftSqlType.string,
+        data['${effectivePrefix}download_music_codec'],
+      )!,
+      discordPresence: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}discord_presence'],
+      )!,
+      endlessPlayback: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}endless_playback'],
+      )!,
+      enableConnect: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}enable_connect'],
+      )!,
+      connectPort: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}connect_port'],
+      )!,
+      cacheMusic: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}cache_music'],
+      )!,
     );
   }
 
@@ -768,36 +993,37 @@ class PreferencesTableData extends DataClass
   final bool enableConnect;
   final int connectPort;
   final bool cacheMusic;
-  const PreferencesTableData(
-      {required this.id,
-      required this.audioQuality,
-      required this.albumColorSync,
-      required this.amoledDarkTheme,
-      required this.checkUpdate,
-      required this.normalizeAudio,
-      required this.showSystemTrayIcon,
-      required this.systemTitleBar,
-      required this.skipNonMusic,
-      required this.closeBehavior,
-      required this.accentColorScheme,
-      required this.layoutMode,
-      required this.locale,
-      required this.market,
-      required this.searchMode,
-      required this.downloadLocation,
-      required this.localLibraryLocation,
-      required this.pipedInstance,
-      required this.invidiousInstance,
-      required this.themeMode,
-      required this.audioSource,
-      required this.youtubeClientEngine,
-      required this.streamMusicCodec,
-      required this.downloadMusicCodec,
-      required this.discordPresence,
-      required this.endlessPlayback,
-      required this.enableConnect,
-      required this.connectPort,
-      required this.cacheMusic});
+  const PreferencesTableData({
+    required this.id,
+    required this.audioQuality,
+    required this.albumColorSync,
+    required this.amoledDarkTheme,
+    required this.checkUpdate,
+    required this.normalizeAudio,
+    required this.showSystemTrayIcon,
+    required this.systemTitleBar,
+    required this.skipNonMusic,
+    required this.closeBehavior,
+    required this.accentColorScheme,
+    required this.layoutMode,
+    required this.locale,
+    required this.market,
+    required this.searchMode,
+    required this.downloadLocation,
+    required this.localLibraryLocation,
+    required this.pipedInstance,
+    required this.invidiousInstance,
+    required this.themeMode,
+    required this.audioSource,
+    required this.youtubeClientEngine,
+    required this.streamMusicCodec,
+    required this.downloadMusicCodec,
+    required this.discordPresence,
+    required this.endlessPlayback,
+    required this.enableConnect,
+    required this.connectPort,
+    required this.cacheMusic,
+  });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -867,8 +1093,10 @@ class PreferencesTableData extends DataClass
     );
   }
 
-  factory PreferencesTableData.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
+  factory PreferencesTableData.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return PreferencesTableData(
       id: serializer.fromJson<int>(json['id']),
@@ -887,17 +1115,20 @@ class PreferencesTableData extends DataClass
       market: serializer.fromJson<String>(json['market']),
       searchMode: serializer.fromJson<String>(json['searchMode']),
       downloadLocation: serializer.fromJson<String>(json['downloadLocation']),
-      localLibraryLocation:
-          serializer.fromJson<String>(json['localLibraryLocation']),
+      localLibraryLocation: serializer.fromJson<String>(
+        json['localLibraryLocation'],
+      ),
       pipedInstance: serializer.fromJson<String>(json['pipedInstance']),
       invidiousInstance: serializer.fromJson<String>(json['invidiousInstance']),
       themeMode: serializer.fromJson<String>(json['themeMode']),
       audioSource: serializer.fromJson<String>(json['audioSource']),
-      youtubeClientEngine:
-          serializer.fromJson<String>(json['youtubeClientEngine']),
+      youtubeClientEngine: serializer.fromJson<String>(
+        json['youtubeClientEngine'],
+      ),
       streamMusicCodec: serializer.fromJson<String>(json['streamMusicCodec']),
-      downloadMusicCodec:
-          serializer.fromJson<String>(json['downloadMusicCodec']),
+      downloadMusicCodec: serializer.fromJson<String>(
+        json['downloadMusicCodec'],
+      ),
       discordPresence: serializer.fromJson<bool>(json['discordPresence']),
       endlessPlayback: serializer.fromJson<bool>(json['endlessPlayback']),
       enableConnect: serializer.fromJson<bool>(json['enableConnect']),
@@ -941,67 +1172,67 @@ class PreferencesTableData extends DataClass
     };
   }
 
-  PreferencesTableData copyWith(
-          {int? id,
-          String? audioQuality,
-          bool? albumColorSync,
-          bool? amoledDarkTheme,
-          bool? checkUpdate,
-          bool? normalizeAudio,
-          bool? showSystemTrayIcon,
-          bool? systemTitleBar,
-          bool? skipNonMusic,
-          String? closeBehavior,
-          String? accentColorScheme,
-          String? layoutMode,
-          String? locale,
-          String? market,
-          String? searchMode,
-          String? downloadLocation,
-          String? localLibraryLocation,
-          String? pipedInstance,
-          String? invidiousInstance,
-          String? themeMode,
-          String? audioSource,
-          String? youtubeClientEngine,
-          String? streamMusicCodec,
-          String? downloadMusicCodec,
-          bool? discordPresence,
-          bool? endlessPlayback,
-          bool? enableConnect,
-          int? connectPort,
-          bool? cacheMusic}) =>
-      PreferencesTableData(
-        id: id ?? this.id,
-        audioQuality: audioQuality ?? this.audioQuality,
-        albumColorSync: albumColorSync ?? this.albumColorSync,
-        amoledDarkTheme: amoledDarkTheme ?? this.amoledDarkTheme,
-        checkUpdate: checkUpdate ?? this.checkUpdate,
-        normalizeAudio: normalizeAudio ?? this.normalizeAudio,
-        showSystemTrayIcon: showSystemTrayIcon ?? this.showSystemTrayIcon,
-        systemTitleBar: systemTitleBar ?? this.systemTitleBar,
-        skipNonMusic: skipNonMusic ?? this.skipNonMusic,
-        closeBehavior: closeBehavior ?? this.closeBehavior,
-        accentColorScheme: accentColorScheme ?? this.accentColorScheme,
-        layoutMode: layoutMode ?? this.layoutMode,
-        locale: locale ?? this.locale,
-        market: market ?? this.market,
-        searchMode: searchMode ?? this.searchMode,
-        downloadLocation: downloadLocation ?? this.downloadLocation,
-        localLibraryLocation: localLibraryLocation ?? this.localLibraryLocation,
-        pipedInstance: pipedInstance ?? this.pipedInstance,
-        invidiousInstance: invidiousInstance ?? this.invidiousInstance,
-        themeMode: themeMode ?? this.themeMode,
-        audioSource: audioSource ?? this.audioSource,
-        youtubeClientEngine: youtubeClientEngine ?? this.youtubeClientEngine,
-        streamMusicCodec: streamMusicCodec ?? this.streamMusicCodec,
-        downloadMusicCodec: downloadMusicCodec ?? this.downloadMusicCodec,
-        discordPresence: discordPresence ?? this.discordPresence,
-        endlessPlayback: endlessPlayback ?? this.endlessPlayback,
-        enableConnect: enableConnect ?? this.enableConnect,
-        connectPort: connectPort ?? this.connectPort,
-        cacheMusic: cacheMusic ?? this.cacheMusic,
-      );
+  PreferencesTableData copyWith({
+    int? id,
+    String? audioQuality,
+    bool? albumColorSync,
+    bool? amoledDarkTheme,
+    bool? checkUpdate,
+    bool? normalizeAudio,
+    bool? showSystemTrayIcon,
+    bool? systemTitleBar,
+    bool? skipNonMusic,
+    String? closeBehavior,
+    String? accentColorScheme,
+    String? layoutMode,
+    String? locale,
+    String? market,
+    String? searchMode,
+    String? downloadLocation,
+    String? localLibraryLocation,
+    String? pipedInstance,
+    String? invidiousInstance,
+    String? themeMode,
+    String? audioSource,
+    String? youtubeClientEngine,
+    String? streamMusicCodec,
+    String? downloadMusicCodec,
+    bool? discordPresence,
+    bool? endlessPlayback,
+    bool? enableConnect,
+    int? connectPort,
+    bool? cacheMusic,
+  }) => PreferencesTableData(
+    id: id ?? this.id,
+    audioQuality: audioQuality ?? this.audioQuality,
+    albumColorSync: albumColorSync ?? this.albumColorSync,
+    amoledDarkTheme: amoledDarkTheme ?? this.amoledDarkTheme,
+    checkUpdate: checkUpdate ?? this.checkUpdate,
+    normalizeAudio: normalizeAudio ?? this.normalizeAudio,
+    showSystemTrayIcon: showSystemTrayIcon ?? this.showSystemTrayIcon,
+    systemTitleBar: systemTitleBar ?? this.systemTitleBar,
+    skipNonMusic: skipNonMusic ?? this.skipNonMusic,
+    closeBehavior: closeBehavior ?? this.closeBehavior,
+    accentColorScheme: accentColorScheme ?? this.accentColorScheme,
+    layoutMode: layoutMode ?? this.layoutMode,
+    locale: locale ?? this.locale,
+    market: market ?? this.market,
+    searchMode: searchMode ?? this.searchMode,
+    downloadLocation: downloadLocation ?? this.downloadLocation,
+    localLibraryLocation: localLibraryLocation ?? this.localLibraryLocation,
+    pipedInstance: pipedInstance ?? this.pipedInstance,
+    invidiousInstance: invidiousInstance ?? this.invidiousInstance,
+    themeMode: themeMode ?? this.themeMode,
+    audioSource: audioSource ?? this.audioSource,
+    youtubeClientEngine: youtubeClientEngine ?? this.youtubeClientEngine,
+    streamMusicCodec: streamMusicCodec ?? this.streamMusicCodec,
+    downloadMusicCodec: downloadMusicCodec ?? this.downloadMusicCodec,
+    discordPresence: discordPresence ?? this.discordPresence,
+    endlessPlayback: endlessPlayback ?? this.endlessPlayback,
+    enableConnect: enableConnect ?? this.enableConnect,
+    connectPort: connectPort ?? this.connectPort,
+    cacheMusic: cacheMusic ?? this.cacheMusic,
+  );
   PreferencesTableData copyWithCompanion(PreferencesTableCompanion data) {
     return PreferencesTableData(
       id: data.id.present ? data.id.value : this.id,
@@ -1014,8 +1245,9 @@ class PreferencesTableData extends DataClass
       amoledDarkTheme: data.amoledDarkTheme.present
           ? data.amoledDarkTheme.value
           : this.amoledDarkTheme,
-      checkUpdate:
-          data.checkUpdate.present ? data.checkUpdate.value : this.checkUpdate,
+      checkUpdate: data.checkUpdate.present
+          ? data.checkUpdate.value
+          : this.checkUpdate,
       normalizeAudio: data.normalizeAudio.present
           ? data.normalizeAudio.value
           : this.normalizeAudio,
@@ -1034,12 +1266,14 @@ class PreferencesTableData extends DataClass
       accentColorScheme: data.accentColorScheme.present
           ? data.accentColorScheme.value
           : this.accentColorScheme,
-      layoutMode:
-          data.layoutMode.present ? data.layoutMode.value : this.layoutMode,
+      layoutMode: data.layoutMode.present
+          ? data.layoutMode.value
+          : this.layoutMode,
       locale: data.locale.present ? data.locale.value : this.locale,
       market: data.market.present ? data.market.value : this.market,
-      searchMode:
-          data.searchMode.present ? data.searchMode.value : this.searchMode,
+      searchMode: data.searchMode.present
+          ? data.searchMode.value
+          : this.searchMode,
       downloadLocation: data.downloadLocation.present
           ? data.downloadLocation.value
           : this.downloadLocation,
@@ -1053,8 +1287,9 @@ class PreferencesTableData extends DataClass
           ? data.invidiousInstance.value
           : this.invidiousInstance,
       themeMode: data.themeMode.present ? data.themeMode.value : this.themeMode,
-      audioSource:
-          data.audioSource.present ? data.audioSource.value : this.audioSource,
+      audioSource: data.audioSource.present
+          ? data.audioSource.value
+          : this.audioSource,
       youtubeClientEngine: data.youtubeClientEngine.present
           ? data.youtubeClientEngine.value
           : this.youtubeClientEngine,
@@ -1073,10 +1308,12 @@ class PreferencesTableData extends DataClass
       enableConnect: data.enableConnect.present
           ? data.enableConnect.value
           : this.enableConnect,
-      connectPort:
-          data.connectPort.present ? data.connectPort.value : this.connectPort,
-      cacheMusic:
-          data.cacheMusic.present ? data.cacheMusic.value : this.cacheMusic,
+      connectPort: data.connectPort.present
+          ? data.connectPort.value
+          : this.connectPort,
+      cacheMusic: data.cacheMusic.present
+          ? data.cacheMusic.value
+          : this.cacheMusic,
     );
   }
 
@@ -1118,36 +1355,36 @@ class PreferencesTableData extends DataClass
 
   @override
   int get hashCode => Object.hashAll([
-        id,
-        audioQuality,
-        albumColorSync,
-        amoledDarkTheme,
-        checkUpdate,
-        normalizeAudio,
-        showSystemTrayIcon,
-        systemTitleBar,
-        skipNonMusic,
-        closeBehavior,
-        accentColorScheme,
-        layoutMode,
-        locale,
-        market,
-        searchMode,
-        downloadLocation,
-        localLibraryLocation,
-        pipedInstance,
-        invidiousInstance,
-        themeMode,
-        audioSource,
-        youtubeClientEngine,
-        streamMusicCodec,
-        downloadMusicCodec,
-        discordPresence,
-        endlessPlayback,
-        enableConnect,
-        connectPort,
-        cacheMusic
-      ]);
+    id,
+    audioQuality,
+    albumColorSync,
+    amoledDarkTheme,
+    checkUpdate,
+    normalizeAudio,
+    showSystemTrayIcon,
+    systemTitleBar,
+    skipNonMusic,
+    closeBehavior,
+    accentColorScheme,
+    layoutMode,
+    locale,
+    market,
+    searchMode,
+    downloadLocation,
+    localLibraryLocation,
+    pipedInstance,
+    invidiousInstance,
+    themeMode,
+    audioSource,
+    youtubeClientEngine,
+    streamMusicCodec,
+    downloadMusicCodec,
+    discordPresence,
+    endlessPlayback,
+    enableConnect,
+    connectPort,
+    cacheMusic,
+  ]);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -1343,36 +1580,37 @@ class PreferencesTableCompanion extends UpdateCompanion<PreferencesTableData> {
     });
   }
 
-  PreferencesTableCompanion copyWith(
-      {Value<int>? id,
-      Value<String>? audioQuality,
-      Value<bool>? albumColorSync,
-      Value<bool>? amoledDarkTheme,
-      Value<bool>? checkUpdate,
-      Value<bool>? normalizeAudio,
-      Value<bool>? showSystemTrayIcon,
-      Value<bool>? systemTitleBar,
-      Value<bool>? skipNonMusic,
-      Value<String>? closeBehavior,
-      Value<String>? accentColorScheme,
-      Value<String>? layoutMode,
-      Value<String>? locale,
-      Value<String>? market,
-      Value<String>? searchMode,
-      Value<String>? downloadLocation,
-      Value<String>? localLibraryLocation,
-      Value<String>? pipedInstance,
-      Value<String>? invidiousInstance,
-      Value<String>? themeMode,
-      Value<String>? audioSource,
-      Value<String>? youtubeClientEngine,
-      Value<String>? streamMusicCodec,
-      Value<String>? downloadMusicCodec,
-      Value<bool>? discordPresence,
-      Value<bool>? endlessPlayback,
-      Value<bool>? enableConnect,
-      Value<int>? connectPort,
-      Value<bool>? cacheMusic}) {
+  PreferencesTableCompanion copyWith({
+    Value<int>? id,
+    Value<String>? audioQuality,
+    Value<bool>? albumColorSync,
+    Value<bool>? amoledDarkTheme,
+    Value<bool>? checkUpdate,
+    Value<bool>? normalizeAudio,
+    Value<bool>? showSystemTrayIcon,
+    Value<bool>? systemTitleBar,
+    Value<bool>? skipNonMusic,
+    Value<String>? closeBehavior,
+    Value<String>? accentColorScheme,
+    Value<String>? layoutMode,
+    Value<String>? locale,
+    Value<String>? market,
+    Value<String>? searchMode,
+    Value<String>? downloadLocation,
+    Value<String>? localLibraryLocation,
+    Value<String>? pipedInstance,
+    Value<String>? invidiousInstance,
+    Value<String>? themeMode,
+    Value<String>? audioSource,
+    Value<String>? youtubeClientEngine,
+    Value<String>? streamMusicCodec,
+    Value<String>? downloadMusicCodec,
+    Value<bool>? discordPresence,
+    Value<bool>? endlessPlayback,
+    Value<bool>? enableConnect,
+    Value<int>? connectPort,
+    Value<bool>? cacheMusic,
+  }) {
     return PreferencesTableCompanion(
       id: id ?? this.id,
       audioQuality: audioQuality ?? this.audioQuality,
@@ -1458,8 +1696,9 @@ class PreferencesTableCompanion extends UpdateCompanion<PreferencesTableData> {
       map['download_location'] = Variable<String>(downloadLocation.value);
     }
     if (localLibraryLocation.present) {
-      map['local_library_location'] =
-          Variable<String>(localLibraryLocation.value);
+      map['local_library_location'] = Variable<String>(
+        localLibraryLocation.value,
+      );
     }
     if (pipedInstance.present) {
       map['piped_instance'] = Variable<String>(pipedInstance.value);
@@ -1474,8 +1713,9 @@ class PreferencesTableCompanion extends UpdateCompanion<PreferencesTableData> {
       map['audio_source'] = Variable<String>(audioSource.value);
     }
     if (youtubeClientEngine.present) {
-      map['youtube_client_engine'] =
-          Variable<String>(youtubeClientEngine.value);
+      map['youtube_client_engine'] = Variable<String>(
+        youtubeClientEngine.value,
+      );
     }
     if (streamMusicCodec.present) {
       map['stream_music_codec'] = Variable<String>(streamMusicCodec.value);
@@ -1545,23 +1785,38 @@ class ScrobblerTable extends Table
   final String? _alias;
   ScrobblerTable(this.attachedDatabase, [this._alias]);
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
-      'id', aliasedName, false,
-      hasAutoIncrement: true,
-      type: DriftSqlType.int,
-      requiredDuringInsert: false,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
+    'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'PRIMARY KEY AUTOINCREMENT',
+    ),
+  );
   late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
-      'created_at', aliasedName, false,
-      type: DriftSqlType.dateTime,
-      requiredDuringInsert: false,
-      defaultValue: currentDateAndTime);
+    'created_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+    defaultValue: currentDateAndTime,
+  );
   late final GeneratedColumn<String> username = GeneratedColumn<String>(
-      'username', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
+    'username',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
   late final GeneratedColumn<String> passwordHash = GeneratedColumn<String>(
-      'password_hash', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
+    'password_hash',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
   @override
   List<GeneratedColumn> get $columns => [id, createdAt, username, passwordHash];
   @override
@@ -1575,14 +1830,22 @@ class ScrobblerTable extends Table
   ScrobblerTableData map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return ScrobblerTableData(
-      id: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
-      createdAt: attachedDatabase.typeMapping
-          .read(DriftSqlType.dateTime, data['${effectivePrefix}created_at'])!,
-      username: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}username'])!,
-      passwordHash: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}password_hash'])!,
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      createdAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}created_at'],
+      )!,
+      username: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}username'],
+      )!,
+      passwordHash: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}password_hash'],
+      )!,
     );
   }
 
@@ -1598,11 +1861,12 @@ class ScrobblerTableData extends DataClass
   final DateTime createdAt;
   final String username;
   final String passwordHash;
-  const ScrobblerTableData(
-      {required this.id,
-      required this.createdAt,
-      required this.username,
-      required this.passwordHash});
+  const ScrobblerTableData({
+    required this.id,
+    required this.createdAt,
+    required this.username,
+    required this.passwordHash,
+  });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -1622,8 +1886,10 @@ class ScrobblerTableData extends DataClass
     );
   }
 
-  factory ScrobblerTableData.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
+  factory ScrobblerTableData.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return ScrobblerTableData(
       id: serializer.fromJson<int>(json['id']),
@@ -1643,17 +1909,17 @@ class ScrobblerTableData extends DataClass
     };
   }
 
-  ScrobblerTableData copyWith(
-          {int? id,
-          DateTime? createdAt,
-          String? username,
-          String? passwordHash}) =>
-      ScrobblerTableData(
-        id: id ?? this.id,
-        createdAt: createdAt ?? this.createdAt,
-        username: username ?? this.username,
-        passwordHash: passwordHash ?? this.passwordHash,
-      );
+  ScrobblerTableData copyWith({
+    int? id,
+    DateTime? createdAt,
+    String? username,
+    String? passwordHash,
+  }) => ScrobblerTableData(
+    id: id ?? this.id,
+    createdAt: createdAt ?? this.createdAt,
+    username: username ?? this.username,
+    passwordHash: passwordHash ?? this.passwordHash,
+  );
   ScrobblerTableData copyWithCompanion(ScrobblerTableCompanion data) {
     return ScrobblerTableData(
       id: data.id.present ? data.id.value : this.id,
@@ -1704,8 +1970,8 @@ class ScrobblerTableCompanion extends UpdateCompanion<ScrobblerTableData> {
     this.createdAt = const Value.absent(),
     required String username,
     required String passwordHash,
-  })  : username = Value(username),
-        passwordHash = Value(passwordHash);
+  }) : username = Value(username),
+       passwordHash = Value(passwordHash);
   static Insertable<ScrobblerTableData> custom({
     Expression<int>? id,
     Expression<DateTime>? createdAt,
@@ -1720,11 +1986,12 @@ class ScrobblerTableCompanion extends UpdateCompanion<ScrobblerTableData> {
     });
   }
 
-  ScrobblerTableCompanion copyWith(
-      {Value<int>? id,
-      Value<DateTime>? createdAt,
-      Value<String>? username,
-      Value<String>? passwordHash}) {
+  ScrobblerTableCompanion copyWith({
+    Value<int>? id,
+    Value<DateTime>? createdAt,
+    Value<String>? username,
+    Value<String>? passwordHash,
+  }) {
     return ScrobblerTableCompanion(
       id: id ?? this.id,
       createdAt: createdAt ?? this.createdAt,
@@ -1770,26 +2037,45 @@ class SkipSegmentTable extends Table
   final String? _alias;
   SkipSegmentTable(this.attachedDatabase, [this._alias]);
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
-      'id', aliasedName, false,
-      hasAutoIncrement: true,
-      type: DriftSqlType.int,
-      requiredDuringInsert: false,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
+    'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'PRIMARY KEY AUTOINCREMENT',
+    ),
+  );
   late final GeneratedColumn<int> start = GeneratedColumn<int>(
-      'start', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
+    'start',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
   late final GeneratedColumn<int> end = GeneratedColumn<int>(
-      'end', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
+    'end',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
   late final GeneratedColumn<String> trackId = GeneratedColumn<String>(
-      'track_id', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
+    'track_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
   late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
-      'created_at', aliasedName, false,
-      type: DriftSqlType.dateTime,
-      requiredDuringInsert: false,
-      defaultValue: currentDateAndTime);
+    'created_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+    defaultValue: currentDateAndTime,
+  );
   @override
   List<GeneratedColumn> get $columns => [id, start, end, trackId, createdAt];
   @override
@@ -1803,16 +2089,26 @@ class SkipSegmentTable extends Table
   SkipSegmentTableData map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return SkipSegmentTableData(
-      id: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
-      start: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}start'])!,
-      end: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}end'])!,
-      trackId: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}track_id'])!,
-      createdAt: attachedDatabase.typeMapping
-          .read(DriftSqlType.dateTime, data['${effectivePrefix}created_at'])!,
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      start: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}start'],
+      )!,
+      end: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}end'],
+      )!,
+      trackId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}track_id'],
+      )!,
+      createdAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}created_at'],
+      )!,
     );
   }
 
@@ -1829,12 +2125,13 @@ class SkipSegmentTableData extends DataClass
   final int end;
   final String trackId;
   final DateTime createdAt;
-  const SkipSegmentTableData(
-      {required this.id,
-      required this.start,
-      required this.end,
-      required this.trackId,
-      required this.createdAt});
+  const SkipSegmentTableData({
+    required this.id,
+    required this.start,
+    required this.end,
+    required this.trackId,
+    required this.createdAt,
+  });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -1856,8 +2153,10 @@ class SkipSegmentTableData extends DataClass
     );
   }
 
-  factory SkipSegmentTableData.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
+  factory SkipSegmentTableData.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return SkipSegmentTableData(
       id: serializer.fromJson<int>(json['id']),
@@ -1879,19 +2178,19 @@ class SkipSegmentTableData extends DataClass
     };
   }
 
-  SkipSegmentTableData copyWith(
-          {int? id,
-          int? start,
-          int? end,
-          String? trackId,
-          DateTime? createdAt}) =>
-      SkipSegmentTableData(
-        id: id ?? this.id,
-        start: start ?? this.start,
-        end: end ?? this.end,
-        trackId: trackId ?? this.trackId,
-        createdAt: createdAt ?? this.createdAt,
-      );
+  SkipSegmentTableData copyWith({
+    int? id,
+    int? start,
+    int? end,
+    String? trackId,
+    DateTime? createdAt,
+  }) => SkipSegmentTableData(
+    id: id ?? this.id,
+    start: start ?? this.start,
+    end: end ?? this.end,
+    trackId: trackId ?? this.trackId,
+    createdAt: createdAt ?? this.createdAt,
+  );
   SkipSegmentTableData copyWithCompanion(SkipSegmentTableCompanion data) {
     return SkipSegmentTableData(
       id: data.id.present ? data.id.value : this.id,
@@ -1946,9 +2245,9 @@ class SkipSegmentTableCompanion extends UpdateCompanion<SkipSegmentTableData> {
     required int end,
     required String trackId,
     this.createdAt = const Value.absent(),
-  })  : start = Value(start),
-        end = Value(end),
-        trackId = Value(trackId);
+  }) : start = Value(start),
+       end = Value(end),
+       trackId = Value(trackId);
   static Insertable<SkipSegmentTableData> custom({
     Expression<int>? id,
     Expression<int>? start,
@@ -1965,12 +2264,13 @@ class SkipSegmentTableCompanion extends UpdateCompanion<SkipSegmentTableData> {
     });
   }
 
-  SkipSegmentTableCompanion copyWith(
-      {Value<int>? id,
-      Value<int>? start,
-      Value<int>? end,
-      Value<String>? trackId,
-      Value<DateTime>? createdAt}) {
+  SkipSegmentTableCompanion copyWith({
+    Value<int>? id,
+    Value<int>? start,
+    Value<int>? end,
+    Value<String>? trackId,
+    Value<DateTime>? createdAt,
+  }) {
     return SkipSegmentTableCompanion(
       id: id ?? this.id,
       start: start ?? this.start,
@@ -2021,31 +2321,54 @@ class SourceMatchTable extends Table
   final String? _alias;
   SourceMatchTable(this.attachedDatabase, [this._alias]);
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
-      'id', aliasedName, false,
-      hasAutoIncrement: true,
-      type: DriftSqlType.int,
-      requiredDuringInsert: false,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
+    'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'PRIMARY KEY AUTOINCREMENT',
+    ),
+  );
   late final GeneratedColumn<String> trackId = GeneratedColumn<String>(
-      'track_id', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
+    'track_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
   late final GeneratedColumn<String> sourceId = GeneratedColumn<String>(
-      'source_id', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
+    'source_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
   late final GeneratedColumn<String> sourceType = GeneratedColumn<String>(
-      'source_type', aliasedName, false,
-      type: DriftSqlType.string,
-      requiredDuringInsert: false,
-      defaultValue: Constant(SourceType.youtube.name));
+    'source_type',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: Constant(SourceType.youtube.name),
+  );
   late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
-      'created_at', aliasedName, false,
-      type: DriftSqlType.dateTime,
-      requiredDuringInsert: false,
-      defaultValue: currentDateAndTime);
+    'created_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+    defaultValue: currentDateAndTime,
+  );
   @override
-  List<GeneratedColumn> get $columns =>
-      [id, trackId, sourceId, sourceType, createdAt];
+  List<GeneratedColumn> get $columns => [
+    id,
+    trackId,
+    sourceId,
+    sourceType,
+    createdAt,
+  ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -2057,16 +2380,26 @@ class SourceMatchTable extends Table
   SourceMatchTableData map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return SourceMatchTableData(
-      id: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
-      trackId: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}track_id'])!,
-      sourceId: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}source_id'])!,
-      sourceType: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}source_type'])!,
-      createdAt: attachedDatabase.typeMapping
-          .read(DriftSqlType.dateTime, data['${effectivePrefix}created_at'])!,
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      trackId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}track_id'],
+      )!,
+      sourceId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}source_id'],
+      )!,
+      sourceType: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}source_type'],
+      )!,
+      createdAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}created_at'],
+      )!,
     );
   }
 
@@ -2083,12 +2416,13 @@ class SourceMatchTableData extends DataClass
   final String sourceId;
   final String sourceType;
   final DateTime createdAt;
-  const SourceMatchTableData(
-      {required this.id,
-      required this.trackId,
-      required this.sourceId,
-      required this.sourceType,
-      required this.createdAt});
+  const SourceMatchTableData({
+    required this.id,
+    required this.trackId,
+    required this.sourceId,
+    required this.sourceType,
+    required this.createdAt,
+  });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -2110,8 +2444,10 @@ class SourceMatchTableData extends DataClass
     );
   }
 
-  factory SourceMatchTableData.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
+  factory SourceMatchTableData.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return SourceMatchTableData(
       id: serializer.fromJson<int>(json['id']),
@@ -2133,26 +2469,27 @@ class SourceMatchTableData extends DataClass
     };
   }
 
-  SourceMatchTableData copyWith(
-          {int? id,
-          String? trackId,
-          String? sourceId,
-          String? sourceType,
-          DateTime? createdAt}) =>
-      SourceMatchTableData(
-        id: id ?? this.id,
-        trackId: trackId ?? this.trackId,
-        sourceId: sourceId ?? this.sourceId,
-        sourceType: sourceType ?? this.sourceType,
-        createdAt: createdAt ?? this.createdAt,
-      );
+  SourceMatchTableData copyWith({
+    int? id,
+    String? trackId,
+    String? sourceId,
+    String? sourceType,
+    DateTime? createdAt,
+  }) => SourceMatchTableData(
+    id: id ?? this.id,
+    trackId: trackId ?? this.trackId,
+    sourceId: sourceId ?? this.sourceId,
+    sourceType: sourceType ?? this.sourceType,
+    createdAt: createdAt ?? this.createdAt,
+  );
   SourceMatchTableData copyWithCompanion(SourceMatchTableCompanion data) {
     return SourceMatchTableData(
       id: data.id.present ? data.id.value : this.id,
       trackId: data.trackId.present ? data.trackId.value : this.trackId,
       sourceId: data.sourceId.present ? data.sourceId.value : this.sourceId,
-      sourceType:
-          data.sourceType.present ? data.sourceType.value : this.sourceType,
+      sourceType: data.sourceType.present
+          ? data.sourceType.value
+          : this.sourceType,
       createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
     );
   }
@@ -2201,8 +2538,8 @@ class SourceMatchTableCompanion extends UpdateCompanion<SourceMatchTableData> {
     required String sourceId,
     this.sourceType = const Value.absent(),
     this.createdAt = const Value.absent(),
-  })  : trackId = Value(trackId),
-        sourceId = Value(sourceId);
+  }) : trackId = Value(trackId),
+       sourceId = Value(sourceId);
   static Insertable<SourceMatchTableData> custom({
     Expression<int>? id,
     Expression<String>? trackId,
@@ -2219,12 +2556,13 @@ class SourceMatchTableCompanion extends UpdateCompanion<SourceMatchTableData> {
     });
   }
 
-  SourceMatchTableCompanion copyWith(
-      {Value<int>? id,
-      Value<String>? trackId,
-      Value<String>? sourceId,
-      Value<String>? sourceType,
-      Value<DateTime>? createdAt}) {
+  SourceMatchTableCompanion copyWith({
+    Value<int>? id,
+    Value<String>? trackId,
+    Value<String>? sourceId,
+    Value<String>? sourceType,
+    Value<DateTime>? createdAt,
+  }) {
     return SourceMatchTableCompanion(
       id: id ?? this.id,
       trackId: trackId ?? this.trackId,
@@ -2275,43 +2613,76 @@ class AudioPlayerStateTable extends Table
   final String? _alias;
   AudioPlayerStateTable(this.attachedDatabase, [this._alias]);
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
-      'id', aliasedName, false,
-      hasAutoIncrement: true,
-      type: DriftSqlType.int,
-      requiredDuringInsert: false,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
+    'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'PRIMARY KEY AUTOINCREMENT',
+    ),
+  );
   late final GeneratedColumn<bool> playing = GeneratedColumn<bool>(
-      'playing', aliasedName, false,
-      type: DriftSqlType.bool,
-      requiredDuringInsert: true,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('CHECK ("playing" IN (0, 1))'));
+    'playing',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: true,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("playing" IN (0, 1))',
+    ),
+  );
   late final GeneratedColumn<String> loopMode = GeneratedColumn<String>(
-      'loop_mode', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
+    'loop_mode',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
   late final GeneratedColumn<bool> shuffled = GeneratedColumn<bool>(
-      'shuffled', aliasedName, false,
-      type: DriftSqlType.bool,
-      requiredDuringInsert: true,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('CHECK ("shuffled" IN (0, 1))'));
+    'shuffled',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: true,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("shuffled" IN (0, 1))',
+    ),
+  );
   late final GeneratedColumn<String> collections = GeneratedColumn<String>(
-      'collections', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
+    'collections',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
   late final GeneratedColumn<String> tracks = GeneratedColumn<String>(
-      'tracks', aliasedName, false,
-      type: DriftSqlType.string,
-      requiredDuringInsert: false,
-      defaultValue: const Constant("[]"));
+    'tracks',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant("[]"),
+  );
   late final GeneratedColumn<int> currentIndex = GeneratedColumn<int>(
-      'current_index', aliasedName, false,
-      type: DriftSqlType.int,
-      requiredDuringInsert: false,
-      defaultValue: const Constant(0));
+    'current_index',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
   @override
-  List<GeneratedColumn> get $columns =>
-      [id, playing, loopMode, shuffled, collections, tracks, currentIndex];
+  List<GeneratedColumn> get $columns => [
+    id,
+    playing,
+    loopMode,
+    shuffled,
+    collections,
+    tracks,
+    currentIndex,
+  ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -2320,24 +2691,40 @@ class AudioPlayerStateTable extends Table
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  AudioPlayerStateTableData map(Map<String, dynamic> data,
-      {String? tablePrefix}) {
+  AudioPlayerStateTableData map(
+    Map<String, dynamic> data, {
+    String? tablePrefix,
+  }) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return AudioPlayerStateTableData(
-      id: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
-      playing: attachedDatabase.typeMapping
-          .read(DriftSqlType.bool, data['${effectivePrefix}playing'])!,
-      loopMode: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}loop_mode'])!,
-      shuffled: attachedDatabase.typeMapping
-          .read(DriftSqlType.bool, data['${effectivePrefix}shuffled'])!,
-      collections: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}collections'])!,
-      tracks: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}tracks'])!,
-      currentIndex: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}current_index'])!,
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      playing: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}playing'],
+      )!,
+      loopMode: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}loop_mode'],
+      )!,
+      shuffled: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}shuffled'],
+      )!,
+      collections: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}collections'],
+      )!,
+      tracks: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}tracks'],
+      )!,
+      currentIndex: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}current_index'],
+      )!,
     );
   }
 
@@ -2356,14 +2743,15 @@ class AudioPlayerStateTableData extends DataClass
   final String collections;
   final String tracks;
   final int currentIndex;
-  const AudioPlayerStateTableData(
-      {required this.id,
-      required this.playing,
-      required this.loopMode,
-      required this.shuffled,
-      required this.collections,
-      required this.tracks,
-      required this.currentIndex});
+  const AudioPlayerStateTableData({
+    required this.id,
+    required this.playing,
+    required this.loopMode,
+    required this.shuffled,
+    required this.collections,
+    required this.tracks,
+    required this.currentIndex,
+  });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -2389,8 +2777,10 @@ class AudioPlayerStateTableData extends DataClass
     );
   }
 
-  factory AudioPlayerStateTableData.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
+  factory AudioPlayerStateTableData.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return AudioPlayerStateTableData(
       id: serializer.fromJson<int>(json['id']),
@@ -2416,32 +2806,34 @@ class AudioPlayerStateTableData extends DataClass
     };
   }
 
-  AudioPlayerStateTableData copyWith(
-          {int? id,
-          bool? playing,
-          String? loopMode,
-          bool? shuffled,
-          String? collections,
-          String? tracks,
-          int? currentIndex}) =>
-      AudioPlayerStateTableData(
-        id: id ?? this.id,
-        playing: playing ?? this.playing,
-        loopMode: loopMode ?? this.loopMode,
-        shuffled: shuffled ?? this.shuffled,
-        collections: collections ?? this.collections,
-        tracks: tracks ?? this.tracks,
-        currentIndex: currentIndex ?? this.currentIndex,
-      );
+  AudioPlayerStateTableData copyWith({
+    int? id,
+    bool? playing,
+    String? loopMode,
+    bool? shuffled,
+    String? collections,
+    String? tracks,
+    int? currentIndex,
+  }) => AudioPlayerStateTableData(
+    id: id ?? this.id,
+    playing: playing ?? this.playing,
+    loopMode: loopMode ?? this.loopMode,
+    shuffled: shuffled ?? this.shuffled,
+    collections: collections ?? this.collections,
+    tracks: tracks ?? this.tracks,
+    currentIndex: currentIndex ?? this.currentIndex,
+  );
   AudioPlayerStateTableData copyWithCompanion(
-      AudioPlayerStateTableCompanion data) {
+    AudioPlayerStateTableCompanion data,
+  ) {
     return AudioPlayerStateTableData(
       id: data.id.present ? data.id.value : this.id,
       playing: data.playing.present ? data.playing.value : this.playing,
       loopMode: data.loopMode.present ? data.loopMode.value : this.loopMode,
       shuffled: data.shuffled.present ? data.shuffled.value : this.shuffled,
-      collections:
-          data.collections.present ? data.collections.value : this.collections,
+      collections: data.collections.present
+          ? data.collections.value
+          : this.collections,
       tracks: data.tracks.present ? data.tracks.value : this.tracks,
       currentIndex: data.currentIndex.present
           ? data.currentIndex.value
@@ -2465,7 +2857,14 @@ class AudioPlayerStateTableData extends DataClass
 
   @override
   int get hashCode => Object.hash(
-      id, playing, loopMode, shuffled, collections, tracks, currentIndex);
+    id,
+    playing,
+    loopMode,
+    shuffled,
+    collections,
+    tracks,
+    currentIndex,
+  );
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -2505,10 +2904,10 @@ class AudioPlayerStateTableCompanion
     required String collections,
     this.tracks = const Value.absent(),
     this.currentIndex = const Value.absent(),
-  })  : playing = Value(playing),
-        loopMode = Value(loopMode),
-        shuffled = Value(shuffled),
-        collections = Value(collections);
+  }) : playing = Value(playing),
+       loopMode = Value(loopMode),
+       shuffled = Value(shuffled),
+       collections = Value(collections);
   static Insertable<AudioPlayerStateTableData> custom({
     Expression<int>? id,
     Expression<bool>? playing,
@@ -2529,14 +2928,15 @@ class AudioPlayerStateTableCompanion
     });
   }
 
-  AudioPlayerStateTableCompanion copyWith(
-      {Value<int>? id,
-      Value<bool>? playing,
-      Value<String>? loopMode,
-      Value<bool>? shuffled,
-      Value<String>? collections,
-      Value<String>? tracks,
-      Value<int>? currentIndex}) {
+  AudioPlayerStateTableCompanion copyWith({
+    Value<int>? id,
+    Value<bool>? playing,
+    Value<String>? loopMode,
+    Value<bool>? shuffled,
+    Value<String>? collections,
+    Value<String>? tracks,
+    Value<int>? currentIndex,
+  }) {
     return AudioPlayerStateTableCompanion(
       id: id ?? this.id,
       playing: playing ?? this.playing,
@@ -2597,26 +2997,45 @@ class HistoryTable extends Table
   final String? _alias;
   HistoryTable(this.attachedDatabase, [this._alias]);
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
-      'id', aliasedName, false,
-      hasAutoIncrement: true,
-      type: DriftSqlType.int,
-      requiredDuringInsert: false,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
+    'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'PRIMARY KEY AUTOINCREMENT',
+    ),
+  );
   late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
-      'created_at', aliasedName, false,
-      type: DriftSqlType.dateTime,
-      requiredDuringInsert: false,
-      defaultValue: currentDateAndTime);
+    'created_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+    defaultValue: currentDateAndTime,
+  );
   late final GeneratedColumn<String> type = GeneratedColumn<String>(
-      'type', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
+    'type',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
   late final GeneratedColumn<String> itemId = GeneratedColumn<String>(
-      'item_id', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
+    'item_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
   late final GeneratedColumn<String> data = GeneratedColumn<String>(
-      'data', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
+    'data',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
   @override
   List<GeneratedColumn> get $columns => [id, createdAt, type, itemId, data];
   @override
@@ -2630,16 +3049,26 @@ class HistoryTable extends Table
   HistoryTableData map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return HistoryTableData(
-      id: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
-      createdAt: attachedDatabase.typeMapping
-          .read(DriftSqlType.dateTime, data['${effectivePrefix}created_at'])!,
-      type: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}type'])!,
-      itemId: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}item_id'])!,
-      data: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}data'])!,
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      createdAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}created_at'],
+      )!,
+      type: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}type'],
+      )!,
+      itemId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}item_id'],
+      )!,
+      data: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}data'],
+      )!,
     );
   }
 
@@ -2656,12 +3085,13 @@ class HistoryTableData extends DataClass
   final String type;
   final String itemId;
   final String data;
-  const HistoryTableData(
-      {required this.id,
-      required this.createdAt,
-      required this.type,
-      required this.itemId,
-      required this.data});
+  const HistoryTableData({
+    required this.id,
+    required this.createdAt,
+    required this.type,
+    required this.itemId,
+    required this.data,
+  });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -2683,8 +3113,10 @@ class HistoryTableData extends DataClass
     );
   }
 
-  factory HistoryTableData.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
+  factory HistoryTableData.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return HistoryTableData(
       id: serializer.fromJson<int>(json['id']),
@@ -2706,19 +3138,19 @@ class HistoryTableData extends DataClass
     };
   }
 
-  HistoryTableData copyWith(
-          {int? id,
-          DateTime? createdAt,
-          String? type,
-          String? itemId,
-          String? data}) =>
-      HistoryTableData(
-        id: id ?? this.id,
-        createdAt: createdAt ?? this.createdAt,
-        type: type ?? this.type,
-        itemId: itemId ?? this.itemId,
-        data: data ?? this.data,
-      );
+  HistoryTableData copyWith({
+    int? id,
+    DateTime? createdAt,
+    String? type,
+    String? itemId,
+    String? data,
+  }) => HistoryTableData(
+    id: id ?? this.id,
+    createdAt: createdAt ?? this.createdAt,
+    type: type ?? this.type,
+    itemId: itemId ?? this.itemId,
+    data: data ?? this.data,
+  );
   HistoryTableData copyWithCompanion(HistoryTableCompanion data) {
     return HistoryTableData(
       id: data.id.present ? data.id.value : this.id,
@@ -2773,9 +3205,9 @@ class HistoryTableCompanion extends UpdateCompanion<HistoryTableData> {
     required String type,
     required String itemId,
     required String data,
-  })  : type = Value(type),
-        itemId = Value(itemId),
-        data = Value(data);
+  }) : type = Value(type),
+       itemId = Value(itemId),
+       data = Value(data);
   static Insertable<HistoryTableData> custom({
     Expression<int>? id,
     Expression<DateTime>? createdAt,
@@ -2792,12 +3224,13 @@ class HistoryTableCompanion extends UpdateCompanion<HistoryTableData> {
     });
   }
 
-  HistoryTableCompanion copyWith(
-      {Value<int>? id,
-      Value<DateTime>? createdAt,
-      Value<String>? type,
-      Value<String>? itemId,
-      Value<String>? data}) {
+  HistoryTableCompanion copyWith({
+    Value<int>? id,
+    Value<DateTime>? createdAt,
+    Value<String>? type,
+    Value<String>? itemId,
+    Value<String>? data,
+  }) {
     return HistoryTableCompanion(
       id: id ?? this.id,
       createdAt: createdAt ?? this.createdAt,
@@ -2847,18 +3280,30 @@ class LyricsTable extends Table with TableInfo<LyricsTable, LyricsTableData> {
   final String? _alias;
   LyricsTable(this.attachedDatabase, [this._alias]);
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
-      'id', aliasedName, false,
-      hasAutoIncrement: true,
-      type: DriftSqlType.int,
-      requiredDuringInsert: false,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
+    'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'PRIMARY KEY AUTOINCREMENT',
+    ),
+  );
   late final GeneratedColumn<String> trackId = GeneratedColumn<String>(
-      'track_id', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
+    'track_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
   late final GeneratedColumn<String> data = GeneratedColumn<String>(
-      'data', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
+    'data',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
   @override
   List<GeneratedColumn> get $columns => [id, trackId, data];
   @override
@@ -2872,12 +3317,18 @@ class LyricsTable extends Table with TableInfo<LyricsTable, LyricsTableData> {
   LyricsTableData map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return LyricsTableData(
-      id: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
-      trackId: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}track_id'])!,
-      data: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}data'])!,
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      trackId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}track_id'],
+      )!,
+      data: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}data'],
+      )!,
     );
   }
 
@@ -2891,8 +3342,11 @@ class LyricsTableData extends DataClass implements Insertable<LyricsTableData> {
   final int id;
   final String trackId;
   final String data;
-  const LyricsTableData(
-      {required this.id, required this.trackId, required this.data});
+  const LyricsTableData({
+    required this.id,
+    required this.trackId,
+    required this.data,
+  });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -2910,8 +3364,10 @@ class LyricsTableData extends DataClass implements Insertable<LyricsTableData> {
     );
   }
 
-  factory LyricsTableData.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
+  factory LyricsTableData.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return LyricsTableData(
       id: serializer.fromJson<int>(json['id']),
@@ -2977,8 +3433,8 @@ class LyricsTableCompanion extends UpdateCompanion<LyricsTableData> {
     this.id = const Value.absent(),
     required String trackId,
     required String data,
-  })  : trackId = Value(trackId),
-        data = Value(data);
+  }) : trackId = Value(trackId),
+       data = Value(data);
   static Insertable<LyricsTableData> custom({
     Expression<int>? id,
     Expression<String>? trackId,
@@ -2991,8 +3447,11 @@ class LyricsTableCompanion extends UpdateCompanion<LyricsTableData> {
     });
   }
 
-  LyricsTableCompanion copyWith(
-      {Value<int>? id, Value<String>? trackId, Value<String>? data}) {
+  LyricsTableCompanion copyWith({
+    Value<int>? id,
+    Value<String>? trackId,
+    Value<String>? data,
+  }) {
     return LyricsTableCompanion(
       id: id ?? this.id,
       trackId: trackId ?? this.trackId,
@@ -3033,65 +3492,109 @@ class MetadataPluginsTable extends Table
   final String? _alias;
   MetadataPluginsTable(this.attachedDatabase, [this._alias]);
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
-      'id', aliasedName, false,
-      hasAutoIncrement: true,
-      type: DriftSqlType.int,
-      requiredDuringInsert: false,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
+    'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'PRIMARY KEY AUTOINCREMENT',
+    ),
+  );
   late final GeneratedColumn<String> name = GeneratedColumn<String>(
-      'name', aliasedName, false,
-      additionalChecks:
-          GeneratedColumn.checkTextLength(minTextLength: 1, maxTextLength: 50),
-      type: DriftSqlType.string,
-      requiredDuringInsert: true);
+    'name',
+    aliasedName,
+    false,
+    additionalChecks: GeneratedColumn.checkTextLength(
+      minTextLength: 1,
+      maxTextLength: 50,
+    ),
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
   late final GeneratedColumn<String> description = GeneratedColumn<String>(
-      'description', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
+    'description',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
   late final GeneratedColumn<String> version = GeneratedColumn<String>(
-      'version', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
+    'version',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
   late final GeneratedColumn<String> author = GeneratedColumn<String>(
-      'author', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
+    'author',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
   late final GeneratedColumn<String> entryPoint = GeneratedColumn<String>(
-      'entry_point', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
+    'entry_point',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
   late final GeneratedColumn<String> apis = GeneratedColumn<String>(
-      'apis', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
+    'apis',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
   late final GeneratedColumn<String> abilities = GeneratedColumn<String>(
-      'abilities', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
+    'abilities',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
   late final GeneratedColumn<bool> selected = GeneratedColumn<bool>(
-      'selected', aliasedName, false,
-      type: DriftSqlType.bool,
-      requiredDuringInsert: false,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('CHECK ("selected" IN (0, 1))'),
-      defaultValue: const Constant(false));
+    'selected',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("selected" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
   late final GeneratedColumn<String> repository = GeneratedColumn<String>(
-      'repository', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
+    'repository',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
   late final GeneratedColumn<String> pluginApiVersion = GeneratedColumn<String>(
-      'plugin_api_version', aliasedName, false,
-      type: DriftSqlType.string,
-      requiredDuringInsert: false,
-      defaultValue: const Constant('1.0.0'));
+    'plugin_api_version',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant('1.0.0'),
+  );
   @override
   List<GeneratedColumn> get $columns => [
-        id,
-        name,
-        description,
-        version,
-        author,
-        entryPoint,
-        apis,
-        abilities,
-        selected,
-        repository,
-        pluginApiVersion
-      ];
+    id,
+    name,
+    description,
+    version,
+    author,
+    entryPoint,
+    apis,
+    abilities,
+    selected,
+    repository,
+    pluginApiVersion,
+  ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -3100,32 +3603,56 @@ class MetadataPluginsTable extends Table
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  MetadataPluginsTableData map(Map<String, dynamic> data,
-      {String? tablePrefix}) {
+  MetadataPluginsTableData map(
+    Map<String, dynamic> data, {
+    String? tablePrefix,
+  }) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return MetadataPluginsTableData(
-      id: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
-      name: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
-      description: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}description'])!,
-      version: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}version'])!,
-      author: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}author'])!,
-      entryPoint: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}entry_point'])!,
-      apis: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}apis'])!,
-      abilities: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}abilities'])!,
-      selected: attachedDatabase.typeMapping
-          .read(DriftSqlType.bool, data['${effectivePrefix}selected'])!,
-      repository: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}repository']),
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      name: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}name'],
+      )!,
+      description: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}description'],
+      )!,
+      version: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}version'],
+      )!,
+      author: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}author'],
+      )!,
+      entryPoint: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}entry_point'],
+      )!,
+      apis: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}apis'],
+      )!,
+      abilities: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}abilities'],
+      )!,
+      selected: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}selected'],
+      )!,
+      repository: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}repository'],
+      ),
       pluginApiVersion: attachedDatabase.typeMapping.read(
-          DriftSqlType.string, data['${effectivePrefix}plugin_api_version'])!,
+        DriftSqlType.string,
+        data['${effectivePrefix}plugin_api_version'],
+      )!,
     );
   }
 
@@ -3148,18 +3675,19 @@ class MetadataPluginsTableData extends DataClass
   final bool selected;
   final String? repository;
   final String pluginApiVersion;
-  const MetadataPluginsTableData(
-      {required this.id,
-      required this.name,
-      required this.description,
-      required this.version,
-      required this.author,
-      required this.entryPoint,
-      required this.apis,
-      required this.abilities,
-      required this.selected,
-      this.repository,
-      required this.pluginApiVersion});
+  const MetadataPluginsTableData({
+    required this.id,
+    required this.name,
+    required this.description,
+    required this.version,
+    required this.author,
+    required this.entryPoint,
+    required this.apis,
+    required this.abilities,
+    required this.selected,
+    this.repository,
+    required this.pluginApiVersion,
+  });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -3197,8 +3725,10 @@ class MetadataPluginsTableData extends DataClass
     );
   }
 
-  factory MetadataPluginsTableData.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
+  factory MetadataPluginsTableData.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return MetadataPluginsTableData(
       id: serializer.fromJson<int>(json['id']),
@@ -3232,47 +3762,51 @@ class MetadataPluginsTableData extends DataClass
     };
   }
 
-  MetadataPluginsTableData copyWith(
-          {int? id,
-          String? name,
-          String? description,
-          String? version,
-          String? author,
-          String? entryPoint,
-          String? apis,
-          String? abilities,
-          bool? selected,
-          Value<String?> repository = const Value.absent(),
-          String? pluginApiVersion}) =>
-      MetadataPluginsTableData(
-        id: id ?? this.id,
-        name: name ?? this.name,
-        description: description ?? this.description,
-        version: version ?? this.version,
-        author: author ?? this.author,
-        entryPoint: entryPoint ?? this.entryPoint,
-        apis: apis ?? this.apis,
-        abilities: abilities ?? this.abilities,
-        selected: selected ?? this.selected,
-        repository: repository.present ? repository.value : this.repository,
-        pluginApiVersion: pluginApiVersion ?? this.pluginApiVersion,
-      );
+  MetadataPluginsTableData copyWith({
+    int? id,
+    String? name,
+    String? description,
+    String? version,
+    String? author,
+    String? entryPoint,
+    String? apis,
+    String? abilities,
+    bool? selected,
+    Value<String?> repository = const Value.absent(),
+    String? pluginApiVersion,
+  }) => MetadataPluginsTableData(
+    id: id ?? this.id,
+    name: name ?? this.name,
+    description: description ?? this.description,
+    version: version ?? this.version,
+    author: author ?? this.author,
+    entryPoint: entryPoint ?? this.entryPoint,
+    apis: apis ?? this.apis,
+    abilities: abilities ?? this.abilities,
+    selected: selected ?? this.selected,
+    repository: repository.present ? repository.value : this.repository,
+    pluginApiVersion: pluginApiVersion ?? this.pluginApiVersion,
+  );
   MetadataPluginsTableData copyWithCompanion(
-      MetadataPluginsTableCompanion data) {
+    MetadataPluginsTableCompanion data,
+  ) {
     return MetadataPluginsTableData(
       id: data.id.present ? data.id.value : this.id,
       name: data.name.present ? data.name.value : this.name,
-      description:
-          data.description.present ? data.description.value : this.description,
+      description: data.description.present
+          ? data.description.value
+          : this.description,
       version: data.version.present ? data.version.value : this.version,
       author: data.author.present ? data.author.value : this.author,
-      entryPoint:
-          data.entryPoint.present ? data.entryPoint.value : this.entryPoint,
+      entryPoint: data.entryPoint.present
+          ? data.entryPoint.value
+          : this.entryPoint,
       apis: data.apis.present ? data.apis.value : this.apis,
       abilities: data.abilities.present ? data.abilities.value : this.abilities,
       selected: data.selected.present ? data.selected.value : this.selected,
-      repository:
-          data.repository.present ? data.repository.value : this.repository,
+      repository: data.repository.present
+          ? data.repository.value
+          : this.repository,
       pluginApiVersion: data.pluginApiVersion.present
           ? data.pluginApiVersion.value
           : this.pluginApiVersion,
@@ -3298,8 +3832,19 @@ class MetadataPluginsTableData extends DataClass
   }
 
   @override
-  int get hashCode => Object.hash(id, name, description, version, author,
-      entryPoint, apis, abilities, selected, repository, pluginApiVersion);
+  int get hashCode => Object.hash(
+    id,
+    name,
+    description,
+    version,
+    author,
+    entryPoint,
+    apis,
+    abilities,
+    selected,
+    repository,
+    pluginApiVersion,
+  );
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -3355,13 +3900,13 @@ class MetadataPluginsTableCompanion
     this.selected = const Value.absent(),
     this.repository = const Value.absent(),
     this.pluginApiVersion = const Value.absent(),
-  })  : name = Value(name),
-        description = Value(description),
-        version = Value(version),
-        author = Value(author),
-        entryPoint = Value(entryPoint),
-        apis = Value(apis),
-        abilities = Value(abilities);
+  }) : name = Value(name),
+       description = Value(description),
+       version = Value(version),
+       author = Value(author),
+       entryPoint = Value(entryPoint),
+       apis = Value(apis),
+       abilities = Value(abilities);
   static Insertable<MetadataPluginsTableData> custom({
     Expression<int>? id,
     Expression<String>? name,
@@ -3390,18 +3935,19 @@ class MetadataPluginsTableCompanion
     });
   }
 
-  MetadataPluginsTableCompanion copyWith(
-      {Value<int>? id,
-      Value<String>? name,
-      Value<String>? description,
-      Value<String>? version,
-      Value<String>? author,
-      Value<String>? entryPoint,
-      Value<String>? apis,
-      Value<String>? abilities,
-      Value<bool>? selected,
-      Value<String?>? repository,
-      Value<String>? pluginApiVersion}) {
+  MetadataPluginsTableCompanion copyWith({
+    Value<int>? id,
+    Value<String>? name,
+    Value<String>? description,
+    Value<String>? version,
+    Value<String>? author,
+    Value<String>? entryPoint,
+    Value<String>? apis,
+    Value<String>? abilities,
+    Value<bool>? selected,
+    Value<String?>? repository,
+    Value<String>? pluginApiVersion,
+  }) {
     return MetadataPluginsTableCompanion(
       id: id ?? this.id,
       name: name ?? this.name,
@@ -3477,8 +4023,9 @@ class MetadataPluginsTableCompanion
 
 class DatabaseAtV8 extends GeneratedDatabase {
   DatabaseAtV8(QueryExecutor e) : super(e);
-  late final AuthenticationTable authenticationTable =
-      AuthenticationTable(this);
+  late final AuthenticationTable authenticationTable = AuthenticationTable(
+    this,
+  );
   late final BlacklistTable blacklistTable = BlacklistTable(this);
   late final PreferencesTable preferencesTable = PreferencesTable(this);
   late final ScrobblerTable scrobblerTable = ScrobblerTable(this);
@@ -3488,30 +4035,35 @@ class DatabaseAtV8 extends GeneratedDatabase {
       AudioPlayerStateTable(this);
   late final HistoryTable historyTable = HistoryTable(this);
   late final LyricsTable lyricsTable = LyricsTable(this);
-  late final MetadataPluginsTable metadataPluginsTable =
-      MetadataPluginsTable(this);
-  late final Index uniqueBlacklist = Index('unique_blacklist',
-      'CREATE UNIQUE INDEX unique_blacklist ON blacklist_table (element_type, element_id)');
-  late final Index uniqTrackMatch = Index('uniq_track_match',
-      'CREATE UNIQUE INDEX uniq_track_match ON source_match_table (track_id, source_id, source_type)');
+  late final MetadataPluginsTable metadataPluginsTable = MetadataPluginsTable(
+    this,
+  );
+  late final Index uniqueBlacklist = Index(
+    'unique_blacklist',
+    'CREATE UNIQUE INDEX unique_blacklist ON blacklist_table (element_type, element_id)',
+  );
+  late final Index uniqTrackMatch = Index(
+    'uniq_track_match',
+    'CREATE UNIQUE INDEX uniq_track_match ON source_match_table (track_id, source_id, source_type)',
+  );
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
   @override
   List<DatabaseSchemaEntity> get allSchemaEntities => [
-        authenticationTable,
-        blacklistTable,
-        preferencesTable,
-        scrobblerTable,
-        skipSegmentTable,
-        sourceMatchTable,
-        audioPlayerStateTable,
-        historyTable,
-        lyricsTable,
-        metadataPluginsTable,
-        uniqueBlacklist,
-        uniqTrackMatch
-      ];
+    authenticationTable,
+    blacklistTable,
+    preferencesTable,
+    scrobblerTable,
+    skipSegmentTable,
+    sourceMatchTable,
+    audioPlayerStateTable,
+    historyTable,
+    lyricsTable,
+    metadataPluginsTable,
+    uniqueBlacklist,
+    uniqTrackMatch,
+  ];
   @override
   int get schemaVersion => 8;
 }

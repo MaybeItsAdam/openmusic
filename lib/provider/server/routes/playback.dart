@@ -31,9 +31,7 @@ final _deviceClients = Set.unmodifiable({
 });
 
 String? get _randomUserAgent => _deviceClients
-    .elementAt(
-      Random().nextInt(_deviceClients.length),
-    )
+    .elementAt(Random().nextInt(_deviceClients.length))
     .payload["context"]["client"]["userAgent"];
 
 class ServerPlaybackRoutes {
@@ -57,21 +55,25 @@ class ServerPlaybackRoutes {
     Request request,
     String trackId,
   ) async {
-    final track =
-        playlist.tracks.firstWhere((element) => element.id == trackId);
+    final track = playlist.tracks.firstWhere(
+      (element) => element.id == trackId,
+    );
 
-    final activeSourcedTrack =
-        await ref.read(activeTrackSourcesProvider.future);
+    final activeSourcedTrack = await ref.read(
+      activeTrackSourcesProvider.future,
+    );
 
-    final media = audioPlayer.playlist.medias
-        .firstWhere((e) => e.uri == request.requestedUri.toString());
+    final media = audioPlayer.playlist.medias.firstWhere(
+      (e) => e.uri == request.requestedUri.toString(),
+    );
     final spotubeMedia =
         media is SpotubeMedia ? media : SpotubeMedia.media(media);
     final sourcedTrack = activeSourcedTrack?.track.id == track.id
         ? activeSourcedTrack?.source
         : await ref.read(
-            sourcedTrackProvider(spotubeMedia.track as SpotubeFullTrackObject)
-                .future,
+            sourcedTrackProvider(
+              spotubeMedia.track as SpotubeFullTrackObject,
+            ).future,
           );
 
     return sourcedTrack;
@@ -147,7 +149,7 @@ class ServerPlaybackRoutes {
           "content-length": ["${cachedFileLength - 1}"],
           "accept-ranges": ["bytes"],
           "content-range": [
-            "bytes 0-${cachedFileLength - 1}/$cachedFileLength"
+            "bytes 0-${cachedFileLength - 1}/$cachedFileLength",
           ],
           "connection": ["close"],
         }),
@@ -162,34 +164,30 @@ class ServerPlaybackRoutes {
             .swapWithNextSibling()
             .then((track) => track.url!);
 
+    final requestHeaders = Map<String, dynamic>.from(headers)
+      ..remove("host")
+      ..remove("Host");
+
     final options = Options(
       headers: {
-        ...headers,
+        ...requestHeaders,
         "user-agent": _randomUserAgent,
         "Cache-Control": "max-age=3600",
         "Connection": "keep-alive",
-        "host": Uri.parse(url).host,
       },
       responseType: ResponseType.stream,
-      validateStatus: (status) => status! < 400,
+      validateStatus: (status) => status != null && status < 400,
     );
 
-    final contentLengthRes = await Future<dio_lib.Response?>.value(
-      dio.head(
-        url,
-        options: options.copyWith(responseType: ResponseType.bytes),
-      ),
-    ).catchError((e, stack) async {
-      AppLogger.reportError(e, stack);
-
-      final sourcedTrack = await ref
-          .read(sourcedTrackProvider(track.query).notifier)
-          .refreshStreamingUrl();
-
-      url = sourcedTrack.url!;
-
-      return dio.head(url, options: options);
-    });
+    dio_lib.Response? contentLengthRes;
+    if (url.contains("m3u8") || url.contains("mpegurl")) {
+      try {
+        contentLengthRes = await dio.head(
+          url,
+          options: options.copyWith(responseType: ResponseType.bytes),
+        );
+      } catch (_) {}
+    }
 
     // Redirect to m3u8 link directly as it handles range requests internally
     if (contentLengthRes?.headers.value("content-type") ==
@@ -206,7 +204,17 @@ class ServerPlaybackRoutes {
       );
     }
 
-    final res = await dio.get<ResponseBody>(url, options: options);
+    late dio_lib.Response<ResponseBody> res;
+    try {
+      res = await dio.get<ResponseBody>(url, options: options);
+    } catch (e, stack) {
+      AppLogger.reportError(e, stack);
+      final sourcedTrack = await ref
+          .read(sourcedTrackProvider(track.query).notifier)
+          .refreshStreamingUrl();
+      url = sourcedTrack.url!;
+      res = await dio.get<ResponseBody>(url, options: options);
+    }
 
     AppLogger.log.i(
       "Response for track: ${track.query.name}\n"
@@ -226,8 +234,9 @@ class ServerPlaybackRoutes {
     }
 
     // Write the stream to the file based on the range
-    final partialCacheFileSink =
-        trackPartialCacheFile.openWrite(mode: FileMode.writeOnlyAppend);
+    final partialCacheFileSink = trackPartialCacheFile.openWrite(
+      mode: FileMode.writeOnlyAppend,
+    );
     final contentRange = res.headers.value("content-range") != null
         ? ContentRangeHeader.parse(res.headers.value("content-range") ?? "")
         : ContentRangeHeader(0, 0, 0);
@@ -283,15 +292,9 @@ class ServerPlaybackRoutes {
         return Response.notFound("Track not found in the current queue");
       }
 
-      final res = await streamTrackInformation(
-        request,
-        sourcedTrack,
-      );
+      final res = await streamTrackInformation(request, sourcedTrack);
 
-      return Response(
-        res.statusCode!,
-        headers: res.headers.map,
-      );
+      return Response(res.statusCode!, headers: res.headers.map);
     } catch (e, stack) {
       AppLogger.reportError(e, stack);
       return Response.internalServerError();
@@ -307,11 +310,7 @@ class ServerPlaybackRoutes {
         return Response.notFound("Track not found in the current queue");
       }
 
-      final res = await streamTrack(
-        request,
-        sourcedTrack,
-        request.headers,
-      );
+      final res = await streamTrack(request, sourcedTrack, request.headers);
 
       if (res.data is ResponseBody) {
         return Response(
@@ -354,5 +353,6 @@ class ServerPlaybackRoutes {
   }
 }
 
-final serverPlaybackRoutesProvider =
-    Provider((ref) => ServerPlaybackRoutes(ref));
+final serverPlaybackRoutesProvider = Provider(
+  (ref) => ServerPlaybackRoutes(ref),
+);

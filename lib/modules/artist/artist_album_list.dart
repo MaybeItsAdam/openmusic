@@ -9,16 +9,14 @@ import 'package:spotube/provider/metadata_plugin/utils/common.dart';
 class ArtistAlbumList extends HookConsumerWidget {
   final String artistId;
 
-  const ArtistAlbumList(
-    this.artistId, {
-    super.key,
-  });
+  const ArtistAlbumList(this.artistId, {super.key});
 
   @override
   Widget build(BuildContext context, ref) {
     final albumsQuery = ref.watch(metadataPluginArtistAlbumsProvider(artistId));
-    final albumsQueryNotifier =
-        ref.watch(metadataPluginArtistAlbumsProvider(artistId).notifier);
+    final albumsQueryNotifier = ref.watch(
+      metadataPluginArtistAlbumsProvider(artistId).notifier,
+    );
 
     final albums = albumsQuery.asData?.value.items ?? [];
 
@@ -29,10 +27,7 @@ class ArtistAlbumList extends HookConsumerWidget {
       hasNextPage: albumsQuery.asData?.value.hasMore ?? false,
       items: albums,
       onFetchMore: albumsQueryNotifier.fetchMore,
-      title: Text(
-        context.l10n.albums,
-        style: theme.typography.h4,
-      ),
+      title: Text(context.l10n.albums, style: theme.typography.h4),
     );
   }
 }

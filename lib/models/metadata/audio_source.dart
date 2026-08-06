@@ -2,10 +2,7 @@ part of 'metadata.dart';
 
 final oneOptionalDecimalFormatter = NumberFormat('0.#', 'en_US');
 
-enum SpotubeMediaCompressionType {
-  lossy,
-  lossless,
-}
+enum SpotubeMediaCompressionType { lossy, lossless }
 
 @Freezed(unionKey: 'type')
 class SpotubeAudioSourceContainerPreset
@@ -27,7 +24,8 @@ class SpotubeAudioSourceContainerPreset
   }) = SpotubeAudioSourceContainerPresetLossless;
 
   factory SpotubeAudioSourceContainerPreset.fromJson(
-          Map<String, dynamic> json) =>
+    Map<String, dynamic> json,
+  ) =>
       _$SpotubeAudioSourceContainerPresetFromJson(json);
 
   String getFileExtension() {
@@ -49,7 +47,8 @@ class SpotubeAudioLossyContainerQuality
   }) = _SpotubeAudioLossyContainerQuality;
 
   factory SpotubeAudioLossyContainerQuality.fromJson(
-          Map<String, dynamic> json) =>
+    Map<String, dynamic> json,
+  ) =>
       _$SpotubeAudioLossyContainerQualityFromJson(json);
 
   @override
@@ -69,7 +68,8 @@ class SpotubeAudioLosslessContainerQuality
   }) = _SpotubeAudioLosslessContainerQuality;
 
   factory SpotubeAudioLosslessContainerQuality.fromJson(
-          Map<String, dynamic> json) =>
+    Map<String, dynamic> json,
+  ) =>
       _$SpotubeAudioLosslessContainerQualityFromJson(json);
 
   @override
@@ -89,8 +89,28 @@ class SpotubeAudioSourceMatchObject with _$SpotubeAudioSourceMatchObject {
     required String externalUri,
   }) = _SpotubeAudioSourceMatchObject;
 
-  factory SpotubeAudioSourceMatchObject.fromJson(Map<String, dynamic> json) =>
-      _$SpotubeAudioSourceMatchObjectFromJson(json);
+  factory SpotubeAudioSourceMatchObject.fromJson(Map<String, dynamic> json) {
+    final rawDuration = json['duration'];
+    int durationMicros = 0;
+    if (rawDuration is num) {
+      final val = rawDuration.toInt();
+      if (val > 0 && val < 86400 * 1000) {
+        durationMicros = val * 1000000;
+      } else {
+        durationMicros = val;
+      }
+    }
+
+    return SpotubeAudioSourceMatchObject(
+      id: json['id'] as String,
+      title: json['title'] as String,
+      artists:
+          (json['artists'] as List<dynamic>).map((e) => e as String).toList(),
+      duration: Duration(microseconds: durationMicros),
+      thumbnail: json['thumbnail'] as String?,
+      externalUri: json['externalUri'] as String,
+    );
+  }
 }
 
 @freezed

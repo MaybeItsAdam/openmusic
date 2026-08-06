@@ -14,9 +14,7 @@ class MetadataPluginArtistEndpoint {
     final raw = await hetuMetadataArtist
         .invoke("getArtist", positionalArgs: [id]) as Map;
 
-    return SpotubeFullArtistObject.fromJson(
-      raw.cast<String, dynamic>(),
-    );
+    return SpotubeFullArtistObject.fromJson(raw.cast<String, dynamic>());
   }
 
   Future<SpotubePaginationResponseObject<SpotubeFullTrackObject>> topTracks(
@@ -27,17 +25,14 @@ class MetadataPluginArtistEndpoint {
     final raw = await hetuMetadataArtist.invoke(
       "topTracks",
       positionalArgs: [id],
-      namedArgs: {
-        "offset": offset,
-        "limit": limit,
-      }..removeWhere((key, value) => value == null),
+      namedArgs: {"offset": offset, "limit": limit}
+        ..removeWhere((key, value) => value == null),
     ) as Map;
 
     return SpotubePaginationResponseObject<SpotubeFullTrackObject>.fromJson(
       raw.cast<String, dynamic>(),
-      (Map json) => SpotubeFullTrackObject.fromJson(
-        json.cast<String, dynamic>(),
-      ),
+      (Map json) =>
+          SpotubeFullTrackObject.fromJson(json.cast<String, dynamic>()),
     );
   }
 
@@ -49,32 +44,23 @@ class MetadataPluginArtistEndpoint {
     final raw = await hetuMetadataArtist.invoke(
       "albums",
       positionalArgs: [id],
-      namedArgs: {
-        "offset": offset,
-        "limit": limit,
-      }..removeWhere((key, value) => value == null),
+      namedArgs: {"offset": offset, "limit": limit}
+        ..removeWhere((key, value) => value == null),
     ) as Map;
 
     return SpotubePaginationResponseObject<SpotubeSimpleAlbumObject>.fromJson(
       raw.cast<String, dynamic>(),
-      (Map json) => SpotubeSimpleAlbumObject.fromJson(
-        json.cast<String, dynamic>(),
-      ),
+      (Map json) =>
+          SpotubeSimpleAlbumObject.fromJson(json.cast<String, dynamic>()),
     );
   }
 
   Future<void> save(List<String> ids) async {
-    await hetuMetadataArtist.invoke(
-      "save",
-      positionalArgs: [ids],
-    );
+    await hetuMetadataArtist.invoke("save", positionalArgs: [ids]);
   }
 
   Future<void> unsave(List<String> ids) async {
-    await hetuMetadataArtist.invoke(
-      "unsave",
-      positionalArgs: [ids],
-    );
+    await hetuMetadataArtist.invoke("unsave", positionalArgs: [ids]);
   }
 
   Future<SpotubePaginationResponseObject<SpotubeFullArtistObject>> related(
@@ -85,17 +71,14 @@ class MetadataPluginArtistEndpoint {
     final raw = await hetuMetadataArtist.invoke(
       "related",
       positionalArgs: [id],
-      namedArgs: {
-        "offset": offset,
-        "limit": limit ?? 20,
-      }..removeWhere((key, value) => value == null),
+      namedArgs: {"offset": offset, "limit": limit ?? 20}
+        ..removeWhere((key, value) => value == null),
     ) as Map;
 
     return SpotubePaginationResponseObject<SpotubeFullArtistObject>.fromJson(
       raw.cast<String, dynamic>(),
-      (Map json) => SpotubeFullArtistObject.fromJson(
-        json.cast<String, dynamic>(),
-      ),
+      (Map json) =>
+          SpotubeFullArtistObject.fromJson(json.cast<String, dynamic>()),
     );
   }
 }

@@ -9,8 +9,9 @@ import 'package:spotube/services/audio_player/audio_player.dart';
 void useEndlessPlayback(WidgetRef ref) {
   final playback = ref.watch(audioPlayerProvider.notifier);
   final audioPlayerState = ref.watch(audioPlayerProvider);
-  final endlessPlayback =
-      ref.watch(userPreferencesProvider.select((s) => s.endlessPlayback));
+  final endlessPlayback = ref.watch(
+    userPreferencesProvider.select((s) => s.endlessPlayback),
+  );
   final metadataPlugin = ref.watch(metadataPluginProvider.future);
 
   useEffect(
@@ -49,8 +50,9 @@ void useEndlessPlayback(WidgetRef ref) {
         listener(audioPlayerState.currentIndex);
       }
 
-      final subscription =
-          audioPlayer.currentIndexChangedStream.listen(listener);
+      final subscription = audioPlayer.currentIndexChangedStream.listen(
+        listener,
+      );
 
       return subscription.cancel;
     },

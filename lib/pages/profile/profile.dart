@@ -39,11 +39,7 @@ class ProfilePage extends HookConsumerWidget {
 
     return SafeArea(
       child: Scaffold(
-        headers: [
-          TitleBar(
-            title: Text(context.l10n.profile),
-          )
-        ],
+        headers: [TitleBar(title: Text(context.l10n.profile))],
         child: Skeletonizer(
           enabled: me.isLoading,
           child: CustomScrollView(
@@ -69,10 +65,7 @@ class ProfilePage extends HookConsumerWidget {
               ),
               const SliverGap(10),
               SliverToBoxAdapter(
-                child: Text(
-                  meData.name,
-                  textAlign: TextAlign.center,
-                ).h4(),
+                child: Text(meData.name, textAlign: TextAlign.center).h4(),
               ),
               const SliverGap(20),
               SliverCrossAxisConstrained(

@@ -37,7 +37,7 @@ class SyncedLyricsNotifier
       options: Options(
         headers: {
           "User-Agent":
-              "Spotube v${packageInfo.version} (https://github.com/KRTirtho/spotube)"
+              "Spotube v${packageInfo.version} (https://github.com/KRTirtho/spotube)",
         },
         responseType: ResponseType.json,
       ),
@@ -57,10 +57,9 @@ class SyncedLyricsNotifier
 
     final syncedLyricsRaw = json["syncedLyrics"] as String?;
     final syncedLyrics = syncedLyricsRaw?.isNotEmpty == true
-        ? Lrc.parse(syncedLyricsRaw!)
-            .lyrics
-            .map(LyricSlice.fromLrcLine)
-            .toList()
+        ? Lrc.parse(
+            syncedLyricsRaw!,
+          ).lyrics.map(LyricSlice.fromLrcLine).toList()
         : null;
 
     if (syncedLyrics?.isNotEmpty == true) {
@@ -115,10 +114,7 @@ class SyncedLyricsNotifier
 
       if (cachedLyrics == null || cachedLyrics.lyrics.isEmpty) {
         await database.into(database.lyricsTable).insert(
-              LyricsTableCompanion.insert(
-                trackId: track.id,
-                data: lyrics,
-              ),
+              LyricsTableCompanion.insert(trackId: track.id, data: lyrics),
               mode: InsertMode.replace,
             );
       }
@@ -134,16 +130,17 @@ class SyncedLyricsNotifier
 final syncedLyricsDelayProvider = StateProvider<int>((ref) => 0);
 
 final syncedLyricsProvider = AsyncNotifierProviderFamily<SyncedLyricsNotifier,
-    SubtitleSimple, SpotubeTrackObject?>(
-  () => SyncedLyricsNotifier(),
-);
+    SubtitleSimple, SpotubeTrackObject?>(() => SyncedLyricsNotifier());
 
-final syncedLyricsMapProvider =
-    FutureProvider.family((ref, SpotubeTrackObject? track) async {
+final syncedLyricsMapProvider = FutureProvider.family((
+  ref,
+  SpotubeTrackObject? track,
+) async {
   final syncedLyrics = await ref.watch(syncedLyricsProvider(track).future);
 
-  final isStaticLyrics =
-      syncedLyrics.lyrics.every((l) => l.time == Duration.zero);
+  final isStaticLyrics = syncedLyrics.lyrics.every(
+    (l) => l.time == Duration.zero,
+  );
 
   final lyricsMap = syncedLyrics.lyrics
       .map((lyric) => {lyric.time.inSeconds: lyric.text})

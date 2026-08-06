@@ -25,9 +25,7 @@ class SearchPlaceholder extends HookConsumerWidget {
     return switch ((searchTerm.isEmpty, snapshot.isLoading)) {
       (true, false) => Column(
           children: [
-            SizedBox(
-              height: mediaQuery.height * 0.2,
-            ),
+            SizedBox(height: mediaQuery.height * 0.2),
             Undraw(
               illustration: UndrawIllustration.explore,
               color: theme.colorScheme.primary,
@@ -42,9 +40,7 @@ class SearchPlaceholder extends HookConsumerWidget {
             maxWidth:
                 mediaQuery.lgAndUp ? mediaQuery.width * 0.5 : mediaQuery.width,
           ),
-          padding: const EdgeInsets.symmetric(
-            horizontal: 20,
-          ),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,

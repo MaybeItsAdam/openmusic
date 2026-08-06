@@ -27,8 +27,10 @@ class AudioPlayerState with _$AudioPlayerState {
     List<SpotubeTrackObject> tracks = const [],
   }) {
     assert(
-      tracks.every((track) =>
-          track is SpotubeFullTrackObject || track is SpotubeLocalTrackObject),
+      tracks.every(
+        (track) =>
+            track is SpotubeFullTrackObject || track is SpotubeLocalTrackObject,
+      ),
       'All tracks must be either SpotubeFullTrackObject or SpotubeLocalTrackObject',
     );
 

@@ -17,9 +17,7 @@ import 'package:spotube/provider/user_preferences/user_preferences_provider.dart
 final navigationPanelHeight = StateProvider<double>((ref) => 50);
 
 class SpotubeNavigationBar extends HookConsumerWidget {
-  const SpotubeNavigationBar({
-    super.key,
-  });
+  const SpotubeNavigationBar({super.key});
 
   @override
   Widget build(BuildContext context, ref) {
@@ -27,17 +25,19 @@ class SpotubeNavigationBar extends HookConsumerWidget {
 
     final downloadCount = ref
         .watch(downloadManagerProvider)
-        .where((e) =>
-            e.status == DownloadStatus.downloading ||
-            e.status == DownloadStatus.queued)
+        .where(
+          (e) =>
+              e.status == DownloadStatus.downloading ||
+              e.status == DownloadStatus.queued,
+        )
         .length;
-    final layoutMode =
-        ref.watch(userPreferencesProvider.select((s) => s.layoutMode));
-
-    final navbarTileList = useMemoized(
-      () => getNavbarTileList(context.l10n),
-      [context.l10n],
+    final layoutMode = ref.watch(
+      userPreferencesProvider.select((s) => s.layoutMode),
     );
+
+    final navbarTileList = useMemoized(() => getNavbarTileList(context.l10n), [
+      context.l10n,
+    ]);
 
     final panelHeight = ref.watch(navigationPanelHeight);
 
@@ -80,7 +80,7 @@ class SpotubeNavigationBar extends HookConsumerWidget {
                     onPressed: () {
                       context.navigateTo(tile.route);
                     },
-                  )
+                  ),
               ],
             ),
           ],

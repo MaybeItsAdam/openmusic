@@ -55,10 +55,7 @@ class LogsPage extends HookConsumerWidget {
                 },
               ),
               IconButton.ghost(
-                icon: const Icon(
-                  SpotubeIcons.trash,
-                  size: 16,
-                ),
+                icon: const Icon(SpotubeIcons.trash, size: 16),
                 onPressed: () async {
                   ref.invalidate(logsProvider);
 
@@ -66,10 +63,10 @@ class LogsPage extends HookConsumerWidget {
 
                   await logsFile.writeAsString("");
                 },
-              )
+              ),
             ],
           ),
-        )
+        ),
       ],
       child: SafeArea(
         child: switch (logsQuery) {

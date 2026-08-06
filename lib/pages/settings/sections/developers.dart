@@ -23,7 +23,7 @@ class SettingsDevelopersSection extends HookWidget {
           onTap: () {
             context.navigateTo(const LogsRoute());
           },
-        )
+        ),
       ],
     );
   }

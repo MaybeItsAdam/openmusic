@@ -27,15 +27,9 @@ class SelectDeviceDialog extends HookConsumerWidget {
           children: [
             Text(context.l10n.multiple_device_connected),
             const Gap(16),
-            RadioItem(
-              trailing: Text(remoteService.name),
-              value: true,
-            ),
+            RadioItem(trailing: Text(remoteService.name), value: true),
             const Gap(8),
-            RadioItem(
-              trailing: Text(context.l10n.this_device),
-              value: false,
-            ),
+            RadioItem(trailing: Text(context.l10n.this_device), value: false),
           ],
         ),
       ),
@@ -52,7 +46,9 @@ class SelectDeviceDialog extends HookConsumerWidget {
 }
 
 Future<bool?> showSelectDeviceDialog(
-    BuildContext context, WidgetRef ref) async {
+  BuildContext context,
+  WidgetRef ref,
+) async {
   final connectClients = ref.read(connectClientsProvider);
 
   if (connectClients.asData?.value.resolvedService == null) {

@@ -61,9 +61,7 @@ extension ChunkDownloaderDioExtension on Dio {
       if (totalLength == null || totalLength <= 1) {
         final resp = await get<ResponseBody>(
           urlPath,
-          options: Options(
-            responseType: ResponseType.stream,
-          ),
+          options: Options(responseType: ResponseType.stream),
           queryParameters: queryParameters,
           cancelToken: cancelToken,
         );

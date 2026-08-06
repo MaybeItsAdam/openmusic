@@ -38,17 +38,14 @@ class AboutSpotubePage extends HookConsumerWidget {
           TitleBar(
             leading: const [BackButton()],
             title: Text(context.l10n.about_spotube),
-          )
+          ),
         ],
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Column(
               children: [
-                Assets.branding.spotubeLogoPng.image(
-                  height: 200,
-                  width: 200,
-                ),
+                Assets.branding.spotubeLogoPng.image(height: 200, width: 200),
                 Center(
                   child: Column(
                     children: [
@@ -71,21 +68,21 @@ class AboutSpotubePage extends HookConsumerWidget {
                                   context.l10n.kingkor_roy_tirtho,
                                   "https://github.com/KRTirtho",
                                 ),
-                              )
+                              ),
                             ],
                           ),
                           TableRow(
                             cells: [
                               TableCell(child: Text(context.l10n.version)),
                               colon,
-                              TableCell(child: Text("v${packageInfo.version}"))
+                              TableCell(child: Text("v${packageInfo.version}")),
                             ],
                           ),
                           TableRow(
                             cells: [
                               TableCell(child: Text(context.l10n.channel)),
                               colon,
-                              TableCell(child: Text(Env.releaseChannel.name))
+                              TableCell(child: Text(Env.releaseChannel.name)),
                             ],
                           ),
                           TableRow(
@@ -93,9 +90,10 @@ class AboutSpotubePage extends HookConsumerWidget {
                               TableCell(child: Text(context.l10n.build_number)),
                               colon,
                               TableCell(
-                                child: Text(packageInfo.buildNumber
-                                    .replaceAll(".", " ")),
-                              )
+                                child: Text(
+                                  packageInfo.buildNumber.replaceAll(".", " "),
+                                ),
+                              ),
                             ],
                           ),
                           const TableRow(
@@ -182,15 +180,10 @@ class AboutSpotubePage extends HookConsumerWidget {
                   child: SafeArea(
                     child: license.when(
                       data: (data) {
-                        return Text(
-                          data,
-                          style: theme.typography.small,
-                        );
+                        return Text(data, style: theme.typography.small);
                       },
                       loading: () {
-                        return const Center(
-                          child: CircularProgressIndicator(),
-                        );
+                        return const Center(child: CircularProgressIndicator());
                       },
                       error: (e, s) {
                         return Text(

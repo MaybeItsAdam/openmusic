@@ -10,8 +10,9 @@ final metadataPluginSupportTextProvider = FutureProvider<String>((ref) async {
   return await metadataPlugin.core.support;
 });
 
-final audioSourcePluginSupportTextProvider =
-    FutureProvider<String>((ref) async {
+final audioSourcePluginSupportTextProvider = FutureProvider<String>((
+  ref,
+) async {
   final audioSourcePlugin = await ref.watch(audioSourcePluginProvider.future);
 
   if (audioSourcePlugin == null) {

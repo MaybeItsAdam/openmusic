@@ -47,9 +47,7 @@ class UserDownloadsPage extends HookConsumerWidget {
               itemCount: downloadQueue.length,
               padding: const EdgeInsets.only(bottom: 200),
               itemBuilder: (context, index) {
-                return DownloadItem(
-                  task: downloadQueue.elementAt(index),
-                );
+                return DownloadItem(task: downloadQueue.elementAt(index));
               },
             ),
           ),

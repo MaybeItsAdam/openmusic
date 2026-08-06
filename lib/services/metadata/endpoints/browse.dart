@@ -11,16 +11,11 @@ class MetadataPluginBrowseEndpoint {
           as HTInstance;
 
   Future<SpotubePaginationResponseObject<SpotubeBrowseSectionObject<Object>>>
-      sections({
-    int? offset,
-    int? limit,
-  }) async {
+      sections({int? offset, int? limit}) async {
     final raw = await hetuMetadataBrowse.invoke(
       "sections",
-      namedArgs: {
-        "offset": offset,
-        "limit": limit,
-      }..removeWhere((key, value) => value == null),
+      namedArgs: {"offset": offset, "limit": limit}
+        ..removeWhere((key, value) => value == null),
     ) as Map;
 
     return SpotubePaginationResponseObject<
@@ -57,10 +52,8 @@ class MetadataPluginBrowseEndpoint {
     final raw = await hetuMetadataBrowse.invoke(
       "sectionItems",
       positionalArgs: [id],
-      namedArgs: {
-        "offset": offset,
-        "limit": limit,
-      }..removeWhere((key, value) => value == null),
+      namedArgs: {"offset": offset, "limit": limit}
+        ..removeWhere((key, value) => value == null),
     ) as Map;
 
     return SpotubePaginationResponseObject<Object>.fromJson(
@@ -77,9 +70,7 @@ class MetadataPluginBrowseEndpoint {
             json.cast<String, dynamic>(),
           );
         } else {
-          return SpotubeFullArtistObject.fromJson(
-            json.cast<String, dynamic>(),
-          );
+          return SpotubeFullArtistObject.fromJson(json.cast<String, dynamic>());
         }
       },
     );

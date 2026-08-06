@@ -45,10 +45,7 @@ class LyricSlice {
   LyricSlice({required this.time, required this.text});
 
   factory LyricSlice.fromLrcLine(LrcLine line) {
-    return LyricSlice(
-      time: line.timestamp,
-      text: line.lyrics.trim(),
-    );
+    return LyricSlice(time: line.timestamp, text: line.lyrics.trim());
   }
 
   factory LyricSlice.fromJson(Map<String, dynamic> json) {
@@ -59,10 +56,7 @@ class LyricSlice {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      "time": time.inMilliseconds,
-      "text": text,
-    };
+    return {"time": time.inMilliseconds, "text": text};
   }
 
   @override

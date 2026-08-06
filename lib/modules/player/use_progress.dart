@@ -6,7 +6,7 @@ import 'package:spotube/services/audio_player/audio_player.dart';
   double progressStatic,
   Duration position,
   Duration duration,
-  double bufferProgress
+  double bufferProgress,
 }) useProgress(WidgetRef ref) {
   final bufferProgress =
       useStream(audioPlayer.bufferedPositionStream).data?.inSeconds ?? 0;

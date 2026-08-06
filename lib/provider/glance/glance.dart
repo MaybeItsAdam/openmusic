@@ -92,12 +92,9 @@ Future<void> _sendActiveTrack(SpotubeTrackObject? track) async {
       ...jsonTrack["album"],
       "images": [
         if (cachedImage != null && image != null)
-          {
-            ...image.toJson(),
-            "path": cachedImage,
-          }
-      ]
-    }
+          {...image.toJson(), "path": cachedImage},
+      ],
+    },
   };
 
   await _saveWidgetData("activeTrack", jsonEncode(data));
@@ -109,8 +106,20 @@ final glanceProvider = Provider((ref) {
   final server = ref.read(serverProvider);
   final activeTrack = ref.read(audioPlayerProvider).activeTrack;
 
-  server.whenData(
-    (value) async {
+  server.whenData((value) async {
+    final (:server, :port) = value;
+
+    await _saveWidgetData(
+      "playbackServerAddress",
+      "${server.address.host}:$port",
+    );
+    await _updateWidget();
+  });
+
+  _sendActiveTrack(activeTrack);
+
+  ref.listen(serverProvider, (prev, next) async {
+    next.whenData((value) async {
       final (:server, :port) = value;
 
       await _saveWidgetData(
@@ -118,38 +127,19 @@ final glanceProvider = Provider((ref) {
         "${server.address.host}:$port",
       );
       await _updateWidget();
-    },
-  );
-
-  _sendActiveTrack(activeTrack);
-
-  ref.listen(serverProvider, (prev, next) async {
-    next.whenData(
-      (value) async {
-        final (:server, :port) = value;
-
-        await _saveWidgetData(
-          "playbackServerAddress",
-          "${server.address.host}:$port",
-        );
-        await _updateWidget();
-      },
-    );
+    });
   });
 
-  ref.listen(
-    audioPlayerProvider,
-    (previous, next) async {
-      try {
-        if (previous?.activeTrack != next.activeTrack &&
-            next.activeTrack != null) {
-          await _sendActiveTrack(next.activeTrack);
-        }
-      } catch (e, stack) {
-        AppLogger.reportError(e, stack);
+  ref.listen(audioPlayerProvider, (previous, next) async {
+    try {
+      if (previous?.activeTrack != next.activeTrack &&
+          next.activeTrack != null) {
+        await _sendActiveTrack(next.activeTrack);
       }
-    },
-  );
+    } catch (e, stack) {
+      AppLogger.reportError(e, stack);
+    }
+  });
 
   final subscriptions = [
     audioPlayer.playingStream.listen((playing) async {

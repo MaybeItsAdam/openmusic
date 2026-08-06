@@ -15,9 +15,7 @@ import 'package:spotube/provider/metadata_plugin/core/auth.dart';
 import 'package:spotube/provider/metadata_plugin/core/user.dart';
 
 class SidebarFooter extends HookConsumerWidget implements NavigationBarItem {
-  const SidebarFooter({
-    super.key,
-  });
+  const SidebarFooter({super.key});
 
   @override
   Widget build(BuildContext context, ref) {
@@ -26,9 +24,11 @@ class SidebarFooter extends HookConsumerWidget implements NavigationBarItem {
     final mediaQuery = MediaQuery.of(context);
     final downloadCount = ref
         .watch(downloadManagerProvider)
-        .where((e) =>
-            e.status == DownloadStatus.downloading ||
-            e.status == DownloadStatus.queued)
+        .where(
+          (e) =>
+              e.status == DownloadStatus.downloading ||
+              e.status == DownloadStatus.queued,
+        )
         .length;
     final userSnapshot = ref.watch(metadataPluginUserProvider);
     final data = userSnapshot.asData?.value;
@@ -84,9 +84,7 @@ class SidebarFooter extends HookConsumerWidget implements NavigationBarItem {
               },
               leading: const Icon(SpotubeIcons.download),
               trailing: downloadCount > 0
-                  ? PrimaryBadge(
-                      child: Text(downloadCount.toString()),
-                    )
+                  ? PrimaryBadge(child: Text(downloadCount.toString()))
                   : null,
               child: Text(context.l10n.downloads),
             ),
@@ -117,8 +115,9 @@ class SidebarFooter extends HookConsumerWidget implements NavigationBarItem {
                             maxLines: 1,
                             softWrap: false,
                             overflow: TextOverflow.fade,
-                            style: theme.typography.normal
-                                .copyWith(fontWeight: FontWeight.bold),
+                            style: theme.typography.normal.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ],

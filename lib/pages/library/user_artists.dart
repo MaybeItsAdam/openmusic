@@ -34,8 +34,9 @@ class UserArtistsPage extends HookConsumerWidget {
     final authenticated = ref.watch(metadataPluginAuthenticatedProvider);
 
     final artistQuery = ref.watch(metadataPluginSavedArtistsProvider);
-    final artistQueryNotifier =
-        ref.watch(metadataPluginSavedArtistsProvider.notifier);
+    final artistQueryNotifier = ref.watch(
+      metadataPluginSavedArtistsProvider.notifier,
+    );
 
     final searchText = useState('');
 
@@ -46,10 +47,7 @@ class UserArtistsPage extends HookConsumerWidget {
         return artists.toList();
       }
       return artists
-          .map((e) => (
-                weightedRatio(e.name, searchText.value),
-                e,
-              ))
+          .map((e) => (weightedRatio(e.name, searchText.value), e))
           .sorted((a, b) => b.$1.compareTo(a.$1))
           .where((e) => e.$1 > 50)
           .map((e) => e.$2)
@@ -110,43 +108,46 @@ class UserArtistsPage extends HookConsumerWidget {
                   ),
                   const SliverGap(10),
                   if (filteredArtists.isNotEmpty || artistQuery.isLoading)
-                    SliverLayoutBuilder(builder: (context, constrains) {
-                      return SliverGrid.builder(
-                        itemCount: filteredArtists.length + 1,
-                        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                          maxCrossAxisExtent: 200,
-                          mainAxisExtent: constrains.smAndDown ? 225 : 250,
-                          crossAxisSpacing: 8,
-                          mainAxisSpacing: 8,
-                        ),
-                        itemBuilder: (context, index) {
-                          if (filteredArtists.isNotEmpty &&
-                              index == filteredArtists.length) {
-                            if (artistQuery.asData?.value.hasMore != true) {
-                              return const SizedBox.shrink();
+                    SliverLayoutBuilder(
+                      builder: (context, constrains) {
+                        return SliverGrid.builder(
+                          itemCount: filteredArtists.length + 1,
+                          gridDelegate:
+                              SliverGridDelegateWithMaxCrossAxisExtent(
+                            maxCrossAxisExtent: 200,
+                            mainAxisExtent: constrains.smAndDown ? 225 : 250,
+                            crossAxisSpacing: 8,
+                            mainAxisSpacing: 8,
+                          ),
+                          itemBuilder: (context, index) {
+                            if (filteredArtists.isNotEmpty &&
+                                index == filteredArtists.length) {
+                              if (artistQuery.asData?.value.hasMore != true) {
+                                return const SizedBox.shrink();
+                              }
+
+                              return Waypoint(
+                                controller: controller,
+                                isGrid: true,
+                                onTouchEdge: artistQueryNotifier.fetchMore,
+                                child: Skeletonizer(
+                                  enabled: true,
+                                  child: ArtistCard(FakeData.artist),
+                                ),
+                              );
                             }
 
-                            return Waypoint(
-                              controller: controller,
-                              isGrid: true,
-                              onTouchEdge: artistQueryNotifier.fetchMore,
-                              child: Skeletonizer(
-                                enabled: true,
-                                child: ArtistCard(FakeData.artist),
+                            return Skeletonizer(
+                              enabled: artistQuery.isLoading,
+                              child: ArtistCard(
+                                filteredArtists.elementAtOrNull(index) ??
+                                    FakeData.artist,
                               ),
                             );
-                          }
-
-                          return Skeletonizer(
-                            enabled: artistQuery.isLoading,
-                            child: ArtistCard(
-                              filteredArtists.elementAtOrNull(index) ??
-                                  FakeData.artist,
-                            ),
-                          );
-                        },
-                      );
-                    })
+                          },
+                        );
+                      },
+                    )
                   else if (filteredArtists.isEmpty &&
                       searchText.value.isEmpty &&
                       !artistQuery.isLoading)
@@ -163,7 +164,7 @@ class UserArtistsPage extends HookConsumerWidget {
                           Text(
                             context.l10n.not_following_artists,
                             textAlign: TextAlign.center,
-                          ).muted().small()
+                          ).muted().small(),
                         ],
                       ),
                     )
@@ -181,7 +182,7 @@ class UserArtistsPage extends HookConsumerWidget {
                           Text(
                             context.l10n.nothing_found,
                             textAlign: TextAlign.center,
-                          ).muted().small()
+                          ).muted().small(),
                         ],
                       ),
                     ),

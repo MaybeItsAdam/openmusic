@@ -19,22 +19,20 @@ class StatsPlaylistsPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
-    final topPlaylists =
-        ref.watch(historyTopPlaylistsProvider(HistoryDuration.allTime));
+    final topPlaylists = ref.watch(
+      historyTopPlaylistsProvider(HistoryDuration.allTime),
+    );
 
-    final topPlaylistsNotifier = ref
-        .watch(historyTopPlaylistsProvider(HistoryDuration.allTime).notifier);
+    final topPlaylistsNotifier = ref.watch(
+      historyTopPlaylistsProvider(HistoryDuration.allTime).notifier,
+    );
 
     final playlistsData = topPlaylists.asData?.value.items ?? [];
 
     return SafeArea(
       bottom: false,
       child: Scaffold(
-        headers: [
-          TitleBar(
-            title: Text(context.l10n.playlists),
-          )
-        ],
+        headers: [TitleBar(title: Text(context.l10n.playlists))],
         child: Skeletonizer(
           enabled: topPlaylists.isLoading && !topPlaylists.isLoadingNextPage,
           child: InfiniteList(
@@ -52,7 +50,8 @@ class StatsPlaylistsPage extends HookConsumerWidget {
                 playlist: playlist.playlist,
                 info: Text(
                   context.l10n.count_plays(
-                      compactNumberFormatter.format(playlist.count)),
+                    compactNumberFormatter.format(playlist.count),
+                  ),
                 ),
               );
             },

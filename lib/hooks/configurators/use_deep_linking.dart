@@ -14,7 +14,8 @@ final appLinks = AppLinks();
 final linkStream = appLinks.stringLinkStream.asBroadcastStream();
 
 @Deprecated(
-    "Deeplinking is deprecated. Later a custom API for metadata provider will be created.")
+  "Deeplinking is deprecated. Later a custom API for metadata provider will be created.",
+)
 void useDeepLinking(WidgetRef ref, AppRouter router) {
   // // single instance no worries
   // final spotify = ref.watch(spotifyProvider);

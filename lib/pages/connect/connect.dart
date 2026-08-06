@@ -26,9 +26,7 @@ class ConnectPage extends HookConsumerWidget {
     return SafeArea(
       bottom: false,
       child: Scaffold(
-        headers: [
-          TitleBar(title: Text(context.l10n.devices)),
-        ],
+        headers: [TitleBar(title: Text(context.l10n.devices))],
         child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: CustomScrollView(
@@ -36,10 +34,7 @@ class ConnectPage extends HookConsumerWidget {
               SliverPadding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 sliver: SliverToBoxAdapter(
-                  child: Text(
-                    context.l10n.remote,
-                    style: typography.bold,
-                  ),
+                  child: Text(context.l10n.remote, style: typography.bold),
                 ),
               ),
               const SliverGap(10),

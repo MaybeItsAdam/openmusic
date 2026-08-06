@@ -12,10 +12,7 @@ import 'package:spotube/provider/user_preferences/user_preferences_provider.dart
 
 class SettingsAppearanceSection extends HookConsumerWidget {
   final bool isGettingStarted;
-  const SettingsAppearanceSection({
-    super.key,
-    this.isGettingStarted = false,
-  });
+  const SettingsAppearanceSection({super.key, this.isGettingStarted = false});
 
   @override
   Widget build(BuildContext context, ref) {
@@ -23,10 +20,11 @@ class SettingsAppearanceSection extends HookConsumerWidget {
     final preferencesNotifier = ref.watch(userPreferencesProvider.notifier);
     final pickColorScheme = useCallback(() {
       return () => showDialog(
-          context: context,
-          builder: (context) {
-            return const ColorSchemePickerDialog();
-          });
+            context: context,
+            builder: (context) {
+              return const ColorSchemePickerDialog();
+            },
+          );
     }, []);
 
     final children = [
@@ -90,10 +88,7 @@ class SettingsAppearanceSection extends HookConsumerWidget {
       ListTile(
         leading: const Icon(SpotubeIcons.palette),
         title: Text(context.l10n.accent_color),
-        contentPadding: const EdgeInsets.symmetric(
-          horizontal: 15,
-          vertical: 5,
-        ),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
         trailing: ColorChip(
           color: preferences.accentColorScheme,
           name: preferences.accentColorScheme.name,
@@ -116,10 +111,7 @@ class SettingsAppearanceSection extends HookConsumerWidget {
       return Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          for (final child in children) ...[
-            child,
-            const Gap(16),
-          ],
+          for (final child in children) ...[child, const Gap(16)],
         ],
       );
     }

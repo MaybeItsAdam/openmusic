@@ -29,8 +29,9 @@ class BottomPlayer extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, ref) {
     final playlist = ref.watch(audioPlayerProvider);
-    final layoutMode =
-        ref.watch(userPreferencesProvider.select((s) => s.layoutMode));
+    final layoutMode = ref.watch(
+      userPreferencesProvider.select((s) => s.layoutMode),
+    );
 
     final mediaQuery = MediaQuery.of(context);
 
@@ -57,9 +58,7 @@ class BottomPlayer extends HookConsumerWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Expanded(
-            child: PlayerTrackDetails(track: playlist.activeTrack),
-          ),
+          Expanded(child: PlayerTrackDetails(track: playlist.activeTrack)),
           // controls
           const Flexible(
             flex: 3,
@@ -75,9 +74,9 @@ class BottomPlayer extends HookConsumerWidget {
               PlayerActions(
                 extraActions: [
                   Tooltip(
-                    tooltip:
-                        TooltipContainer(child: Text(context.l10n.mini_player))
-                            .call,
+                    tooltip: TooltipContainer(
+                      child: Text(context.l10n.mini_player),
+                    ).call,
                     child: IconButton(
                       variance: ButtonVariance.ghost,
                       icon: const Icon(SpotubeIcons.miniPlayer),
@@ -113,17 +112,19 @@ class BottomPlayer extends HookConsumerWidget {
                 height: 40,
                 constraints: const BoxConstraints(maxWidth: 250),
                 padding: const EdgeInsets.only(right: 10),
-                child: Consumer(builder: (context, ref, _) {
-                  final volume = ref.watch(volumeProvider);
-                  return VolumeSlider(
-                    fullWidth: true,
-                    value: volume,
-                    onChanged: (value) {
-                      ref.read(volumeProvider.notifier).setVolume(value);
-                    },
-                  );
-                }),
-              )
+                child: Consumer(
+                  builder: (context, ref, _) {
+                    final volume = ref.watch(volumeProvider);
+                    return VolumeSlider(
+                      fullWidth: true,
+                      value: volume,
+                      onChanged: (value) {
+                        ref.read(volumeProvider.notifier).setVolume(value);
+                      },
+                    );
+                  },
+                ),
+              ),
             ],
           ),
         ],

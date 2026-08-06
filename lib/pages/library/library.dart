@@ -19,9 +19,11 @@ class LibraryPage extends HookConsumerWidget {
   Widget build(BuildContext context, ref) {
     final downloadingCount = ref
         .watch(downloadManagerProvider)
-        .where((e) =>
-            e.status == DownloadStatus.downloading ||
-            e.status == DownloadStatus.queued)
+        .where(
+          (e) =>
+              e.status == DownloadStatus.downloading ||
+              e.status == DownloadStatus.queued,
+        )
         .length;
     final router = context.watchRouter;
     final sidebarLibraryTileList = useMemoized(
@@ -48,45 +50,49 @@ class LibraryPage extends HookConsumerWidget {
       },
       child: SafeArea(
         bottom: false,
-        child: LayoutBuilder(builder: (context, constraints) {
-          return Scaffold(
-            headers: [
-              if (constraints.smAndDown)
-                TitleBar(
-                  automaticallyImplyLeading: false,
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: TabList(
-                      index: index,
-                      onChanged: (index) {
-                        context.navigateTo(sidebarLibraryTileList[index].route);
-                      },
-                      children: [
-                        for (final tile in sidebarLibraryTileList)
-                          TabItem(
-                            child: Badge(
-                              isLabelVisible: tile.id == 'downloads' &&
-                                  downloadingCount > 0,
-                              label: Text(downloadingCount.toString()),
-                              child: Text(tile.title),
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            return Scaffold(
+              headers: [
+                if (constraints.smAndDown)
+                  TitleBar(
+                    automaticallyImplyLeading: false,
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: TabList(
+                        index: index,
+                        onChanged: (index) {
+                          context.navigateTo(
+                            sidebarLibraryTileList[index].route,
+                          );
+                        },
+                        children: [
+                          for (final tile in sidebarLibraryTileList)
+                            TabItem(
+                              child: Badge(
+                                isLabelVisible: tile.id == 'downloads' &&
+                                    downloadingCount > 0,
+                                label: Text(downloadingCount.toString()),
+                                child: Text(tile.title),
+                              ),
                             ),
-                          ),
-                      ],
+                        ],
+                      ),
                     ),
+                  )
+                else
+                  const TitleBar(
+                    automaticallyImplyLeading: false,
+                    backgroundColor: Colors.transparent,
+                    surfaceBlur: 0,
+                    height: 32,
                   ),
-                )
-              else
-                const TitleBar(
-                  automaticallyImplyLeading: false,
-                  backgroundColor: Colors.transparent,
-                  surfaceBlur: 0,
-                  height: 32,
-                ),
-              const Gap(10),
-            ],
-            child: const AutoRouter(),
-          );
-        }),
+                const Gap(10),
+              ],
+              child: const AutoRouter(),
+            );
+          },
+        ),
       ),
     );
   }

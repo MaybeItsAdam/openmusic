@@ -15,7 +15,8 @@ class DiscordNotifier extends AsyncNotifier<void> {
     if (!kIsDesktop) return;
 
     final enabled = ref.watch(
-        userPreferencesProvider.select((s) => s.discordPresence && kIsDesktop));
+      userPreferencesProvider.select((s) => s.discordPresence && kIsDesktop),
+    );
 
     var lastPosition = audioPlayer.position;
 
@@ -53,7 +54,7 @@ class DiscordNotifier extends AsyncNotifier<void> {
         } catch (e, stack) {
           AppLogger.reportError(e, stack);
         }
-      })
+      }),
     ];
 
     ref.onDispose(() async {
@@ -92,10 +93,7 @@ class DiscordNotifier extends AsyncNotifier<void> {
           smallText: "Spotube",
         ),
         buttons: [
-          RPCButton(
-            label: "Listen on Spotube",
-            url: track.externalUri,
-          ),
+          RPCButton(label: "Listen on Spotube", url: track.externalUri),
         ],
         timestamps: RPCTimestamps(
           start: isPlaying
@@ -118,5 +116,6 @@ class DiscordNotifier extends AsyncNotifier<void> {
   }
 }
 
-final discordProvider =
-    AsyncNotifierProvider<DiscordNotifier, void>(() => DiscordNotifier());
+final discordProvider = AsyncNotifierProvider<DiscordNotifier, void>(
+  () => DiscordNotifier(),
+);

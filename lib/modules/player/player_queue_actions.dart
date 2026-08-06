@@ -6,10 +6,7 @@ import 'package:spotube/extensions/constrains.dart';
 class PlayerQueueActionButton extends StatelessWidget {
   final Widget Function(BuildContext context, VoidCallback close) builder;
 
-  const PlayerQueueActionButton({
-    super.key,
-    required this.builder,
-  });
+  const PlayerQueueActionButton({super.key, required this.builder});
 
   @override
   Widget build(BuildContext context) {

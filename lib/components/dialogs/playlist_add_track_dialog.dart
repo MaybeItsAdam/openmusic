@@ -23,8 +23,9 @@ class PlaylistAddTrackDialog extends HookConsumerWidget {
   Widget build(BuildContext context, ref) {
     final typography = Theme.of(context).typography;
     final userPlaylists = ref.watch(metadataPluginSavedPlaylistsProvider);
-    final favoritePlaylistsNotifier =
-        ref.watch(metadataPluginSavedPlaylistsProvider.notifier);
+    final favoritePlaylistsNotifier = ref.watch(
+      metadataPluginSavedPlaylistsProvider.notifier,
+    );
 
     final me = ref.watch(metadataPluginUserProvider);
 
@@ -72,10 +73,7 @@ class PlaylistAddTrackDialog extends HookConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-              context.l10n.add_to_playlist,
-              style: typography.large,
-            ),
+            Text(context.l10n.add_to_playlist, style: typography.large),
             const Spacer(),
             const PlaylistCreateDialogButton(),
           ],
@@ -87,10 +85,7 @@ class PlaylistAddTrackDialog extends HookConsumerWidget {
               Navigator.pop(context, false);
             },
           ),
-          PrimaryButton(
-            onPressed: onAdd,
-            child: Text(context.l10n.add),
-          ),
+          PrimaryButton(onPressed: onAdd, child: Text(context.l10n.add)),
         ],
         content: SizedBox(
           height: 300,

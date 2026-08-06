@@ -14,10 +14,7 @@ final playerOverlayControllerProvider = StateProvider<PanelController>((ref) {
 class PlayerOverlay extends HookConsumerWidget {
   final String albumArt;
 
-  const PlayerOverlay({
-    required this.albumArt,
-    super.key,
-  });
+  const PlayerOverlay({required this.albumArt, super.key});
 
   @override
   Widget build(BuildContext context, ref) {

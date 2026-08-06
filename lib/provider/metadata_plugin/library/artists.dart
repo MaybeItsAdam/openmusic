@@ -29,17 +29,12 @@ class MetadataPluginSavedArtistNotifier
     final oldState = state.value;
 
     state = AsyncData(
-      state.value!.copyWith(
-        items: [
-          ...artists,
-          ...state.value!.items,
-        ],
-      ),
+      state.value!.copyWith(items: [...artists, ...state.value!.items]),
     );
     try {
-      await (await metadataPlugin)
-          .artist
-          .save(artists.map((e) => e.id).toList());
+      await (await metadataPlugin).artist.save(
+            artists.map((e) => e.id).toList(),
+          );
     } catch (e) {
       state = AsyncData(oldState!);
       rethrow;
@@ -55,9 +50,7 @@ class MetadataPluginSavedArtistNotifier
     state = AsyncData(
       state.value!.copyWith(
         items: state.value!.items
-            .where(
-              (e) => artistIds.contains((e).id) == false,
-            )
+            .where((e) => artistIds.contains((e).id) == false)
             .toList(),
       ),
     );
@@ -72,23 +65,22 @@ class MetadataPluginSavedArtistNotifier
 }
 
 final metadataPluginSavedArtistsProvider = AsyncNotifierProvider<
-    MetadataPluginSavedArtistNotifier,
-    SpotubePaginationResponseObject<SpotubeFullArtistObject>>(
-  () => MetadataPluginSavedArtistNotifier(),
-);
+        MetadataPluginSavedArtistNotifier,
+        SpotubePaginationResponseObject<SpotubeFullArtistObject>>(
+    () => MetadataPluginSavedArtistNotifier());
 
 final metadataPluginIsSavedArtistProvider =
-    FutureProvider.autoDispose.family<bool, String>(
-  (ref, artistId) async {
-    final savedArtists =
-        await ref.watch(metadataPluginSavedArtistsProvider.future);
-    final savedArtistsNotifier =
-        ref.read(metadataPluginSavedArtistsProvider.notifier);
+    FutureProvider.autoDispose.family<bool, String>((ref, artistId) async {
+  final savedArtists = await ref.watch(
+    metadataPluginSavedArtistsProvider.future,
+  );
+  final savedArtistsNotifier = ref.read(
+    metadataPluginSavedArtistsProvider.notifier,
+  );
 
-    final allSavedArtists = savedArtists.hasMore
-        ? await savedArtistsNotifier.fetchAll()
-        : savedArtists.items;
+  final allSavedArtists = savedArtists.hasMore
+      ? await savedArtistsNotifier.fetchAll()
+      : savedArtists.items;
 
-    return allSavedArtists.any((element) => element.id == artistId);
-  },
-);
+  return allSavedArtists.any((element) => element.id == artistId);
+});

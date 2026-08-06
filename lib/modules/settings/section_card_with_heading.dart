@@ -17,10 +17,7 @@ class SectionCardWithHeading extends StatelessWidget {
       data: ListTileThemeData(
         shape: RoundedRectangleBorder(
           borderRadius: context.theme.borderRadiusLg,
-          side: BorderSide(
-            color: context.theme.colorScheme.border,
-            width: .5,
-          ),
+          side: BorderSide(color: context.theme.colorScheme.border, width: .5),
         ),
         textColor: context.theme.colorScheme.foreground,
         iconColor: context.theme.colorScheme.foreground,

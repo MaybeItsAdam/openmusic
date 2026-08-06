@@ -17,8 +17,9 @@ class SearchPageAllTab extends HookConsumerWidget {
   Widget build(BuildContext context, ref) {
     final scrollController = ScrollController();
     final searchTerm = ref.watch(searchTermStateProvider);
-    final searchSnapshot =
-        ref.watch(metadataPluginSearchAllProvider(searchTerm));
+    final searchSnapshot = ref.watch(
+      metadataPluginSearchAllProvider(searchTerm),
+    );
 
     if (searchSnapshot.hasError) {
       return ErrorBox(

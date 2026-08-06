@@ -45,10 +45,7 @@ class ButtonTile extends StatelessWidget {
             if (selected) {
               return switch (style) {
                 ButtonVariance.outline => decoration.copyWith(
-                    border: Border.all(
-                      color: colorScheme.primary,
-                      width: 1.0,
-                    ),
+                    border: Border.all(color: colorScheme.primary, width: 1.0),
                     color: colorScheme.primary.withAlpha(25),
                   ),
                 ButtonVariance.ghost || _ => decoration.copyWith(
@@ -63,9 +60,7 @@ class ButtonTile extends StatelessWidget {
             final iconTheme = style.iconTheme(context, states);
 
             if (selected && style == ButtonVariance.outline) {
-              return iconTheme.copyWith(
-                color: colorScheme.primary,
-              );
+              return iconTheme.copyWith(color: colorScheme.primary);
             }
 
             return iconTheme;
@@ -74,9 +69,7 @@ class ButtonTile extends StatelessWidget {
             final textStyle = style.textStyle(context, states);
 
             if (selected && style == ButtonVariance.outline) {
-              return textStyle.copyWith(
-                color: colorScheme.primary,
-              );
+              return textStyle.copyWith(color: colorScheme.primary);
             }
 
             return textStyle;

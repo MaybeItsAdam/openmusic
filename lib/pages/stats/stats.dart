@@ -32,11 +32,7 @@ class StatsPage extends HookConsumerWidget {
               if (kIsMacOS) const SliverGap(20),
               const StatsPageSummarySection(),
               const StatsPageTopSection(),
-              const SliverToBoxAdapter(
-                child: SafeArea(
-                  child: SizedBox(),
-                ),
-              )
+              const SliverToBoxAdapter(child: SafeArea(child: SizedBox())),
             ],
           ),
         ),

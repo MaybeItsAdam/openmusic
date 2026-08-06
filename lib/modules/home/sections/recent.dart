@@ -29,7 +29,7 @@ class HomeRecentlyPlayedSection extends HookConsumerWidget {
             if (item.playlist != null)
               item.playlist
             else if (item.album != null)
-              item.album
+              item.album,
         ],
         hasNextPage: false,
         isLoadingNextPage: false,

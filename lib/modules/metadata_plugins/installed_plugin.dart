@@ -48,19 +48,23 @@ class MetadataInstalledPluginItem extends HookConsumerWidget {
     final supportsScrobbling = isDefaultMetadata &&
         plugin.abilities.contains(PluginAbilities.scrobbling);
 
-    final isMetadataAuthenticatedSnapshot =
-        ref.watch(metadataPluginAuthenticatedProvider);
-    final isAudioSourceAuthenticatedSnapshot =
-        ref.watch(audioSourcePluginAuthenticatedProvider);
+    final isMetadataAuthenticatedSnapshot = ref.watch(
+      metadataPluginAuthenticatedProvider,
+    );
+    final isAudioSourceAuthenticatedSnapshot = ref.watch(
+      audioSourcePluginAuthenticatedProvider,
+    );
     final isAuthenticated = (isDefaultMetadata &&
             isMetadataAuthenticatedSnapshot.asData?.value == true) ||
         (isDefaultAudioSource &&
             isAudioSourceAuthenticatedSnapshot.asData?.value == true);
 
-    final metadataUpdateAvailable =
-        ref.watch(metadataPluginUpdateCheckerProvider);
-    final audioSourceUpdateAvailable =
-        ref.watch(audioSourcePluginUpdateCheckerProvider);
+    final metadataUpdateAvailable = ref.watch(
+      metadataPluginUpdateCheckerProvider,
+    );
+    final audioSourceUpdateAvailable = ref.watch(
+      audioSourcePluginUpdateCheckerProvider,
+    );
     final updateAvailable = switch ((isDefaultMetadata, isDefaultAudioSource)) {
       (true, _) => metadataUpdateAvailable,
       (false, true) => audioSourceUpdateAvailable,
@@ -152,7 +156,7 @@ class MetadataInstalledPluginItem extends HookConsumerWidget {
                                   Text(
                                     context.l10n.third_party,
                                     style: const TextStyle(color: Colors.white),
-                                  ).xSmall
+                                  ).xSmall,
                                 ],
                               ),
                             ),
@@ -173,17 +177,14 @@ class MetadataInstalledPluginItem extends HookConsumerWidget {
                             ),
                           ),
                         ],
-                      )
+                      ),
                   ],
                 ),
                 trailing: IconButton.ghost(
                   onPressed: () async {
                     await pluginsNotifier.removePlugin(plugin);
                   },
-                  icon: const Icon(
-                    SpotubeIcons.trash,
-                    color: Colors.red,
-                  ),
+                  icon: const Icon(SpotubeIcons.trash, color: Colors.red),
                 ),
               );
             },
@@ -214,9 +215,7 @@ class MetadataInstalledPluginItem extends HookConsumerWidget {
                       child: Basic(
                         leading: const Icon(SpotubeIcons.update),
                         title: Text(context.l10n.update_available),
-                        subtitle: Text(
-                          updateAvailable!.asData!.value!.version,
-                        ),
+                        subtitle: Text(updateAvailable!.asData!.value!.version),
                         trailing: Button.primary(
                           onPressed: () {
                             showDialog(
@@ -240,7 +239,7 @@ class MetadataInstalledPluginItem extends HookConsumerWidget {
                         title: Text(context.l10n.supports_scrobbling),
                         subtitle: Text(context.l10n.plugin_scrobbling_info),
                       ),
-                    )
+                    ),
                 ],
               ),
             ),
@@ -269,8 +268,9 @@ class MetadataInstalledPluginItem extends HookConsumerWidget {
                     Button.secondary(
                       enabled: !isDefaultAudioSource,
                       onPressed: () async {
-                        await pluginsNotifier
-                            .setDefaultAudioSourcePlugin(plugin);
+                        await pluginsNotifier.setDefaultAudioSourcePlugin(
+                          plugin,
+                        );
                       },
                       child: Text(
                         isDefaultAudioSource
@@ -287,92 +287,95 @@ class MetadataInstalledPluginItem extends HookConsumerWidget {
                 spacing: 8,
                 children: [
                   if (isDefaultMetadata || isDefaultAudioSource)
-                    Consumer(builder: (context, ref, _) {
-                      final metadataSupportTextSnapshot =
-                          ref.watch(metadataPluginSupportTextProvider);
-                      final audioSourceSupportTextSnapshot =
-                          ref.watch(audioSourcePluginSupportTextProvider);
+                    Consumer(
+                      builder: (context, ref, _) {
+                        final metadataSupportTextSnapshot = ref.watch(
+                          metadataPluginSupportTextProvider,
+                        );
+                        final audioSourceSupportTextSnapshot = ref.watch(
+                          audioSourcePluginSupportTextProvider,
+                        );
 
-                      final supportTextSnapshot =
-                          switch ((isDefaultMetadata, isDefaultAudioSource)) {
-                        (true, _) => metadataSupportTextSnapshot,
-                        (false, true) => audioSourceSupportTextSnapshot,
-                        _ => null,
-                      };
+                        final supportTextSnapshot = switch ((
+                          isDefaultMetadata,
+                          isDefaultAudioSource,
+                        )) {
+                          (true, _) => metadataSupportTextSnapshot,
+                          (false, true) => audioSourceSupportTextSnapshot,
+                          _ => null,
+                        };
 
-                      if ((supportTextSnapshot?.hasValue ?? false) &&
-                          supportTextSnapshot?.value == null) {
-                        return const SizedBox.shrink();
-                      }
+                        if ((supportTextSnapshot?.hasValue ?? false) &&
+                            supportTextSnapshot?.value == null) {
+                          return const SizedBox.shrink();
+                        }
 
-                      final bgColor =
-                          context.theme.brightness == Brightness.dark
-                              ? const Color.fromARGB(255, 255, 145, 175)
-                              : Colors.pink[600];
-                      final textColor =
-                          context.theme.brightness == Brightness.dark
-                              ? Colors.pink[700]
-                              : Colors.pink[50];
+                        final bgColor =
+                            context.theme.brightness == Brightness.dark
+                                ? const Color.fromARGB(255, 255, 145, 175)
+                                : Colors.pink[600];
+                        final textColor =
+                            context.theme.brightness == Brightness.dark
+                                ? Colors.pink[700]
+                                : Colors.pink[50];
 
-                      final mediaQuery = MediaQuery.sizeOf(context);
+                        final mediaQuery = MediaQuery.sizeOf(context);
 
-                      return Button(
-                        style: ButtonVariance.secondary.copyWith(
-                          decoration: (context, states, value) {
-                            return value.copyWithIfBoxDecoration(
-                              color: bgColor,
-                            );
-                          },
-                          textStyle: (context, states, value) {
-                            return value.copyWith(
-                              color: textColor,
-                            );
-                          },
-                          iconTheme: (context, states, value) {
-                            return value.copyWith(
-                              color: textColor,
-                            );
-                          },
-                        ),
-                        leading: const Icon(SpotubeIcons.heartFilled),
-                        child: Text(context.l10n.support),
-                        onPressed: () {
-                          showDialog(
-                            context: context,
-                            builder: (context) {
-                              return AlertDialog(
-                                title: Text(
-                                    context.l10n.support_plugin_development),
-                                content: ConstrainedBox(
-                                  constraints: BoxConstraints(
-                                    maxHeight: mediaQuery.height * 0.8,
-                                    maxWidth: 720,
+                        return Button(
+                          style: ButtonVariance.secondary.copyWith(
+                            decoration: (context, states, value) {
+                              return value.copyWithIfBoxDecoration(
+                                color: bgColor,
+                              );
+                            },
+                            textStyle: (context, states, value) {
+                              return value.copyWith(color: textColor);
+                            },
+                            iconTheme: (context, states, value) {
+                              return value.copyWith(color: textColor);
+                            },
+                          ),
+                          leading: const Icon(SpotubeIcons.heartFilled),
+                          child: Text(context.l10n.support),
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title: Text(
+                                    context.l10n.support_plugin_development,
                                   ),
-                                  child: SizedBox(
-                                    width: double.infinity,
-                                    child: SingleChildScrollView(
-                                      child: AppMarkdown(
-                                        data: supportTextSnapshot
-                                                ?.asData?.value ??
-                                            "",
+                                  content: ConstrainedBox(
+                                    constraints: BoxConstraints(
+                                      maxHeight: mediaQuery.height * 0.8,
+                                      maxWidth: 720,
+                                    ),
+                                    child: SizedBox(
+                                      width: double.infinity,
+                                      child: SingleChildScrollView(
+                                        child: AppMarkdown(
+                                          data: supportTextSnapshot
+                                                  ?.asData?.value ??
+                                              "",
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                                actions: [
-                                  Button.secondary(
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                    child: Text(context.l10n.close),
-                                  ),
-                                ],
-                              );
-                            },
-                          );
-                        },
-                      );
-                    }),
+                                  actions: [
+                                    Button.secondary(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Text(context.l10n.close),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          },
+                        );
+                      },
+                    ),
                   if ((isDefaultMetadata || isDefaultAudioSource) &&
                       requiresAuth &&
                       !isAuthenticated)
@@ -395,9 +398,9 @@ class MetadataInstalledPluginItem extends HookConsumerWidget {
                       child: Text(context.l10n.logout),
                     ),
                 ],
-              )
+              ),
             ],
-          )
+          ),
         ],
       ),
     );

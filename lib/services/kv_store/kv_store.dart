@@ -42,9 +42,7 @@ abstract class KVStoreService {
   static Future<void> setWindowSize(WindowSize value) async =>
       await sharedPreferences.setString(
         'windowSize',
-        jsonEncode(
-          value.toJson(),
-        ),
+        jsonEncode(value.toJson()),
       );
 
   static String get encryptionKey {
@@ -109,10 +107,7 @@ abstract class KVStoreService {
   ) async {
     await sharedPreferences.setString(
       'ytDlpPath',
-      jsonEncode({
-        ...?_youtubeEnginePaths,
-        engine.name: path,
-      }),
+      jsonEncode({...?_youtubeEnginePaths, engine.name: path}),
     );
   }
 }

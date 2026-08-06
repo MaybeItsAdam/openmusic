@@ -14,9 +14,7 @@ class MetadataPluginTrackEndpoint {
     final raw =
         await hetuMetadataTrack.invoke("getTrack", positionalArgs: [id]) as Map;
 
-    return SpotubeFullTrackObject.fromJson(
-      raw.cast<String, dynamic>(),
-    );
+    return SpotubeFullTrackObject.fromJson(raw.cast<String, dynamic>());
   }
 
   Future<void> save(List<String> ids) async {

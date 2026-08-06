@@ -40,7 +40,7 @@ class MetadataPluginSearchTracksNotifier
 }
 
 final metadataPluginSearchTracksProvider =
-    AutoDisposeAsyncNotifierProviderFamily<MetadataPluginSearchTracksNotifier,
-        SpotubePaginationResponseObject<SpotubeFullTrackObject>, String>(
-  () => MetadataPluginSearchTracksNotifier(),
-);
+    AutoDisposeAsyncNotifierProviderFamily<
+        MetadataPluginSearchTracksNotifier,
+        SpotubePaginationResponseObject<SpotubeFullTrackObject>,
+        String>(() => MetadataPluginSearchTracksNotifier());

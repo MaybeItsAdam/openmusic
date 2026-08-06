@@ -21,9 +21,10 @@ class AudioPlayerStreamListeners {
   final Ref ref;
   late final AudioServices notificationService;
   AudioPlayerStreamListeners(this.ref) {
-    AudioServices.create(ref, ref.read(audioPlayerProvider.notifier)).then(
-      (value) => notificationService = value,
-    );
+    AudioServices.create(
+      ref,
+      ref.read(audioPlayerProvider.notifier),
+    ).then((value) => notificationService = value);
 
     final subscriptions = [
       subscribeToPlaylist(),
@@ -115,8 +116,9 @@ class AudioPlayerStreamListeners {
         if (activeTrack.artists.any((a) => a.images == null)) {
           final metadataPlugin = await ref.read(metadataPluginProvider.future);
           final artists = await Future.wait(
-            activeTrack.artists
-                .map((artist) => metadataPlugin!.artist.getArtist(artist.id)),
+            activeTrack.artists.map(
+              (artist) => metadataPlugin!.artist.getArtist(artist.id),
+            ),
           );
           activeTrack = activeTrack.copyWith(
             artists: artists
@@ -144,8 +146,9 @@ class AudioPlayerStreamListeners {
                 audioPlayerState.tracks.length - 1) {
           return;
         }
-        final nextTrack = audioPlayerState.tracks
-            .elementAtOrNull(audioPlayerState.currentIndex + 1);
+        final nextTrack = audioPlayerState.tracks.elementAtOrNull(
+          audioPlayerState.currentIndex + 1,
+        );
 
         if (nextTrack == null ||
             lastTrack == nextTrack.id ||
@@ -171,5 +174,6 @@ class AudioPlayerStreamListeners {
   }
 }
 
-final audioPlayerStreamListenersProvider =
-    Provider<AudioPlayerStreamListeners>(AudioPlayerStreamListeners.new);
+final audioPlayerStreamListenersProvider = Provider<AudioPlayerStreamListeners>(
+  AudioPlayerStreamListeners.new,
+);

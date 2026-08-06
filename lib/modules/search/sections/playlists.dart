@@ -6,15 +6,14 @@ import 'package:spotube/pages/search/search.dart';
 import 'package:spotube/provider/metadata_plugin/search/all.dart';
 
 class SearchPlaylistsSection extends HookConsumerWidget {
-  const SearchPlaylistsSection({
-    super.key,
-  });
+  const SearchPlaylistsSection({super.key});
 
   @override
   Widget build(BuildContext context, ref) {
     final searchTerm = ref.watch(searchTermStateProvider);
-    final playlistsQuery =
-        ref.watch(metadataPluginSearchAllProvider(searchTerm));
+    final playlistsQuery = ref.watch(
+      metadataPluginSearchAllProvider(searchTerm),
+    );
     final playlists = playlistsQuery.asData?.value.playlists ?? [];
 
     return HorizontalPlaybuttonCardView(

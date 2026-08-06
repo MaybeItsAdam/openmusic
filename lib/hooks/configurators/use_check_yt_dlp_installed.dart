@@ -15,13 +15,12 @@ void useCheckYtDlpInstalled(WidgetRef ref) {
   useEffect(() {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       final youtubeEngine = ref.read(
-        userPreferencesProvider.select(
-          (value) => value.youtubeClientEngine,
-        ),
+        userPreferencesProvider.select((value) => value.youtubeClientEngine),
       );
 
-      final customPath =
-          KVStoreService.getYoutubeEnginePath(YoutubeClientEngine.ytDlp);
+      final customPath = KVStoreService.getYoutubeEnginePath(
+        YoutubeClientEngine.ytDlp,
+      );
 
       if (youtubeEngine == YoutubeClientEngine.ytDlp &&
           !await YtDlpEngine.isInstalled() &&

@@ -18,18 +18,14 @@ final validTopics = {
 
 class MetadataPluginRepositoryItem extends HookConsumerWidget {
   final MetadataPluginRepository pluginRepo;
-  const MetadataPluginRepositoryItem({
-    super.key,
-    required this.pluginRepo,
-  });
+  const MetadataPluginRepositoryItem({super.key, required this.pluginRepo});
 
   @override
   Widget build(BuildContext context, ref) {
     final pluginsNotifier = ref.watch(metadataPluginsProvider.notifier);
-    final host = useMemoized(
-      () => Uri.parse(pluginRepo.repoUrl).host,
-      [pluginRepo.repoUrl],
-    );
+    final host = useMemoized(() => Uri.parse(pluginRepo.repoUrl).host, [
+      pluginRepo.repoUrl,
+    ]);
     final isInstalling = useState(false);
 
     return Card(
@@ -65,8 +61,10 @@ class MetadataPluginRepositoryItem extends HookConsumerWidget {
                           context: context,
                           builder: (context) {
                             final pluginAbilities = pluginConfig.apis
-                                .map((e) =>
-                                    context.l10n.can_access_name_api(e.name))
+                                .map(
+                                  (e) =>
+                                      context.l10n.can_access_name_api(e.name),
+                                )
                                 .join("\n\n");
 
                             return AlertDialog(
@@ -81,8 +79,9 @@ class MetadataPluginRepositoryItem extends HookConsumerWidget {
                                   Text(context.l10n.third_party_plugin_warning),
                                   const Gap(8),
                                   FutureBuilder(
-                                    future: pluginsNotifier
-                                        .getLogoPath(pluginConfig),
+                                    future: pluginsNotifier.getLogoPath(
+                                      pluginConfig,
+                                    ),
                                     builder: (context, snapshot) {
                                       return Basic(
                                         leading: snapshot.hasData
@@ -102,11 +101,13 @@ class MetadataPluginRepositoryItem extends HookConsumerWidget {
                                                       BorderRadius.circular(8),
                                                 ),
                                                 child: const Icon(
-                                                    SpotubeIcons.plugin),
+                                                  SpotubeIcons.plugin,
+                                                ),
                                               ),
                                         title: Text(pluginConfig.name),
-                                        subtitle:
-                                            Text(pluginConfig.description),
+                                        subtitle: Text(
+                                          pluginConfig.description,
+                                        ),
                                       );
                                     },
                                   ),
@@ -208,7 +209,7 @@ class MetadataPluginRepositoryItem extends HookConsumerWidget {
                       Text(
                         context.l10n.third_party,
                         style: const TextStyle(color: Colors.white),
-                      ).xSmall
+                      ).xSmall,
                     ],
                   ),
                 ),

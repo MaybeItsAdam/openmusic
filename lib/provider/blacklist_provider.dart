@@ -28,8 +28,9 @@ class BlackListNotifier extends AsyncNotifier<List<BlacklistTableData>> {
   }
 
   Future<void> remove(String elementId) async {
-    await (_database.delete(_database.blacklistTable)
-          ..where((tbl) => tbl.elementId.equals(elementId)))
+    await (_database.delete(
+      _database.blacklistTable,
+    )..where((tbl) => tbl.elementId.equals(elementId)))
         .go();
   }
 
@@ -47,8 +48,9 @@ class BlackListNotifier extends AsyncNotifier<List<BlacklistTableData>> {
   }
 
   bool containsArtist(String artistId) {
-    return state.asData?.value
-            .any((element) => element.elementId == artistId) ??
+    return state.asData?.value.any(
+          (element) => element.elementId == artistId,
+        ) ??
         false;
   }
 

@@ -14,10 +14,7 @@ import 'package:window_manager/window_manager.dart';
 
 class WindowTitleBarButtons extends HookConsumerWidget {
   final Color? foregroundColor;
-  const WindowTitleBarButtons({
-    super.key,
-    this.foregroundColor,
-  });
+  const WindowTitleBarButtons({super.key, this.foregroundColor});
 
   @override
   Widget build(BuildContext context, ref) {
@@ -75,17 +72,19 @@ class WindowTitleBarButtons extends HookConsumerWidget {
                 isMaximized.value = false;
               },
             ),
-          HoverBuilder(builder: (context, isHovered) {
-            return ShadcnWindowButton(
-              icon: CloseIcon(
-                color: isHovered
-                    ? Colors.white
-                    : context.theme.colorScheme.foreground,
-              ),
-              onPressed: onClose,
-              hoverBackgroundColor: const Color(0xFFD32F2F),
-            );
-          }),
+          HoverBuilder(
+            builder: (context, isHovered) {
+              return ShadcnWindowButton(
+                icon: CloseIcon(
+                  color: isHovered
+                      ? Colors.white
+                      : context.theme.colorScheme.foreground,
+                ),
+                onPressed: onClose,
+                hoverBackgroundColor: const Color(0xFFD32F2F),
+              );
+            },
+          ),
         ],
       );
     }
@@ -93,10 +92,7 @@ class WindowTitleBarButtons extends HookConsumerWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        DecoratedMinimizeButton(
-          type: type,
-          onPressed: windowManager.minimize,
-        ),
+        DecoratedMinimizeButton(type: type, onPressed: windowManager.minimize),
         DecoratedMaximizeButton(
           type: type,
           onPressed: () async {
@@ -109,10 +105,7 @@ class WindowTitleBarButtons extends HookConsumerWidget {
             }
           },
         ),
-        DecoratedCloseButton(
-          type: type,
-          onPressed: onClose,
-        ),
+        DecoratedCloseButton(type: type, onPressed: onClose),
       ],
     );
   }

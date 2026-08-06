@@ -22,10 +22,7 @@ const engineDownloadUrls = {
 
 class YouTubeEngineNotInstalledDialog extends HookConsumerWidget {
   final YoutubeClientEngine engine;
-  const YouTubeEngineNotInstalledDialog({
-    super.key,
-    required this.engine,
-  });
+  const YouTubeEngineNotInstalledDialog({super.key, required this.engine});
 
   @override
   Widget build(BuildContext context, ref) {
@@ -99,8 +96,9 @@ class YouTubeEngineNotInstalledDialog extends HookConsumerWidget {
           onPressed: () async {
             if (controller.text.isNotEmpty) {
               if (!await File(controller.text).exists() && context.mounted) {
-                formKey.currentState?.fields["path"]
-                    ?.invalidate(context.l10n.file_not_found);
+                formKey.currentState?.fields["path"]?.invalidate(
+                  context.l10n.file_not_found,
+                );
                 return;
               }
               await KVStoreService.setYoutubeEnginePath(

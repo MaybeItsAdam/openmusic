@@ -39,22 +39,20 @@ class SettingsPlaybackEditConnectPortDialog extends HookConsumerWidget {
                 keyboardType: TextInputType.number,
                 inputFormatters: [
                   // Allow only signed integers
-                  TextInputFormatter.withFunction(
-                    (oldValue, newValue) {
-                      if (newValue.text.isEmpty) {
-                        return const TextEditingValue();
-                      }
-                      if (newValue.text.length == 1 && newValue.text == "-") {
-                        return newValue;
-                      }
-
-                      final intValue = int.tryParse(newValue.text);
-                      if (intValue == null) {
-                        return oldValue;
-                      }
+                  TextInputFormatter.withFunction((oldValue, newValue) {
+                    if (newValue.text.isEmpty) {
+                      return const TextEditingValue();
+                    }
+                    if (newValue.text.length == 1 && newValue.text == "-") {
                       return newValue;
-                    },
-                  ),
+                    }
+
+                    final intValue = int.tryParse(newValue.text);
+                    if (intValue == null) {
+                      return oldValue;
+                    }
+                    return newValue;
+                  }),
                 ],
               ),
               const Gap(5),

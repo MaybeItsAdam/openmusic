@@ -7,10 +7,7 @@ class MetadataPluginBrowseSectionsNotifier
     extends PaginatedAsyncNotifier<SpotubeBrowseSectionObject<Object>> {
   @override
   Future<SpotubePaginationResponseObject<SpotubeBrowseSectionObject<Object>>>
-      fetch(
-    int offset,
-    int limit,
-  ) async {
+      fetch(int offset, int limit) async {
     return await (await metadataPlugin).browse.sections(
           limit: limit,
           offset: offset,
@@ -25,7 +22,6 @@ class MetadataPluginBrowseSectionsNotifier
 }
 
 final metadataPluginBrowseSectionsProvider = AsyncNotifierProvider<
-    MetadataPluginBrowseSectionsNotifier,
-    SpotubePaginationResponseObject<SpotubeBrowseSectionObject<Object>>>(
-  () => MetadataPluginBrowseSectionsNotifier(),
-);
+        MetadataPluginBrowseSectionsNotifier,
+        SpotubePaginationResponseObject<SpotubeBrowseSectionObject<Object>>>(
+    () => MetadataPluginBrowseSectionsNotifier());

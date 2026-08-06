@@ -21,7 +21,9 @@ class UserPreferencesNotifier extends Notifier<PreferencesTableData> {
   build() {
     final db = ref.watch(databaseProvider);
 
-    (db.select(db.preferencesTable)..where((tbl) => tbl.id.equals(0)))
+    (db.select(
+      db.preferencesTable,
+    )..where((tbl) => tbl.id.equals(0)))
         .getSingleOrNull()
         .then((result) async {
       if (result == null) {
@@ -33,8 +35,9 @@ class UserPreferencesNotifier extends Notifier<PreferencesTableData> {
             );
       }
 
-      state = await (db.select(db.preferencesTable)
-            ..where((tbl) => tbl.id.equals(0)))
+      state = await (db.select(
+        db.preferencesTable,
+      )..where((tbl) => tbl.id.equals(0)))
           .getSingle();
 
       final subscription = (db.select(db.preferencesTable)
@@ -96,8 +99,9 @@ class UserPreferencesNotifier extends Notifier<PreferencesTableData> {
 
   static Future<String> getMusicCacheDir() async {
     if (kIsAndroid) {
-      final dir =
-          await paths.getExternalCacheDirectories().then((dirs) => dirs!.first);
+      final dir = await paths.getExternalCacheDirectories().then(
+            (dirs) => dirs!.first,
+          );
       if (!await dir.exists()) {
         await dir.create(recursive: true);
       }
@@ -152,9 +156,7 @@ class UserPreferencesNotifier extends Notifier<PreferencesTableData> {
   void setLocalLibraryLocation(List<String> localLibraryDirs) {
     //if (localLibraryDir.isEmpty) return;
     setData(
-      PreferencesTableCompanion(
-        localLibraryLocation: Value(localLibraryDirs),
-      ),
+      PreferencesTableCompanion(localLibraryLocation: Value(localLibraryDirs)),
     );
   }
 
@@ -187,11 +189,7 @@ class UserPreferencesNotifier extends Notifier<PreferencesTableData> {
   }
 
   void setSystemTitleBar(bool isSystemTitleBar) {
-    setData(
-      PreferencesTableCompanion(
-        systemTitleBar: Value(isSystemTitleBar),
-      ),
-    );
+    setData(PreferencesTableCompanion(systemTitleBar: Value(isSystemTitleBar)));
   }
 
   void setDiscordPresence(bool discordPresence) {

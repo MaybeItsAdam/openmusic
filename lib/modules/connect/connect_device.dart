@@ -72,7 +72,7 @@ class ConnectDeviceButton extends HookConsumerWidget {
           onPressed: () {
             context.navigateTo(const ConnectRoute());
           },
-        )
+        ),
       ],
     );
   }

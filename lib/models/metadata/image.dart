@@ -2,22 +2,14 @@ part of 'metadata.dart';
 
 @freezed
 class SpotubeImageObject with _$SpotubeImageObject {
-  factory SpotubeImageObject({
-    required String url,
-    int? width,
-    int? height,
-  }) = _SpotubeImageObject;
+  factory SpotubeImageObject({required String url, int? width, int? height}) =
+      _SpotubeImageObject;
 
   factory SpotubeImageObject.fromJson(Map<String, dynamic> json) =>
       _$SpotubeImageObjectFromJson(json);
 }
 
-enum ImagePlaceholder {
-  albumArt,
-  artist,
-  collection,
-  online,
-}
+enum ImagePlaceholder { albumArt, artist, collection, online }
 
 final placeholderUrlMap = {
   ImagePlaceholder.albumArt: Assets.images.albumPlaceholder.path,
@@ -29,12 +21,10 @@ final placeholderUrlMap = {
 
 extension SpotubeImageExtensions on List<SpotubeImageObject>? {
   /// Returns the URL of the image at the specified index.
-  String asUrlString({
-    int index = 1,
-    required ImagePlaceholder placeholder,
-  }) {
-    final sortedImage =
-        this?.sorted((a, b) => (a.width ?? 0).compareTo(b.width ?? 0));
+  String asUrlString({int index = 1, required ImagePlaceholder placeholder}) {
+    final sortedImage = this?.sorted(
+      (a, b) => (a.width ?? 0).compareTo(b.width ?? 0),
+    );
 
     return sortedImage != null && sortedImage.isNotEmpty
         ? sortedImage[
@@ -43,10 +33,7 @@ extension SpotubeImageExtensions on List<SpotubeImageObject>? {
         : placeholderUrlMap[placeholder]!;
   }
 
-  Uri asUri({
-    int index = 1,
-    required ImagePlaceholder placeholder,
-  }) {
+  Uri asUri({int index = 1, required ImagePlaceholder placeholder}) {
     final url = asUrlString(placeholder: placeholder, index: index);
     if (url.startsWith("http")) {
       return Uri.parse(url);
@@ -79,17 +66,14 @@ extension SpotubeImageExtensions on List<SpotubeImageObject>? {
     });
 
     return sortedImage != null && sortedImage.isNotEmpty
-        ? sortedImage.firstWhere(
-            (image) {
-              final width = image.width ?? 0;
-              final height = image.height ?? 0;
-              return width >= 200 &&
-                  height >= 200 &&
-                  width <= 300 &&
-                  height <= 300;
-            },
-            orElse: () => sortedImage.first,
-          ).url
+        ? sortedImage.firstWhere((image) {
+            final width = image.width ?? 0;
+            final height = image.height ?? 0;
+            return width >= 200 &&
+                height >= 200 &&
+                width <= 300 &&
+                height <= 300;
+          }, orElse: () => sortedImage.first).url
         : placeholderUrl;
   }
 }

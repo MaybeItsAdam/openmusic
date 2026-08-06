@@ -14,9 +14,7 @@ final closeNotification = !kIsDesktop
     : (LocalNotification(
         title: 'Spotube',
         body: 'Running in background. Minimized to System Tray',
-        actions: [
-          LocalNotificationAction(text: 'Close The App'),
-        ],
+        actions: [LocalNotificationAction(text: 'Close The App')],
       )..onClickAction = (value) {
         exit(0);
       });

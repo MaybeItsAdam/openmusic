@@ -33,8 +33,9 @@ class MetadataPluginPlaylistNotifier
     bool? collaborative,
     void Function(dynamic error)? onError,
   }) async {
-    final userId = await ref
-        .read(metadataPluginUserProvider.selectAsync((data) => data?.id));
+    final userId = await ref.read(
+      metadataPluginUserProvider.selectAsync((data) => data?.id),
+    );
     if (userId == null) {
       throw Exception('User ID is not available. Please log in first.');
     }
@@ -85,8 +86,10 @@ class MetadataPluginPlaylistNotifier
     }
   }
 
-  Future<void> addTracks(List<String> trackIds,
-      [void Function(dynamic error)? onError]) async {
+  Future<void> addTracks(
+    List<String> trackIds, [
+    void Function(dynamic error)? onError,
+  ]) async {
     if (state.value == null) return;
 
     try {
@@ -99,8 +102,10 @@ class MetadataPluginPlaylistNotifier
     }
   }
 
-  Future<void> removeTracks(List<String> trackIds,
-      [void Function(dynamic error)? onError]) async {
+  Future<void> removeTracks(
+    List<String> trackIds, [
+    void Function(dynamic error)? onError,
+  ]) async {
     try {
       if (state.value == null) return;
 
@@ -115,8 +120,9 @@ class MetadataPluginPlaylistNotifier
 
   Future<void> delete() async {
     if (state.value == null) return;
-    final userId = await ref
-        .read(metadataPluginUserProvider.selectAsync((data) => data?.id));
+    final userId = await ref.read(
+      metadataPluginUserProvider.selectAsync((data) => data?.id),
+    );
     if (userId == null || userId != state.value!.owner.id) {
       throw Exception('You can only delete your own playlists.');
     }
@@ -126,6 +132,6 @@ class MetadataPluginPlaylistNotifier
 }
 
 final metadataPluginPlaylistProvider = AutoDisposeAsyncNotifierProviderFamily<
-    MetadataPluginPlaylistNotifier, SpotubeFullPlaylistObject, String>(
-  () => MetadataPluginPlaylistNotifier(),
-);
+    MetadataPluginPlaylistNotifier,
+    SpotubeFullPlaylistObject,
+    String>(() => MetadataPluginPlaylistNotifier());

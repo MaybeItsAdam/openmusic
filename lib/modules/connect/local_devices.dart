@@ -30,10 +30,7 @@ class ConnectPageLocalDevices extends HookWidget {
         SliverPadding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
           sliver: SliverToBoxAdapter(
-            child: Text(
-              context.l10n.this_device,
-              style: typography.bold,
-            ),
+            child: Text(context.l10n.this_device, style: typography.bold),
           ),
         ),
         const SliverGap(10),
@@ -52,7 +49,7 @@ class ConnectPageLocalDevices extends HookWidget {
             );
           },
         ),
-        const SliverGap(200)
+        const SliverGap(200),
       ],
     );
   }

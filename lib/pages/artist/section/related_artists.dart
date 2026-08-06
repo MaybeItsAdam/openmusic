@@ -5,15 +5,13 @@ import 'package:spotube/provider/metadata_plugin/artist/related.dart';
 
 class ArtistPageRelatedArtists extends ConsumerWidget {
   final String artistId;
-  const ArtistPageRelatedArtists({
-    super.key,
-    required this.artistId,
-  });
+  const ArtistPageRelatedArtists({super.key, required this.artistId});
 
   @override
   Widget build(BuildContext context, ref) {
-    final relatedArtists =
-        ref.watch(metadataPluginArtistRelatedArtistsProvider(artistId));
+    final relatedArtists = ref.watch(
+      metadataPluginArtistRelatedArtistsProvider(artistId),
+    );
 
     return switch (relatedArtists) {
       AsyncData(value: final artists) => SliverPadding(
@@ -29,17 +27,12 @@ class ArtistPageRelatedArtists extends ConsumerWidget {
             ),
             itemBuilder: (context, index) {
               final artist = artists.items.elementAt(index);
-              return SizedBox(
-                width: 180,
-                child: ArtistCard(artist),
-              );
+              return SizedBox(width: 180, child: ArtistCard(artist));
             },
           ),
         ),
       AsyncError(:final error) => SliverToBoxAdapter(
-          child: Center(
-            child: Text(error.toString()),
-          ),
+          child: Center(child: Text(error.toString())),
         ),
       _ => const SliverToBoxAdapter(
           child: Center(child: CircularProgressIndicator()),

@@ -19,9 +19,7 @@ class ArtistCard extends HookConsumerWidget {
   Widget build(BuildContext context, ref) {
     final theme = Theme.of(context);
     final backgroundImage = UniversalImage.imageProvider(
-      artist.images.asUrlString(
-        placeholder: ImagePlaceholder.artist,
-      ),
+      artist.images.asUrlString(placeholder: ImagePlaceholder.artist),
     );
     final isBlackListed = ref.watch(
       blacklistProvider.select(
@@ -62,11 +60,9 @@ class ArtistCard extends HookConsumerWidget {
                   ),
                   const Gap(5),
                 ],
-                SecondaryBadge(
-                  child: Text(context.l10n.artist.toUpperCase()),
-                )
+                SecondaryBadge(child: Text(context.l10n.artist.toUpperCase())),
               ],
-            )
+            ),
           ],
         ),
       ),

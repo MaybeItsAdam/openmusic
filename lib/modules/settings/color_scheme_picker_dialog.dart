@@ -65,11 +65,9 @@ class ColorSchemePickerDialog extends HookConsumerWidget {
 
     final scheme = preferences.accentColorScheme;
     final active = useState<String?>(
-      colorsMap.firstWhereOrNull(
-        (element) {
-          return scheme.name == element.name;
-        },
-      )?.name,
+      colorsMap.firstWhereOrNull((element) {
+        return scheme.name == element.name;
+      })?.name,
     );
 
     return AlertDialog(
@@ -97,25 +95,21 @@ class ColorSchemePickerDialog extends HookConsumerWidget {
         child: Wrap(
           spacing: 8,
           runSpacing: 8,
-          children: colorsMap.map(
-            (color) {
-              return ColorChip(
-                name: color.name,
-                color: color,
-                isActive: color.name == active.value,
-                onPressed: () {
-                  active.value = color.name;
-                  preferencesNotifier.setAccentColorScheme(
-                    colorsMap.firstWhere(
-                      (element) {
-                        return element.name == color.name;
-                      },
-                    ),
-                  );
-                },
-              );
-            },
-          ).toList(),
+          children: colorsMap.map((color) {
+            return ColorChip(
+              name: color.name,
+              color: color,
+              isActive: color.name == active.value,
+              onPressed: () {
+                active.value = color.name;
+                preferencesNotifier.setAccentColorScheme(
+                  colorsMap.firstWhere((element) {
+                    return element.name == color.name;
+                  }),
+                );
+              },
+            );
+          }).toList(),
         ),
       ),
     );

@@ -57,10 +57,8 @@ class _TextEditingControllerHookCreator {
 const useShadcnTextEditingController = _TextEditingControllerHookCreator();
 
 class _TextEditingControllerHook extends Hook<TextEditingController> {
-  const _TextEditingControllerHook(
-    this.initialText, [
-    List<Object?>? keys,
-  ])  : initialValue = null,
+  const _TextEditingControllerHook(this.initialText, [List<Object?>? keys])
+      : initialValue = null,
         super(keys: keys);
 
   const _TextEditingControllerHook.fromValue(

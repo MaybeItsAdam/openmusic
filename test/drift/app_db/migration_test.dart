@@ -2,7 +2,7 @@
 import 'package:drift/drift.dart';
 import 'package:drift_dev/api/migrations.dart';
 import 'package:spotube/models/database/database.dart';
-import 'package:test/test.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'generated/schema.dart';
 
 import 'generated/schema_v1.dart' as v1;
@@ -93,35 +93,59 @@ void main() {
         batch.insertAll(oldDb.skipSegmentTable, oldSkipSegmentTableData);
         batch.insertAll(oldDb.sourceMatchTable, oldSourceMatchTableData);
         batch.insertAll(
-            oldDb.audioPlayerStateTable, oldAudioPlayerStateTableData);
+          oldDb.audioPlayerStateTable,
+          oldAudioPlayerStateTableData,
+        );
         batch.insertAll(oldDb.playlistTable, oldPlaylistTableData);
         batch.insertAll(oldDb.playlistMediaTable, oldPlaylistMediaTableData);
         batch.insertAll(oldDb.historyTable, oldHistoryTableData);
         batch.insertAll(oldDb.lyricsTable, oldLyricsTableData);
       },
       validateItems: (newDb) async {
-        expect(expectedNewAuthenticationTableData,
-            await newDb.select(newDb.authenticationTable).get());
-        expect(expectedNewBlacklistTableData,
-            await newDb.select(newDb.blacklistTable).get());
-        expect(expectedNewPreferencesTableData,
-            await newDb.select(newDb.preferencesTable).get());
-        expect(expectedNewScrobblerTableData,
-            await newDb.select(newDb.scrobblerTable).get());
-        expect(expectedNewSkipSegmentTableData,
-            await newDb.select(newDb.skipSegmentTable).get());
-        expect(expectedNewSourceMatchTableData,
-            await newDb.select(newDb.sourceMatchTable).get());
-        expect(expectedNewAudioPlayerStateTableData,
-            await newDb.select(newDb.audioPlayerStateTable).get());
-        expect(expectedNewPlaylistTableData,
-            await newDb.select(newDb.playlistTable).get());
-        expect(expectedNewPlaylistMediaTableData,
-            await newDb.select(newDb.playlistMediaTable).get());
-        expect(expectedNewHistoryTableData,
-            await newDb.select(newDb.historyTable).get());
-        expect(expectedNewLyricsTableData,
-            await newDb.select(newDb.lyricsTable).get());
+        expect(
+          expectedNewAuthenticationTableData,
+          await newDb.select(newDb.authenticationTable).get(),
+        );
+        expect(
+          expectedNewBlacklistTableData,
+          await newDb.select(newDb.blacklistTable).get(),
+        );
+        expect(
+          expectedNewPreferencesTableData,
+          await newDb.select(newDb.preferencesTable).get(),
+        );
+        expect(
+          expectedNewScrobblerTableData,
+          await newDb.select(newDb.scrobblerTable).get(),
+        );
+        expect(
+          expectedNewSkipSegmentTableData,
+          await newDb.select(newDb.skipSegmentTable).get(),
+        );
+        expect(
+          expectedNewSourceMatchTableData,
+          await newDb.select(newDb.sourceMatchTable).get(),
+        );
+        expect(
+          expectedNewAudioPlayerStateTableData,
+          await newDb.select(newDb.audioPlayerStateTable).get(),
+        );
+        expect(
+          expectedNewPlaylistTableData,
+          await newDb.select(newDb.playlistTable).get(),
+        );
+        expect(
+          expectedNewPlaylistMediaTableData,
+          await newDb.select(newDb.playlistMediaTable).get(),
+        );
+        expect(
+          expectedNewHistoryTableData,
+          await newDb.select(newDb.historyTable).get(),
+        );
+        expect(
+          expectedNewLyricsTableData,
+          await newDb.select(newDb.lyricsTable).get(),
+        );
       },
     );
   });

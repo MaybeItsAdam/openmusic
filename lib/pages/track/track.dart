@@ -27,10 +27,7 @@ class TrackPage extends HookConsumerWidget {
   static const name = "track";
 
   final String trackId;
-  const TrackPage({
-    super.key,
-    @PathParam("id") required this.trackId,
-  });
+  const TrackPage({super.key, @PathParam("id") required this.trackId});
 
   @override
   Widget build(BuildContext context, ref) {
@@ -58,10 +55,7 @@ class TrackPage extends HookConsumerWidget {
       bottom: false,
       child: Scaffold(
         headers: const [
-          TitleBar(
-            backgroundColor: Colors.transparent,
-            surfaceBlur: 0,
-          )
+          TitleBar(backgroundColor: Colors.transparent, surfaceBlur: 0),
         ],
         floatingHeader: true,
         child: Stack(
@@ -94,10 +88,7 @@ class TrackPage extends HookConsumerWidget {
                     alignment: Alignment.topCenter,
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
-                        colors: [
-                          colorScheme.background,
-                          Colors.transparent,
-                        ],
+                        colors: [colorScheme.background, Colors.transparent],
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                         stops: const [0.2, 1],
@@ -125,17 +116,16 @@ class TrackPage extends HookConsumerWidget {
                             ),
                           ),
                           Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 16.0),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16.0,
+                            ),
                             child: Column(
                               crossAxisAlignment: mediaQuery.smAndDown
                                   ? CrossAxisAlignment.center
                                   : CrossAxisAlignment.start,
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                Text(
-                                  track.name,
-                                ).large().semiBold(),
+                                Text(track.name).large().semiBold(),
                                 const Gap(10),
                                 Row(
                                   mainAxisSize: MainAxisSize.min,
@@ -170,8 +160,9 @@ class TrackPage extends HookConsumerWidget {
                                 ),
                                 const Gap(10),
                                 ConstrainedBox(
-                                  constraints:
-                                      const BoxConstraints(maxWidth: 350),
+                                  constraints: const BoxConstraints(
+                                    maxWidth: 350,
+                                  ),
                                   child: Row(
                                     mainAxisSize: mediaQuery.smAndDown
                                         ? MainAxisSize.max
@@ -179,11 +170,14 @@ class TrackPage extends HookConsumerWidget {
                                     children: [
                                       const Gap(5),
                                       if (!isActive &&
-                                          !playlist.tracks
-                                              .containsBy(track, (t) => t.id))
+                                          !playlist.tracks.containsBy(
+                                            track,
+                                            (t) => t.id,
+                                          ))
                                         Button.outline(
-                                          leading:
-                                              const Icon(SpotubeIcons.queueAdd),
+                                          leading: const Icon(
+                                            SpotubeIcons.queueAdd,
+                                          ),
                                           child: Text(context.l10n.queue),
                                           onPressed: () {
                                             playlistNotifier.addTrack(track);
@@ -191,18 +185,22 @@ class TrackPage extends HookConsumerWidget {
                                         ),
                                       const Gap(5),
                                       if (!isActive &&
-                                          !playlist.tracks
-                                              .containsBy(track, (t) => t.id))
+                                          !playlist.tracks.containsBy(
+                                            track,
+                                            (t) => t.id,
+                                          ))
                                         Tooltip(
                                           tooltip: TooltipContainer(
                                             child: Text(context.l10n.play_next),
                                           ).call,
                                           child: IconButton.outline(
                                             icon: const Icon(
-                                                SpotubeIcons.lightning),
+                                              SpotubeIcons.lightning,
+                                            ),
                                             onPressed: () {
-                                              playlistNotifier
-                                                  .addTracksAtFirst([track]);
+                                              playlistNotifier.addTracksAtFirst(
+                                                [track],
+                                              );
                                             },
                                           ),
                                         ),

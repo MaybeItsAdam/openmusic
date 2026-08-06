@@ -10,9 +10,7 @@ class PlayerQueuePage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
-    final playlist = ref.watch(
-      audioPlayerProvider,
-    );
+    final playlist = ref.watch(audioPlayerProvider);
     final playlistNotifier = ref.read(audioPlayerProvider.notifier);
     return Scaffold(
       child: SafeArea(

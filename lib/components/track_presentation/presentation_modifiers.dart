@@ -12,10 +12,7 @@ import 'package:spotube/hooks/controllers/use_shadcn_text_editing_controller.dar
 
 class TrackPresentationModifiersSection extends HookConsumerWidget {
   final FocusNode? focusNode;
-  const TrackPresentationModifiersSection({
-    super.key,
-    this.focusNode,
-  });
+  const TrackPresentationModifiersSection({super.key, this.focusNode});
 
   @override
   Widget build(BuildContext context, ref) {
@@ -28,62 +25,64 @@ class TrackPresentationModifiersSection extends HookConsumerWidget {
     final controller = useShadcnTextEditingController();
     final scale = context.theme.scaling;
 
-    return LayoutBuilder(builder: (context, constrains) {
-      return Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: (constrains.mdAndUp ? 16 : 8) * scale,
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Checkbox(
-                  state: state.selectedTracks.length == options.tracks.length
-                      ? CheckboxState.checked
-                      : CheckboxState.unchecked,
-                  onChanged: (value) {
-                    if (value == CheckboxState.checked) {
-                      notifier.selectAllTracks();
-                    } else {
-                      notifier.deselectAllTracks();
-                    }
-                  },
-                ),
-              ],
-            ),
-            Flexible(
-              child: Row(
+    return LayoutBuilder(
+      builder: (context, constrains) {
+        return Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: (constrains.mdAndUp ? 16 : 8) * scale,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
                 mainAxisSize: MainAxisSize.min,
-                spacing: 8,
                 children: [
-                  Flexible(
-                    child: ConstrainedBox(
-                      constraints: BoxConstraints(
-                        maxWidth: 320 * scale,
-                        maxHeight: 38 * scale,
-                      ),
-                      child: TextField(
-                        controller: controller,
-                        focusNode: focusNode,
-                        placeholder: Text(context.l10n.search_tracks),
-                        onChanged: (value) {
-                          if (value.isEmpty) {
-                            notifier.clearFilter();
-                          } else {
-                            notifier.filterTracks(value);
-                          }
-                        },
-                        features: [
-                          InputFeature.leading(
-                            Icon(
-                              SpotubeIcons.search,
-                              color: context.theme.colorScheme.mutedForeground,
+                  Checkbox(
+                    state: state.selectedTracks.length == options.tracks.length
+                        ? CheckboxState.checked
+                        : CheckboxState.unchecked,
+                    onChanged: (value) {
+                      if (value == CheckboxState.checked) {
+                        notifier.selectAllTracks();
+                      } else {
+                        notifier.deselectAllTracks();
+                      }
+                    },
+                  ),
+                ],
+              ),
+              Flexible(
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  spacing: 8,
+                  children: [
+                    Flexible(
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(
+                          maxWidth: 320 * scale,
+                          maxHeight: 38 * scale,
+                        ),
+                        child: TextField(
+                          controller: controller,
+                          focusNode: focusNode,
+                          placeholder: Text(context.l10n.search_tracks),
+                          onChanged: (value) {
+                            if (value.isEmpty) {
+                              notifier.clearFilter();
+                            } else {
+                              notifier.filterTracks(value);
+                            }
+                          },
+                          features: [
+                            InputFeature.leading(
+                              Icon(
+                                SpotubeIcons.search,
+                                color:
+                                    context.theme.colorScheme.mutedForeground,
+                              ),
                             ),
-                          ),
-                          InputFeature.trailing(
-                            ListenableBuilder(
+                            InputFeature.trailing(
+                              ListenableBuilder(
                                 listenable: controller,
                                 builder: (context, _) {
                                   return AnimatedCrossFade(
@@ -91,11 +90,13 @@ class TrackPresentationModifiersSection extends HookConsumerWidget {
                                     crossFadeState: controller.text.isEmpty
                                         ? CrossFadeState.showFirst
                                         : CrossFadeState.showSecond,
-                                    firstChild:
-                                        const SizedBox.square(dimension: 20),
+                                    firstChild: const SizedBox.square(
+                                      dimension: 20,
+                                    ),
                                     secondChild: AnimatedScale(
-                                      duration:
-                                          const Duration(milliseconds: 300),
+                                      duration: const Duration(
+                                        milliseconds: 300,
+                                      ),
                                       scale: controller.text.isEmpty ? 0 : 1,
                                       child: IconButton.ghost(
                                         size: const ButtonSize(.6),
@@ -107,25 +108,27 @@ class TrackPresentationModifiersSection extends HookConsumerWidget {
                                       ),
                                     ),
                                   );
-                                }),
-                          )
-                        ],
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  SortTracksDropdown(
-                    value: state.sortBy,
-                    onChanged: (value) {
-                      notifier.sortTracks(value);
-                    },
-                  ),
-                  const TrackPresentationActionsSection(),
-                ],
+                    SortTracksDropdown(
+                      value: state.sortBy,
+                      onChanged: (value) {
+                        notifier.sortTracks(value);
+                      },
+                    ),
+                    const TrackPresentationActionsSection(),
+                  ],
+                ),
               ),
-            ),
-          ],
-        ),
-      );
-    });
+            ],
+          ),
+        );
+      },
+    );
   }
 }

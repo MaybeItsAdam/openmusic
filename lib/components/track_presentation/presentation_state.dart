@@ -38,26 +38,25 @@ class PresentationStateNotifier
   PresentationState build(collection) {
     if (arg case SpotubeSimplePlaylistObject() || SpotubeSimpleAlbumObject()) {
       if (isSavedTrackPlaylist) {
-        ref.listen(
-          metadataPluginSavedTracksProvider,
-          (previous, next) {
-            next.whenData((value) {
-              state = state.copyWith(
-                presentationTracks: ServiceUtils.sortTracks(
-                  value.items,
-                  state.sortBy,
-                ),
-              );
-            });
-          },
-        );
+        ref.listen(metadataPluginSavedTracksProvider, (previous, next) {
+          next.whenData((value) {
+            state = state.copyWith(
+              presentationTracks: ServiceUtils.sortTracks(
+                value.items,
+                state.sortBy,
+              ),
+            );
+          });
+        });
       } else {
         ref.listen(
           arg is SpotubeSimplePlaylistObject
               ? metadataPluginPlaylistTracksProvider(
-                  (arg as SpotubeSimplePlaylistObject).id)
+                  (arg as SpotubeSimplePlaylistObject).id,
+                )
               : metadataPluginAlbumTracksProvider(
-                  (arg as SpotubeSimpleAlbumObject).id),
+                  (arg as SpotubeSimpleAlbumObject).id,
+                ),
           (previous, next) {
             next.whenData((value) {
               state = state.copyWith(
@@ -95,14 +94,20 @@ class PresentationStateNotifier
           (true, true) =>
             ref.read(metadataPluginSavedTracksProvider).asData?.value.items,
           (true, false) => ref
-              .read(metadataPluginPlaylistTracksProvider(
-                  (arg as SpotubeSimplePlaylistObject).id))
+              .read(
+                metadataPluginPlaylistTracksProvider(
+                  (arg as SpotubeSimplePlaylistObject).id,
+                ),
+              )
               .asData
               ?.value
               .items,
           _ => ref
-              .read(metadataPluginAlbumTracksProvider(
-                  (arg as SpotubeSimpleAlbumObject).id))
+              .read(
+                metadataPluginAlbumTracksProvider(
+                  (arg as SpotubeSimpleAlbumObject).id,
+                ),
+              )
               .asData
               ?.value
               .items,
@@ -117,15 +122,11 @@ class PresentationStateNotifier
       return;
     }
 
-    state = state.copyWith(
-      selectedTracks: [...state.selectedTracks, track],
-    );
+    state = state.copyWith(selectedTracks: [...state.selectedTracks, track]);
   }
 
   void selectAllTracks() {
-    state = state.copyWith(
-      selectedTracks: tracks,
-    );
+    state = state.copyWith(selectedTracks: tracks);
   }
 
   void deselectTrack(SpotubeTrackObject track) {
@@ -135,9 +136,7 @@ class PresentationStateNotifier
   }
 
   void deselectAllTracks() {
-    state = state.copyWith(
-      selectedTracks: [],
-    );
+    state = state.copyWith(selectedTracks: []);
   }
 
   void filterTracks(String query) {
@@ -175,6 +174,6 @@ class PresentationStateNotifier
 }
 
 final presentationStateProvider = AutoDisposeNotifierProviderFamily<
-    PresentationStateNotifier, PresentationState, Object>(
-  () => PresentationStateNotifier(),
-);
+    PresentationStateNotifier,
+    PresentationState,
+    Object>(() => PresentationStateNotifier());

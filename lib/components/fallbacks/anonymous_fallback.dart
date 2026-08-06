@@ -11,10 +11,7 @@ import 'package:spotube/utils/platform.dart';
 
 class AnonymousFallback extends ConsumerWidget {
   final Widget? child;
-  const AnonymousFallback({
-    super.key,
-    this.child,
-  });
+  const AnonymousFallback({super.key, this.child});
 
   @override
   Widget build(BuildContext context, ref) {
@@ -41,7 +38,7 @@ class AnonymousFallback extends ConsumerWidget {
           Button.primary(
             child: Text(context.l10n.login),
             onPressed: () => context.navigateTo(const SettingsRoute()),
-          )
+          ),
         ],
       ),
     );

@@ -191,9 +191,7 @@ class TrackOptionsActions {
             builder: (context, overlay) {
               return SurfaceCard(
                 child: Text(
-                  context.l10n.removed_track_from_queue(
-                    track.name,
-                  ),
+                  context.l10n.removed_track_from_queue(track.name),
                   textAlign: TextAlign.center,
                 ),
               );
@@ -281,7 +279,9 @@ final trackOptionsStateProvider =
   final downloadManager = ref.watch(downloadManagerProvider.notifier);
   final blacklist = ref.watch(blacklistProvider.notifier);
   final isBlacklisted = blacklist.contains(track);
-  final isSavedTrack = ref.watch(metadataPluginIsSavedTrackProvider(track.id));
+  final isSavedTrack = ref.watch(
+    metadataPluginIsSavedTrackProvider(track.id),
+  );
 
   final downloadTask = playlist.activeTrack?.id == null
       ? null

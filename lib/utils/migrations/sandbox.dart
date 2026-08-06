@@ -33,7 +33,8 @@ Future<void> migrateMacOsFromSandboxToNoSandbox() async {
       );
       return;
     } else if (supportFiles.any(
-        (file) => file is File && fileExts.contains(extension(file.path)))) {
+      (file) => file is File && fileExts.contains(extension(file.path)),
+    )) {
       stdout.writeln(
         "🔵 Non-sandbox directory is not empty, skipping migration",
       );

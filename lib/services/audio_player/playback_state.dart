@@ -6,7 +6,7 @@ enum AudioPlaybackState {
   paused,
   completed,
   buffering,
-  stopped;
+  stopped,
 
   // static AudioPlaybackState fromJaPlayerState(PlayerState state) {
   //   if (state.playing) {

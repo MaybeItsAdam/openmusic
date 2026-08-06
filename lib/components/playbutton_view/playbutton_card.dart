@@ -123,7 +123,7 @@ class PlaybuttonCard extends StatelessWidget {
                                   size: 15,
                                 ),
                               (false, false) => const Icon(SpotubeIcons.play),
-                              (false, true) => const Icon(SpotubeIcons.pause)
+                              (false, true) => const Icon(SpotubeIcons.pause),
                             },
                             enabled: !isLoading,
                             onPressed: onPlaybuttonPressed,
@@ -152,11 +152,7 @@ class PlaybuttonCard extends StatelessWidget {
         ),
         title: Tooltip(
           tooltip: TooltipContainer(child: Text(title)).call,
-          child: Text(
-            title,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
+          child: Text(title, maxLines: 1, overflow: TextOverflow.ellipsis),
         ),
         subtitle: Text(
           unescapeHtml.isEmpty ? "\n" : unescapeHtml,

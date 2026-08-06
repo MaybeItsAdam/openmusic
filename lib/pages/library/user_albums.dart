@@ -30,8 +30,9 @@ class UserAlbumsPage extends HookConsumerWidget {
   Widget build(BuildContext context, ref) {
     final authenticated = ref.watch(metadataPluginAuthenticatedProvider);
     final albumsQuery = ref.watch(metadataPluginSavedAlbumsProvider);
-    final albumsQueryNotifier =
-        ref.watch(metadataPluginSavedAlbumsProvider.notifier);
+    final albumsQueryNotifier = ref.watch(
+      metadataPluginSavedAlbumsProvider.notifier,
+    );
 
     final controller = useScrollController();
 
@@ -42,10 +43,7 @@ class UserAlbumsPage extends HookConsumerWidget {
         return albumsQuery.asData?.value.items ?? [];
       }
       return albumsQuery.asData?.value.items
-              .map((e) => (
-                    weightedRatio(e.name, searchText.value),
-                    e,
-                  ))
+              .map((e) => (weightedRatio(e.name, searchText.value), e))
               .sorted((a, b) => b.$1.compareTo(a.$1))
               .where((e) => e.$1 > 50)
               .map((e) => e.$2)
@@ -97,7 +95,7 @@ class UserAlbumsPage extends HookConsumerWidget {
                       child: TextField(
                         onChanged: (value) => searchText.value = value,
                         features: const [
-                          InputFeature.leading(Icon(SpotubeIcons.filter))
+                          InputFeature.leading(Icon(SpotubeIcons.filter)),
                         ],
                         placeholder: Text(context.l10n.filter_albums),
                       ),
@@ -123,7 +121,7 @@ class UserAlbumsPage extends HookConsumerWidget {
                           Text(
                             context.l10n.no_favorite_albums_yet,
                             textAlign: TextAlign.center,
-                          ).muted().small()
+                          ).muted().small(),
                         ],
                       ),
                     ),
@@ -137,9 +135,8 @@ class UserAlbumsPage extends HookConsumerWidget {
                       hasMore: albumsQuery.asData?.value.hasMore == true,
                       isLoading: albumsQuery.isLoading,
                       onRequestMore: albumsQueryNotifier.fetchMore,
-                      gridItemBuilder: (context, index) => AlbumCard(
-                        albums[index],
-                      ),
+                      gridItemBuilder: (context, index) =>
+                          AlbumCard(albums[index]),
                       listItemBuilder: (context, index) =>
                           AlbumCard.tile(albums[index]),
                     ),

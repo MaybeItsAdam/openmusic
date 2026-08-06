@@ -75,9 +75,9 @@ class HorizontalPlaybuttonCardView<T> extends HookWidget {
                 // disable multiple scrollbar to use this
                 onNotification: (notification) => true,
                 child: ScrollConfiguration(
-                  behavior: ScrollConfiguration.of(context).copyWith(
-                    dragDevices: PointerDeviceKind.values.toSet(),
-                  ),
+                  behavior: ScrollConfiguration.of(
+                    context,
+                  ).copyWith(dragDevices: PointerDeviceKind.values.toSet()),
                   child: items.isEmpty
                       ? ListView.builder(
                           scrollDirection: Axis.horizontal,
@@ -93,11 +93,11 @@ class HorizontalPlaybuttonCardView<T> extends HookWidget {
                           itemCount: items.length,
                           onFetchData: onFetchMore,
                           loadingBuilder: (context) => Skeletonizer(
-                                enabled: true,
-                                child: isArtist
-                                    ? ArtistCard(FakeData.artist)
-                                    : AlbumCard(FakeData.albumSimple),
-                              ),
+                            enabled: true,
+                            child: isArtist
+                                ? ArtistCard(FakeData.artist)
+                                : AlbumCard(FakeData.albumSimple),
+                          ),
                           isLoading: isLoadingNextPage,
                           hasReachedMax: !hasNextPage,
                           separatorBuilder: (context, index) => Gap(12 * scale),
@@ -106,14 +106,18 @@ class HorizontalPlaybuttonCardView<T> extends HookWidget {
 
                             return switch (item) {
                               SpotubeSimplePlaylistObject() => PlaylistCard(
-                                  item as SpotubeSimplePlaylistObject),
-                              SpotubeSimpleAlbumObject() =>
-                                AlbumCard(item as SpotubeSimpleAlbumObject),
-                              SpotubeFullArtistObject() =>
-                                ArtistCard(item as SpotubeFullArtistObject),
+                                  item as SpotubeSimplePlaylistObject,
+                                ),
+                              SpotubeSimpleAlbumObject() => AlbumCard(
+                                  item as SpotubeSimpleAlbumObject,
+                                ),
+                              SpotubeFullArtistObject() => ArtistCard(
+                                  item as SpotubeFullArtistObject,
+                                ),
                               _ => const SizedBox.shrink(),
                             };
-                          }),
+                          },
+                        ),
                 ),
               ),
             ),

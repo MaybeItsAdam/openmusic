@@ -17,9 +17,6 @@ class InterScrollbar extends HookWidget {
   Widget build(BuildContext context) {
     if (kIsDesktop) return child;
 
-    return DraggableScrollbar.semicircle(
-      controller: controller,
-      child: child,
-    );
+    return DraggableScrollbar.semicircle(controller: controller, child: child);
   }
 }

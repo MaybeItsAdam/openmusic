@@ -117,9 +117,7 @@ class SeekAction extends Action<SeekIntent> {
     }
     final position = audioPlayer.position.inSeconds;
     await audioPlayer.seek(
-      Duration(
-        seconds: intent.forward ? position + 5 : position - 5,
-      ),
+      Duration(seconds: intent.forward ? position + 5 : position - 5),
     );
     return null;
   }

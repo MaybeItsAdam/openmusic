@@ -32,9 +32,7 @@ class ShadcnWindowButton extends StatelessWidget {
               );
             }
 
-            return decoration.copyWith(
-              borderRadius: BorderRadius.zero,
-            );
+            return decoration.copyWith(borderRadius: BorderRadius.zero);
           },
         ),
         icon: icon,
@@ -51,17 +49,21 @@ class CloseIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Align(
         alignment: Alignment.topLeft,
-        child: Stack(children: [
-          // Use rotated containers instead of a painter because it renders slightly crisper than a painter for some reason.
-          Transform.rotate(
+        child: Stack(
+          children: [
+            // Use rotated containers instead of a painter because it renders slightly crisper than a painter for some reason.
+            Transform.rotate(
               angle: pi * .25,
               child:
-                  Center(child: Container(width: 14, height: 1, color: color))),
-          Transform.rotate(
+                  Center(child: Container(width: 14, height: 1, color: color)),
+            ),
+            Transform.rotate(
               angle: pi * -.25,
               child:
-                  Center(child: Container(width: 14, height: 1, color: color))),
-        ]),
+                  Center(child: Container(width: 14, height: 1, color: color)),
+            ),
+          ],
+        ),
       );
 }
 
@@ -85,10 +87,7 @@ class _MaximizePainter extends _IconPainter {
 /// Restore
 class RestoreIcon extends StatelessWidget {
   final Color color;
-  const RestoreIcon({
-    super.key,
-    required this.color,
-  });
+  const RestoreIcon({super.key, required this.color});
   @override
   Widget build(BuildContext context) => _AlignedPaint(_RestorePainter(color));
 }
@@ -102,9 +101,15 @@ class _RestorePainter extends _IconPainter {
     canvas.drawLine(const Offset(2, 2), const Offset(2, 0), p);
     canvas.drawLine(const Offset(2, 0), Offset(size.width, 0), p);
     canvas.drawLine(
-        Offset(size.width, 0), Offset(size.width, size.height - 2), p);
-    canvas.drawLine(Offset(size.width, size.height - 2),
-        Offset(size.width - 2, size.height - 2), p);
+      Offset(size.width, 0),
+      Offset(size.width, size.height - 2),
+      p,
+    );
+    canvas.drawLine(
+      Offset(size.width, size.height - 2),
+      Offset(size.width - 2, size.height - 2),
+      p,
+    );
   }
 }
 
@@ -122,7 +127,10 @@ class _MinimizePainter extends _IconPainter {
   void paint(Canvas canvas, Size size) {
     Paint p = getPaint(color);
     canvas.drawLine(
-        Offset(0, size.height / 2), Offset(size.width, size.height / 2), p);
+      Offset(0, size.height / 2),
+      Offset(size.width, size.height / 2),
+      p,
+    );
   }
 }
 

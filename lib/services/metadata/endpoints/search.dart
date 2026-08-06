@@ -24,10 +24,8 @@ class MetadataPluginSearchEndpoint {
       );
     }
 
-    final raw = await hetuMetadataSearch.invoke(
-      "all",
-      positionalArgs: [query],
-    ) as Map;
+    final raw =
+        await hetuMetadataSearch.invoke("all", positionalArgs: [query]) as Map;
 
     return SpotubeSearchResponseObject.fromJson(raw.cast<String, dynamic>());
   }
@@ -50,10 +48,8 @@ class MetadataPluginSearchEndpoint {
     final raw = await hetuMetadataSearch.invoke(
       "albums",
       positionalArgs: [query],
-      namedArgs: {
-        "limit": limit,
-        "offset": offset,
-      }..removeWhere((key, value) => value == null),
+      namedArgs: {"limit": limit, "offset": offset}
+        ..removeWhere((key, value) => value == null),
     ) as Map;
 
     return SpotubePaginationResponseObject<SpotubeSimpleAlbumObject>.fromJson(
@@ -80,26 +76,18 @@ class MetadataPluginSearchEndpoint {
     final raw = await hetuMetadataSearch.invoke(
       "artists",
       positionalArgs: [query],
-      namedArgs: {
-        "limit": limit,
-        "offset": offset,
-      }..removeWhere((key, value) => value == null),
+      namedArgs: {"limit": limit, "offset": offset}
+        ..removeWhere((key, value) => value == null),
     ) as Map;
 
     return SpotubePaginationResponseObject<SpotubeFullArtistObject>.fromJson(
       raw.cast<String, dynamic>(),
-      (json) => SpotubeFullArtistObject.fromJson(
-        json.cast<String, dynamic>(),
-      ),
+      (json) => SpotubeFullArtistObject.fromJson(json.cast<String, dynamic>()),
     );
   }
 
   Future<SpotubePaginationResponseObject<SpotubeSimplePlaylistObject>>
-      playlists(
-    String query, {
-    int? limit,
-    int? offset,
-  }) async {
+      playlists(String query, {int? limit, int? offset}) async {
     if (query.isEmpty) {
       return SpotubePaginationResponseObject<SpotubeSimplePlaylistObject>(
         items: [],
@@ -113,18 +101,15 @@ class MetadataPluginSearchEndpoint {
     final raw = await hetuMetadataSearch.invoke(
       "playlists",
       positionalArgs: [query],
-      namedArgs: {
-        "limit": limit,
-        "offset": offset,
-      }..removeWhere((key, value) => value == null),
+      namedArgs: {"limit": limit, "offset": offset}
+        ..removeWhere((key, value) => value == null),
     ) as Map;
 
     return SpotubePaginationResponseObject<
         SpotubeSimplePlaylistObject>.fromJson(
       raw.cast<String, dynamic>(),
-      (json) => SpotubeSimplePlaylistObject.fromJson(
-        json.cast<String, dynamic>(),
-      ),
+      (json) =>
+          SpotubeSimplePlaylistObject.fromJson(json.cast<String, dynamic>()),
     );
   }
 
@@ -146,10 +131,8 @@ class MetadataPluginSearchEndpoint {
     final raw = await hetuMetadataSearch.invoke(
       "tracks",
       positionalArgs: [query],
-      namedArgs: {
-        "limit": limit,
-        "offset": offset,
-      }..removeWhere((key, value) => value == null),
+      namedArgs: {"limit": limit, "offset": offset}
+        ..removeWhere((key, value) => value == null),
     ) as Map;
 
     return SpotubePaginationResponseObject<SpotubeFullTrackObject>.fromJson(

@@ -23,15 +23,9 @@ extension FormattedAlbumType on SpotubeAlbumType {
 class AlbumCard extends HookConsumerWidget {
   final SpotubeSimpleAlbumObject album;
   final bool _isTile;
-  const AlbumCard(
-    this.album, {
-    super.key,
-  }) : _isTile = false;
+  const AlbumCard(this.album, {super.key}) : _isTile = false;
 
-  const AlbumCard.tile(
-    this.album, {
-    super.key,
-  }) : _isTile = true;
+  const AlbumCard.tile(this.album, {super.key}) : _isTile = true;
 
   @override
   Widget build(BuildContext context, ref) {
@@ -71,95 +65,102 @@ class AlbumCard extends HookConsumerWidget {
       context.navigateTo(AlbumRoute(id: album.id, album: album));
     }, [context, album]);
 
-    final onPlaybuttonPressed = useCallback(() async {
-      updating.value = true;
-      try {
+    final onPlaybuttonPressed = useCallback(
+      () async {
+        updating.value = true;
+        try {
+          if (isPlaylistPlaying) {
+            return playing ? audioPlayer.pause() : audioPlayer.resume();
+          }
+
+          final fetchedTracks = await fetchAllTrack();
+
+          if (fetchedTracks.isEmpty || !context.mounted) return;
+
+          final isRemoteDevice = await showSelectDeviceDialog(context, ref);
+          if (isRemoteDevice == null) return;
+          if (isRemoteDevice) {
+            final remotePlayback = ref.read(connectProvider.notifier);
+            await remotePlayback.load(
+              WebSocketLoadEventData.album(
+                tracks: fetchedTracks,
+                collection: album,
+              ),
+            );
+          } else {
+            await playlistNotifier.load(fetchedTracks, autoPlay: true);
+            playlistNotifier.addCollection(album.id);
+            historyNotifier.addAlbums([album]);
+          }
+        } finally {
+          updating.value = false;
+        }
+      },
+      [
+        isPlaylistPlaying,
+        playing,
+        audioPlayer,
+        fetchAllTrack,
+        context,
+        ref,
+        playlistNotifier,
+        album,
+        historyNotifier,
+        updating,
+      ],
+    );
+
+    final onAddToQueuePressed = useCallback(
+      () async {
         if (isPlaylistPlaying) {
-          return playing ? audioPlayer.pause() : audioPlayer.resume();
+          return;
         }
 
-        final fetchedTracks = await fetchAllTrack();
+        updating.value = true;
+        try {
+          final fetchedTracks = await fetchAllTrack();
 
-        if (fetchedTracks.isEmpty || !context.mounted) return;
-
-        final isRemoteDevice = await showSelectDeviceDialog(context, ref);
-        if (isRemoteDevice == null) return;
-        if (isRemoteDevice) {
-          final remotePlayback = ref.read(connectProvider.notifier);
-          await remotePlayback.load(
-            WebSocketLoadEventData.album(
-              tracks: fetchedTracks,
-              collection: album,
-            ),
-          );
-        } else {
-          await playlistNotifier.load(fetchedTracks, autoPlay: true);
+          if (fetchedTracks.isEmpty) return;
+          playlistNotifier.addTracks(fetchedTracks);
           playlistNotifier.addCollection(album.id);
           historyNotifier.addAlbums([album]);
-        }
-      } finally {
-        updating.value = false;
-      }
-    }, [
-      isPlaylistPlaying,
-      playing,
-      audioPlayer,
-      fetchAllTrack,
-      context,
-      ref,
-      playlistNotifier,
-      album,
-      historyNotifier,
-      updating
-    ]);
-
-    final onAddToQueuePressed = useCallback(() async {
-      if (isPlaylistPlaying) {
-        return;
-      }
-
-      updating.value = true;
-      try {
-        final fetchedTracks = await fetchAllTrack();
-
-        if (fetchedTracks.isEmpty) return;
-        playlistNotifier.addTracks(fetchedTracks);
-        playlistNotifier.addCollection(album.id);
-        historyNotifier.addAlbums([album]);
-        if (context.mounted) {
-          showToast(
-            context: context,
-            builder: (context, overlay) {
-              return SurfaceCard(
-                child: Basic(
-                  content: Text(
-                    context.l10n.added_to_queue(fetchedTracks.length),
+          if (context.mounted) {
+            showToast(
+              context: context,
+              builder: (context, overlay) {
+                return SurfaceCard(
+                  child: Basic(
+                    content: Text(
+                      context.l10n.added_to_queue(fetchedTracks.length),
+                    ),
+                    trailing: Button.outline(
+                      child: Text(context.l10n.undo),
+                      onPressed: () {
+                        playlistNotifier.removeTracks(
+                          fetchedTracks.map((e) => e.id),
+                        );
+                      },
+                    ),
                   ),
-                  trailing: Button.outline(
-                    child: Text(context.l10n.undo),
-                    onPressed: () {
-                      playlistNotifier
-                          .removeTracks(fetchedTracks.map((e) => e.id));
-                    },
-                  ),
-                ),
-              );
-            },
-          );
+                );
+              },
+            );
+          }
+        } finally {
+          updating.value = false;
         }
-      } finally {
-        updating.value = false;
-      }
-    }, [
-      isPlaylistPlaying,
-      updating.value,
-      fetchAllTrack,
-      playlistNotifier,
-      album.id,
-      historyNotifier,
-      album,
-      context
-    ]);
+      },
+      [
+        isPlaylistPlaying,
+        updating.value,
+        fetchAllTrack,
+        playlistNotifier,
+        album.id,
+        historyNotifier,
+        album,
+        context,
+      ],
+    );
 
     if (_isTile) {
       return PlaybuttonTile(

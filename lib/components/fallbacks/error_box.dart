@@ -9,11 +9,7 @@ import 'package:spotube/extensions/context.dart';
 class ErrorBox extends StatelessWidget {
   final Object error;
   final VoidCallback? onRetry;
-  const ErrorBox({
-    super.key,
-    required this.error,
-    this.onRetry,
-  });
+  const ErrorBox({super.key, required this.error, this.onRetry});
 
   @override
   Widget build(BuildContext context) {
@@ -76,26 +72,30 @@ class ErrorBox extends StatelessWidget {
                                   IconButton.ghost(
                                     icon: const Icon(SpotubeIcons.close),
                                     onPressed: () => context.maybePop(),
-                                  )
+                                  ),
                                 ],
                               ),
                               actions: [
-                                HookBuilder(builder: (context) {
-                                  final copied = useState(false);
+                                HookBuilder(
+                                  builder: (context) {
+                                    final copied = useState(false);
 
-                                  return Button.ghost(
-                                    leading: copied.value
-                                        ? const Icon(SpotubeIcons.done)
-                                        : const Icon(SpotubeIcons.clipboard),
-                                    child: Text(context.l10n.copy_to_clipboard),
-                                    onPressed: () {
-                                      Clipboard.setData(
-                                        ClipboardData(text: error.toString()),
-                                      );
-                                      copied.value = true;
-                                    },
-                                  );
-                                })
+                                    return Button.ghost(
+                                      leading: copied.value
+                                          ? const Icon(SpotubeIcons.done)
+                                          : const Icon(SpotubeIcons.clipboard),
+                                      child: Text(
+                                        context.l10n.copy_to_clipboard,
+                                      ),
+                                      onPressed: () {
+                                        Clipboard.setData(
+                                          ClipboardData(text: error.toString()),
+                                        );
+                                        copied.value = true;
+                                      },
+                                    );
+                                  },
+                                ),
                               ],
                               content: SingleChildScrollView(
                                 child: Card(

@@ -45,12 +45,11 @@ class ConnectClientsNotifier extends AsyncNotifier<ConnectClientsState> {
 
         switch (event.type) {
           case BonsoirDiscoveryEventType.discoveryServiceFound:
-            state = AsyncData(state.value!.copyWith(
-              services: [
-                ...?state.value?.services,
-                event.service!,
-              ],
-            ));
+            state = AsyncData(
+              state.value!.copyWith(
+                services: [...?state.value?.services, event.service!],
+              ),
+            );
             break;
           case BonsoirDiscoveryEventType.discoveryServiceResolved:
             state = AsyncData(
@@ -89,10 +88,7 @@ class ConnectClientsNotifier extends AsyncNotifier<ConnectClientsState> {
 
     await discovery.start();
 
-    return ConnectClientsState(
-      services: [],
-      discovery: discovery,
-    );
+    return ConnectClientsState(services: [], discovery: discovery);
   }
 
   Future<void> resolveService(BonsoirService service) async {
