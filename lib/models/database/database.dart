@@ -88,7 +88,11 @@ Future<void> _tolerating(
   ],
 )
 class AppDatabase extends _$AppDatabase {
-  AppDatabase() : super(_openConnection());
+  /// [executor] is only supplied by tests; the app always uses the default
+  /// on-disk connection. Migration tests cannot run without this seam, which
+  /// is why the migration test referenced a `Database` class that never
+  /// existed and therefore never compiled.
+  AppDatabase([QueryExecutor? executor]) : super(executor ?? _openConnection());
 
   @override
   int get schemaVersion => 10;
