@@ -115,15 +115,28 @@ class DownloadManagerNotifier extends Notifier<List<DownloadTask>> {
   void retry(SpotubeFullTrackObject track) {
     if (state.firstWhereOrNull((e) => e.track.id == track.id)?.status
         case DownloadStatus.canceled || DownloadStatus.failed) {
-      _setStatus(track, DownloadStatus.queued);
+      // A Dio CancelToken is single-use: retrying with the cancelled token
+      // would abort the new request immediately.
+      state = state.map((e) {
+        if (e.track.id != track.id) return e;
+        return e.copyWith(
+          status: DownloadStatus.queued,
+          cancelToken: CancelToken(),
+        );
+      }).toList();
       _startDownloading(); // No await should be invoked to avoid stuck UI
     }
   }
 
   void cancel(SpotubeFullTrackObject track) {
-    if (state.firstWhereOrNull((e) => e.track.id == track.id)?.status ==
-        DownloadStatus.failed) {
+    final task = state.firstWhereOrNull((e) => e.track.id == track.id);
+    if (task == null || task.status == DownloadStatus.failed) {
       return;
+    }
+    // Aborting the in-flight request is what actually stops the download;
+    // setting the status alone just relabels a transfer that keeps running.
+    if (!task.cancelToken.isCancelled) {
+      task.cancelToken.cancel();
     }
     _setStatus(track, DownloadStatus.canceled);
   }
@@ -140,10 +153,6 @@ class DownloadManagerNotifier extends Notifier<List<DownloadTask>> {
   void _setStatus(SpotubeFullTrackObject track, DownloadStatus status) {
     state = state.map((e) {
       if (e.track.id == track.id) {
-        if ((status == DownloadStatus.canceled) && e.cancelToken.isCancelled) {
-          e.cancelToken.cancel();
-        }
-
         return e.copyWith(status: status);
       }
       return e;
@@ -176,6 +185,7 @@ class DownloadManagerNotifier extends Notifier<List<DownloadTask>> {
       final track = await ref.read(sourcedTrackProvider(task.track).future);
       if (task.cancelToken.isCancelled) {
         _setStatus(task.track, DownloadStatus.canceled);
+        return;
       }
       final presets = ref.read(audioSourcePresetsProvider);
       final container =

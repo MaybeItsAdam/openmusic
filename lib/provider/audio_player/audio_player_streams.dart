@@ -2,6 +2,10 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:shadcn_flutter/shadcn_flutter.dart';
+import 'package:spotube/collections/routes.dart';
+import 'package:spotube/collections/spotube_icons.dart';
+import 'package:spotube/extensions/context.dart';
 import 'package:spotube/models/metadata/metadata.dart';
 import 'package:spotube/provider/audio_player/audio_player.dart';
 import 'package:spotube/provider/audio_player/state.dart';
@@ -170,7 +174,43 @@ class AudioPlayerStreamListeners {
   }
 
   StreamSubscription subscribeToPlayerError() {
-    return audioPlayer.errorStream.listen((event) {});
+    String? lastError;
+    return audioPlayer.errorStream.listen((error) {
+      // mpv repeats the same error for every failed read attempt; reporting
+      // each one would bury the log and stack up identical toasts.
+      if (error == lastError) return;
+      lastError = error;
+
+      AppLogger.reportError(
+        Exception("Playback error: $error"),
+        StackTrace.current,
+      );
+
+      if (rootNavigatorKey.currentContext?.mounted != true) return;
+      final theme = Theme.of(rootNavigatorKey.currentContext!);
+
+      showToast(
+        context: rootNavigatorKey.currentContext!,
+        location: ToastLocation.topRight,
+        dismissible: true,
+        builder: (context, overlay) {
+          return SurfaceCard(
+            fillColor: theme.colorScheme.destructive,
+            filled: true,
+            child: Basic(
+              leading: const Icon(SpotubeIcons.error),
+              title: Text(
+                context.l10n.an_error_occurred,
+                style: theme.typography.normal.copyWith(
+                  color: theme.colorScheme.destructiveForeground,
+                ),
+              ),
+              leadingAlignment: Alignment.center,
+            ),
+          );
+        },
+      );
+    });
   }
 }
 

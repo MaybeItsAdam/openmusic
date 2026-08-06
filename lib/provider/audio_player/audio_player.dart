@@ -290,17 +290,23 @@ class AudioPlayerNotifier extends Notifier<AudioPlayerState> {
   }
 
   Future<void> removeTracks(Iterable<String> trackIds) async {
-    final trackIndexes = state.tracks
-        .where((element) => trackIds.any((trackId) => trackId == element.id))
-        .mapIndexed((index, element) => index);
+    final ids = trackIds.toSet();
 
-    final tracks = state.tracks.where(
-      (element) => !trackIds.contains(element.id),
-    );
+    // Indexes must be positions in the queue itself. Filtering first and then
+    // enumerating yields 0,1,2… regardless of where the tracks actually sit.
+    final trackIndexes = [
+      for (var i = 0; i < state.tracks.length; i++)
+        if (ids.contains(state.tracks[i].id)) i,
+    ];
+
+    if (trackIndexes.isEmpty) return;
+
+    final tracks = state.tracks.where((element) => !ids.contains(element.id));
 
     state = state.copyWith(tracks: tracks.toList());
 
-    for (final index in trackIndexes) {
+    // Descending, so each removal cannot shift the indexes still to be removed.
+    for (final index in trackIndexes.reversed) {
       await audioPlayer.removeTrack(index);
     }
 
@@ -335,9 +341,25 @@ class AudioPlayerNotifier extends Notifier<AudioPlayerState> {
         .asMediaList()
         .unique((a, b) => a.uri == b.uri);
 
+    if (medias.isEmpty) return;
+
+    // `initialIndex` indexes the caller's unfiltered list, but `medias` has had
+    // blacklisted and duplicate entries removed. Locate the intended track by
+    // identity instead, falling back to the start of the queue when that track
+    // is exactly what the filtering removed.
+    final intendedTrack = tracks.elementAtOrNull(initialIndex);
+    final resolvedIndex = intendedTrack == null
+        ? 0
+        : max(
+            medias.indexWhere(
+              (media) => _compareTracks(media.track, intendedTrack),
+            ),
+            0,
+          );
+
     // Giving the initial track a boost so MediaKit won't skip
     // because of timeout
-    final intendedActiveTrack = medias.elementAt(initialIndex);
+    final intendedActiveTrack = medias.elementAt(resolvedIndex);
     if (intendedActiveTrack.track is! SpotubeLocalTrackObject) {
       ref.read(
         sourcedTrackProvider(
@@ -346,18 +368,16 @@ class AudioPlayerNotifier extends Notifier<AudioPlayerState> {
       );
     }
 
-    if (medias.isEmpty) return;
-
     state = state.copyWith(
       // These are filtered tracks as well
       tracks: medias.map((media) => media.track).toList(),
-      currentIndex: initialIndex,
+      currentIndex: resolvedIndex,
       collections: [],
     );
 
     await audioPlayer.openPlaylist(
       medias,
-      initialIndex: initialIndex,
+      initialIndex: resolvedIndex,
       autoPlay: autoPlay,
     );
 
