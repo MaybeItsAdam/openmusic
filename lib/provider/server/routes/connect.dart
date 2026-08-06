@@ -52,12 +52,32 @@ class ServerConnectRoutes {
     return webSocketHandler((WebSocketChannel channel, String? protocol) async {
       final context =
           (req.context["shelf.io.connection_info"] as HttpConnectionInfo?);
-      final origin = "${context?.remoteAddress.host}:${context?.remotePort}";
+
+      // No connection info means we cannot identify or name the peer, so there
+      // is nothing to ask the user about. Previously this produced the literal
+      // string "null:null", which then got cached in the allowlist and
+      // auto-approved every subsequent unidentifiable client.
+      if (context == null) {
+        channel.sink.addEvent(WebSocketErrorEvent("Connection denied"));
+        await channel.sink.close();
+        return;
+      }
+
+      // Keyed on address only. Including the ephemeral remote port meant an
+      // approval never matched on reconnect, retraining users to click Accept.
+      final origin = context.remoteAddress.host;
       _connectClientStreamController.add(origin);
 
-      // Confirm whether user allows to connect
-      if (rootNavigatorKey.currentContext?.mounted == true &&
-          _allowedConnections.contains(origin) == false) {
+      if (!_allowedConnections.contains(origin)) {
+        // Fail closed. This check used to gate the whole consent block, so a
+        // backgrounded app with no navigator context skipped the prompt and
+        // granted full playback control silently.
+        if (rootNavigatorKey.currentContext?.mounted != true) {
+          channel.sink.addEvent(WebSocketErrorEvent("Connection denied"));
+          await channel.sink.close();
+          return;
+        }
+
         final confirmed = await showDialog<bool>(
               context: rootNavigatorKey.currentContext!,
               builder: (context) {
