@@ -22,7 +22,7 @@ const { metadata } = Astro.props as Props;
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
     <meta name="generator" content={Astro.generator} />
-    <title>{metadata?.title || "Spotube"}</title>
+    <title>{metadata?.title || "OpenMusic"}</title>
     <meta
       name="description"
       content={metadata?.description ||
@@ -33,22 +33,21 @@ const { metadata } = Astro.props as Props;
       content={metadata?.keywords ||
         "music, client, open source, music, streaming"}
     />
-    <meta name="author" content={metadata?.author || "KRTirtho"} />
-    <meta property="og:image" content="/images/spotube-logo.png" />
-    <meta property="og:image:alt" content="Spotube Logo" />
+    <meta name="author" content={metadata?.author || "MaybeItsAdam"} />
+    <meta property="og:image" content="/images/openmusic-logo.png" />
+    <meta property="og:image:alt" content="OpenMusic Logo" />
     <meta property="og:image:type" content="image/png" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={metadata?.title || "Spotube"} />
+    <meta name="twitter:title" content={metadata?.title || "OpenMusic"} />
     <meta
       name="twitter:description"
       content={metadata?.description ||
         "A cross-platform extensible open-source music streaming platform"}
     />
-    <meta name="twitter:image" content="/images/spotube-logo.png" />
-    <meta name="twitter:creator" content={metadata?.author || "KRTirtho"} />
-    <meta name="twitter:site" content="@KRTirtho" />
-
+    <meta name="twitter:image" content="/images/openmusic-logo.png" />
+    <meta name="twitter:creator" content={metadata?.author || "MaybeItsAdam"} />
+    
     <meta name="robots" content="index, follow" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#1DB954" />
@@ -67,28 +66,16 @@ const { metadata } = Astro.props as Props;
     </main>
     <footer class="w-full bg-tertiary-100-900 p-4 flex justify-between">
       <div>
-        <h3 class="h3">Spotube</h3>
+        <h3 class="h3">OpenMusic</h3>
         <p>
-          Copyright © {new Date().getFullYear()} Spotube
+          Copyright © {new Date().getFullYear()} OpenMusic
         </p>
       </div>
       <ul>
         <li>
-          <a href="https://github.com/KRTirtho/spotube">
+          <a href="https://github.com/MaybeItsAdam/openmusic">
             <FaGithub className="inline mr-1" />
             Github
-          </a>
-        </li>
-        <li>
-          <a href="https://opencollective.org/spotube">
-            <img
-              src="https://avatars0.githubusercontent.com/u/13403593?v=4"
-              alt="OpenCollective"
-              height="20"
-              width="20"
-              class="inline mr-1"
-            />
-            OpenCollective
           </a>
         </li>
       </ul>

@@ -8,24 +8,26 @@ import { ADS_SLOTS } from 'collections/app';
   <MarkdownLayout>
     <div class="p-4 md:ps-24">
       <h2 class="h2">Package Managers</h2>
-      Spotube is available in various Package Managers supported by Platform
+      OpenMusic has not been published to any package manager yet. The identifiers below
+      are the ones OpenMusic will use once its packages are published — they do **not**
+      resolve today, and they deliberately do not point at upstream Spotube's packages.
       ## <FaLinux className="inline" /> Linux
       ### Flatpak📦
       Make sure [Flatpak](https://flatpak.org) is installed in your Linux device & Run the following command in the terminal:
       ```bash
-      $ flatpak install com.github.KRTirtho.Spotube
+      $ flatpak install io.github.MaybeItsAdam.OpenMusic
       ```
       ### Arch User Repository (AUR)♾️
-      If you're an Arch Linux user, you can also install Spotube from AUR.
+      If you're an Arch Linux user, you can also install OpenMusic from AUR.
       Make sure you have `yay`/`pamac`/`paru` installed in your system. And Run the Following command in the Terminal:
       ```bash
-      $ yay -Sy spotube-bin
+      $ yay -Sy openmusic-bin
       ```
       ```bash
-      $ pamac install spotube-bin
+      $ pamac install openmusic-bin
       ```
       ```bash
-      $ paru -Sy spotube-bin
+      $ paru -Sy openmusic-bin
       ```
       <Ads
         style="display:block; text-align:center;"
@@ -36,11 +38,8 @@ import { ADS_SLOTS } from 'collections/app';
       />
       ## <FaApple className="inline" /> MacOS
       ### Homebrew🍻
-      Spotube can be installed through Homebrew. We host our own cask definition thus you'll need to add our tap first:
-      ```bash
-      $ brew tap krtirtho/apps
-      $ brew install --cask spotube
-      ```
+      OpenMusic does not currently publish a Homebrew cask. Download the `.dmg` from the
+      [releases page](https://github.com/MaybeItsAdam/openmusic/releases) instead.
       <Ads
         style="display:block; text-align:center;"
         adSlot={ADS_SLOTS.packagePageArticle}
@@ -50,21 +49,18 @@ import { ADS_SLOTS } from 'collections/app';
       />
       ## <FaWindows className="inline" color="#00A2F0" /> Windows
       ### Chocolatey🍫
-      Spotube is available in [community.chocolatey.org](https://community.chocolatey.org) repo. If you have chocolatey install in your system just run following command in an Elevated Command Prompt or PowerShell:
+      Once published to [community.chocolatey.org](https://community.chocolatey.org), OpenMusic will be installable with the following command in an Elevated Command Prompt or PowerShell:
       ```powershell
-      $ choco install spotube
+      $ choco install openmusic
       ```
       ### WinGet💫
-      Spotube is also available in the Official Windows PackageManager WinGet. Make sure you have WinGet installed in your Windows machine and run following in a Terminal:
+      Once published to the Official Windows PackageManager WinGet, OpenMusic will be installable with:
       ```powershell
-      $ winget install --id KRTirtho.Spotube
+      $ winget install --id MaybeItsAdam.OpenMusic
       ```
       ### Scoop🥄
-      Spotube is also available in [Scoop](https://scoop.sh) bucket. Make sure you have Scoop installed in your Windows machine and run following in a Terminal:
-      ```powershell
-      $ scoop bucket add extras
-      $ scoop install spotube
-      ```
+      OpenMusic does not currently publish a Scoop manifest. Download the installer from the
+      [releases page](https://github.com/MaybeItsAdam/openmusic/releases) instead.
     </div>
   </MarkdownLayout>
 </RootLayout>

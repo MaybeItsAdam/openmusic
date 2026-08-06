@@ -1,4 +1,4 @@
-# Code of Conduct - Spotube
+# Code of Conduct - OpenMusic
 
 ## Our Pledge
 

@@ -91,8 +91,8 @@ export default function ReleasesSection() {
 
   useEffect(() => {
     github.repos.listReleases({
-      owner: "KRTirtho",
-      repo: "spotube",
+      owner: "MaybeItsAdam",
+      repo: "openmusic",
 
     }).then((res) => {
       setReleases(

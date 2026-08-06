@@ -21,105 +21,105 @@ export const routes: Record<string, [string, IconType | null]> = {
 };
 
 const releasesUrl =
-  "https://github.com/KRTirtho/Spotube/releases/latest/download";
+  "https://github.com/MaybeItsAdam/openmusic/releases/latest/download";
 
 export const downloadLinks: Record<string, [string, IconType[]]> = {
-  "Android Apk": [`${releasesUrl}/Spotube-android-all-arch.apk`, [FaAndroid]],
+  "Android Apk": [`${releasesUrl}/OpenMusic-android-all-arch.apk`, [FaAndroid]],
   "Windows Executable": [
-    `${releasesUrl}/Spotube-windows-x86_64-setup.exe`,
+    `${releasesUrl}/OpenMusic-windows-x86_64-setup.exe`,
     [FaWindows],
   ],
-  "macOS Dmg": [`${releasesUrl}/Spotube-macos-universal.dmg`, [FaApple]],
+  "macOS Dmg": [`${releasesUrl}/OpenMusic-macos-universal.dmg`, [FaApple]],
   "Ubuntu, Debian": [
-    `${releasesUrl}/Spotube-linux-x86_64.deb`,
+    `${releasesUrl}/OpenMusic-linux-x86_64.deb`,
     [FaUbuntu, FaDebian],
   ],
   "Fedora, Redhat, Opensuse": [
-    `${releasesUrl}/Spotube-linux-x86_64.rpm`,
+    `${releasesUrl}/OpenMusic-linux-x86_64.rpm`,
     [FaFedora, FaRedhat, FaOpensuse],
   ],
-  "iPhone Ipa": [`${releasesUrl}/Spotube-iOS.ipa`, [FaApple]],
+  "iPhone Ipa": [`${releasesUrl}/OpenMusic-iOS.ipa`, [FaApple]],
 };
 
 export const extendedDownloadLinks: Record<
   string,
   [string, IconType[], string]
 > = {
-  Android: [`${releasesUrl}/Spotube-android-all-arch.apk`, [FaAndroid], "apk"],
+  Android: [`${releasesUrl}/OpenMusic-android-all-arch.apk`, [FaAndroid], "apk"],
   Windows: [
-    `${releasesUrl}/Spotube-windows-x86_64-setup.exe`,
+    `${releasesUrl}/OpenMusic-windows-x86_64-setup.exe`,
     [FaWindows],
     "exe",
   ],
-  macOS: [`${releasesUrl}/Spotube-macos-universal.dmg`, [FaApple], "dmg"],
+  macOS: [`${releasesUrl}/OpenMusic-macos-universal.dmg`, [FaApple], "dmg"],
   "Ubuntu, Debian (x64)": [
-    `${releasesUrl}/Spotube-linux-x86_64.deb`,
+    `${releasesUrl}/OpenMusic-linux-x86_64.deb`,
     [FaUbuntu, FaDebian],
     "deb",
   ],
   "Ubuntu, Debian (arm64)": [
-    `${releasesUrl}/Spotube-linux-aarch64.deb`,
+    `${releasesUrl}/OpenMusic-linux-aarch64.deb`,
     [FaUbuntu, FaDebian],
     "deb",
   ],
   "Fedora, Redhat, Opensuse": [
-    `${releasesUrl}/Spotube-linux-x86_64.rpm`,
+    `${releasesUrl}/OpenMusic-linux-x86_64.rpm`,
     [FaFedora, FaRedhat, FaOpensuse],
     "rpm",
   ],
   "Linux AppImage (x64)": [
-    `${releasesUrl}/Spotube-linux-x86_64.AppImage`,
+    `${releasesUrl}/OpenMusic-linux-x86_64.AppImage`,
     [FaLinux],
     "AppImage",
   ],
   "Linux AppImage (arm64)": [
-    `${releasesUrl}/Spotube-linux-aarch64.AppImage`,
+    `${releasesUrl}/OpenMusic-linux-aarch64.AppImage`,
     [FaLinux],
     "AppImage",
   ],
-  iPhone: [`${releasesUrl}/Spotube-iOS.ipa`, [FaApple], "ipa"],
+  iPhone: [`${releasesUrl}/OpenMusic-iOS.ipa`, [FaApple], "ipa"],
 };
 
 const nightlyReleaseUrl =
-  "https://github.com/KRTirtho/Spotube/releases/download/nightly";
+  "https://github.com/MaybeItsAdam/openmusic/releases/download/nightly";
 
 export const extendedNightlyDownloadLinks: Record<
   string,
   [string, IconType[], string]
 > = {
-  Android: [`${releasesUrl}/Spotube-android-all-arch.apk`, [FaAndroid], "apk"],
+  Android: [`${releasesUrl}/OpenMusic-android-all-arch.apk`, [FaAndroid], "apk"],
   Windows: [
-    `${releasesUrl}/Spotube-windows-x86_64-setup.exe`,
+    `${releasesUrl}/OpenMusic-windows-x86_64-setup.exe`,
     [FaWindows],
     "exe",
   ],
-  macOS: [`${releasesUrl}/Spotube-macos-universal.dmg`, [FaApple], "dmg"],
+  macOS: [`${releasesUrl}/OpenMusic-macos-universal.dmg`, [FaApple], "dmg"],
   "Ubuntu, Debian (x64)": [
-    `${releasesUrl}/Spotube-linux-x86_64.deb`,
+    `${releasesUrl}/OpenMusic-linux-x86_64.deb`,
     [FaUbuntu, FaDebian],
     "deb",
   ],
   "Ubuntu, Debian (arm64)": [
-    `${releasesUrl}/Spotube-linux-aarch64.deb`,
+    `${releasesUrl}/OpenMusic-linux-aarch64.deb`,
     [FaUbuntu, FaDebian],
     "deb",
   ],
   "Fedora, Redhat, Opensuse": [
-    `${releasesUrl}/Spotube-linux-x86_64.rpm`,
+    `${releasesUrl}/OpenMusic-linux-x86_64.rpm`,
     [FaFedora, FaRedhat, FaOpensuse],
     "rpm",
   ],
   "Linux AppImage (x64)": [
-    `${releasesUrl}/Spotube-linux-x86_64.AppImage`,
+    `${releasesUrl}/OpenMusic-linux-x86_64.AppImage`,
     [FaLinux],
     "AppImage",
   ],
   "Linux AppImage (arm64)": [
-    `${releasesUrl}/Spotube-linux-aarch64.AppImage`,
+    `${releasesUrl}/OpenMusic-linux-aarch64.AppImage`,
     [FaLinux],
     "AppImage",
   ],
-  iPhone: [`${releasesUrl}/Spotube-iOS.ipa`, [FaApple], "ipa"],
+  iPhone: [`${releasesUrl}/OpenMusic-iOS.ipa`, [FaApple], "ipa"],
 };
 
 export const ADS_SLOTS = Object.freeze({
