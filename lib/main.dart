@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:ui';
-import 'dart:io';
 
 import 'package:desktop_webview_window/desktop_webview_window.dart';
 import 'package:flutter/foundation.dart';
@@ -17,7 +16,6 @@ import 'package:media_kit/media_kit.dart';
 import 'package:metadata_god/metadata_god.dart';
 import 'package:smtc_windows/smtc_windows.dart';
 import 'package:spotube/collections/env.dart';
-import 'package:spotube/collections/http-override.dart';
 import 'package:spotube/collections/intents.dart';
 import 'package:spotube/collections/routes.dart';
 import 'package:spotube/hooks/configurators/use_close_behavior.dart';
@@ -67,8 +65,6 @@ Future<void> main(List<String> rawArgs) async {
 
   AppLogger.runZoned(() async {
     final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-
-    HttpOverrides.global = BadCertificateAllowlistOverrides();
 
     // await registerWindowsScheme("spotify");
 
@@ -124,12 +120,8 @@ Future<void> main(List<String> rawArgs) async {
 
     runApp(
       ProviderScope(
-        overrides: [
-          databaseProvider.overrideWith((ref) => database),
-        ],
-        observers: const [
-          AppLoggerProviderObserver(),
-        ],
+        overrides: [databaseProvider.overrideWith((ref) => database)],
+        observers: const [AppLoggerProviderObserver()],
         child: const Spotube(),
       ),
     );
@@ -141,11 +133,13 @@ class Spotube extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
-    final themeMode =
-        ref.watch(userPreferencesProvider.select((s) => s.themeMode));
+    final themeMode = ref.watch(
+      userPreferencesProvider.select((s) => s.themeMode),
+    );
     final locale = ref.watch(userPreferencesProvider.select((s) => s.locale));
-    final accentMaterialColor =
-        ref.watch(userPreferencesProvider.select((s) => s.accentColorScheme));
+    final accentMaterialColor = ref.watch(
+      userPreferencesProvider.select((s) => s.accentColorScheme),
+    );
     final router = useMemoized(() => AppRouter(ref), []);
     final hasTouchSupport = useHasTouch();
 
@@ -207,10 +201,7 @@ class Spotube extends HookConsumerWidget {
         );
 
         if (kIsLinux) {
-          child = DragToResizeArea(
-            resizeEdgeSize: 2.5,
-            child: child,
-          );
+          child = DragToResizeArea(resizeEdgeSize: 2.5, child: child);
         }
 
         return child;
@@ -263,42 +254,66 @@ class Spotube extends HookConsumerWidget {
           LogicalKeyboardKey.digit1,
           LogicalKeyboardKey.control,
           LogicalKeyboardKey.shift,
-        ): HomeTabIntent(router, tab: HomeTabs.browse),
+        ): HomeTabIntent(
+          router,
+          tab: HomeTabs.browse,
+        ),
         LogicalKeySet(
           LogicalKeyboardKey.digit2,
           LogicalKeyboardKey.control,
           LogicalKeyboardKey.shift,
-        ): HomeTabIntent(router, tab: HomeTabs.search),
+        ): HomeTabIntent(
+          router,
+          tab: HomeTabs.search,
+        ),
         LogicalKeySet(
           LogicalKeyboardKey.digit3,
           LogicalKeyboardKey.control,
           LogicalKeyboardKey.shift,
-        ): HomeTabIntent(router, tab: HomeTabs.lyrics),
+        ): HomeTabIntent(
+          router,
+          tab: HomeTabs.lyrics,
+        ),
         LogicalKeySet(
           LogicalKeyboardKey.digit4,
           LogicalKeyboardKey.control,
           LogicalKeyboardKey.shift,
-        ): HomeTabIntent(router, tab: HomeTabs.userPlaylists),
+        ): HomeTabIntent(
+          router,
+          tab: HomeTabs.userPlaylists,
+        ),
         LogicalKeySet(
           LogicalKeyboardKey.digit5,
           LogicalKeyboardKey.control,
           LogicalKeyboardKey.shift,
-        ): HomeTabIntent(router, tab: HomeTabs.userArtists),
+        ): HomeTabIntent(
+          router,
+          tab: HomeTabs.userArtists,
+        ),
         LogicalKeySet(
           LogicalKeyboardKey.digit6,
           LogicalKeyboardKey.control,
           LogicalKeyboardKey.shift,
-        ): HomeTabIntent(router, tab: HomeTabs.userAlbums),
+        ): HomeTabIntent(
+          router,
+          tab: HomeTabs.userAlbums,
+        ),
         LogicalKeySet(
           LogicalKeyboardKey.digit7,
           LogicalKeyboardKey.control,
           LogicalKeyboardKey.shift,
-        ): HomeTabIntent(router, tab: HomeTabs.userLocalLibrary),
+        ): HomeTabIntent(
+          router,
+          tab: HomeTabs.userLocalLibrary,
+        ),
         LogicalKeySet(
           LogicalKeyboardKey.digit8,
           LogicalKeyboardKey.control,
           LogicalKeyboardKey.shift,
-        ): HomeTabIntent(router, tab: HomeTabs.userDownloads),
+        ): HomeTabIntent(
+          router,
+          tab: HomeTabs.userDownloads,
+        ),
         LogicalKeySet(
           LogicalKeyboardKey.keyW,
           LogicalKeyboardKey.control,
