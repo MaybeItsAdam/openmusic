@@ -10,6 +10,13 @@ import 'package:openmusic/utils/platform.dart';
 abstract class EncryptedKvStoreService {
   static const _storage = FlutterSecureStorage(
     aOptions: AndroidOptions(encryptedSharedPreferences: true),
+    // The data-protection keychain requires a `keychain-access-groups`
+    // entitlement, which needs a real signing team. Spotube ships ad-hoc
+    // signed, so asking for it fails with errSecMissingEntitlement (-34018)
+    // and drops the key into the plaintext fallback -- i.e. the exact outcome
+    // moving macOS onto the Keychain was meant to avoid. The file-based
+    // keychain needs no entitlement and works on an unsigned build.
+    mOptions: MacOsOptions(useDataProtectionKeyChain: false),
   );
 
   static FlutterSecureStorage get storage => _storage;
@@ -70,8 +77,18 @@ abstract class EncryptedKvStoreService {
       final existing = await _storage.read(key: _keyName);
       if (existing != null) return existing;
 
-      final key = _generateKey();
+      // Secure storage holds nothing, but an earlier run may have been pushed
+      // into the plaintext fallback -- an ad-hoc macOS build that could not
+      // reach the Keychain, say. Anything already at rest is encrypted under
+      // that key, so adopt it and promote it rather than minting a new one and
+      // orphaning every value it protects.
+      final orphaned = KVStoreService.sharedPreferences.getString(_keyName);
+      final key = orphaned ?? _generateKey();
+
       await _storage.write(key: _keyName, value: key);
+      // Only once the write succeeded, so a failure here still leaves the
+      // fallback readable on the next launch.
+      await KVStoreService.sharedPreferences.remove(_keyName);
       return key;
     } catch (error, stackTrace) {
       // Do not fail silently: losing secure storage means the key lands in
