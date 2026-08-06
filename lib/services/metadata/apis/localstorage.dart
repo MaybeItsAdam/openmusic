@@ -12,8 +12,17 @@ class SharedPreferencesLocalStorage implements Localstorage {
   }
 
   @override
-  Future<void> clear() {
-    return _prefs.clear();
+  Future<void> clear() async {
+    // Every other method is namespaced to this plugin, but clear() used to call
+    // _prefs.clear(), wiping all of SharedPreferences: other plugins' tokens
+    // and, worse, KVStoreService's `encryption` and `iv` entries, which
+    // permanently destroys the ability to decrypt stored credentials.
+    final ownedKeys =
+        _prefs.getKeys().where((key) => key.startsWith(prefix(""))).toList();
+
+    for (final key in ownedKeys) {
+      await _prefs.remove(key);
+    }
   }
 
   @override

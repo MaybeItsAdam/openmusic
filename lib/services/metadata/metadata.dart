@@ -15,6 +15,7 @@ import 'package:spotube/collections/routes.gr.dart';
 import 'package:spotube/components/titlebar/titlebar.dart';
 import 'package:spotube/models/metadata/metadata.dart';
 import 'package:spotube/services/metadata/apis/localstorage.dart';
+import 'package:spotube/services/metadata/errors/exceptions.dart';
 import 'package:spotube/services/metadata/endpoints/album.dart';
 import 'package:spotube/services/metadata/endpoints/artist.dart';
 import 'package:spotube/services/metadata/endpoints/audio_source.dart';
@@ -28,6 +29,10 @@ import 'package:spotube/services/metadata/endpoints/user.dart';
 import 'package:spotube/services/youtube_engine/youtube_engine.dart';
 
 const defaultMetadataLimit = "20";
+
+/// A bare Hetu identifier — anything else would let plugin.json inject source
+/// into the eval that resolves the plugin's entry class.
+final _entryPointPattern = RegExp(r'^[A-Za-z_][A-Za-z0-9_]{0,63}$');
 
 class MetadataPlugin {
   static final pluginApiVersion = Version.parse("2.0.0");
@@ -137,6 +142,13 @@ class MetadataPlugin {
     await HetuStdLoader.loadBytecodeFlutter(hetu);
     await HetuOtpUtilLoader.loadBytecodeFlutter(hetu);
     await HetuSpotubePluginLoader.loadBytecodeFlutter(hetu);
+
+    // entryPoint comes from the archive's plugin.json and is interpolated into
+    // evaluated source, so anything other than a bare identifier is arbitrary
+    // Hetu executed at plugin-load time.
+    if (!_entryPointPattern.hasMatch(config.entryPoint)) {
+      throw MetadataPluginException.invalidPluginConfiguration();
+    }
 
     hetu.loadBytecode(bytes: byteCode, moduleName: "plugin");
     hetu.eval("""

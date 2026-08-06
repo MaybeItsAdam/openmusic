@@ -24,6 +24,35 @@ final allowedDomainsRegex = RegExp(
   r"^(https?:\/\/)?(www\.)?(github\.com|codeberg\.org)\/.+",
 );
 
+/// Hosts plugins may be fetched from, matched on exact host or a dot-anchored
+/// subdomain so that `github.com.evil.tld` cannot pass.
+const kAllowedPluginHosts = {"github.com", "codeberg.org"};
+
+/// Validates a plugin download URL, throwing if it is not one we will fetch
+/// bytecode from. Returns the parsed [Uri] so callers can inspect the path.
+Uri _assertAllowedPluginUri(String url) {
+  final uri = Uri.tryParse(url);
+
+  final isAllowed = uri != null &&
+      // Plaintext HTTP would let any on-path attacker swap the bytecode.
+      uri.scheme == "https" &&
+      // "https://github.com@evil.tld/x" has host evil.tld; reject credentials
+      // outright rather than relying on every reader spotting that.
+      uri.userInfo.isEmpty &&
+      (!uri.hasPort || uri.port == 443) &&
+      kAllowedPluginHosts.any(
+        (allowed) =>
+            uri.host.toLowerCase() == allowed ||
+            uri.host.toLowerCase().endsWith(".$allowed"),
+      );
+
+  if (!isAllowed) {
+    throw MetadataPluginException.unsupportedPluginDownloadWebsite();
+  }
+
+  return uri;
+}
+
 class MetadataPluginState {
   final List<PluginConfiguration> plugins;
   final int defaultMetadataPlugin;
@@ -273,14 +302,32 @@ class MetadataPluginNotifier extends AsyncNotifier<MetadataPluginState> {
         join((await getApplicationSupportDirectory()).path, "metadata-plugins"),
       );
 
+  /// Sanitizes a single path segment taken from plugin-supplied metadata.
+  ///
+  /// Rejects rather than silently rewrites when nothing usable is left, so a
+  /// hostile value can never collapse into an empty segment and land the
+  /// plugin directly in the plugin root.
+  String _safeSegment(String raw) {
+    final sanitized = ServiceUtils.sanitizeFilename(raw).trim();
+    if (sanitized.isEmpty || sanitized.contains("..")) {
+      throw MetadataPluginException.invalidPluginConfiguration();
+    }
+    return sanitized;
+  }
+
   /// Directory where the plugin will be extracted.
   /// This is a unique directory for each plugin version.
   /// It is used to avoid conflicts when multiple versions of the same plugin are installed
   Future<Directory> _getPluginExtractionDir(PluginConfiguration plugin) async {
     final pluginDir = await _getPluginRootDir();
+    // `version` comes straight from the archive's plugin.json and used to be
+    // interpolated raw, so a version of "../../.." relocated the whole
+    // extraction tree -- and with it the delete in removePlugin.
+    // sanitizeFilename strips path separators, so this is a no-op for any
+    // ordinary version string.
     final pluginExtractionDirPath = join(
       pluginDir.path,
-      "${ServiceUtils.sanitizeFilename(plugin.author)}-${ServiceUtils.sanitizeFilename(plugin.name)}-${plugin.version}",
+      "${_safeSegment(plugin.author)}-${_safeSegment(plugin.name)}-${_safeSegment(plugin.version)}",
     );
     return Directory(pluginExtractionDirPath);
   }
@@ -304,38 +351,59 @@ class MetadataPluginNotifier extends AsyncNotifier<MetadataPluginState> {
 
     final pluginExtractionDir = await _getPluginExtractionDir(pluginConfig);
 
+    // Archive entry names are attacker-controlled. `join` treats an absolute
+    // second argument as absolute, so an entry named "/etc/cron.d/x" escapes
+    // outright and "../../x" escapes relatively -- and create(recursive: true)
+    // would happily build the parent directories on the way out.
+    final rootPath = normalize(pluginExtractionDir.absolute.path);
+
     for (final file in archive) {
-      if (file.isFile) {
-        final filename = file.name;
-        final data = file.content as List<int>;
-        final extractedFile = File(join(pluginExtractionDir.path, filename));
-        await extractedFile.create(recursive: true);
-        await extractedFile.writeAsBytes(data);
+      if (!file.isFile) continue;
+
+      final target = normalize(join(rootPath, file.name));
+      if (!isWithin(rootPath, target)) {
+        throw MetadataPluginException.invalidPluginConfiguration();
       }
+
+      final data = file.content as List<int>;
+      final extractedFile = File(target);
+      await extractedFile.create(recursive: true);
+      await extractedFile.writeAsBytes(data);
     }
 
     return pluginConfig;
   }
 
   /// Downloads, extracts & caches the plugin from the given URL and returns the plugin config.
-  /// If only a text/html URL is provided, it will try to get the latest release from
-  /// the URL for supported websites (github.com, codeberg.org).
+  /// If a repository URL is provided, it resolves the latest release asset from
+  /// the supported hosts (github.com, codeberg.org).
+  ///
+  /// The host allowlist is enforced unconditionally. It previously applied only
+  /// when the response advertised `text/html`, so a direct `.smplug` link on any
+  /// host -- over plain HTTP -- bypassed it entirely. That also covered
+  /// `updatePlugin`, whose download URL is chosen by the plugin's own
+  /// `checkUpdate` implementation and is therefore fully plugin-controlled.
   Future<PluginConfiguration> downloadAndCachePlugin(String url) async {
-    final res = await globalDio.head(url);
-    final isSupportedWebsite =
-        (res.headers["Content-Type"]?.first)?.startsWith("text/html") == true &&
-            allowedDomainsRegex.hasMatch(url);
+    final uri = _assertAllowedPluginUri(url);
+
     String pluginDownloadUrl = url;
-    if (isSupportedWebsite) {
-      if (url.contains("github.com")) {
-        final uri = _getGithubReleasesUrl(url);
-        pluginDownloadUrl = await _getPluginDownloadUrl(uri);
-      } else if (url.contains("codeberg.org")) {
-        final uri = _getCodebergeReleasesUrl(url);
-        pluginDownloadUrl = await _getPluginDownloadUrl(uri);
+    // Dispatch on the path, not the server-supplied Content-Type: the latter is
+    // attacker-controlled and does not belong in a security decision.
+    if (!uri.path.toLowerCase().endsWith(".smplug")) {
+      if (uri.host.endsWith("github.com")) {
+        pluginDownloadUrl = await _getPluginDownloadUrl(
+          _getGithubReleasesUrl(url),
+        );
+      } else if (uri.host.endsWith("codeberg.org")) {
+        pluginDownloadUrl = await _getPluginDownloadUrl(
+          _getCodebergeReleasesUrl(url),
+        );
       } else {
         throw MetadataPluginException.unsupportedPluginDownloadWebsite();
       }
+      // The release API response is remote data too, so re-validate what it
+      // pointed us at.
+      _assertAllowedPluginUri(pluginDownloadUrl);
     }
 
     // Now let's download, extract and cache the plugin
@@ -495,7 +563,9 @@ class MetadataPluginNotifier extends AsyncNotifier<MetadataPluginState> {
       update.downloadUrl,
     );
 
-    if (pluginUpdatedConfig.name != plugin.name &&
+    // `&&` here meant an update was rejected only when both fields changed, so
+    // a replacement keeping the author but changing the name sailed through.
+    if (pluginUpdatedConfig.name != plugin.name ||
         pluginUpdatedConfig.author != plugin.author) {
       throw MetadataPluginException.invalidPluginConfiguration();
     }
