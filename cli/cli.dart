@@ -7,7 +7,7 @@ import 'commands/translated.dart';
 import 'commands/untranslated.dart';
 
 void main(List<String> args) {
-  final commandRunner = CommandRunner("cli", "Configuration CLI for Spotube");
+  final commandRunner = CommandRunner("cli", "Configuration CLI for OpenMusic");
 
   commandRunner.addCommand(InstallDependenciesCommand());
   commandRunner.addCommand(BuildCommand());

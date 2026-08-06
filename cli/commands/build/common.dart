@@ -29,7 +29,7 @@ mixin BuildCommandCommonSteps on Command {
   }
 
   RegExp get versionVarRegExp =>
-      RegExp(r"\%\{\{SPOTUBE_VERSION\}\}\%", multiLine: true);
+      RegExp(r"\%\{\{OPENMUSIC_VERSION\}\}\%", multiLine: true);
 
   File get dotEnvFile => File(join(cwd.path, ".env"));
 

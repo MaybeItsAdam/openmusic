@@ -21,7 +21,7 @@ class LinuxBuildCommand extends Command with BuildCommandCommonSteps {
     stdout.writeln("Replacing versions");
 
     final appDataFile = File(
-      join(cwd.path, "linux", "com.github.KRTirtho.Spotube.appdata.xml"),
+      join(cwd.path, "linux", "io.github.MaybeItsAdam.OpenMusic.appdata.xml"),
     );
 
     appDataFile.writeAsStringSync(
@@ -43,7 +43,7 @@ class LinuxBuildCommand extends Command with BuildCommandCommonSteps {
       await shell.run("fastforge package --platform=linux --targets=rpm");
     }
 
-    final tempDir = join(Directory.systemTemp.path, "spotube-tar");
+    final tempDir = join(Directory.systemTemp.path, "openmusic-tar");
     final bundleArchName = architecture == "x86" ? "x86_64" : "aarch64";
     final bundleDirPath = join(
       cwd.path,
@@ -58,7 +58,7 @@ class LinuxBuildCommand extends Command with BuildCommandCommonSteps {
       join(
         cwd.path,
         "dist",
-        "spotube-linux-"
+        "openmusic-linux-"
             "${CliEnv.channel == BuildChannel.nightly ? "nightly" : versionWithoutBuildNumber}"
             "-$bundleArchName.tar.xz",
       ),
@@ -66,14 +66,14 @@ class LinuxBuildCommand extends Command with BuildCommandCommonSteps {
 
     await copyPath(bundleDirPath, tempDir);
     await File(
-      join(cwd.path, "linux", "spotube.desktop"),
-    ).copy(join(tempDir, "spotube.desktop"));
+      join(cwd.path, "linux", "openmusic.desktop"),
+    ).copy(join(tempDir, "openmusic.desktop"));
     await File(
-      join(cwd.path, "linux", "com.github.KRTirtho.Spotube.appdata.xml"),
-    ).copy(join(tempDir, "com.github.KRTirtho.Spotube.appdata.xml"));
+      join(cwd.path, "linux", "io.github.MaybeItsAdam.OpenMusic.appdata.xml"),
+    ).copy(join(tempDir, "io.github.MaybeItsAdam.OpenMusic.appdata.xml"));
     await File(
-      join(cwd.path, "assets", "branding", "spotube-logo.png"),
-    ).copy(join(tempDir, "spotube-logo.png"));
+      join(cwd.path, "assets", "branding", "openmusic-logo.png"),
+    ).copy(join(tempDir, "openmusic-logo.png"));
 
     await shell.run("tar -cJf ${tarFile.path} -C $tempDir .");
 
@@ -82,11 +82,11 @@ class LinuxBuildCommand extends Command with BuildCommandCommonSteps {
         cwd.path,
         "dist",
         pubspec.version.toString(),
-        "spotube-${pubspec.version}-linux.deb",
+        "${pubspec.name}-${pubspec.version}-linux.deb",
       ),
     );
     await ogDeb.copy(
-      join(cwd.path, "dist", "Spotube-linux-$bundleArchName.deb"),
+      join(cwd.path, "dist", "OpenMusic-linux-$bundleArchName.deb"),
     );
     await ogDeb.delete();
 
@@ -96,12 +96,12 @@ class LinuxBuildCommand extends Command with BuildCommandCommonSteps {
           cwd.path,
           "dist",
           pubspec.version.toString(),
-          "spotube-${pubspec.version}-linux.rpm",
+          "${pubspec.name}-${pubspec.version}-linux.rpm",
         ),
       );
 
       await ogRpm.copy(
-        join(cwd.path, "dist", "Spotube-linux-$bundleArchName.rpm"),
+        join(cwd.path, "dist", "OpenMusic-linux-$bundleArchName.rpm"),
       );
 
       await ogRpm.delete();
@@ -112,11 +112,11 @@ class LinuxBuildCommand extends Command with BuildCommandCommonSteps {
         cwd.path,
         "dist",
         pubspec.version.toString(),
-        "spotube-${pubspec.version}-linux.AppImage",
+        "${pubspec.name}-${pubspec.version}-linux.AppImage",
       ),
     );
     await ogAppImage.copy(
-      join(cwd.path, "dist", "Spotube-linux-$bundleArchName.AppImage"),
+      join(cwd.path, "dist", "OpenMusic-linux-$bundleArchName.AppImage"),
     );
     await ogAppImage.delete();
 

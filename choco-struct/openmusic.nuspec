@@ -4,30 +4,30 @@ enclosed in quotation marks, you should use an editor that supports UTF-8, not t
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <!-- == PACKAGE SPECIFIC SECTION == -->
-    <id>spotube</id>
-    <version>%{{SPOTUBE_VERSION}}%</version>
-    <packageSourceUrl>https://github.com/KRTirtho/spotube/tree/master/choco-struct</packageSourceUrl>
-    <owners>Kingkor Roy Tirtho</owners>
+    <id>openmusic</id>
+    <version>%{{OPENMUSIC_VERSION}}%</version>
+    <packageSourceUrl>https://github.com/MaybeItsAdam/openmusic/tree/master/choco-struct</packageSourceUrl>
+    <owners>MaybeItsAdam</owners>
     <!-- ============================== -->
 
     <!-- == SOFTWARE SPECIFIC SECTION == -->
-    <title>spotube (Install)</title>
-    <authors>Kingkor Roy Tirtho</authors>
-    <projectUrl>https://spotube.krtirtho.dev</projectUrl>
+    <title>openmusic (Install)</title>
+    <authors>MaybeItsAdam</authors>
+    <projectUrl>https://github.com/MaybeItsAdam/openmusic</projectUrl>
     <iconUrl>
-      https://rawcdn.githack.com/KRTirtho/spotube/7edb0bb834eb18c05551e30a891720a6abf53dbe/assets/branding/spotube-logo.png</iconUrl>
-    <copyright>2022 Spotube</copyright>
+      https://rawcdn.githack.com/MaybeItsAdam/openmusic/refs/heads/master/assets/branding/openmusic-logo.png</iconUrl>
+    <copyright>2025 OpenMusic</copyright>
     <!-- If there is a license Url available, it is required for the community feed -->
-    <licenseUrl>https://github.com/KRTirtho/spotube/blob/master/LICENSE</licenseUrl>
+    <licenseUrl>https://github.com/MaybeItsAdam/openmusic/blob/master/LICENSE</licenseUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
-    <projectSourceUrl>https://github.com/KRTirtho/spotube</projectSourceUrl>
-    <docsUrl>https://spotube.krtirtho.dev</docsUrl>
-    <bugTrackerUrl>https://github.com/KRTirtho/spotube/issues/new</bugTrackerUrl>
-    <tags>spotube music audio youtube flutter</tags>
+    <projectSourceUrl>https://github.com/MaybeItsAdam/openmusic</projectSourceUrl>
+    <docsUrl>https://github.com/MaybeItsAdam/openmusic</docsUrl>
+    <bugTrackerUrl>https://github.com/MaybeItsAdam/openmusic/issues/new</bugTrackerUrl>
+    <tags>openmusic music audio youtube flutter</tags>
     <summary>🎧 Open source music client that doesn't require Premium nor uses Electron! Available
       for both desktop &amp; mobile! </summary>
     <description>
-      Spotube is a Flutter based lightweight music client. It utilizes the power
+      OpenMusic is a Flutter based lightweight music client. It utilizes the power
       of music metadata providers &amp; Youtube's public API &amp; creates a hazardless, performant
       &amp; resource
       friendly User Experience
@@ -47,7 +47,7 @@ enclosed in quotation marks, you should use an editor that supports UTF-8, not t
       - Time synced lyrics
       - Downloadable tracks
     </description>
-    <releaseNotes>https://github.com/KRTirtho/spotube/releases/tag/v%{{SPOTUBE_VERSION}}%</releaseNotes>
+    <releaseNotes>https://github.com/MaybeItsAdam/openmusic/releases/tag/v%{{OPENMUSIC_VERSION}}%</releaseNotes>
   </metadata>
   <files>
     <file src="tools\**" target="tools" />

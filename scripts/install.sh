@@ -3,15 +3,15 @@ set -euo pipefail
 
 # Variables
 fname="$(basename "$0")"
-installDir='/usr/share/spotube'
-desktopFile='/usr/share/applications/spotube.desktop'
-appdata='/usr/share/appdata/spotube.appdata.xml'
-iconDir='/usr/share/icons/spotube'
-icon="${iconDir}/spotube-logo.png"
-symlink='/usr/bin/spotube'
-repo='KRTirtho/spotube'
+installDir='/usr/share/openmusic'
+desktopFile='/usr/share/applications/openmusic.desktop'
+appdata='/usr/share/appdata/openmusic.appdata.xml'
+iconDir='/usr/share/icons/openmusic'
+icon="${iconDir}/openmusic-logo.png"
+symlink='/usr/bin/openmusic'
+repo='MaybeItsAdam/openmusic'
 
-# Populated by download_extract_spotube; cleaned up on exit.
+# Populated by download_extract_openmusic; cleaned up on exit.
 temp=''
 
 function cleanup() {
@@ -34,9 +34,9 @@ function rootCheck() {
 function help() {
     echo "Usage: sudo ./${fname} [flags]"
     echo 'Flags:'
-    echo '  -i, --install <version>    Install any Spotube version (if not specified, the latest is installed).'
+    echo '  -i, --install <version>    Install any OpenMusic version (if not specified, the latest is installed).'
     echo '  -h, --help                 This help menu'
-    echo '  -r, --remove               Removes Spotube from your system'
+    echo '  -r, --remove               Removes OpenMusic from your system'
     exit 0
 }
 
@@ -71,7 +71,7 @@ function install_deps() {
         # shellcheck disable=SC2086
         pacman -Sy ${archDeps}
     else
-        echo 'You have to install some dependencies manually in order for Spotube to work.'
+        echo 'You have to install some dependencies manually in order for OpenMusic to work.'
         echo "The deps are the following: ${rpmDeps}"
     fi
 }
@@ -99,15 +99,15 @@ function verify_checksum() {
     echo 'Checksum OK.'
 }
 
-function download_extract_spotube() {
+function download_extract_openmusic() {
     local releaseTag tarName downloadURL sumURL tarPath sumPath
 
     if [ "${ver}" = 'nightly' ]; then
         releaseTag='nightly'
-        tarName='spotube-linux-nightly-x86_64.tar.xz'
+        tarName='openmusic-linux-nightly-x86_64.tar.xz'
     else
         releaseTag="v${ver}"
-        tarName="spotube-linux-${ver}-x86_64.tar.xz"
+        tarName="openmusic-linux-${ver}-x86_64.tar.xz"
     fi
 
     downloadURL="https://github.com/${repo}/releases/download/${releaseTag}/${tarName}"
@@ -116,7 +116,7 @@ function download_extract_spotube() {
     # A private mktemp directory rather than a predictable /tmp path. The old
     # fixed path plus a "skip download if the file exists" branch let any local
     # user pre-plant a tarball that this script then installed as root.
-    temp="$(mktemp -d "${TMPDIR:-/tmp}/spotube-install.XXXXXXXXXX")"
+    temp="$(mktemp -d "${TMPDIR:-/tmp}/openmusic-install.XXXXXXXXXX")"
     chmod 700 "${temp}"
 
     tarPath="${temp}/${tarName}"
@@ -138,14 +138,14 @@ function download_extract_spotube() {
     fi
 }
 
-function install_spotube() {
+function install_openmusic() {
     if [ -d "${installDir}" ]; then
-        echo -n 'Spotube is already installed. Do you want to reinstall it? [y/N] '
+        echo -n 'OpenMusic is already installed. Do you want to reinstall it? [y/N] '
         read -r reinstall
 
         case "${reinstall}" in
         [yY]*)
-            uninstall_spotube
+            uninstall_openmusic
             ;;
         *)
             echo 'Aborting installation...'
@@ -157,22 +157,22 @@ function install_spotube() {
     mkdir -p "${installDir}" "${iconDir}"
     mv "${temp}/data" "${installDir}"
     mv "${temp}/lib" "${installDir}"
-    mv "${temp}/spotube" "${installDir}"
-    mv "${temp}/spotube.desktop" "${desktopFile}"
-    mv "${temp}/com.github.KRTirtho.Spotube.appdata.xml" "${appdata}"
-    mv "${temp}/spotube-logo.png" "${icon}"
-    ln -sf "${installDir}/spotube" "${symlink}"
+    mv "${temp}/openmusic" "${installDir}"
+    mv "${temp}/openmusic.desktop" "${desktopFile}"
+    mv "${temp}/io.github.MaybeItsAdam.OpenMusic.appdata.xml" "${appdata}"
+    mv "${temp}/openmusic-logo.png" "${icon}"
+    ln -sf "${installDir}/openmusic" "${symlink}"
 
-    echo "Spotube ${ver} has been installed successfully!"
+    echo "OpenMusic ${ver} has been installed successfully!"
 }
 
-function uninstall_spotube() {
-    echo -n 'Are you sure you want to uninstall Spotube? [y/N] '
+function uninstall_openmusic() {
+    echo -n 'Are you sure you want to uninstall OpenMusic? [y/N] '
     read -r confirm
 
     case "${confirm}" in
     [yY]*)
-        echo 'Uninstalling Spotube..'
+        echo 'Uninstalling OpenMusic..'
         rm -rf "${installDir}" "${desktopFile}" "${appdata}" "${iconDir}" "${symlink}"
         ;;
     *)
@@ -198,13 +198,13 @@ case "${1:-}" in
 
     rootCheck
     install_deps
-    download_extract_spotube
-    install_spotube
+    download_extract_openmusic
+    install_openmusic
     exit 0
     ;;
 -r | --remove)
     rootCheck
-    uninstall_spotube
+    uninstall_openmusic
     exit 0
     ;;
 -h | --help | "")
