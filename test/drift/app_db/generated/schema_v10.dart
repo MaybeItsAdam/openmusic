@@ -613,7 +613,7 @@ class PreferencesTable extends Table
     false,
     type: DriftSqlType.string,
     requiredDuringInsert: false,
-    defaultValue: Constant(CloseBehavior.close.name),
+    defaultValue: Constant('close'),
   );
   late final GeneratedColumn<String> accentColorScheme =
       GeneratedColumn<String>(
@@ -630,7 +630,7 @@ class PreferencesTable extends Table
     false,
     type: DriftSqlType.string,
     requiredDuringInsert: false,
-    defaultValue: Constant(LayoutMode.adaptive.name),
+    defaultValue: Constant('adaptive'),
   );
   late final GeneratedColumn<String> locale = GeneratedColumn<String>(
     'locale',
@@ -648,7 +648,7 @@ class PreferencesTable extends Table
     false,
     type: DriftSqlType.string,
     requiredDuringInsert: false,
-    defaultValue: Constant(Market.US.name),
+    defaultValue: Constant('US'),
   );
   late final GeneratedColumn<String> searchMode = GeneratedColumn<String>(
     'search_mode',
@@ -656,7 +656,7 @@ class PreferencesTable extends Table
     false,
     type: DriftSqlType.string,
     requiredDuringInsert: false,
-    defaultValue: Constant(SearchMode.youtube.name),
+    defaultValue: Constant('youtube'),
   );
   late final GeneratedColumn<String> downloadLocation = GeneratedColumn<String>(
     'download_location',
@@ -681,7 +681,7 @@ class PreferencesTable extends Table
     false,
     type: DriftSqlType.string,
     requiredDuringInsert: false,
-    defaultValue: Constant(ThemeMode.system.name),
+    defaultValue: Constant('system'),
   );
   late final GeneratedColumn<String> audioSourceId = GeneratedColumn<String>(
     'audio_source_id',
@@ -697,7 +697,7 @@ class PreferencesTable extends Table
         false,
         type: DriftSqlType.string,
         requiredDuringInsert: false,
-        defaultValue: Constant(YoutubeClientEngine.youtubeExplode.name),
+        defaultValue: Constant('youtubeExplode'),
       );
   late final GeneratedColumn<bool> discordPresence = GeneratedColumn<bool>(
     'discord_presence',
