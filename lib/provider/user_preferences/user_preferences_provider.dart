@@ -31,21 +31,27 @@ class UserPreferencesNotifier extends Notifier<PreferencesTableData> {
               PreferencesTableCompanion.insert(
                 id: const Value(0),
                 downloadLocation: Value(await _getDefaultDownloadDirectory()),
+                // The SQL column default can't branch on platform.
+                youtubeClientEngine: Value(
+                  YoutubeClientEngine.defaultForPlatform,
+                ),
               ),
             );
       }
 
-      state = await (db.select(
-        db.preferencesTable,
-      )..where((tbl) => tbl.id.equals(0)))
-          .getSingle();
+      state = _withUsableYoutubeEngine(
+        await (db.select(
+          db.preferencesTable,
+        )..where((tbl) => tbl.id.equals(0)))
+            .getSingle(),
+      );
 
       final subscription = (db.select(db.preferencesTable)
             ..where((tbl) => tbl.id.equals(0)))
           .watchSingle()
           .listen((event) async {
         try {
-          state = event;
+          state = _withUsableYoutubeEngine(event);
 
           if (kIsDesktop) {
             await windowManager.setTitleBarStyle(
@@ -67,6 +73,20 @@ class UserPreferencesNotifier extends Notifier<PreferencesTableData> {
     });
 
     return PreferencesTable.defaults();
+  }
+
+  /// The YouTube engine is persisted by name, so an install that predates the
+  /// current platform gates can hold an engine this build no longer runs here
+  /// (e.g. `youtubeExplode`, which is iOS-only now). Move those users onto the
+  /// platform default and write it back so the settings dropdown — which only
+  /// lists available engines — has a value it can show.
+  PreferencesTableData _withUsableYoutubeEngine(PreferencesTableData data) {
+    if (data.youtubeClientEngine.isAvailableForPlatform()) return data;
+
+    final engine = data.youtubeClientEngine.resolveForPlatform();
+    setYoutubeClientEngine(engine);
+
+    return data.copyWith(youtubeClientEngine: engine);
   }
 
   Future<String> _getDefaultDownloadDirectory() async {

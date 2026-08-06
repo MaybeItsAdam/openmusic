@@ -2,6 +2,7 @@ import 'dart:isolate';
 
 import 'package:flutter/foundation.dart';
 import 'package:openmusic/services/youtube_engine/youtube_engine.dart';
+import 'package:openmusic/utils/platform.dart';
 // import 'package:youtube_explode_dart/solvers.dart';
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 
@@ -146,10 +147,13 @@ class IsolatedYoutubeExplode {
 class YouTubeExplodeEngine implements YouTubeEngine {
   static final _youtubeExplode = IsolatedYoutubeExplode.instance;
 
-  static bool get isAvailableForPlatform => true;
+  /// iOS only. yt-dlp needs a subprocess and NewPipe needs the JVM, so neither
+  /// can run there — this is the only engine iOS has. Everywhere else it is
+  /// retired in favour of yt-dlp (desktop) and NewPipe (Android).
+  static bool get isAvailableForPlatform => kIsIOS;
 
   static Future<bool> isInstalled() async {
-    return true;
+    return isAvailableForPlatform;
   }
 
   @override

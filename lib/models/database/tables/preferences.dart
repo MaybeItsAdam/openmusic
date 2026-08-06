@@ -13,6 +13,20 @@ enum YoutubeClientEngine {
 
   const YoutubeClientEngine(this.label);
 
+  /// The engine to use when the platform gets to pick: yt-dlp on desktop,
+  /// NewPipe on Android, YouTubeExplode on iOS.
+  ///
+  /// A SQL column default has to be a single constant, so this — not the
+  /// `withDefault` on [PreferencesTable.youtubeClientEngine] — is the default
+  /// that actually reaches users. See [PreferencesTable.defaults].
+  static YoutubeClientEngine get defaultForPlatform {
+    if (YtDlpEngine.isAvailableForPlatform) return YoutubeClientEngine.ytDlp;
+    if (NewPipeEngine.isAvailableForPlatform) {
+      return YoutubeClientEngine.newPipe;
+    }
+    return YoutubeClientEngine.youtubeExplode;
+  }
+
   bool isAvailableForPlatform() {
     return switch (this) {
       YoutubeClientEngine.youtubeExplode =>
@@ -21,6 +35,13 @@ enum YoutubeClientEngine {
       YoutubeClientEngine.newPipe => NewPipeEngine.isAvailableForPlatform,
     };
   }
+
+  /// The preference is persisted by name, so a value that was valid when it
+  /// was written can outlive its platform gate — desktop and Android installs
+  /// from before yt-dlp became the default still have `youtubeExplode` stored.
+  /// Coerce those onto an engine this platform can actually run.
+  YoutubeClientEngine resolveForPlatform() =>
+      isAvailableForPlatform() ? this : defaultForPlatform;
 }
 
 enum SearchMode {
@@ -73,6 +94,10 @@ class PreferencesTable extends Table {
   TextColumn get themeMode =>
       textEnum<ThemeMode>().withDefault(Constant(ThemeMode.system.name))();
   TextColumn get audioSourceId => text().nullable()();
+  // The real default is [YoutubeClientEngine.defaultForPlatform] — a SQL
+  // default cannot branch on platform, and every insert supplies this column
+  // explicitly, so this constant only exists to keep the column NOT NULL.
+  // Changing it would force a schema bump for no behavioural gain.
   TextColumn get youtubeClientEngine => textEnum<YoutubeClientEngine>()
       .withDefault(Constant(YoutubeClientEngine.youtubeExplode.name))();
   BoolColumn get discordPresence =>
@@ -105,9 +130,7 @@ class PreferencesTable extends Table {
       localLibraryLocation: [],
       themeMode: ThemeMode.system,
       audioSourceId: null,
-      youtubeClientEngine: kIsIOS
-          ? YoutubeClientEngine.youtubeExplode
-          : YoutubeClientEngine.newPipe,
+      youtubeClientEngine: YoutubeClientEngine.defaultForPlatform,
       discordPresence: true,
       endlessPlayback: true,
       enableConnect: false,

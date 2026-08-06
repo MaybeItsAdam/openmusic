@@ -10,6 +10,7 @@ import 'package:openmusic/components/form/text_form_field.dart';
 import 'package:openmusic/extensions/context.dart';
 import 'package:openmusic/hooks/controllers/use_shadcn_text_editing_controller.dart';
 import 'package:openmusic/models/database/database.dart';
+import 'package:openmusic/provider/youtube_engine/youtube_engine.dart';
 import 'package:openmusic/services/kv_store/kv_store.dart';
 import 'package:openmusic/utils/platform.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -109,6 +110,8 @@ class YouTubeEngineNotInstalledDialog extends HookConsumerWidget {
                 await YtDlp.instance.setBinaryLocation(controller.text);
               }
             }
+            // Re-run the availability check so playback stops falling back.
+            ref.invalidate(ytDlpInstalledProvider);
             if (!context.mounted) return;
             Navigator.of(context).pop(true);
           },

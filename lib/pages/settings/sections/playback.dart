@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart' show ListTile;
@@ -16,8 +14,7 @@ import 'package:openmusic/extensions/context.dart';
 import 'package:openmusic/modules/settings/youtube_engine_not_installed_dialog.dart';
 import 'package:openmusic/provider/metadata_plugin/audio_source/quality_presets.dart';
 import 'package:openmusic/provider/user_preferences/user_preferences_provider.dart';
-import 'package:openmusic/services/kv_store/kv_store.dart';
-import 'package:openmusic/services/youtube_engine/yt_dlp_engine.dart';
+import 'package:openmusic/provider/youtube_engine/youtube_engine.dart';
 
 import 'package:openmusic/utils/platform.dart';
 
@@ -48,10 +45,7 @@ class SettingsPlaybackSection extends HookConsumerWidget {
           onChanged: (value) async {
             if (value == null) return;
             if (value == YoutubeClientEngine.ytDlp) {
-              final customPath = KVStoreService.getYoutubeEnginePath(value);
-              if (!await YtDlpEngine.isInstalled() &&
-                  (customPath == null || !await File(customPath).exists()) &&
-                  context.mounted) {
+              if (!await isYtDlpUsable() && context.mounted) {
                 final hasInstalled = await showDialog<bool>(
                   context: context,
                   builder: (context) =>
@@ -59,6 +53,9 @@ class SettingsPlaybackSection extends HookConsumerWidget {
                 );
                 if (hasInstalled != true) return;
               }
+              // The binary may have appeared since the last check; drop the
+              // cached result so playback stops using the NewPipe fallback.
+              ref.invalidate(ytDlpInstalledProvider);
             }
             preferencesNotifier.setYoutubeClientEngine(value);
           },

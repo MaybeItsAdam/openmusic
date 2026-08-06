@@ -1,13 +1,10 @@
-import 'dart:io';
-
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 import 'package:openmusic/models/database/database.dart';
 import 'package:openmusic/modules/settings/youtube_engine_not_installed_dialog.dart';
 import 'package:openmusic/provider/user_preferences/user_preferences_provider.dart';
-import 'package:openmusic/services/kv_store/kv_store.dart';
-import 'package:openmusic/services/youtube_engine/yt_dlp_engine.dart';
+import 'package:openmusic/provider/youtube_engine/youtube_engine.dart';
 
 void useCheckYtDlpInstalled(WidgetRef ref) {
   final context = useContext();
@@ -18,13 +15,11 @@ void useCheckYtDlpInstalled(WidgetRef ref) {
         userPreferencesProvider.select((value) => value.youtubeClientEngine),
       );
 
-      final customPath = KVStoreService.getYoutubeEnginePath(
-        YoutubeClientEngine.ytDlp,
-      );
-
+      // yt-dlp is the default engine on desktop but ships separately, so this
+      // is the first-run prompt for anyone who doesn't have it yet. Playback
+      // falls back to NewPipe meanwhile — see [youtubeEngineProvider].
       if (youtubeEngine == YoutubeClientEngine.ytDlp &&
-          !await YtDlpEngine.isInstalled() &&
-          (customPath == null || !await File(customPath).exists()) &&
+          !await isYtDlpUsable() &&
           context.mounted) {
         await showDialog(
           context: context,
