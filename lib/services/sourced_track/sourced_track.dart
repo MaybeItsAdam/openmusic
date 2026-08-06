@@ -65,7 +65,25 @@ class SourcedTrack extends BasicSourcedTrack {
         .get()
         .then((s) => s.firstOrNull);
 
-    if (cachedSource == null) {
+    // A row whose sourceInfo won't parse is treated as a cache miss rather than
+    // a hard failure: the v9->v10 migration left rows at the '{}' column
+    // default, and without this an unparseable row breaks that track forever
+    // because nothing ever invalidates it.
+    SpotubeAudioSourceMatchObject? cachedItem;
+    if (cachedSource != null) {
+      try {
+        cachedItem = SpotubeAudioSourceMatchObject.fromJson(
+          jsonDecode(cachedSource.sourceInfo),
+        );
+      } catch (error, stackTrace) {
+        AppLogger.reportError(error, stackTrace);
+        await (database.delete(database.sourceMatchTable)
+              ..where((s) => s.id.equals(cachedSource.id)))
+            .go();
+      }
+    }
+
+    if (cachedItem == null) {
       final siblings = await fetchSiblings(ref: ref, query: query);
       if (siblings.isEmpty) {
         throw TrackNotFoundError(query);
@@ -90,16 +108,13 @@ class SourcedTrack extends BasicSourcedTrack {
         query: query,
       );
     }
-    final item = SpotubeAudioSourceMatchObject.fromJson(
-      jsonDecode(cachedSource.sourceInfo),
-    );
-    final manifest = await audioSource.audioSource.streams(item);
+    final manifest = await audioSource.audioSource.streams(cachedItem);
 
     final sourcedTrack = SourcedTrack(
       ref: ref,
       siblings: [],
       sources: manifest,
-      info: item,
+      info: cachedItem,
       query: query,
       source: audioSourceConfig.slug,
     );
@@ -355,10 +370,14 @@ class SourcedTrack extends BasicSourcedTrack {
       return exactMatch;
     }
 
-    // Find the preset with closest quality to the supplied quality
-    return sources.where((source) {
-      return source.container == preset.name;
-    }).reduce((prev, curr) {
+    // Find the preset with closest quality to the supplied quality. When the
+    // plugin serves nothing in the requested container, fall back to all
+    // sources rather than reducing an empty iterable, which throws.
+    final sameContainer =
+        sources.where((source) => source.container == preset.name).toList();
+    final candidates = sameContainer.isNotEmpty ? sameContainer : sources;
+
+    return candidates.reduce((prev, curr) {
       if (quality is SpotubeAudioLosslessContainerQuality) {
         final prevDiff = ((prev.sampleRate ?? 0) - quality.sampleRate).abs() +
             ((prev.bitDepth ?? 0) - quality.bitDepth).abs();

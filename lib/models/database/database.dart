@@ -19,7 +19,6 @@ import 'package:spotube/services/kv_store/kv_store.dart';
 import 'package:flutter/widgets.dart' hide Table, Key, View;
 import 'package:spotube/modules/settings/color_scheme_picker_dialog.dart';
 import 'package:drift/native.dart';
-import 'package:spotube/services/logger/logger.dart';
 import 'package:spotube/services/youtube_engine/newpipe_engine.dart';
 import 'package:spotube/services/youtube_engine/youtube_explode_engine.dart';
 import 'package:spotube/services/youtube_engine/yt_dlp_engine.dart';
@@ -47,6 +46,32 @@ part 'typeconverters/encrypted_text.dart';
 part 'typeconverters/map.dart';
 part 'typeconverters/map_list.dart';
 part 'typeconverters/subtitle.dart';
+
+// SQLite error fragments that mean a migration step has already been applied,
+// which happens when a previous run crashed part-way through.
+const _noSuchTable = "no such table";
+const _noSuchColumn = "no such column";
+const _duplicateColumn = "duplicate column name";
+const _tableAlreadyExists = "already another table or index";
+
+/// Runs a migration step, tolerating only [toleratedMessages] — the errors that
+/// mean the step is already done.
+///
+/// Every other failure propagates so drift aborts the migration instead of
+/// bumping `user_version` over a half-applied schema, which would leave the
+/// database permanently broken with no opportunity to re-run.
+Future<void> _tolerating(
+  Future<void> Function() step,
+  List<String> toleratedMessages,
+) async {
+  try {
+    await step();
+  } catch (error) {
+    final message = error.toString().toLowerCase();
+    if (toleratedMessages.any(message.contains)) return;
+    rethrow;
+  }
+}
 
 @DriftDatabase(
   tables: [
@@ -201,39 +226,55 @@ class AppDatabase extends _$AppDatabase {
           });
         },
         from8To9: (m, schema) async {
-          await m
-              .renameTable(schema.pluginsTable, "metadata_plugins_table")
-              .catchError((e, stack) => AppLogger.reportError(e, stack));
-          await m
-              .renameColumn(
-                schema.pluginsTable,
-                "selected",
-                pluginsTable.selectedForMetadata,
-              )
-              .catchError((e, stack) => AppLogger.reportError(e, stack));
-          await m
-              .addColumn(
-                schema.pluginsTable,
-                pluginsTable.selectedForAudioSource,
-              )
-              .catchError((e, stack) => AppLogger.reportError(e, stack));
+          await _tolerating(
+            () => m.renameTable(schema.pluginsTable, "metadata_plugins_table"),
+            const [_noSuchTable, _tableAlreadyExists],
+          );
+          await _tolerating(
+            () => m.renameColumn(
+              schema.pluginsTable,
+              "selected",
+              pluginsTable.selectedForMetadata,
+            ),
+            const [_noSuchColumn, _duplicateColumn],
+          );
+          await _tolerating(
+            () => m.addColumn(
+              schema.pluginsTable,
+              pluginsTable.selectedForAudioSource,
+            ),
+            const [_duplicateColumn],
+          );
         },
         from9To10: (m, schema) async {
-          await m
-              .dropColumn(schema.preferencesTable, "piped_instance")
-              .catchError((e, stack) => AppLogger.reportError(e, stack));
-          await m
-              .dropColumn(schema.preferencesTable, "invidious_instance")
-              .catchError((e, stack) => AppLogger.reportError(e, stack));
-          await m
-              .addColumn(schema.sourceMatchTable, sourceMatchTable.sourceInfo)
-              .catchError((e, stack) => AppLogger.reportError(e, stack));
-          await customStatement(
-            "DROP INDEX IF EXISTS uniq_track_match;",
-          ).catchError((e, stack) => AppLogger.reportError(e, stack));
-          await m
-              .dropColumn(schema.sourceMatchTable, "source_id")
-              .catchError((e, stack) => AppLogger.reportError(e, stack));
+          await _tolerating(
+            () => m.dropColumn(schema.preferencesTable, "piped_instance"),
+            const [_noSuchColumn],
+          );
+          await _tolerating(
+            () => m.dropColumn(schema.preferencesTable, "invidious_instance"),
+            const [_noSuchColumn],
+          );
+          await _tolerating(
+            () =>
+                m.addColumn(schema.sourceMatchTable, sourceMatchTable.sourceInfo),
+            const [_duplicateColumn],
+          );
+          await customStatement("DROP INDEX IF EXISTS uniq_track_match;");
+
+          // v9 stored only a bare `source_id`. v10's `source_info` requires
+          // title, artists and externalUri, none of which exist in v9 data and
+          // none of which can be reconstructed without network calls. v10 also
+          // redefined `source_type` from a SourceType enum name to the audio
+          // source plugin's slug, so surviving rows would never be matched by
+          // the new lookup anyway. Clearing the cache lets every track
+          // re-source on next play instead of leaving unparseable rows behind.
+          await customStatement("DELETE FROM source_match_table;");
+
+          await _tolerating(
+            () => m.dropColumn(schema.sourceMatchTable, "source_id"),
+            const [_noSuchColumn],
+          );
         },
       ),
     );
