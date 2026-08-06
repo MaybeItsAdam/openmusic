@@ -10,10 +10,10 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           ref: ${{ github.event.pull_request.head.sha }}
-      - uses: subosito/flutter-action@v2
+      - uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2
         with:
           flutter-version: ${{ env.FLUTTER_VERSION }}
 
@@ -35,3 +35,17 @@ jobs:
       - name: Lint Dart files
         run: |
           dart analyze --no-fatal-warnings
+
+      - name: Check git dependencies are pinned
+        run: dart run scripts/check_pinned_deps.dart
+
+      - name: Check GitHub Actions are pinned
+        run: |
+          unpinned=$(grep -rhoE 'uses: [^ ]+@[^ ]+' .github/workflows/*.yml \
+            | grep -vE '@[0-9a-f]{40}' || true)
+          if [ -n "${unpinned}" ]; then
+            echo 'Actions must be pinned to a full commit SHA:' >&2
+            echo "${unpinned}" >&2
+            exit 1
+          fi
+          echo 'All actions are pinned to commit SHAs.'

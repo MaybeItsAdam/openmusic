@@ -25,12 +25,14 @@ dependencies:
   connectivity_plus: ^6.1.2
   desktop_webview_window:
     git:
+      ref: f261ff20e310d05713249b21c199a9fe17a3de6f
       path: packages/desktop_webview_window
       url: https://github.com/KRTirtho/flutter-plugins.git
   device_info_plus: ^11.1.1
   dio: ^5.4.3+1
   disable_battery_optimization:
     git:
+      ref: aa77a61946849fff495091fc13dcc390948cc60b
       url: https://github.com/KRTirtho/Disable-Battery-Optimizations.git
   draggable_scrollbar:
     git:
@@ -87,7 +89,7 @@ dependencies:
   riverpod: ^2.5.1
   scrobblenaut:
     git:
-      ref: dart-3-support
+      ref: d90cb75d71737f3cfa2de4469d48080c0f3eedc2 # was branch: dart-3-support
       url: https://github.com/KRTirtho/scrobblenaut.git
   scroll_to_index: ^3.0.1
   shadcn_flutter: 0.0.47
@@ -121,6 +123,7 @@ dependencies:
       ref: 4e5310e14af74bdbb51e2a4766e66d6c6a2562a8
   flutter_new_pipe_extractor:
     git:
+      ref: 41cbd821ce49b9343136f67d83d3117e582dad75
       url: https://github.com/KRTirtho/flutter_new_pipe_extractor
   http_parser: ^4.1.2
   collection: any
@@ -129,15 +132,15 @@ dependencies:
   hetu_std:
     git:
       url: https://github.com/hetu-community/hetu_std.git
-      ref: main
+      ref: 401fde426339cf8f1e00dee22cc95f64c3e60053 # was branch: main
   hetu_otp_util:
     git:
       url: https://github.com/hetu-community/hetu_otp_util.git
-      ref: main
+      ref: 7790606751828758769596e809ba6cbb756f9b9a # was branch: main
   hetu_spotube_plugin:
     git:
       url: https://github.com/KRTirtho/hetu_spotube_plugin.git
-      ref: main
+      ref: d85dd429241d464a8b5b0c2b3d870143eeba8b46 # was branch: main
   get_it: ^8.0.3
   flutter_markdown_plus: ^1.0.3
   pub_semver: ^2.2.0
@@ -146,10 +149,12 @@ dependencies:
   # Have to use the git version due to unresponsive .move() after .add()
   media_kit:
     git:
+      ref: d310049f24196250d876efb02b9ff56fa9ef5068
       url: https://github.com/media-kit/media-kit
       path: media_kit
   media_kit_libs_audio:
     git:
+      ref: d310049f24196250d876efb02b9ff56fa9ef5068
       url: https://github.com/media-kit/media-kit
       path: libs/universal/media_kit_libs_audio
   base32: ^2.2.0
@@ -174,8 +179,28 @@ dev_dependencies:
   auto_route_generator: ^9.0.0
 
 dependency_overrides:
+  # hetu_spotube_plugin declares these three at a branch or at HEAD. Pub treats
+  # a mutable ref and a commit ref as different sources, so pinning them in
+  # `dependencies` alone is a version-solving conflict; overriding is what makes
+  # the pin stick. It matters most for the hetu_* packages, which ship
+  # precompiled bytecode loaded into the VM with host bindings.
+  hetu_std:
+    git:
+      url: https://github.com/hetu-community/hetu_std.git
+      ref: 401fde426339cf8f1e00dee22cc95f64c3e60053 # was branch: main
+  desktop_webview_window:
+    git:
+      url: https://github.com/KRTirtho/flutter-plugins.git
+      ref: f261ff20e310d05713249b21c199a9fe17a3de6f # was HEAD
+      path: packages/desktop_webview_window
+  # Transitive only, and a third-party fork this project does not control.
+  fk_user_agent:
+    git:
+      url: https://github.com/maeltoukap/fk_user_agent.git
+      ref: 458046cd9a88924e5074d96ba45397219d53b230 # was HEAD
   bonsoir_android:
     git:
+      ref: aa5604628ba41e3a7153769f4465a3d375488f2e
       url: https://github.com/KRTirtho/Bonsoir.git
       path: packages/bonsoir_android
   meta: 1.16.0
@@ -187,26 +212,31 @@ dependency_overrides:
   flutter_secure_storage_linux:
     git:
       url: https://github.com/m-berto/flutter_secure_storage.git
-      ref: patch-2
+      ref: f076cbb65b075afd6e3b648122987a67306dc298 # was branch: patch-2
       path: flutter_secure_storage_linux
   media_kit_libs_android_audio:
     git:
+      ref: d310049f24196250d876efb02b9ff56fa9ef5068
       url: https://github.com/media-kit/media-kit
       path: libs/android/media_kit_libs_android_audio
   media_kit_libs_ios_audio:
     git:
+      ref: d310049f24196250d876efb02b9ff56fa9ef5068
       url: https://github.com/media-kit/media-kit
       path: libs/ios/media_kit_libs_ios_audio
   media_kit_libs_macos_audio:
     git:
+      ref: d310049f24196250d876efb02b9ff56fa9ef5068
       url: https://github.com/media-kit/media-kit
       path: libs/macos/media_kit_libs_macos_audio
   media_kit_libs_windows_audio:
     git:
+      ref: d310049f24196250d876efb02b9ff56fa9ef5068
       url: https://github.com/media-kit/media-kit
       path: libs/windows/media_kit_libs_windows_audio
   media_kit_libs_linux:
     git:
+      ref: d310049f24196250d876efb02b9ff56fa9ef5068
       url: https://github.com/media-kit/media-kit
       path: libs/linux/media_kit_libs_linux
 

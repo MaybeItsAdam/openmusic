@@ -173,7 +173,7 @@ packages:
     dependency: "direct overridden"
     description:
       path: "packages/bonsoir_android"
-      ref: HEAD
+      ref: aa5604628ba41e3a7153769f4465a3d375488f2e
       resolved-ref: aa5604628ba41e3a7153769f4465a3d375488f2e
       url: "https://github.com/KRTirtho/Bonsoir.git"
     source: git
@@ -486,7 +486,7 @@ packages:
     dependency: "direct main"
     description:
       path: "packages/desktop_webview_window"
-      ref: HEAD
+      ref: f261ff20e310d05713249b21c199a9fe17a3de6f
       resolved-ref: f261ff20e310d05713249b21c199a9fe17a3de6f
       url: "https://github.com/KRTirtho/flutter-plugins.git"
     source: git
@@ -527,7 +527,7 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: HEAD
+      ref: aa77a61946849fff495091fc13dcc390948cc60b
       resolved-ref: aa77a61946849fff495091fc13dcc390948cc60b
       url: "https://github.com/KRTirtho/Disable-Battery-Optimizations.git"
     source: git
@@ -726,10 +726,10 @@ packages:
     source: hosted
     version: "1.1.1"
   fk_user_agent:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       path: "."
-      ref: HEAD
+      ref: "458046cd9a88924e5074d96ba45397219d53b230"
       resolved-ref: "458046cd9a88924e5074d96ba45397219d53b230"
       url: "https://github.com/maeltoukap/fk_user_agent.git"
     source: git
@@ -930,7 +930,7 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: HEAD
+      ref: "41cbd821ce49b9343136f67d83d3117e582dad75"
       resolved-ref: "41cbd821ce49b9343136f67d83d3117e582dad75"
       url: "https://github.com/KRTirtho/flutter_new_pipe_extractor"
     source: git
@@ -971,7 +971,7 @@ packages:
     dependency: "direct overridden"
     description:
       path: flutter_secure_storage_linux
-      ref: patch-2
+      ref: f076cbb65b075afd6e3b648122987a67306dc298
       resolved-ref: f076cbb65b075afd6e3b648122987a67306dc298
       url: "https://github.com/m-berto/flutter_secure_storage.git"
     source: git
@@ -1155,7 +1155,7 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: main
+      ref: "7790606751828758769596e809ba6cbb756f9b9a"
       resolved-ref: "7790606751828758769596e809ba6cbb756f9b9a"
       url: "https://github.com/hetu-community/hetu_otp_util.git"
     source: git
@@ -1172,7 +1172,7 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: main
+      ref: d85dd429241d464a8b5b0c2b3d870143eeba8b46
       resolved-ref: d85dd429241d464a8b5b0c2b3d870143eeba8b46
       url: "https://github.com/KRTirtho/hetu_spotube_plugin.git"
     source: git
@@ -1181,7 +1181,7 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: main
+      ref: "401fde426339cf8f1e00dee22cc95f64c3e60053"
       resolved-ref: "401fde426339cf8f1e00dee22cc95f64c3e60053"
       url: "https://github.com/hetu-community/hetu_std.git"
     source: git
@@ -1483,7 +1483,7 @@ packages:
     dependency: "direct main"
     description:
       path: media_kit
-      ref: HEAD
+      ref: d310049f24196250d876efb02b9ff56fa9ef5068
       resolved-ref: d310049f24196250d876efb02b9ff56fa9ef5068
       url: "https://github.com/media-kit/media-kit"
     source: git
@@ -1492,7 +1492,7 @@ packages:
     dependency: "direct overridden"
     description:
       path: "libs/android/media_kit_libs_android_audio"
-      ref: HEAD
+      ref: d310049f24196250d876efb02b9ff56fa9ef5068
       resolved-ref: d310049f24196250d876efb02b9ff56fa9ef5068
       url: "https://github.com/media-kit/media-kit"
     source: git
@@ -1501,7 +1501,7 @@ packages:
     dependency: "direct main"
     description:
       path: "libs/universal/media_kit_libs_audio"
-      ref: HEAD
+      ref: d310049f24196250d876efb02b9ff56fa9ef5068
       resolved-ref: d310049f24196250d876efb02b9ff56fa9ef5068
       url: "https://github.com/media-kit/media-kit"
     source: git
@@ -1510,7 +1510,7 @@ packages:
     dependency: "direct overridden"
     description:
       path: "libs/ios/media_kit_libs_ios_audio"
-      ref: HEAD
+      ref: d310049f24196250d876efb02b9ff56fa9ef5068
       resolved-ref: d310049f24196250d876efb02b9ff56fa9ef5068
       url: "https://github.com/media-kit/media-kit"
     source: git
@@ -1519,7 +1519,7 @@ packages:
     dependency: "direct overridden"
     description:
       path: "libs/linux/media_kit_libs_linux"
-      ref: HEAD
+      ref: d310049f24196250d876efb02b9ff56fa9ef5068
       resolved-ref: d310049f24196250d876efb02b9ff56fa9ef5068
       url: "https://github.com/media-kit/media-kit"
     source: git
@@ -1528,7 +1528,7 @@ packages:
     dependency: "direct overridden"
     description:
       path: "libs/macos/media_kit_libs_macos_audio"
-      ref: HEAD
+      ref: d310049f24196250d876efb02b9ff56fa9ef5068
       resolved-ref: d310049f24196250d876efb02b9ff56fa9ef5068
       url: "https://github.com/media-kit/media-kit"
     source: git
@@ -1537,7 +1537,7 @@ packages:
     dependency: "direct overridden"
     description:
       path: "libs/windows/media_kit_libs_windows_audio"
-      ref: HEAD
+      ref: d310049f24196250d876efb02b9ff56fa9ef5068
       resolved-ref: d310049f24196250d876efb02b9ff56fa9ef5068
       url: "https://github.com/media-kit/media-kit"
     source: git
@@ -1994,7 +1994,7 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: dart-3-support
+      ref: d90cb75d71737f3cfa2de4469d48080c0f3eedc2
       resolved-ref: d90cb75d71737f3cfa2de4469d48080c0f3eedc2
       url: "https://github.com/KRTirtho/scrobblenaut.git"
     source: git
