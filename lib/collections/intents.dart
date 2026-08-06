@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -8,6 +6,7 @@ import 'package:openmusic/collections/routes.gr.dart';
 import 'package:openmusic/modules/player/player_controls.dart';
 import 'package:openmusic/provider/audio_player/querying_track_info.dart';
 import 'package:openmusic/services/audio_player/audio_player.dart';
+import 'package:openmusic/utils/app_exit.dart';
 import 'package:openmusic/utils/platform.dart';
 
 class PlayPauseIntent extends Intent {
@@ -129,7 +128,7 @@ class CloseAppAction extends Action<CloseAppIntent> {
   @override
   invoke(intent) {
     if (kIsDesktop) {
-      exit(0);
+      quitApp();
     } else {
       SystemNavigator.pop();
     }
