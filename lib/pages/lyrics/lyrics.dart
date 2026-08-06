@@ -3,16 +3,16 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart' hide Consumer;
 import 'package:shadcn_flutter/shadcn_flutter_extension.dart';
 
-import 'package:spotube/components/titlebar/titlebar.dart';
-import 'package:spotube/components/image/universal_image.dart';
-import 'package:spotube/extensions/context.dart';
-import 'package:spotube/hooks/utils/use_palette_color.dart';
-import 'package:spotube/models/metadata/metadata.dart';
-import 'package:spotube/pages/lyrics/plain_lyrics.dart';
-import 'package:spotube/pages/lyrics/synced_lyrics.dart';
-import 'package:spotube/provider/audio_player/audio_player.dart';
-import 'package:spotube/provider/lyrics/synced.dart';
-import 'package:spotube/utils/platform.dart';
+import 'package:openmusic/components/titlebar/titlebar.dart';
+import 'package:openmusic/components/image/universal_image.dart';
+import 'package:openmusic/extensions/context.dart';
+import 'package:openmusic/hooks/utils/use_palette_color.dart';
+import 'package:openmusic/models/metadata/metadata.dart';
+import 'package:openmusic/pages/lyrics/plain_lyrics.dart';
+import 'package:openmusic/pages/lyrics/synced_lyrics.dart';
+import 'package:openmusic/provider/audio_player/audio_player.dart';
+import 'package:openmusic/provider/lyrics/synced.dart';
+import 'package:openmusic/utils/platform.dart';
 import 'package:auto_route/auto_route.dart';
 
 @RoutePage()

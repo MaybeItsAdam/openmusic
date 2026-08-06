@@ -1,13 +1,13 @@
 import 'package:audio_service/audio_service.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:spotube/collections/env.dart';
-import 'package:spotube/models/metadata/metadata.dart';
-import 'package:spotube/provider/audio_player/audio_player.dart';
-import 'package:spotube/services/audio_player/audio_player.dart';
-import 'package:spotube/services/audio_services/mobile_audio_service.dart';
-import 'package:spotube/services/audio_services/windows_audio_service.dart';
-import 'package:spotube/utils/platform.dart';
+import 'package:openmusic/collections/env.dart';
+import 'package:openmusic/models/metadata/metadata.dart';
+import 'package:openmusic/provider/audio_player/audio_player.dart';
+import 'package:openmusic/services/audio_player/audio_player.dart';
+import 'package:openmusic/services/audio_services/mobile_audio_service.dart';
+import 'package:openmusic/services/audio_services/windows_audio_service.dart';
+import 'package:openmusic/utils/platform.dart';
 
 class AudioServices with WidgetsBindingObserver {
   final MobileAudioService? mobile;
@@ -29,14 +29,14 @@ class AudioServices with WidgetsBindingObserver {
                 kIsLinux,
                 Env.releaseChannel,
               )) {
-                (true, _) => "spotube",
-                (_, ReleaseChannel.stable) => "oss.krtirtho.spotube",
-                (_, ReleaseChannel.nightly) => "oss.krtirtho.spotube.nightly",
+                (true, _) => "openmusic",
+                (_, ReleaseChannel.stable) => "io.github.maybeitsadam.openmusic",
+                (_, ReleaseChannel.nightly) => "io.github.maybeitsadam.openmusic.nightly",
               },
-              androidNotificationChannelName: 'Spotube',
+              androidNotificationChannelName: 'OpenMusic',
               androidNotificationOngoing: false,
               androidStopForegroundOnPause: false,
-              androidNotificationChannelDescription: "Spotube Media Controls",
+              androidNotificationChannelDescription: "OpenMusic Media Controls",
             ),
           )
         : null;

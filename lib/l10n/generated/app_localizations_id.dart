@@ -490,13 +490,13 @@ class AppLocalizationsId extends AppLocalizations {
   String get about => 'Tentang';
 
   @override
-  String get u_love_spotube => 'Kami tahu Anda menyukai Spotube';
+  String get u_love_spotube => 'Kami tahu Anda menyukai OpenMusic';
 
   @override
   String get check_for_updates => 'Periksa pembaruan';
 
   @override
-  String get about_spotube => 'Tentang Spotube';
+  String get about_spotube => 'Tentang OpenMusic';
 
   @override
   String get blacklist => 'Daftar Hitam';
@@ -506,7 +506,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get spotube_description =>
-      'Spotube, klien Spotify yang ringan, lintas platform, dan gratis untuk semua';
+      'OpenMusic, klien Spotify yang ringan, lintas platform, dan gratis untuk semua';
 
   @override
   String get version => 'Versi';
@@ -729,7 +729,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get download_ip_ban_warning =>
-      'BTW, IP Anda bisa diblokir di YouTube karena permintaan unduhan yang berlebihan dari biasanya. Blokir IP berarti Anda tidak dapat menggunakan YouTube (meskipun Anda masuk) setidaknya selama 2-3 bulan dari perangkat IP tersebut. Dan Spotube tidak bertanggung jawab jika hal ini terjadi';
+      'BTW, IP Anda bisa diblokir di YouTube karena permintaan unduhan yang berlebihan dari biasanya. Blokir IP berarti Anda tidak dapat menggunakan YouTube (meskipun Anda masuk) setidaknya selama 2-3 bulan dari perangkat IP tersebut. Dan OpenMusic tidak bertanggung jawab jika hal ini terjadi';
 
   @override
   String get by_clicking_accept_terms =>
@@ -745,7 +745,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get download_agreement_3 =>
-      'Saya sepenuhnya menyadari bahwa IP saya dapat diblokir di YouTube & saya tidak menganggap Spotube atau pemilik/kontributornya bertanggung jawab atas kecelakaan apa pun yang disebabkan oleh tindakan saya saat ini';
+      'Saya sepenuhnya menyadari bahwa IP saya dapat diblokir di YouTube & saya tidak menganggap OpenMusic atau pemilik/kontributornya bertanggung jawab atas kecelakaan apa pun yang disebabkan oleh tindakan saya saat ini';
 
   @override
   String get decline => 'Menolak';
@@ -827,7 +827,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get encryption_failed_warning =>
-      'Spotube menggunakan enkripsi untuk menyimpan data Anda dengan aman. Namun gagal melakukannya. Jadi itu akan kembali ke penyimpanan yang tidak aman\nJika Anda menggunakan linux, pastikan Anda telah menginstal layanan rahasia (gnome-keyring, kde-wallet, keepassxc, dll)';
+      'OpenMusic menggunakan enkripsi untuk menyimpan data Anda dengan aman. Namun gagal melakukannya. Jadi itu akan kembali ke penyimpanan yang tidak aman\nJika Anda menggunakan linux, pastikan Anda telah menginstal layanan rahasia (gnome-keyring, kde-wallet, keepassxc, dll)';
 
   @override
   String get querying_info => 'Mencari informasi...';
@@ -1009,7 +1009,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get choose_your_region_description =>
-      'Ini akan membantu Spotube menampilkan konten yang tepat\nuntuk lokasi Anda.';
+      'Ini akan membantu OpenMusic menampilkan konten yang tepat\nuntuk lokasi Anda.';
 
   @override
   String get choose_your_language => 'Pilih bahasa Anda';
@@ -1019,7 +1019,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get help_project_grow_description =>
-      'Spotube adalah proyek sumber terbuka. Anda dapat membantu proyek ini berkembang dengan berkontribusi pada proyek, melaporkan bug, atau menyarankan fitur baru.';
+      'OpenMusic adalah proyek sumber terbuka. Anda dapat membantu proyek ini berkembang dengan berkontribusi pada proyek, melaporkan bug, atau menyarankan fitur baru.';
 
   @override
   String get contribute_on_github => 'Berkontribusi di GitHub';
@@ -1035,7 +1035,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get enable_connect_description =>
-      'Kontrol Spotube dari perangkat lain';
+      'Kontrol OpenMusic dari perangkat lain';
 
   @override
   String get devices => 'Perangkat';
@@ -1083,19 +1083,19 @@ class AppLocalizationsId extends AppLocalizations {
   }
 
   @override
-  String get spotube_has_an_update => 'Spotube memiliki pembaruan';
+  String get spotube_has_an_update => 'OpenMusic memiliki pembaruan';
 
   @override
   String get download_now => 'Unduh sekarang';
 
   @override
   String nightly_version(Object nightlyBuildNum) {
-    return 'Spotube Nightly $nightlyBuildNum telah dirilis';
+    return 'OpenMusic Nightly $nightlyBuildNum telah dirilis';
   }
 
   @override
   String release_version(Object version) {
-    return 'Spotube v$version telah dirilis';
+    return 'OpenMusic v$version telah dirilis';
   }
 
   @override
@@ -1519,7 +1519,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get third_party_plugin_dmca_notice =>
-      'Tim Spotube tidak bertanggung jawab (termasuk hukum) atas plugin \"Pihak ketiga\" mana pun.\nSilakan gunakan dengan risiko Anda sendiri. Untuk bug/masalah apa pun, silakan laporkan ke repositori plugin.\n\nJika ada plugin \"Pihak ketiga\" yang melanggar ToS/DMCA dari layanan/entitas hukum mana pun, silakan minta penulis plugin \"Pihak ketiga\" atau platform hosting, mis. GitHub/Codeberg, untuk mengambil tindakan. Yang tercantum di atas (berlabel \"Pihak ketiga\") adalah semua plugin publik/yang dikelola oleh komunitas. Kami tidak mengkurasi mereka, jadi kami tidak dapat mengambil tindakan apa pun terhadap mereka.\n\n';
+      'Tim OpenMusic tidak bertanggung jawab (termasuk hukum) atas plugin \"Pihak ketiga\" mana pun.\nSilakan gunakan dengan risiko Anda sendiri. Untuk bug/masalah apa pun, silakan laporkan ke repositori plugin.\n\nJika ada plugin \"Pihak ketiga\" yang melanggar ToS/DMCA dari layanan/entitas hukum mana pun, silakan minta penulis plugin \"Pihak ketiga\" atau platform hosting, mis. GitHub/Codeberg, untuk mengambil tindakan. Yang tercantum di atas (berlabel \"Pihak ketiga\") adalah semua plugin publik/yang dikelola oleh komunitas. Kami tidak mengkurasi mereka, jadi kami tidak dapat mengambil tindakan apa pun terhadap mereka.\n\n';
 
   @override
   String get input_does_not_match_format =>

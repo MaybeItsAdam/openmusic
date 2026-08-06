@@ -3,8 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 import 'package:shadcn_flutter/shadcn_flutter_extension.dart';
-import 'package:spotube/collections/spotube_icons.dart';
-import 'package:spotube/extensions/context.dart';
+import 'package:openmusic/collections/openmusic_icons.dart';
+import 'package:openmusic/extensions/context.dart';
 
 class ErrorBox extends StatelessWidget {
   final Object error;
@@ -25,7 +25,7 @@ class ErrorBox extends StatelessWidget {
             spacing: 12,
             children: [
               Basic(
-                leading: const Icon(SpotubeIcons.error),
+                leading: const Icon(OpenMusicIcons.error),
                 contentSpacing: 8,
                 title: Text(context.l10n.an_error_occurred),
               ),
@@ -50,7 +50,7 @@ class ErrorBox extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Button.text(
-                    leading: const Icon(SpotubeIcons.logs),
+                    leading: const Icon(OpenMusicIcons.logs),
                     onPressed: () {
                       showDialog(
                         context: context,
@@ -66,11 +66,11 @@ class ErrorBox extends StatelessWidget {
                               title: Row(
                                 spacing: 8,
                                 children: [
-                                  const Icon(SpotubeIcons.logs),
+                                  const Icon(OpenMusicIcons.logs),
                                   Text(context.l10n.logs),
                                   const Spacer(),
                                   IconButton.ghost(
-                                    icon: const Icon(SpotubeIcons.close),
+                                    icon: const Icon(OpenMusicIcons.close),
                                     onPressed: () => context.maybePop(),
                                   ),
                                 ],
@@ -82,8 +82,8 @@ class ErrorBox extends StatelessWidget {
 
                                     return Button.ghost(
                                       leading: copied.value
-                                          ? const Icon(SpotubeIcons.done)
-                                          : const Icon(SpotubeIcons.clipboard),
+                                          ? const Icon(OpenMusicIcons.done)
+                                          : const Icon(OpenMusicIcons.clipboard),
                                       child: Text(
                                         context.l10n.copy_to_clipboard,
                                       ),
@@ -123,7 +123,7 @@ class ErrorBox extends StatelessWidget {
                   ),
                   if (onRetry != null)
                     Button.text(
-                      leading: const Icon(SpotubeIcons.refresh),
+                      leading: const Icon(OpenMusicIcons.refresh),
                       onPressed: onRetry,
                       child: Text(context.l10n.retry),
                     ),

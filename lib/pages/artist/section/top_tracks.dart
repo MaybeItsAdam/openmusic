@@ -3,16 +3,16 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 import 'package:shadcn_flutter/shadcn_flutter_extension.dart';
 import 'package:skeletonizer/skeletonizer.dart';
-import 'package:spotube/collections/fake.dart';
-import 'package:spotube/collections/spotube_icons.dart';
-import 'package:spotube/components/dialogs/select_device_dialog.dart';
-import 'package:spotube/components/track_tile/track_tile.dart';
-import 'package:spotube/extensions/context.dart';
-import 'package:spotube/models/connect/connect.dart';
-import 'package:spotube/models/metadata/metadata.dart';
-import 'package:spotube/provider/connect/connect.dart';
-import 'package:spotube/provider/audio_player/audio_player.dart';
-import 'package:spotube/provider/metadata_plugin/artist/top_tracks.dart';
+import 'package:openmusic/collections/fake.dart';
+import 'package:openmusic/collections/openmusic_icons.dart';
+import 'package:openmusic/components/dialogs/select_device_dialog.dart';
+import 'package:openmusic/components/track_tile/track_tile.dart';
+import 'package:openmusic/extensions/context.dart';
+import 'package:openmusic/models/connect/connect.dart';
+import 'package:openmusic/models/metadata/metadata.dart';
+import 'package:openmusic/provider/connect/connect.dart';
+import 'package:openmusic/provider/audio_player/audio_player.dart';
+import 'package:openmusic/provider/metadata_plugin/artist/top_tracks.dart';
 
 class ArtistPageTopTracks extends HookConsumerWidget {
   final String artistId;
@@ -108,7 +108,7 @@ class ArtistPageTopTracks extends HookConsumerWidget {
               ),
               if (!isPlaylistPlaying)
                 IconButton.outline(
-                  icon: const Icon(SpotubeIcons.queueAdd),
+                  icon: const Icon(OpenMusicIcons.queueAdd),
                   onPressed: () {
                     playlistNotifier.addTracks(topTracks.toList());
                     showToast(
@@ -136,8 +136,8 @@ class ArtistPageTopTracks extends HookConsumerWidget {
                     : Skeleton.keep(
                         child: Icon(
                           isPlaylistPlaying
-                              ? SpotubeIcons.pause
-                              : SpotubeIcons.play,
+                              ? OpenMusicIcons.pause
+                              : OpenMusicIcons.play,
                         ),
                       ),
                 onPressed: () => playPlaylist(topTracks.toList()),

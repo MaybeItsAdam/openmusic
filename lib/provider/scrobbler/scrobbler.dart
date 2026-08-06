@@ -3,11 +3,11 @@ import 'dart:async';
 import 'package:drift/drift.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:scrobblenaut/scrobblenaut.dart';
-import 'package:spotube/collections/env.dart';
-import 'package:spotube/models/database/database.dart';
-import 'package:spotube/models/metadata/metadata.dart';
-import 'package:spotube/provider/database/database.dart';
-import 'package:spotube/services/logger/logger.dart';
+import 'package:openmusic/collections/env.dart';
+import 'package:openmusic/models/database/database.dart';
+import 'package:openmusic/models/metadata/metadata.dart';
+import 'package:openmusic/provider/database/database.dart';
+import 'package:openmusic/services/logger/logger.dart';
 
 class ScrobblerNotifier extends AsyncNotifier<Scrobblenaut?> {
   final StreamController<SpotubeTrackObject> _scrobbleController =

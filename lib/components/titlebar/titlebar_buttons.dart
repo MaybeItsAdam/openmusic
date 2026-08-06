@@ -2,13 +2,13 @@ import 'package:shadcn_flutter/shadcn_flutter.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shadcn_flutter/shadcn_flutter_extension.dart';
-import 'package:spotube/components/hover_builder.dart';
-import 'package:spotube/components/titlebar/titlebar.dart';
-import 'package:spotube/components/titlebar/titlebar_icon_buttons.dart';
+import 'package:openmusic/components/hover_builder.dart';
+import 'package:openmusic/components/titlebar/titlebar.dart';
+import 'package:openmusic/components/titlebar/titlebar_icon_buttons.dart';
 
-import 'package:spotube/hooks/configurators/use_window_listener.dart';
-import 'package:spotube/provider/user_preferences/user_preferences_provider.dart';
-import 'package:spotube/utils/platform.dart';
+import 'package:openmusic/hooks/configurators/use_window_listener.dart';
+import 'package:openmusic/provider/user_preferences/user_preferences_provider.dart';
+import 'package:openmusic/utils/platform.dart';
 import 'package:titlebar_buttons/titlebar_buttons.dart';
 import 'package:window_manager/window_manager.dart';
 

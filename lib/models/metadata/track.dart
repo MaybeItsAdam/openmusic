@@ -79,8 +79,8 @@ class SpotubeTrackObject with _$SpotubeTrackObject {
 }
 
 extension AsMediaListSpotubeTrackObject on Iterable<SpotubeTrackObject> {
-  List<SpotubeMedia> asMediaList() {
-    return map((track) => SpotubeMedia(track)).toList();
+  List<OpenMusicMedia> asMediaList() {
+    return map((track) => OpenMusicMedia(track)).toList();
   }
 }
 

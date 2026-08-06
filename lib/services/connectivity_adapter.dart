@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/widgets.dart';
-import 'package:spotube/services/logger/logger.dart';
+import 'package:openmusic/services/logger/logger.dart';
 
 class ConnectionCheckerService with WidgetsBindingObserver {
   final _connectionStreamController = StreamController<bool>.broadcast();

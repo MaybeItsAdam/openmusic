@@ -1,28 +1,28 @@
 import 'dart:io';
 
 import 'package:media_kit/media_kit.dart' hide Track;
-import 'package:spotube/models/metadata/metadata.dart';
-import 'package:spotube/services/logger/logger.dart';
+import 'package:openmusic/models/metadata/metadata.dart';
+import 'package:openmusic/services/logger/logger.dart';
 import 'package:flutter/foundation.dart';
-import 'package:spotube/services/audio_player/custom_player.dart';
+import 'package:openmusic/services/audio_player/custom_player.dart';
 import 'dart:async';
 
 import 'package:media_kit/media_kit.dart' as mk;
 
-import 'package:spotube/services/audio_player/playback_state.dart';
-import 'package:spotube/utils/platform.dart';
+import 'package:openmusic/services/audio_player/playback_state.dart';
+import 'package:openmusic/utils/platform.dart';
 
 part 'audio_players_streams_mixin.dart';
 part 'audio_player_impl.dart';
 
-class SpotubeMedia extends mk.Media {
+class OpenMusicMedia extends mk.Media {
   static int serverPort = 0;
 
   static String get _host =>
       kIsWindows ? "localhost" : InternetAddress.anyIPv4.address;
 
   final SpotubeTrackObject track;
-  SpotubeMedia(this.track)
+  OpenMusicMedia(this.track)
       : assert(
           track is SpotubeLocalTrackObject || track is SpotubeFullTrackObject,
           "Track must be a either a local track or a full track object with ISRC",
@@ -35,9 +35,9 @@ class SpotubeMedia extends mk.Media {
           extras: track.toJson(),
         );
 
-  factory SpotubeMedia.media(Media media) {
+  factory OpenMusicMedia.media(Media media) {
     assert(media.extras != null, "[Media] must have extra metadata set");
-    return SpotubeMedia(SpotubeTrackObject.fromJson(media.extras!));
+    return OpenMusicMedia(SpotubeTrackObject.fromJson(media.extras!));
   }
 }
 
@@ -47,7 +47,7 @@ abstract class AudioPlayerInterface {
   AudioPlayerInterface()
       : _mkPlayer = CustomPlayer(
           configuration: const mk.PlayerConfiguration(
-            title: "Spotube",
+            title: "OpenMusic",
             logLevel: kDebugMode ? mk.MPVLogLevel.info : mk.MPVLogLevel.error,
             async: true,
           ),

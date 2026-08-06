@@ -63,13 +63,13 @@ IDI_APP_ICON            ICON                    "resources\\app_icon.ico"
 #if defined(FLUTTER_VERSION_MAJOR) && defined(FLUTTER_VERSION_MINOR) && defined(FLUTTER_VERSION_PATCH) && defined(FLUTTER_VERSION_BUILD)
 #define VERSION_AS_NUMBER FLUTTER_VERSION_MAJOR,FLUTTER_VERSION_MINOR,FLUTTER_VERSION_PATCH,FLUTTER_VERSION_BUILD
 #else
-#define VERSION_AS_NUMBER %{{SPOTUBE_VERSION_AS_NUMBER}}%
+#define VERSION_AS_NUMBER %{{OPENMUSIC_VERSION_AS_NUMBER}}%
 #endif
 
 #if defined(FLUTTER_VERSION)
 #define VERSION_AS_STRING FLUTTER_VERSION
 #else
-#define VERSION_AS_STRING "%{{SPOTUBE_VERSION}}%"
+#define VERSION_AS_STRING "%{{OPENMUSIC_VERSION}}%"
 #endif
 
 VS_VERSION_INFO VERSIONINFO
@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "oss.krtirtho" "\0"
-            VALUE "FileDescription", "Spotube" "\0"
+            VALUE "CompanyName", "MaybeItsAdam" "\0"
+            VALUE "FileDescription", "OpenMusic" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "spotube" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2024 oss.krtirtho. All rights reserved." "\0"
-            VALUE "OriginalFilename", "spotube.exe" "\0"
-            VALUE "ProductName", "spotube" "\0"
+            VALUE "InternalName", "openmusic" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2025 MaybeItsAdam. All rights reserved." "\0"
+            VALUE "OriginalFilename", "openmusic.exe" "\0"
+            VALUE "ProductName", "OpenMusic" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

@@ -1,7 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:spotube/provider/tray_manager/tray_menu.dart';
-import 'package:spotube/provider/user_preferences/user_preferences_provider.dart';
-import 'package:spotube/utils/platform.dart';
+import 'package:openmusic/provider/tray_manager/tray_menu.dart';
+import 'package:openmusic/provider/user_preferences/user_preferences_provider.dart';
+import 'package:openmusic/utils/platform.dart';
 import 'package:tray_manager/tray_manager.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -19,10 +19,10 @@ class SystemTrayManager with TrayListener {
     if (enabled) {
       await trayManager.setIcon(
         kIsWindows
-            ? 'assets/branding/spotube-logo.ico'
+            ? 'assets/branding/openmusic-logo.ico'
             : kIsFlatpak
-                ? 'com.github.KRTirtho.Spotube'
-                : 'assets/branding/spotube-logo.png',
+                ? 'io.github.MaybeItsAdam.OpenMusic'
+                : 'assets/branding/openmusic-logo.png',
       );
       trayManager.addListener(this);
     } else {

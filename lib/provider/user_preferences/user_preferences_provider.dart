@@ -4,13 +4,13 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart' as paths;
 import 'package:shadcn_flutter/shadcn_flutter.dart' hide join;
-import 'package:spotube/models/database/database.dart';
-import 'package:spotube/models/metadata/market.dart';
-import 'package:spotube/modules/settings/color_scheme_picker_dialog.dart';
-import 'package:spotube/provider/database/database.dart';
-import 'package:spotube/services/audio_player/audio_player.dart';
-import 'package:spotube/services/logger/logger.dart';
-import 'package:spotube/utils/platform.dart';
+import 'package:openmusic/models/database/database.dart';
+import 'package:openmusic/models/metadata/market.dart';
+import 'package:openmusic/modules/settings/color_scheme_picker_dialog.dart';
+import 'package:openmusic/provider/database/database.dart';
+import 'package:openmusic/services/audio_player/audio_player.dart';
+import 'package:openmusic/services/logger/logger.dart';
+import 'package:openmusic/utils/platform.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:open_file/open_file.dart';
 
@@ -70,14 +70,14 @@ class UserPreferencesNotifier extends Notifier<PreferencesTableData> {
   }
 
   Future<String> _getDefaultDownloadDirectory() async {
-    if (kIsAndroid) return "/storage/emulated/0/Download/Spotube";
+    if (kIsAndroid) return "/storage/emulated/0/Download/OpenMusic";
 
     if (kIsMacOS) {
       return join((await paths.getLibraryDirectory()).path, "Caches");
     }
 
     return paths.getDownloadsDirectory().then((dir) {
-      return join(dir!.path, "Spotube");
+      return join(dir!.path, "OpenMusic");
     });
   }
 

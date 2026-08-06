@@ -1,13 +1,13 @@
-import 'package:spotube/models/database/database.dart';
-import 'package:spotube/models/metadata/metadata.dart';
-import 'package:spotube/provider/database/database.dart';
-import 'package:spotube/services/logger/logger.dart';
+import 'package:openmusic/models/database/database.dart';
+import 'package:openmusic/models/metadata/metadata.dart';
+import 'package:openmusic/provider/database/database.dart';
+import 'package:openmusic/services/logger/logger.dart';
 import 'package:dio/dio.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:spotube/provider/server/active_track_sources.dart';
-import 'package:spotube/provider/user_preferences/user_preferences_provider.dart';
+import 'package:openmusic/provider/server/active_track_sources.dart';
+import 'package:openmusic/provider/user_preferences/user_preferences_provider.dart';
 
-import 'package:spotube/services/dio/dio.dart';
+import 'package:openmusic/services/dio/dio.dart';
 
 class SourcedSegments {
   final String source;

@@ -1,7 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:spotube/models/metadata/metadata.dart';
-import 'package:spotube/provider/metadata_plugin/core/auth.dart';
-import 'package:spotube/provider/metadata_plugin/utils/paginated.dart';
+import 'package:openmusic/models/metadata/metadata.dart';
+import 'package:openmusic/provider/metadata_plugin/core/auth.dart';
+import 'package:openmusic/provider/metadata_plugin/utils/paginated.dart';
 
 class MetadataPluginAlbumReleasesNotifier
     extends PaginatedAsyncNotifier<SpotubeSimpleAlbumObject> {

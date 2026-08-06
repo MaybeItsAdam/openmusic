@@ -3,9 +3,9 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter_undraw/flutter_undraw.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 import 'package:shadcn_flutter/shadcn_flutter_extension.dart';
-import 'package:spotube/collections/routes.gr.dart';
-import 'package:spotube/collections/spotube_icons.dart';
-import 'package:spotube/extensions/context.dart';
+import 'package:openmusic/collections/routes.gr.dart';
+import 'package:openmusic/collections/openmusic_icons.dart';
+import 'package:openmusic/extensions/context.dart';
 
 class NoDefaultMetadataPlugin extends StatelessWidget {
   const NoDefaultMetadataPlugin({super.key});
@@ -29,7 +29,7 @@ class NoDefaultMetadataPlugin extends StatelessWidget {
             maxLines: 1,
           ),
           Button.primary(
-            leading: const Icon(SpotubeIcons.extensions),
+            leading: const Icon(OpenMusicIcons.extensions),
             child: Text(context.l10n.manage_metadata_providers),
             onPressed: () {
               context.pushRoute(const SettingsMetadataProviderRoute());

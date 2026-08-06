@@ -3,13 +3,13 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 
-import 'package:spotube/collections/side_bar_tiles.dart';
-import 'package:spotube/models/database/database.dart';
-import 'package:spotube/extensions/constrains.dart';
-import 'package:spotube/extensions/context.dart';
-import 'package:spotube/modules/root/sidebar/sidebar_footer.dart';
+import 'package:openmusic/collections/side_bar_tiles.dart';
+import 'package:openmusic/models/database/database.dart';
+import 'package:openmusic/extensions/constrains.dart';
+import 'package:openmusic/extensions/context.dart';
+import 'package:openmusic/modules/root/sidebar/sidebar_footer.dart';
 
-import 'package:spotube/provider/user_preferences/user_preferences_provider.dart';
+import 'package:openmusic/provider/user_preferences/user_preferences_provider.dart';
 
 class Sidebar extends HookConsumerWidget {
   final Widget child;
@@ -58,7 +58,7 @@ class Sidebar extends HookConsumerWidget {
                   letterSpacing: 1.8,
                   color: colorScheme.foreground,
                 ),
-                child: const Text("Spotube"),
+                child: const Text("OpenMusic"),
               )
             : const Text(""),
       ),

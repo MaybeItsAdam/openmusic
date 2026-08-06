@@ -1,12 +1,12 @@
 import 'package:collection/collection.dart';
 import 'package:fuzzywuzzy/fuzzywuzzy.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:spotube/models/metadata/metadata.dart';
-import 'package:spotube/pages/library/user_local_tracks/user_local_tracks.dart';
-import 'package:spotube/provider/metadata_plugin/library/tracks.dart';
-import 'package:spotube/provider/metadata_plugin/tracks/album.dart';
-import 'package:spotube/provider/metadata_plugin/tracks/playlist.dart';
-import 'package:spotube/utils/service_utils.dart';
+import 'package:openmusic/models/metadata/metadata.dart';
+import 'package:openmusic/pages/library/user_local_tracks/user_local_tracks.dart';
+import 'package:openmusic/provider/metadata_plugin/library/tracks.dart';
+import 'package:openmusic/provider/metadata_plugin/tracks/album.dart';
+import 'package:openmusic/provider/metadata_plugin/tracks/playlist.dart';
+import 'package:openmusic/utils/service_utils.dart';
 
 class PresentationState {
   final List<SpotubeTrackObject> selectedTracks;

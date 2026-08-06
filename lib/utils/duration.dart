@@ -1,4 +1,4 @@
-import 'package:spotube/services/logger/logger.dart';
+import 'package:openmusic/services/logger/logger.dart';
 
 /// Parses duration string formatted by Duration.toString() to [Duration].
 /// The string should be of form hours:minutes:seconds.microseconds

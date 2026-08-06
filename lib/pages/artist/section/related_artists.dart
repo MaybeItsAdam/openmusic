@@ -1,7 +1,7 @@
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:spotube/modules/artist/artist_card.dart';
-import 'package:spotube/provider/metadata_plugin/artist/related.dart';
+import 'package:openmusic/modules/artist/artist_card.dart';
+import 'package:openmusic/provider/metadata_plugin/artist/related.dart';
 
 class ArtistPageRelatedArtists extends ConsumerWidget {
   final String artistId;

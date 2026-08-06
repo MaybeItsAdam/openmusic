@@ -3,9 +3,9 @@ import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:spotube/services/kv_store/kv_store.dart';
-import 'package:spotube/services/logger/logger.dart';
-import 'package:spotube/utils/platform.dart';
+import 'package:openmusic/services/kv_store/kv_store.dart';
+import 'package:openmusic/services/logger/logger.dart';
+import 'package:openmusic/utils/platform.dart';
 
 abstract class EncryptedKvStoreService {
   static const _storage = FlutterSecureStorage(

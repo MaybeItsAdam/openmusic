@@ -5,12 +5,12 @@ import 'package:drift/drift.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lrc/lrc.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:spotube/models/database/database.dart';
-import 'package:spotube/models/lyrics.dart';
-import 'package:spotube/models/metadata/metadata.dart';
-import 'package:spotube/provider/database/database.dart';
-import 'package:spotube/services/dio/dio.dart';
-import 'package:spotube/services/logger/logger.dart';
+import 'package:openmusic/models/database/database.dart';
+import 'package:openmusic/models/lyrics.dart';
+import 'package:openmusic/models/metadata/metadata.dart';
+import 'package:openmusic/provider/database/database.dart';
+import 'package:openmusic/services/dio/dio.dart';
+import 'package:openmusic/services/logger/logger.dart';
 
 class SyncedLyricsNotifier
     extends FamilyAsyncNotifier<SubtitleSimple, SpotubeTrackObject?> {
@@ -37,7 +37,7 @@ class SyncedLyricsNotifier
       options: Options(
         headers: {
           "User-Agent":
-              "Spotube v${packageInfo.version} (https://github.com/KRTirtho/spotube)",
+              "OpenMusic v${packageInfo.version} (https://github.com/MaybeItsAdam/openmusic)",
         },
         responseType: ResponseType.json,
       ),

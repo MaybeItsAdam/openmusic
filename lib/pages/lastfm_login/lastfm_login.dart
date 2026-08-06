@@ -2,12 +2,12 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
-import 'package:spotube/collections/spotube_icons.dart';
-import 'package:spotube/components/button/back_button.dart';
-import 'package:spotube/components/dialogs/prompt_dialog.dart';
-import 'package:spotube/components/titlebar/titlebar.dart';
-import 'package:spotube/extensions/context.dart';
-import 'package:spotube/provider/scrobbler/scrobbler.dart';
+import 'package:openmusic/collections/openmusic_icons.dart';
+import 'package:openmusic/components/button/back_button.dart';
+import 'package:openmusic/components/dialogs/prompt_dialog.dart';
+import 'package:openmusic/components/titlebar/titlebar.dart';
+import 'package:openmusic/extensions/context.dart';
+import 'package:openmusic/provider/scrobbler/scrobbler.dart';
 import 'package:auto_route/auto_route.dart';
 
 @RoutePage()
@@ -81,7 +81,7 @@ class LastFMLoginPage extends HookConsumerWidget {
                         ),
                         padding: const EdgeInsets.all(12),
                         child: const Icon(
-                          SpotubeIcons.lastFm,
+                          OpenMusicIcons.lastFm,
                           color: Colors.white,
                           size: 60,
                         ),
@@ -121,8 +121,8 @@ class LastFMLoginPage extends HookConsumerWidget {
                                     IconButton.ghost(
                                       icon: Icon(
                                         passwordVisible.value
-                                            ? SpotubeIcons.eye
-                                            : SpotubeIcons.noEye,
+                                            ? OpenMusicIcons.eye
+                                            : OpenMusicIcons.noEye,
                                       ),
                                       onPressed: () => passwordVisible.value =
                                           !passwordVisible.value,

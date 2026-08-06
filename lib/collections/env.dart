@@ -1,5 +1,5 @@
 import 'package:envied/envied.dart';
-import 'package:spotube/utils/platform.dart';
+import 'package:openmusic/utils/platform.dart';
 
 part 'env.g.dart';
 

@@ -1,5 +1,5 @@
 import 'package:shadcn_flutter/shadcn_flutter.dart';
-import 'package:spotube/extensions/context.dart';
+import 'package:openmusic/extensions/context.dart';
 
 Future<bool> showPromptDialog({
   required BuildContext context,

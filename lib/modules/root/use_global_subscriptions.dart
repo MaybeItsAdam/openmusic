@@ -3,15 +3,15 @@ import 'dart:async';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
-import 'package:spotube/collections/spotube_icons.dart';
-import 'package:spotube/extensions/context.dart';
-import 'package:spotube/modules/metadata_plugins/plugin_update_available_dialog.dart';
-import 'package:spotube/provider/metadata_plugin/metadata_plugin_provider.dart';
-import 'package:spotube/provider/metadata_plugin/updater/update_checker.dart';
-import 'package:spotube/provider/server/routes/connect.dart';
-import 'package:spotube/services/audio_player/audio_player.dart';
-import 'package:spotube/services/connectivity_adapter.dart';
-import 'package:spotube/utils/service_utils.dart';
+import 'package:openmusic/collections/openmusic_icons.dart';
+import 'package:openmusic/extensions/context.dart';
+import 'package:openmusic/modules/metadata_plugins/plugin_update_available_dialog.dart';
+import 'package:openmusic/provider/metadata_plugin/metadata_plugin_provider.dart';
+import 'package:openmusic/provider/metadata_plugin/updater/update_checker.dart';
+import 'package:openmusic/provider/server/routes/connect.dart';
+import 'package:openmusic/services/audio_player/audio_player.dart';
+import 'package:openmusic/services/connectivity_adapter.dart';
+import 'package:openmusic/utils/service_utils.dart';
 
 void useGlobalSubscriptions(WidgetRef ref) {
   final context = useContext();
@@ -90,7 +90,7 @@ void useGlobalSubscriptions(WidgetRef ref) {
             if (connected) {
               return SurfaceCard(
                 child: Basic(
-                  leading: const Icon(SpotubeIcons.wifi),
+                  leading: const Icon(OpenMusicIcons.wifi),
                   title: Text(context.l10n.connection_restored),
                 ),
               );
@@ -101,7 +101,7 @@ void useGlobalSubscriptions(WidgetRef ref) {
               filled: true,
               child: Basic(
                 leading: Icon(
-                  SpotubeIcons.noWifi,
+                  OpenMusicIcons.noWifi,
                   color: theme.colorScheme.destructiveForeground,
                 ),
                 trailing: Text(
@@ -125,7 +125,7 @@ void useGlobalSubscriptions(WidgetRef ref) {
               fillColor: Colors.yellow[600],
               filled: true,
               child: Basic(
-                leading: const Icon(SpotubeIcons.error, color: Colors.black),
+                leading: const Icon(OpenMusicIcons.error, color: Colors.black),
                 title: Text(
                   context.l10n.connect_client_alert(clientOrigin),
                   style: const TextStyle(color: Colors.black),

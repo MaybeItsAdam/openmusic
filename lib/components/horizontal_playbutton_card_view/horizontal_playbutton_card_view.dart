@@ -4,11 +4,11 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 import 'package:shadcn_flutter/shadcn_flutter_extension.dart';
 import 'package:skeletonizer/skeletonizer.dart';
-import 'package:spotube/collections/fake.dart';
-import 'package:spotube/models/metadata/metadata.dart';
-import 'package:spotube/modules/album/album_card.dart';
-import 'package:spotube/modules/artist/artist_card.dart';
-import 'package:spotube/modules/playlist/playlist_card.dart';
+import 'package:openmusic/collections/fake.dart';
+import 'package:openmusic/models/metadata/metadata.dart';
+import 'package:openmusic/modules/album/album_card.dart';
+import 'package:openmusic/modules/artist/artist_card.dart';
+import 'package:openmusic/modules/playlist/playlist_card.dart';
 import 'package:very_good_infinite_list/very_good_infinite_list.dart';
 
 class HorizontalPlaybuttonCardView<T> extends HookWidget {

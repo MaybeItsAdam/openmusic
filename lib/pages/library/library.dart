@@ -3,13 +3,13 @@ import 'package:flutter/material.dart' show Badge;
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
-import 'package:spotube/collections/routes.gr.dart';
-import 'package:spotube/collections/side_bar_tiles.dart';
-import 'package:spotube/collections/spotube_icons.dart';
-import 'package:spotube/components/titlebar/titlebar.dart';
-import 'package:spotube/extensions/constrains.dart';
-import 'package:spotube/extensions/context.dart';
-import 'package:spotube/provider/download_manager_provider.dart';
+import 'package:openmusic/collections/routes.gr.dart';
+import 'package:openmusic/collections/side_bar_tiles.dart';
+import 'package:openmusic/collections/openmusic_icons.dart';
+import 'package:openmusic/components/titlebar/titlebar.dart';
+import 'package:openmusic/extensions/constrains.dart';
+import 'package:openmusic/extensions/context.dart';
+import 'package:openmusic/provider/download_manager_provider.dart';
 
 @RoutePage()
 class LibraryPage extends HookConsumerWidget {
@@ -34,7 +34,7 @@ class LibraryPage extends HookConsumerWidget {
           pathPrefix: "library/downloads",
           title: context.l10n.downloads,
           route: const UserDownloadsRoute(),
-          icon: SpotubeIcons.download,
+          icon: OpenMusicIcons.download,
         ),
       ],
       [context.l10n],

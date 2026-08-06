@@ -1,7 +1,7 @@
 import 'package:drift/drift.dart';
-import 'package:spotube/models/database/database.dart';
-import 'package:spotube/services/kv_store/encrypted_kv_store.dart';
-import 'package:spotube/services/logger/logger.dart';
+import 'package:openmusic/models/database/database.dart';
+import 'package:openmusic/services/kv_store/encrypted_kv_store.dart';
+import 'package:openmusic/services/logger/logger.dart';
 
 /// Columns holding values written by the legacy Salsa20 scheme.
 ///

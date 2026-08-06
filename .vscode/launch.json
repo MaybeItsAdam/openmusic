@@ -2,13 +2,13 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "spotube",
+      "name": "openmusic",
       "type": "dart",
       "request": "launch",
       "program": "lib/main.dart",
     },
     {
-      "name": "spotube (mobile)",
+      "name": "openmusic (mobile)",
       "type": "dart",
       "request": "launch",
       "program": "lib/main.dart",
@@ -18,7 +18,7 @@
       ]
     },
     {
-      "name": "spotube (mobile-skia)",
+      "name": "openmusic (mobile-skia)",
       "type": "dart",
       "request": "launch",
       "program": "lib/main.dart",
@@ -29,21 +29,21 @@
       ]
     },
     {
-      "name": "spotube (profile)",
+      "name": "openmusic (profile)",
       "type": "dart",
       "request": "launch",
       "program": "lib/main.dart",
       "flutterMode": "profile"
     },
     {
-      "name": "spotube (release)",
+      "name": "openmusic (release)",
       "type": "dart",
       "request": "launch",
       "program": "lib/main.dart",
       "flutterMode": "release"
     },
     {
-      "name": "spotube (mobile) (release)",
+      "name": "openmusic (mobile) (release)",
       "type": "dart",
       "request": "launch",
       "program": "lib/main.dart",

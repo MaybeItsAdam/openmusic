@@ -3,10 +3,10 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 import 'package:shadcn_flutter/shadcn_flutter_extension.dart';
-import 'package:spotube/components/button/back_button.dart';
-import 'package:spotube/components/titlebar/titlebar_buttons.dart';
-import 'package:spotube/provider/user_preferences/user_preferences_provider.dart';
-import 'package:spotube/utils/platform.dart';
+import 'package:openmusic/components/button/back_button.dart';
+import 'package:openmusic/components/titlebar/titlebar_buttons.dart';
+import 'package:openmusic/provider/user_preferences/user_preferences_provider.dart';
+import 'package:openmusic/utils/platform.dart';
 import 'package:window_manager/window_manager.dart';
 
 final kTitlebarVisible = kIsWindows || kIsLinux;

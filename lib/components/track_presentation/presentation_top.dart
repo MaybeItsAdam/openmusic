@@ -3,15 +3,15 @@ import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 import 'package:shadcn_flutter/shadcn_flutter_extension.dart';
-import 'package:spotube/collections/spotube_icons.dart';
-import 'package:spotube/components/heart_button/heart_button.dart';
-import 'package:spotube/components/image/universal_image.dart';
-import 'package:spotube/components/track_presentation/presentation_props.dart';
-import 'package:spotube/components/track_presentation/use_action_callbacks.dart';
-import 'package:spotube/components/track_presentation/use_is_user_playlist.dart';
-import 'package:spotube/extensions/constrains.dart';
-import 'package:spotube/extensions/context.dart';
-import 'package:spotube/modules/playlist/playlist_create_dialog.dart';
+import 'package:openmusic/collections/openmusic_icons.dart';
+import 'package:openmusic/components/heart_button/heart_button.dart';
+import 'package:openmusic/components/image/universal_image.dart';
+import 'package:openmusic/components/track_presentation/presentation_props.dart';
+import 'package:openmusic/components/track_presentation/use_action_callbacks.dart';
+import 'package:openmusic/components/track_presentation/use_is_user_playlist.dart';
+import 'package:openmusic/extensions/constrains.dart';
+import 'package:openmusic/extensions/context.dart';
+import 'package:openmusic/modules/playlist/playlist_create_dialog.dart';
 
 class TrackPresentationTopSection extends HookConsumerWidget {
   const TrackPresentationTopSection({super.key});
@@ -48,7 +48,7 @@ class TrackPresentationTopSection extends HookConsumerWidget {
                       size: 20,
                     ),
                   )
-                : const Icon(SpotubeIcons.shuffle),
+                : const Icon(OpenMusicIcons.shuffle),
             enabled: !isLoading && !isActive,
             onPressed: onShuffle,
           ),
@@ -59,14 +59,14 @@ class TrackPresentationTopSection extends HookConsumerWidget {
               child: Text(context.l10n.add_to_queue),
             ).call,
             child: IconButton.secondary(
-              icon: const Icon(SpotubeIcons.queueAdd),
+              icon: const Icon(OpenMusicIcons.queueAdd),
               enabled: !isLoading && !isActive,
               onPressed: onAddToQueue,
             ),
           )
         else
           Button.secondary(
-            leading: const Icon(SpotubeIcons.add),
+            leading: const Icon(OpenMusicIcons.add),
             enabled: !isLoading && !isActive,
             onPressed: onAddToQueue,
             child: Text(context.l10n.queue),
@@ -74,11 +74,11 @@ class TrackPresentationTopSection extends HookConsumerWidget {
         Button.primary(
           alignment: Alignment.center,
           leading: switch ((isActive, isLoading)) {
-            (true, false) => const Icon(SpotubeIcons.pause),
+            (true, false) => const Icon(OpenMusicIcons.pause),
             (false, true) => const Center(
                 child: CircularProgressIndicator(onSurface: true, size: 18),
               ),
-            _ => const Icon(SpotubeIcons.play),
+            _ => const Icon(OpenMusicIcons.play),
           },
           onPressed: onPlay,
           enabled: !isLoading && !isActive,
@@ -93,7 +93,7 @@ class TrackPresentationTopSection extends HookConsumerWidget {
         if (isUserPlaylist)
           IconButton.outline(
             size: ButtonSize.small,
-            icon: const Icon(SpotubeIcons.edit),
+            icon: const Icon(OpenMusicIcons.edit),
             onPressed: () {
               showDialog(
                 context: context,
@@ -110,7 +110,7 @@ class TrackPresentationTopSection extends HookConsumerWidget {
           Tooltip(
             tooltip: TooltipContainer(child: Text(context.l10n.share)).call,
             child: IconButton.outline(
-              icon: const Icon(SpotubeIcons.share),
+              icon: const Icon(OpenMusicIcons.share),
               size: ButtonSize.small,
               onPressed: () async {
                 await Clipboard.setData(ClipboardData(text: options.shareUrl!));

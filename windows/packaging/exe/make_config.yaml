@@ -1,9 +1,9 @@
-app_id: 80B901C8-D6FE-494E-8AF7-A2BD440E8644
-publisher: KRTirtho, OSS
-publisher_url: https://github.com/KRTirtho/spotube
-display_name: Spotube
+app_id: C63C5B8D-2BD5-4F1A-9BC6-DB50EC6364B4
+publisher: MaybeItsAdam
+publisher_url: https://github.com/MaybeItsAdam/openmusic
+display_name: OpenMusic
 create_desktop_icon: true
-install_dir_name: Spotube
+install_dir_name: OpenMusic
 script_template: inno_setup.iss
 locales:
   - en

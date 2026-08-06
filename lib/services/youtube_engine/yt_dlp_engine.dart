@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:collection/collection.dart';
-import 'package:spotube/services/youtube_engine/youtube_engine.dart';
-import 'package:spotube/utils/platform.dart';
+import 'package:openmusic/services/youtube_engine/youtube_engine.dart';
+import 'package:openmusic/utils/platform.dart';
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 import 'package:yt_dlp_dart/yt_dlp_dart.dart';
 // ignore: depend_on_referenced_packages

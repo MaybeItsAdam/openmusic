@@ -1,9 +1,9 @@
-display_name: Spotube
-package_name: spotube
+display_name: OpenMusic
+package_name: openmusic
 
 maintainer:
-  name: Kingkor Roy Tirtho
-  email: krtirtho@gmail.com
+  name: MaybeItsAdam
+  email: noreply@github.com
 
 priority: optional
 section: x11
@@ -30,7 +30,7 @@ suggested_dependencies:
   - yt-dlp
 
 essential: false
-icon: assets/branding/spotube-logo.png
+icon: assets/branding/openmusic-logo.png
 
 keywords:
   - Music

@@ -1,5 +1,5 @@
 import 'package:riverpod/riverpod.dart';
-import 'package:spotube/provider/metadata_plugin/audio_source/quality_presets.dart';
+import 'package:openmusic/provider/metadata_plugin/audio_source/quality_presets.dart';
 
 final audioSourceQualityLabelProvider = Provider<String>((ref) {
   final sourceQuality = ref.watch(audioSourcePresetsProvider);

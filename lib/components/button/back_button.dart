@@ -1,10 +1,10 @@
 import 'package:shadcn_flutter/shadcn_flutter.dart';
-import 'package:spotube/collections/spotube_icons.dart';
+import 'package:openmusic/collections/openmusic_icons.dart';
 
 class BackButton extends StatelessWidget {
   final Color? color;
   final IconData icon;
-  const BackButton({super.key, this.color, this.icon = SpotubeIcons.angleLeft});
+  const BackButton({super.key, this.color, this.icon = OpenMusicIcons.angleLeft});
 
   @override
   Widget build(BuildContext context) {

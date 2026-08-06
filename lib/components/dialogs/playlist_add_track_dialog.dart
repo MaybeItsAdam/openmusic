@@ -1,13 +1,13 @@
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
-import 'package:spotube/models/metadata/metadata.dart';
+import 'package:openmusic/models/metadata/metadata.dart';
 
-import 'package:spotube/modules/playlist/playlist_create_dialog.dart';
-import 'package:spotube/components/image/universal_image.dart';
-import 'package:spotube/extensions/context.dart';
-import 'package:spotube/provider/metadata_plugin/library/playlists.dart';
-import 'package:spotube/provider/metadata_plugin/core/user.dart';
+import 'package:openmusic/modules/playlist/playlist_create_dialog.dart';
+import 'package:openmusic/components/image/universal_image.dart';
+import 'package:openmusic/extensions/context.dart';
+import 'package:openmusic/provider/metadata_plugin/library/playlists.dart';
+import 'package:openmusic/provider/metadata_plugin/core/user.dart';
 
 class PlaylistAddTrackDialog extends HookConsumerWidget {
   /// The id of the playlist this dialog was opened from

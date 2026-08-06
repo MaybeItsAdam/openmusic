@@ -4,23 +4,23 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 import 'package:shadcn_flutter/shadcn_flutter_extension.dart';
 
-import 'package:spotube/collections/assets.gen.dart';
-import 'package:spotube/collections/routes.gr.dart';
-import 'package:spotube/collections/spotube_icons.dart';
-import 'package:spotube/models/database/database.dart';
-import 'package:spotube/models/metadata/metadata.dart';
-import 'package:spotube/modules/player/player_actions.dart';
-import 'package:spotube/modules/player/player_overlay.dart';
-import 'package:spotube/modules/player/player_track_details.dart';
-import 'package:spotube/modules/player/player_controls.dart';
-import 'package:spotube/modules/player/volume_slider.dart';
-import 'package:spotube/extensions/constrains.dart';
-import 'package:spotube/extensions/context.dart';
-import 'package:spotube/provider/audio_player/audio_player.dart';
-import 'package:spotube/provider/user_preferences/user_preferences_provider.dart';
+import 'package:openmusic/collections/assets.gen.dart';
+import 'package:openmusic/collections/routes.gr.dart';
+import 'package:openmusic/collections/openmusic_icons.dart';
+import 'package:openmusic/models/database/database.dart';
+import 'package:openmusic/models/metadata/metadata.dart';
+import 'package:openmusic/modules/player/player_actions.dart';
+import 'package:openmusic/modules/player/player_overlay.dart';
+import 'package:openmusic/modules/player/player_track_details.dart';
+import 'package:openmusic/modules/player/player_controls.dart';
+import 'package:openmusic/modules/player/volume_slider.dart';
+import 'package:openmusic/extensions/constrains.dart';
+import 'package:openmusic/extensions/context.dart';
+import 'package:openmusic/provider/audio_player/audio_player.dart';
+import 'package:openmusic/provider/user_preferences/user_preferences_provider.dart';
 
-import 'package:spotube/provider/volume_provider.dart';
-import 'package:spotube/utils/platform.dart';
+import 'package:openmusic/provider/volume_provider.dart';
+import 'package:openmusic/utils/platform.dart';
 import 'package:window_manager/window_manager.dart';
 
 class BottomPlayer extends HookConsumerWidget {
@@ -79,7 +79,7 @@ class BottomPlayer extends HookConsumerWidget {
                     ).call,
                     child: IconButton(
                       variance: ButtonVariance.ghost,
-                      icon: const Icon(SpotubeIcons.miniPlayer),
+                      icon: const Icon(OpenMusicIcons.miniPlayer),
                       onPressed: () async {
                         if (!kIsDesktop) return;
 

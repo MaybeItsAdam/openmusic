@@ -2,11 +2,11 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:spotube/models/metadata/metadata.dart';
+import 'package:openmusic/models/metadata/metadata.dart';
 // ignore: implementation_imports
 import 'package:riverpod/src/async_notifier.dart';
-import 'package:spotube/provider/metadata_plugin/utils/common.dart';
-import 'package:spotube/services/logger/logger.dart';
+import 'package:openmusic/provider/metadata_plugin/utils/common.dart';
+import 'package:openmusic/services/logger/logger.dart';
 
 mixin PaginatedAsyncNotifierMixin<K>
     // ignore: invalid_use_of_internal_member

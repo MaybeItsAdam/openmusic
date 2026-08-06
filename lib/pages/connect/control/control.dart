@@ -5,21 +5,21 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 import 'package:shadcn_flutter/shadcn_flutter_extension.dart';
-import 'package:spotube/collections/routes.gr.dart';
-import 'package:spotube/collections/spotube_icons.dart';
-import 'package:spotube/models/connect/connect.dart';
-import 'package:spotube/models/metadata/metadata.dart';
-import 'package:spotube/modules/player/player_queue.dart';
-import 'package:spotube/modules/player/volume_slider.dart';
-import 'package:spotube/components/image/universal_image.dart';
-import 'package:spotube/components/links/anchor_button.dart';
-import 'package:spotube/components/links/artist_link.dart';
-import 'package:spotube/components/titlebar/titlebar.dart';
-import 'package:spotube/extensions/constrains.dart';
-import 'package:spotube/extensions/context.dart';
-import 'package:spotube/extensions/duration.dart';
-import 'package:spotube/provider/connect/clients.dart';
-import 'package:spotube/provider/connect/connect.dart';
+import 'package:openmusic/collections/routes.gr.dart';
+import 'package:openmusic/collections/openmusic_icons.dart';
+import 'package:openmusic/models/connect/connect.dart';
+import 'package:openmusic/models/metadata/metadata.dart';
+import 'package:openmusic/modules/player/player_queue.dart';
+import 'package:openmusic/modules/player/volume_slider.dart';
+import 'package:openmusic/components/image/universal_image.dart';
+import 'package:openmusic/components/links/anchor_button.dart';
+import 'package:openmusic/components/links/artist_link.dart';
+import 'package:openmusic/components/titlebar/titlebar.dart';
+import 'package:openmusic/extensions/constrains.dart';
+import 'package:openmusic/extensions/context.dart';
+import 'package:openmusic/extensions/duration.dart';
+import 'package:openmusic/provider/connect/clients.dart';
+import 'package:openmusic/provider/connect/connect.dart';
 import 'package:media_kit/media_kit.dart' hide Track;
 
 class RemotePlayerQueue extends ConsumerWidget {
@@ -216,7 +216,7 @@ class ConnectControlPage extends HookConsumerWidget {
                                 ),
                               ).call,
                               child: IconButton(
-                                icon: const Icon(SpotubeIcons.shuffle),
+                                icon: const Icon(OpenMusicIcons.shuffle),
                                 variance: shuffled
                                     ? ButtonVariance.secondary
                                     : ButtonVariance.ghost,
@@ -232,7 +232,7 @@ class ConnectControlPage extends HookConsumerWidget {
                                 child: Text(context.l10n.previous_track),
                               ).call,
                               child: IconButton.ghost(
-                                icon: const Icon(SpotubeIcons.skipBack),
+                                icon: const Icon(OpenMusicIcons.skipBack),
                                 onPressed: playlist.activeTrack == null
                                     ? null
                                     : connectNotifier.previous,
@@ -258,8 +258,8 @@ class ConnectControlPage extends HookConsumerWidget {
                                       )
                                     : Icon(
                                         playing
-                                            ? SpotubeIcons.pause
-                                            : SpotubeIcons.play,
+                                            ? OpenMusicIcons.pause
+                                            : OpenMusicIcons.play,
                                       ),
                                 onPressed: playlist.activeTrack == null
                                     ? null
@@ -277,7 +277,7 @@ class ConnectControlPage extends HookConsumerWidget {
                                 child: Text(context.l10n.next_track),
                               ).call,
                               child: IconButton.ghost(
-                                icon: const Icon(SpotubeIcons.skipForward),
+                                icon: const Icon(OpenMusicIcons.skipForward),
                                 onPressed: playlist.activeTrack == null
                                     ? null
                                     : connectNotifier.next,
@@ -296,8 +296,8 @@ class ConnectControlPage extends HookConsumerWidget {
                               child: IconButton(
                                 icon: Icon(
                                   loopMode == PlaylistMode.single
-                                      ? SpotubeIcons.repeatOne
-                                      : SpotubeIcons.repeat,
+                                      ? OpenMusicIcons.repeatOne
+                                      : OpenMusicIcons.repeat,
                                 ),
                                 variance: loopMode == PlaylistMode.single ||
                                         loopMode == PlaylistMode.loop
@@ -328,7 +328,7 @@ class ConnectControlPage extends HookConsumerWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 20),
                           sliver: SliverToBoxAdapter(
                             child: Button.outline(
-                              leading: const Icon(SpotubeIcons.queue),
+                              leading: const Icon(OpenMusicIcons.queue),
                               child: Text(context.l10n.queue),
                               onPressed: () {
                                 openDrawer(

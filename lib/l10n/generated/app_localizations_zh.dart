@@ -485,13 +485,13 @@ class AppLocalizationsZh extends AppLocalizations {
   String get about => '关于';
 
   @override
-  String get u_love_spotube => '我们明白你喜欢 Spotube';
+  String get u_love_spotube => '我们明白你喜欢 OpenMusic';
 
   @override
   String get check_for_updates => '检查更新';
 
   @override
-  String get about_spotube => '关于 Spotube';
+  String get about_spotube => '关于 OpenMusic';
 
   @override
   String get blacklist => '屏蔽列表';
@@ -500,7 +500,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get please_sponsor => '请赞助/捐赠';
 
   @override
-  String get spotube_description => 'Spotube，一个轻量、跨平台且完全免费的 Spotify 客户端。';
+  String get spotube_description => 'OpenMusic，一个轻量、跨平台且完全免费的 Spotify 客户端。';
 
   @override
   String get version => '版本';
@@ -717,7 +717,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get download_ip_ban_warning =>
-      '小心，如果出现超出正常的下载请求那你的 IP 可能会被 YouTube 封禁，这意味着你的设备将在长达 2-3 个月的时间内无法使用该 IP 访问 YouTube（即使你没登录）。Spotube 对此不承担任何责任';
+      '小心，如果出现超出正常的下载请求那你的 IP 可能会被 YouTube 封禁，这意味着你的设备将在长达 2-3 个月的时间内无法使用该 IP 访问 YouTube（即使你没登录）。OpenMusic 对此不承担任何责任';
 
   @override
   String get by_clicking_accept_terms => '点击 \'同意\' 代表着你同意以下的条款';
@@ -730,7 +730,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get download_agreement_3 =>
-      '我完全了解我的 IP 存在被 YouTube的风险。我同意 Spotube 的所有者与贡献者们无须对我目前的行为所导致的任何后果负责';
+      '我完全了解我的 IP 存在被 YouTube的风险。我同意 OpenMusic 的所有者与贡献者们无须对我目前的行为所导致的任何后果负责';
 
   @override
   String get decline => '拒绝';
@@ -812,7 +812,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get encryption_failed_warning =>
-      'Spotube使用加密来安全地存储您的数据。但是失败了。因此，它将回退到不安全的存储\n如果您使用Linux，请确保已安装gnome-keyring、kde-wallet和keepassxc等秘密服务';
+      'OpenMusic使用加密来安全地存储您的数据。但是失败了。因此，它将回退到不安全的存储\n如果您使用Linux，请确保已安装gnome-keyring、kde-wallet和keepassxc等秘密服务';
 
   @override
   String get querying_info => '正在查询信息...';
@@ -984,7 +984,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get choose_your_region => '选择您的地区';
 
   @override
-  String get choose_your_region_description => '这将帮助Spotube为您的位置显示正确的内容。';
+  String get choose_your_region_description => '这将帮助OpenMusic为您的位置显示正确的内容。';
 
   @override
   String get choose_your_language => '选择您的语言';
@@ -994,7 +994,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get help_project_grow_description =>
-      'Spotube是一个开源项目。您可以通过为项目做出贡献、报告错误或建议新功能来帮助该项目成长。';
+      'OpenMusic是一个开源项目。您可以通过为项目做出贡献、报告错误或建议新功能来帮助该项目成长。';
 
   @override
   String get contribute_on_github => '在GitHub上做出贡献';
@@ -1009,7 +1009,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get enable_connect => '启用连接';
 
   @override
-  String get enable_connect_description => '从其他设备控制Spotube';
+  String get enable_connect_description => '从其他设备控制OpenMusic';
 
   @override
   String get devices => '设备';
@@ -1057,19 +1057,19 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get spotube_has_an_update => 'Spotube 有更新';
+  String get spotube_has_an_update => 'OpenMusic 有更新';
 
   @override
   String get download_now => '立即下载';
 
   @override
   String nightly_version(Object nightlyBuildNum) {
-    return 'Spotube Nightly $nightlyBuildNum 已发布';
+    return 'OpenMusic Nightly $nightlyBuildNum 已发布';
   }
 
   @override
   String release_version(Object version) {
-    return 'Spotube v$version 已发布';
+    return 'OpenMusic v$version 已发布';
   }
 
   @override
@@ -1478,7 +1478,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get third_party_plugin_dmca_notice =>
-      'Spotube 团队对任何“第三方”插件不承担任何责任（包括法律责任）。\n请自行承担风险使用。对于任何错误/问题，请向插件存储库报告。\n\n如果任何“第三方”插件违反了任何服务/法律实体的服务条款/DMCA，请要求该“第三方”插件作者或托管平台（例如 GitHub/Codeberg）采取行动。上面列出的（标记为“第三方”）都是公共/社区维护的插件。我们不对此类插件进行管理，因此无法对其采取任何行动。\n\n';
+      'OpenMusic 团队对任何“第三方”插件不承担任何责任（包括法律责任）。\n请自行承担风险使用。对于任何错误/问题，请向插件存储库报告。\n\n如果任何“第三方”插件违反了任何服务/法律实体的服务条款/DMCA，请要求该“第三方”插件作者或托管平台（例如 GitHub/Codeberg）采取行动。上面列出的（标记为“第三方”）都是公共/社区维护的插件。我们不对此类插件进行管理，因此无法对其采取任何行动。\n\n';
 
   @override
   String get input_does_not_match_format => '输入与所需格式不匹配';
@@ -2008,13 +2008,13 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get about => '關於';
 
   @override
-  String get u_love_spotube => '我們明白你喜歡 Spotube';
+  String get u_love_spotube => '我們明白你喜歡 OpenMusic';
 
   @override
   String get check_for_updates => '檢查更新';
 
   @override
-  String get about_spotube => '關於 Spotube';
+  String get about_spotube => '關於 OpenMusic';
 
   @override
   String get blacklist => '黑名單';
@@ -2023,7 +2023,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get please_sponsor => '請考慮贊助或捐款';
 
   @override
-  String get spotube_description => 'Spotube，一款輕量、跨平台且完全免費的 Spotify 用戶端。';
+  String get spotube_description => 'OpenMusic，一款輕量、跨平台且完全免費的 Spotify 用戶端。';
 
   @override
   String get version => '版本';
@@ -2240,7 +2240,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
 
   @override
   String get download_ip_ban_warning =>
-      '小心，如果出現超出正常的下載請求，那你的 IP 可能會被 YouTube 封鎖，這意味著你的裝置將在長達 2-3 個月的時間內無法使用該 IP 訪問 YouTube（即使你沒登入）。Spotube 不會因而承擔任何責任';
+      '小心，如果出現超出正常的下載請求，那你的 IP 可能會被 YouTube 封鎖，這意味著你的裝置將在長達 2-3 個月的時間內無法使用該 IP 訪問 YouTube（即使你沒登入）。OpenMusic 不會因而承擔任何責任';
 
   @override
   String get by_clicking_accept_terms => '點擊 \'同意\' 代表你同意以下的條款';
@@ -2253,7 +2253,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
 
   @override
   String get download_agreement_3 =>
-      '我完全了解我的 IP 存在被 YouTube 封鎖的風險。並且我明白 Spotube 的擁有者與貢獻者們無須對我目前的行為所導致的任何後果負責';
+      '我完全了解我的 IP 存在被 YouTube 封鎖的風險。並且我明白 OpenMusic 的擁有者與貢獻者們無須對我目前的行為所導致的任何後果負責';
 
   @override
   String get decline => '拒絕';
@@ -2335,7 +2335,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
 
   @override
   String get encryption_failed_warning =>
-      'Spotube使用加密來安全地儲存您的資料。但是失敗了。因此，它將回退到不安全的儲存空間\n如果您使用Linux，請確保已安裝gnome-keyring、kde-wallet和keepassxc等加密服務';
+      'OpenMusic使用加密來安全地儲存您的資料。但是失敗了。因此，它將回退到不安全的儲存空間\n如果您使用Linux，請確保已安裝gnome-keyring、kde-wallet和keepassxc等加密服務';
 
   @override
   String get querying_info => '正在查詢資訊...';
@@ -2507,7 +2507,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get choose_your_region => '選擇您的所在地區';
 
   @override
-  String get choose_your_region_description => '這能幫助 Spotube 為您的所在位置顯示正確的內容。';
+  String get choose_your_region_description => '這能幫助 OpenMusic 為您的所在位置顯示正確的內容。';
 
   @override
   String get choose_your_language => '選擇您的語言';
@@ -2517,7 +2517,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
 
   @override
   String get help_project_grow_description =>
-      'Spotube是一個開源專案。您可以透過為專案做出貢獻、回報錯誤或建議新功能來幫助專案成長。';
+      'OpenMusic是一個開源專案。您可以透過為專案做出貢獻、回報錯誤或建議新功能來幫助專案成長。';
 
   @override
   String get contribute_on_github => '在GitHub上做出貢獻';
@@ -2532,7 +2532,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get enable_connect => '啟用連線';
 
   @override
-  String get enable_connect_description => '從其他裝置控制Spotube';
+  String get enable_connect_description => '從其他裝置控制OpenMusic';
 
   @override
   String get devices => '裝置';
@@ -2580,19 +2580,19 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   }
 
   @override
-  String get spotube_has_an_update => 'Spotube 有更新版本';
+  String get spotube_has_an_update => 'OpenMusic 有更新版本';
 
   @override
   String get download_now => '立即下載';
 
   @override
   String nightly_version(Object nightlyBuildNum) {
-    return 'Spotube Nightly $nightlyBuildNum 已發佈';
+    return 'OpenMusic Nightly $nightlyBuildNum 已發佈';
   }
 
   @override
   String release_version(Object version) {
-    return 'Spotube v$version 已發布';
+    return 'OpenMusic v$version 已發布';
   }
 
   @override
@@ -3001,7 +3001,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
 
   @override
   String get third_party_plugin_dmca_notice =>
-      'Spotube 團隊對任何「第三方」外掛程式不負任何責任（包括法律責任）。\n請自行承擔使用風險。如有任何錯誤/問題，請向該外掛程式的儲存庫回報。\n\n若有任何「第三方」外掛程式違反任何服務/法律實體的服務條款/DMCA，請向「第三方」外掛程式作者或託管平台（如 GitHub/Codeberg）要求採取行動。以上列出的（標記為「第三方」）外掛程式均為公開/社群維護的外掛程式。我們沒有對其進行審核，因此無法對其採取任何行動。\n\n';
+      'OpenMusic 團隊對任何「第三方」外掛程式不負任何責任（包括法律責任）。\n請自行承擔使用風險。如有任何錯誤/問題，請向該外掛程式的儲存庫回報。\n\n若有任何「第三方」外掛程式違反任何服務/法律實體的服務條款/DMCA，請向「第三方」外掛程式作者或託管平台（如 GitHub/Codeberg）要求採取行動。以上列出的（標記為「第三方」）外掛程式均為公開/社群維護的外掛程式。我們沒有對其進行審核，因此無法對其採取任何行動。\n\n';
 
   @override
   String get input_does_not_match_format => '輸入不符合所需格式';

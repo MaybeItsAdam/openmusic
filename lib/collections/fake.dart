@@ -1,6 +1,6 @@
-import 'package:spotube/models/database/database.dart';
-import 'package:spotube/models/metadata/metadata.dart';
-import 'package:spotube/provider/history/summary.dart';
+import 'package:openmusic/models/database/database.dart';
+import 'package:openmusic/models/metadata/metadata.dart';
+import 'package:openmusic/provider/history/summary.dart';
 
 abstract class FakeData {
   static final SpotubeImageObject image = SpotubeImageObject(

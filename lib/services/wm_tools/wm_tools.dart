@@ -1,6 +1,6 @@
 import 'package:shadcn_flutter/shadcn_flutter.dart';
-import 'package:spotube/services/kv_store/kv_store.dart';
-import 'package:spotube/utils/platform.dart';
+import 'package:openmusic/services/kv_store/kv_store.dart';
+import 'package:openmusic/utils/platform.dart';
 import 'package:window_manager/window_manager.dart';
 
 class WindowSize {
@@ -40,7 +40,7 @@ class WindowManagerTools with WidgetsBindingObserver {
 
     await windowManager.waitUntilReadyToShow(
       const WindowOptions(
-        title: "Spotube",
+        title: "OpenMusic",
         backgroundColor: Colors.transparent,
         minimumSize: Size(300, 700),
         titleBarStyle: TitleBarStyle.hidden,

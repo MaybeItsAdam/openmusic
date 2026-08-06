@@ -4,16 +4,16 @@ import 'package:collection/collection.dart';
 import 'package:drift/drift.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:media_kit/media_kit.dart';
-import 'package:spotube/extensions/list.dart';
-import 'package:spotube/models/database/database.dart';
-import 'package:spotube/models/metadata/metadata.dart';
-import 'package:spotube/provider/audio_player/state.dart';
-import 'package:spotube/provider/blacklist_provider.dart';
-import 'package:spotube/provider/database/database.dart';
-import 'package:spotube/provider/discord_provider.dart';
-import 'package:spotube/provider/server/sourced_track_provider.dart';
-import 'package:spotube/services/audio_player/audio_player.dart';
-import 'package:spotube/services/logger/logger.dart';
+import 'package:openmusic/extensions/list.dart';
+import 'package:openmusic/models/database/database.dart';
+import 'package:openmusic/models/metadata/metadata.dart';
+import 'package:openmusic/provider/audio_player/state.dart';
+import 'package:openmusic/provider/blacklist_provider.dart';
+import 'package:openmusic/provider/database/database.dart';
+import 'package:openmusic/provider/discord_provider.dart';
+import 'package:openmusic/provider/server/sourced_track_provider.dart';
+import 'package:openmusic/services/audio_player/audio_player.dart';
+import 'package:openmusic/services/logger/logger.dart';
 
 class AudioPlayerNotifier extends Notifier<AudioPlayerState> {
   BlackListNotifier get _blacklist => ref.read(blacklistProvider.notifier);
@@ -135,7 +135,7 @@ class AudioPlayerNotifier extends Notifier<AudioPlayerState> {
       audioPlayer.playlistStream.listen((playlist) async {
         try {
           final tracks =
-              playlist.medias.map((e) => SpotubeMedia.media(e).track).toList();
+              playlist.medias.map((e) => OpenMusicMedia.media(e).track).toList();
 
           state = state.copyWith(tracks: tracks, currentIndex: playlist.index);
 
@@ -223,7 +223,7 @@ class AudioPlayerNotifier extends Notifier<AudioPlayerState> {
       final track = addableTracks.elementAt(i);
 
       await audioPlayer.addTrackAt(
-        SpotubeMedia(track),
+        OpenMusicMedia(track),
         max(state.currentIndex, 0) + i + 1,
       );
     }
@@ -244,7 +244,7 @@ class AudioPlayerNotifier extends Notifier<AudioPlayerState> {
 
     state = state.copyWith(tracks: [...state.tracks, track]);
 
-    await audioPlayer.addTrack(SpotubeMedia(track));
+    await audioPlayer.addTrack(OpenMusicMedia(track));
 
     await _updatePlayerState(
       AudioPlayerStateTableCompanion(
@@ -261,7 +261,7 @@ class AudioPlayerNotifier extends Notifier<AudioPlayerState> {
     state = state.copyWith(tracks: [...state.tracks, ...tracks]);
 
     for (final track in tracks) {
-      await audioPlayer.addTrack(SpotubeMedia(track));
+      await audioPlayer.addTrack(OpenMusicMedia(track));
     }
 
     await _updatePlayerState(

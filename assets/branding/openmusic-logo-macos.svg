@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  OpenMusic — PLACEHOLDER logo mark, macOS app-icon variant.
+
+  macOS icons are not full-bleed: flutter_launcher_icons only resizes whatever
+  it is given into AppIcon.appiconset, so the rounded square, the surrounding
+  padding and the drop shadow all have to be baked into the source image.
+
+  Layout matches the geometry the project already used (measured off the old
+  asset): a 1120x1120 canvas holding a 932x932 rounded square inset 94px on
+  each side, corner radius 205 (~0.22 of the square, Apple's ratio), with a
+  soft shadow below it. The 512-unit mark artboard is mapped onto the square
+  (932 / 512 = 1.82031).
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 1120" width="1120" height="1120">
+  <title>OpenMusic (macOS)</title>
+  <defs>
+    <filter id="macosShadow" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="14" stdDeviation="16" flood-color="#000000" flood-opacity="0.35"/>
+    </filter>
+    <clipPath id="macosSquare">
+      <rect x="94" y="94" width="932" height="932" rx="205" ry="205"/>
+    </clipPath>
+  </defs>
+  <g filter="url(#macosShadow)">
+    <rect x="94" y="94" width="932" height="932" rx="205" ry="205" fill="#242832"/>
+  </g>
+  <g clip-path="url(#macosSquare)" transform="translate(94 94) scale(1.82031)">
+    <g stroke="#4DA3FF" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M370.9 352.4 A150 150 0 1 1 370.9 159.6" stroke-width="40"/>
+      <path d="M214 194 L332 256 L214 318 Z" stroke-width="26" fill="#4DA3FF"/>
+    </g>
+  </g>
+</svg>

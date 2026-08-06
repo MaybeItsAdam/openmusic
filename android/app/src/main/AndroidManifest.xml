@@ -70,7 +70,7 @@
 
         <category android:name="android.intent.category.DEFAULT" />
         <category android:name="android.intent.category.BROWSABLE" />
-        <data android:scheme="spotube" />
+        <data android:scheme="openmusic" />
       </intent-filter>
 
       <intent-filter>

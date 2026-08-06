@@ -1,11 +1,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:spotube/collections/spotube_icons.dart';
-import 'package:spotube/components/image/universal_image.dart';
-import 'package:spotube/extensions/constrains.dart';
-import 'package:spotube/models/metadata/metadata.dart';
-import 'package:spotube/provider/metadata_plugin/artist/wikipedia.dart';
+import 'package:openmusic/collections/openmusic_icons.dart';
+import 'package:openmusic/components/image/universal_image.dart';
+import 'package:openmusic/extensions/constrains.dart';
+import 'package:openmusic/models/metadata/metadata.dart';
+import 'package:openmusic/provider/metadata_plugin/artist/wikipedia.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class ArtistPageFooter extends ConsumerWidget {
@@ -53,7 +53,7 @@ class ArtistPageFooter extends ConsumerWidget {
             // icon
             const WidgetSpan(
               child: Icon(
-                SpotubeIcons.wikipedia,
+                OpenMusicIcons.wikipedia,
                 color: Colors.white,
                 size: 30,
               ),

@@ -4,24 +4,24 @@ import 'package:shadcn_flutter/shadcn_flutter.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:fuzzywuzzy/fuzzywuzzy.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:spotube/collections/routes.gr.dart';
+import 'package:openmusic/collections/routes.gr.dart';
 
-import 'package:spotube/collections/spotube_icons.dart';
-import 'package:spotube/components/fallbacks/error_box.dart';
-import 'package:spotube/components/fallbacks/no_default_metadata_plugin.dart';
-import 'package:spotube/components/titlebar/titlebar.dart';
-import 'package:spotube/extensions/context.dart';
-import 'package:spotube/extensions/string.dart';
-import 'package:spotube/hooks/controllers/use_shadcn_text_editing_controller.dart';
-import 'package:spotube/pages/search/tabs/albums.dart';
-import 'package:spotube/pages/search/tabs/all.dart';
-import 'package:spotube/pages/search/tabs/artists.dart';
-import 'package:spotube/pages/search/tabs/playlists.dart';
-import 'package:spotube/pages/search/tabs/tracks.dart';
-import 'package:spotube/provider/metadata_plugin/search/all.dart';
-import 'package:spotube/services/kv_store/kv_store.dart';
+import 'package:openmusic/collections/openmusic_icons.dart';
+import 'package:openmusic/components/fallbacks/error_box.dart';
+import 'package:openmusic/components/fallbacks/no_default_metadata_plugin.dart';
+import 'package:openmusic/components/titlebar/titlebar.dart';
+import 'package:openmusic/extensions/context.dart';
+import 'package:openmusic/extensions/string.dart';
+import 'package:openmusic/hooks/controllers/use_shadcn_text_editing_controller.dart';
+import 'package:openmusic/pages/search/tabs/albums.dart';
+import 'package:openmusic/pages/search/tabs/all.dart';
+import 'package:openmusic/pages/search/tabs/artists.dart';
+import 'package:openmusic/pages/search/tabs/playlists.dart';
+import 'package:openmusic/pages/search/tabs/tracks.dart';
+import 'package:openmusic/provider/metadata_plugin/search/all.dart';
+import 'package:openmusic/services/kv_store/kv_store.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:spotube/services/metadata/errors/exceptions.dart';
+import 'package:openmusic/services/metadata/errors/exceptions.dart';
 
 final searchTermStateProvider = StateProvider<String>((ref) {
   return "";
@@ -139,7 +139,7 @@ class SearchPage extends HookConsumerWidget {
                                   focusNode: focusNode,
                                   features: [
                                     const InputFeature.leading(
-                                      Icon(SpotubeIcons.search),
+                                      Icon(OpenMusicIcons.search),
                                     ),
                                     InputFeature.trailing(
                                       AnimatedCrossFade(
@@ -152,7 +152,7 @@ class SearchPage extends HookConsumerWidget {
                                                 : CrossFadeState.showSecond,
                                         firstChild: IconButton.ghost(
                                           size: ButtonSize.small,
-                                          icon: const Icon(SpotubeIcons.close),
+                                          icon: const Icon(OpenMusicIcons.close),
                                           onPressed: () {
                                             controller.clear();
                                           },

@@ -1,4 +1,4 @@
-import 'package:spotube/models/metadata/metadata.dart';
+import 'package:openmusic/models/metadata/metadata.dart';
 
 class TrackNotFoundError extends Error {
   final SpotubeTrackObject track;

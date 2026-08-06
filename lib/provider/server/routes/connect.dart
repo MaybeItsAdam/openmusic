@@ -6,16 +6,16 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 import 'package:shelf/shelf.dart';
 import 'package:shelf_web_socket/shelf_web_socket.dart';
-import 'package:spotube/collections/routes.dart';
-import 'package:spotube/extensions/context.dart';
-import 'package:spotube/models/connect/connect.dart';
-import 'package:spotube/models/metadata/metadata.dart';
+import 'package:openmusic/collections/routes.dart';
+import 'package:openmusic/extensions/context.dart';
+import 'package:openmusic/models/connect/connect.dart';
+import 'package:openmusic/models/metadata/metadata.dart';
 
-import 'package:spotube/provider/history/history.dart';
-import 'package:spotube/provider/audio_player/audio_player.dart';
-import 'package:spotube/provider/volume_provider.dart';
-import 'package:spotube/services/audio_player/audio_player.dart';
-import 'package:spotube/services/logger/logger.dart';
+import 'package:openmusic/provider/history/history.dart';
+import 'package:openmusic/provider/audio_player/audio_player.dart';
+import 'package:openmusic/provider/volume_provider.dart';
+import 'package:openmusic/services/audio_player/audio_player.dart';
+import 'package:openmusic/services/logger/logger.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 extension _WebsocketSinkExts on WebSocketSink {

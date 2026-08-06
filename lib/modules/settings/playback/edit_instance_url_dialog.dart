@@ -3,9 +3,9 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
-import 'package:spotube/components/form/text_form_field.dart';
-import 'package:spotube/extensions/context.dart';
-import 'package:spotube/hooks/controllers/use_shadcn_text_editing_controller.dart';
+import 'package:openmusic/components/form/text_form_field.dart';
+import 'package:openmusic/extensions/context.dart';
+import 'package:openmusic/hooks/controllers/use_shadcn_text_editing_controller.dart';
 
 class SettingsPlaybackEditInstanceUrlDialog extends HookConsumerWidget {
   final String title;

@@ -6,20 +6,20 @@ import 'package:flutter/material.dart' show ListTile;
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
-import 'package:spotube/collections/routes.gr.dart';
-import 'package:spotube/collections/spotube_icons.dart';
-import 'package:spotube/components/adaptive/adaptive_select_tile.dart';
-import 'package:spotube/models/database/database.dart';
-import 'package:spotube/modules/settings/playback/edit_connect_port_dialog.dart';
-import 'package:spotube/modules/settings/section_card_with_heading.dart';
-import 'package:spotube/extensions/context.dart';
-import 'package:spotube/modules/settings/youtube_engine_not_installed_dialog.dart';
-import 'package:spotube/provider/metadata_plugin/audio_source/quality_presets.dart';
-import 'package:spotube/provider/user_preferences/user_preferences_provider.dart';
-import 'package:spotube/services/kv_store/kv_store.dart';
-import 'package:spotube/services/youtube_engine/yt_dlp_engine.dart';
+import 'package:openmusic/collections/routes.gr.dart';
+import 'package:openmusic/collections/openmusic_icons.dart';
+import 'package:openmusic/components/adaptive/adaptive_select_tile.dart';
+import 'package:openmusic/models/database/database.dart';
+import 'package:openmusic/modules/settings/playback/edit_connect_port_dialog.dart';
+import 'package:openmusic/modules/settings/section_card_with_heading.dart';
+import 'package:openmusic/extensions/context.dart';
+import 'package:openmusic/modules/settings/youtube_engine_not_installed_dialog.dart';
+import 'package:openmusic/provider/metadata_plugin/audio_source/quality_presets.dart';
+import 'package:openmusic/provider/user_preferences/user_preferences_provider.dart';
+import 'package:openmusic/services/kv_store/kv_store.dart';
+import 'package:openmusic/services/youtube_engine/yt_dlp_engine.dart';
 
-import 'package:spotube/utils/platform.dart';
+import 'package:openmusic/utils/platform.dart';
 
 class SettingsPlaybackSection extends HookConsumerWidget {
   const SettingsPlaybackSection({super.key});
@@ -38,7 +38,7 @@ class SettingsPlaybackSection extends HookConsumerWidget {
       heading: context.l10n.playback,
       children: [
         AdaptiveSelectTile<YoutubeClientEngine>(
-          secondary: const Icon(SpotubeIcons.engine),
+          secondary: const Icon(OpenMusicIcons.engine),
           title: Text(context.l10n.youtube_engine),
           value: preferences.youtubeClientEngine,
           options: YoutubeClientEngine.values
@@ -65,7 +65,7 @@ class SettingsPlaybackSection extends HookConsumerWidget {
         ),
         if (sourcePresets.presets.isNotEmpty) ...[
           AdaptiveSelectTile(
-            secondary: const Icon(SpotubeIcons.plugin),
+            secondary: const Icon(OpenMusicIcons.plugin),
             title: Text(context.l10n.streaming_music_format),
             value: sourcePresets.selectedStreamingContainerIndex,
             options: [
@@ -79,7 +79,7 @@ class SettingsPlaybackSection extends HookConsumerWidget {
             },
           ),
           AdaptiveSelectTile(
-            secondary: const Icon(SpotubeIcons.audioQuality),
+            secondary: const Icon(OpenMusicIcons.audioQuality),
             title: Text(context.l10n.streaming_music_quality),
             value: sourcePresets.selectedStreamingQualityIndex,
             options: [
@@ -96,7 +96,7 @@ class SettingsPlaybackSection extends HookConsumerWidget {
             },
           ),
           AdaptiveSelectTile(
-            secondary: const Icon(SpotubeIcons.plugin),
+            secondary: const Icon(OpenMusicIcons.plugin),
             title: Text(context.l10n.download_music_format),
             value: sourcePresets.selectedDownloadingContainerIndex,
             options: [
@@ -110,7 +110,7 @@ class SettingsPlaybackSection extends HookConsumerWidget {
             },
           ),
           AdaptiveSelectTile(
-            secondary: const Icon(SpotubeIcons.audioQuality),
+            secondary: const Icon(OpenMusicIcons.audioQuality),
             title: Text(context.l10n.download_music_quality),
             value: sourcePresets.selectedStreamingQualityIndex,
             options: [
@@ -147,23 +147,23 @@ class SettingsPlaybackSection extends HookConsumerWidget {
                     ],
                   ),
                 ),
-          leading: const Icon(SpotubeIcons.cache),
+          leading: const Icon(OpenMusicIcons.cache),
           trailing: Switch(
             value: preferences.cacheMusic,
             onChanged: preferencesNotifier.setCacheMusic,
           ),
         ),
         ListTile(
-          leading: const Icon(SpotubeIcons.playlistRemove),
+          leading: const Icon(OpenMusicIcons.playlistRemove),
           title: Text(context.l10n.blacklist),
           subtitle: Text(context.l10n.blacklist_description),
           onTap: () {
             context.navigateTo(const BlackListRoute());
           },
-          trailing: const Icon(SpotubeIcons.angleRight),
+          trailing: const Icon(OpenMusicIcons.angleRight),
         ),
         ListTile(
-          leading: const Icon(SpotubeIcons.normalize),
+          leading: const Icon(OpenMusicIcons.normalize),
           title: Text(context.l10n.normalize_audio),
           trailing: Switch(
             value: preferences.normalizeAudio,
@@ -171,7 +171,7 @@ class SettingsPlaybackSection extends HookConsumerWidget {
           ),
         ),
         ListTile(
-          leading: const Icon(SpotubeIcons.repeat),
+          leading: const Icon(OpenMusicIcons.repeat),
           title: Text(context.l10n.endless_playback),
           trailing: Switch(
             value: preferences.endlessPlayback,
@@ -181,7 +181,7 @@ class SettingsPlaybackSection extends HookConsumerWidget {
         ListTile(
           title: Text(context.l10n.enable_connect),
           subtitle: Text(context.l10n.enable_connect_description),
-          leading: const Icon(SpotubeIcons.connect),
+          leading: const Icon(OpenMusicIcons.connect),
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
             spacing: 10,
@@ -191,7 +191,7 @@ class SettingsPlaybackSection extends HookConsumerWidget {
                   child: Text(context.l10n.edit_port),
                 ).call,
                 child: IconButton.outline(
-                  icon: const Icon(SpotubeIcons.edit),
+                  icon: const Icon(OpenMusicIcons.edit),
                   size: ButtonSize.small,
                   onPressed: () {
                     showDialog(

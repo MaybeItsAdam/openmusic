@@ -2,16 +2,16 @@ import 'package:flutter/material.dart' as material;
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart' hide Page;
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:spotube/components/dialogs/prompt_dialog.dart';
-import 'package:spotube/components/track_presentation/presentation_props.dart';
-import 'package:spotube/components/track_presentation/track_presentation.dart';
-import 'package:spotube/components/track_presentation/use_is_user_playlist.dart';
-import 'package:spotube/extensions/context.dart';
-import 'package:spotube/models/metadata/metadata.dart';
-import 'package:spotube/provider/metadata_plugin/library/playlists.dart';
+import 'package:openmusic/components/dialogs/prompt_dialog.dart';
+import 'package:openmusic/components/track_presentation/presentation_props.dart';
+import 'package:openmusic/components/track_presentation/track_presentation.dart';
+import 'package:openmusic/components/track_presentation/use_is_user_playlist.dart';
+import 'package:openmusic/extensions/context.dart';
+import 'package:openmusic/models/metadata/metadata.dart';
+import 'package:openmusic/provider/metadata_plugin/library/playlists.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:spotube/provider/metadata_plugin/tracks/playlist.dart';
-import 'package:spotube/provider/metadata_plugin/utils/common.dart';
+import 'package:openmusic/provider/metadata_plugin/tracks/playlist.dart';
+import 'package:openmusic/provider/metadata_plugin/utils/common.dart';
 
 @RoutePage()
 class PlaylistPage extends HookConsumerWidget {

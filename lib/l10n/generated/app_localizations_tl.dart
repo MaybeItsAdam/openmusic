@@ -492,13 +492,13 @@ class AppLocalizationsTl extends AppLocalizations {
   String get about => 'Tungkol sa';
 
   @override
-  String get u_love_spotube => 'Alam naming gusto mo ang Spotube';
+  String get u_love_spotube => 'Alam naming gusto mo ang OpenMusic';
 
   @override
   String get check_for_updates => 'Maghanap ng mga update';
 
   @override
-  String get about_spotube => 'Tungkol sa Spotube';
+  String get about_spotube => 'Tungkol sa OpenMusic';
 
   @override
   String get blacklist => 'Blacklist';
@@ -508,7 +508,7 @@ class AppLocalizationsTl extends AppLocalizations {
 
   @override
   String get spotube_description =>
-      'Spotube, isang magaan, cross-platform, libreng-para-sa-lahat na spotify client';
+      'OpenMusic, isang magaan, cross-platform, libreng-para-sa-lahat na spotify client';
 
   @override
   String get version => 'Bersyon';
@@ -732,7 +732,7 @@ class AppLocalizationsTl extends AppLocalizations {
 
   @override
   String get download_ip_ban_warning =>
-      'Sa nga pala, ang iyong IP ay maaaring ma-block sa YouTube dahil sa sobrang mga kahilingan sa pag-download kaysa sa karaniwan. Ang IP block ay nangangahulugang hindi mo magagamit ang YouTube (kahit na naka-log in ka) sa loob ng hindi bababa sa 2-3 buwan mula sa device na may IP na iyon. At hindi pinanghahawakan ng Spotube ang anumang responsibilidad kung mangyayari ito';
+      'Sa nga pala, ang iyong IP ay maaaring ma-block sa YouTube dahil sa sobrang mga kahilingan sa pag-download kaysa sa karaniwan. Ang IP block ay nangangahulugang hindi mo magagamit ang YouTube (kahit na naka-log in ka) sa loob ng hindi bababa sa 2-3 buwan mula sa device na may IP na iyon. At hindi pinanghahawakan ng OpenMusic ang anumang responsibilidad kung mangyayari ito';
 
   @override
   String get by_clicking_accept_terms =>
@@ -748,7 +748,7 @@ class AppLocalizationsTl extends AppLocalizations {
 
   @override
   String get download_agreement_3 =>
-      'Lubos kong nauunawaan na ang aking IP ay maaaring ma-block sa YouTube at hindi ko pinanghahawakan ang Spotube o ang kanyang mga may-ari/nag-ambag na responsable para sa anumang aksidente na sanhi ng aking kasalukuyang aksyon';
+      'Lubos kong nauunawaan na ang aking IP ay maaaring ma-block sa YouTube at hindi ko pinanghahawakan ang OpenMusic o ang kanyang mga may-ari/nag-ambag na responsable para sa anumang aksidente na sanhi ng aking kasalukuyang aksyon';
 
   @override
   String get decline => 'Tanggihan';
@@ -830,7 +830,7 @@ class AppLocalizationsTl extends AppLocalizations {
 
   @override
   String get encryption_failed_warning =>
-      'Gumagamit ng encryption ang Spotube para ligtas na i-store ang iyong data. Ngunit nabigo. Kaya babalik ito sa hindi secure na storage\nKung gumagamit ka ng linux, mangyaring tiyakin na mayroon kang anumang secret-service na naka-install (gnome-keyring, kde-wallet, keepassxc atbp)';
+      'Gumagamit ng encryption ang OpenMusic para ligtas na i-store ang iyong data. Ngunit nabigo. Kaya babalik ito sa hindi secure na storage\nKung gumagamit ka ng linux, mangyaring tiyakin na mayroon kang anumang secret-service na naka-install (gnome-keyring, kde-wallet, keepassxc atbp)';
 
   @override
   String get querying_info => 'Kinukuha ang impormasyon...';
@@ -1013,7 +1013,7 @@ class AppLocalizationsTl extends AppLocalizations {
 
   @override
   String get choose_your_region_description =>
-      'Ito ay tutulong sa Spotube na ipakita sa iyo ang tamang content\npara sa iyong lokasyon.';
+      'Ito ay tutulong sa OpenMusic na ipakita sa iyo ang tamang content\npara sa iyong lokasyon.';
 
   @override
   String get choose_your_language => 'Piliin ang iyong wika';
@@ -1023,7 +1023,7 @@ class AppLocalizationsTl extends AppLocalizations {
 
   @override
   String get help_project_grow_description =>
-      'Ang Spotube ay isang open-source na proyekto. Maaari mong tulungan ang proyektong ito na lumago sa pamamagitan ng pag-contribute sa proyekto, pag-ulat ng mga bug, o pagmungkahi ng mga bagong feature.';
+      'Ang OpenMusic ay isang open-source na proyekto. Maaari mong tulungan ang proyektong ito na lumago sa pamamagitan ng pag-contribute sa proyekto, pag-ulat ng mga bug, o pagmungkahi ng mga bagong feature.';
 
   @override
   String get contribute_on_github => 'Mag-contribute sa GitHub';
@@ -1039,7 +1039,7 @@ class AppLocalizationsTl extends AppLocalizations {
 
   @override
   String get enable_connect_description =>
-      'Kontrolin ang Spotube mula sa ibang mga device';
+      'Kontrolin ang OpenMusic mula sa ibang mga device';
 
   @override
   String get devices => 'Mga Device';
@@ -1087,19 +1087,19 @@ class AppLocalizationsTl extends AppLocalizations {
   }
 
   @override
-  String get spotube_has_an_update => 'Ang Spotube ay may update';
+  String get spotube_has_an_update => 'Ang OpenMusic ay may update';
 
   @override
   String get download_now => 'I-download Ngayon';
 
   @override
   String nightly_version(Object nightlyBuildNum) {
-    return 'Ang Spotube Nightly $nightlyBuildNum ay inilabas na';
+    return 'Ang OpenMusic Nightly $nightlyBuildNum ay inilabas na';
   }
 
   @override
   String release_version(Object version) {
-    return 'Ang Spotube v$version ay inilabas na';
+    return 'Ang OpenMusic v$version ay inilabas na';
   }
 
   @override
@@ -1528,7 +1528,7 @@ class AppLocalizationsTl extends AppLocalizations {
 
   @override
   String get third_party_plugin_dmca_notice =>
-      'Ang Spotube team ay walang hawak na anumang responsibilidad (kabilang ang legal) para sa anumang \"Third-party\" plugins.\nMangyaring gamitin ang mga ito sa iyong sariling peligro. Para sa anumang mga bug/isyu, mangyaring iulat ang mga ito sa repository ng plugin.\n\nKung ang anumang \"Third-party\" plugin ay lumalabag sa ToS/DMCA ng anumang serbisyo/legal na entity, mangyaring hilingin sa \"Third-party\" plugin author o sa hosting platform e.g. GitHub/Codeberg na gumawa ng aksyon. Ang nakalista sa itaas (\"Third-party\" na may label) ay lahat ng pampubliko/komunidad na pinananatiling mga plugin. Hindi namin sila kinukurusado, kaya hindi kami makakagawa ng anumang aksyon sa kanila.\n\n';
+      'Ang OpenMusic team ay walang hawak na anumang responsibilidad (kabilang ang legal) para sa anumang \"Third-party\" plugins.\nMangyaring gamitin ang mga ito sa iyong sariling peligro. Para sa anumang mga bug/isyu, mangyaring iulat ang mga ito sa repository ng plugin.\n\nKung ang anumang \"Third-party\" plugin ay lumalabag sa ToS/DMCA ng anumang serbisyo/legal na entity, mangyaring hilingin sa \"Third-party\" plugin author o sa hosting platform e.g. GitHub/Codeberg na gumawa ng aksyon. Ang nakalista sa itaas (\"Third-party\" na may label) ay lahat ng pampubliko/komunidad na pinananatiling mga plugin. Hindi namin sila kinukurusado, kaya hindi kami makakagawa ng anumang aksyon sa kanila.\n\n';
 
   @override
   String get input_does_not_match_format =>

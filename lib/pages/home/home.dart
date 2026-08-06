@@ -3,18 +3,18 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
-import 'package:spotube/collections/routes.gr.dart';
-import 'package:spotube/collections/spotube_icons.dart';
-import 'package:spotube/models/database/database.dart';
-import 'package:spotube/modules/connect/connect_device.dart';
-import 'package:spotube/modules/home/sections/featured.dart';
-import 'package:spotube/modules/home/sections/sections.dart';
-import 'package:spotube/modules/home/sections/new_releases.dart';
-import 'package:spotube/modules/home/sections/recent.dart';
-import 'package:spotube/components/titlebar/titlebar.dart';
-import 'package:spotube/extensions/constrains.dart';
-import 'package:spotube/provider/user_preferences/user_preferences_provider.dart';
-import 'package:spotube/utils/platform.dart';
+import 'package:openmusic/collections/routes.gr.dart';
+import 'package:openmusic/collections/openmusic_icons.dart';
+import 'package:openmusic/models/database/database.dart';
+import 'package:openmusic/modules/connect/connect_device.dart';
+import 'package:openmusic/modules/home/sections/featured.dart';
+import 'package:openmusic/modules/home/sections/sections.dart';
+import 'package:openmusic/modules/home/sections/new_releases.dart';
+import 'package:openmusic/modules/home/sections/recent.dart';
+import 'package:openmusic/components/titlebar/titlebar.dart';
+import 'package:openmusic/extensions/constrains.dart';
+import 'package:openmusic/provider/user_preferences/user_preferences_provider.dart';
+import 'package:openmusic/utils/platform.dart';
 
 @RoutePage()
 class HomePage extends HookConsumerWidget {
@@ -47,7 +47,7 @@ class HomePage extends HookConsumerWidget {
                     letterSpacing: 1.8,
                     color: theme.colorScheme.foreground,
                   ),
-                  child: const Text("Spotube"),
+                  child: const Text("OpenMusic"),
                 ),
                 backgroundColor: theme.colorScheme.background,
                 foregroundColor: theme.colorScheme.foreground,
@@ -55,7 +55,7 @@ class HomePage extends HookConsumerWidget {
                   const ConnectDeviceButton(),
                   const Gap(10),
                   IconButton.ghost(
-                    icon: const Icon(SpotubeIcons.settings, size: 20),
+                    icon: const Icon(OpenMusicIcons.settings, size: 20),
                     onPressed: () {
                       context.navigateTo(const SettingsRoute());
                     },

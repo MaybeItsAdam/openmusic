@@ -1,11 +1,11 @@
 import 'package:collection/collection.dart';
 import 'package:drift/drift.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:spotube/models/database/database.dart';
-import 'package:spotube/models/metadata/metadata.dart';
-import 'package:spotube/provider/database/database.dart';
-import 'package:spotube/provider/history/top.dart';
-import 'package:spotube/provider/metadata_plugin/utils/family_paginated.dart';
+import 'package:openmusic/models/database/database.dart';
+import 'package:openmusic/models/metadata/metadata.dart';
+import 'package:openmusic/provider/database/database.dart';
+import 'package:openmusic/provider/history/top.dart';
+import 'package:openmusic/provider/metadata_plugin/utils/family_paginated.dart';
 
 typedef PlaybackHistoryPlaylist = ({
   int count,

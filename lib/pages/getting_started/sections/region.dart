@@ -1,12 +1,12 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
-import 'package:spotube/collections/language_codes.dart';
-import 'package:spotube/collections/markets.dart';
-import 'package:spotube/collections/spotube_icons.dart';
-import 'package:spotube/modules/getting_started/blur_card.dart';
-import 'package:spotube/extensions/context.dart';
-import 'package:spotube/l10n/l10n.dart';
-import 'package:spotube/provider/user_preferences/user_preferences_provider.dart';
+import 'package:openmusic/collections/language_codes.dart';
+import 'package:openmusic/collections/markets.dart';
+import 'package:openmusic/collections/openmusic_icons.dart';
+import 'package:openmusic/modules/getting_started/blur_card.dart';
+import 'package:openmusic/extensions/context.dart';
+import 'package:openmusic/l10n/l10n.dart';
+import 'package:openmusic/provider/user_preferences/user_preferences_provider.dart';
 
 class GettingStartedPageLanguageRegionSection extends HookConsumerWidget {
   final void Function() onNext;
@@ -43,7 +43,7 @@ class GettingStartedPageLanguageRegionSection extends HookConsumerWidget {
             children: [
               Row(
                 children: [
-                  const Icon(SpotubeIcons.language, size: 16),
+                  const Icon(OpenMusicIcons.language, size: 16),
                   const SizedBox(width: 8),
                   Text(context.l10n.language_region).semiBold(),
                 ],
@@ -176,7 +176,7 @@ class GettingStartedPageLanguageRegionSection extends HookConsumerWidget {
               Align(
                 alignment: Alignment.centerRight,
                 child: Button.primary(
-                  trailing: const Icon(SpotubeIcons.angleRight),
+                  trailing: const Icon(OpenMusicIcons.angleRight),
                   onPressed: onNext,
                   child: Text(context.l10n.next),
                 ),

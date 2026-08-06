@@ -1,7 +1,7 @@
 import 'package:flutter_undraw/flutter_undraw.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 import 'package:shadcn_flutter/shadcn_flutter_extension.dart';
-import 'package:spotube/extensions/context.dart';
+import 'package:openmusic/extensions/context.dart';
 
 class NotFound extends StatelessWidget {
   const NotFound({super.key});

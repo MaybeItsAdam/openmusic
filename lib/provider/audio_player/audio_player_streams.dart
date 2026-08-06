@@ -3,23 +3,23 @@ import 'dart:math';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
-import 'package:spotube/collections/routes.dart';
-import 'package:spotube/collections/spotube_icons.dart';
-import 'package:spotube/extensions/context.dart';
-import 'package:spotube/models/metadata/metadata.dart';
-import 'package:spotube/provider/audio_player/audio_player.dart';
-import 'package:spotube/provider/audio_player/state.dart';
-import 'package:spotube/provider/discord_provider.dart';
-import 'package:spotube/provider/history/history.dart';
-import 'package:spotube/provider/metadata_plugin/core/scrobble.dart';
-import 'package:spotube/provider/metadata_plugin/metadata_plugin_provider.dart';
-import 'package:spotube/provider/server/sourced_track_provider.dart';
-import 'package:spotube/provider/skip_segments/skip_segments.dart';
-import 'package:spotube/provider/scrobbler/scrobbler.dart';
-import 'package:spotube/provider/user_preferences/user_preferences_provider.dart';
-import 'package:spotube/services/audio_player/audio_player.dart';
-import 'package:spotube/services/audio_services/audio_services.dart';
-import 'package:spotube/services/logger/logger.dart';
+import 'package:openmusic/collections/routes.dart';
+import 'package:openmusic/collections/openmusic_icons.dart';
+import 'package:openmusic/extensions/context.dart';
+import 'package:openmusic/models/metadata/metadata.dart';
+import 'package:openmusic/provider/audio_player/audio_player.dart';
+import 'package:openmusic/provider/audio_player/state.dart';
+import 'package:openmusic/provider/discord_provider.dart';
+import 'package:openmusic/provider/history/history.dart';
+import 'package:openmusic/provider/metadata_plugin/core/scrobble.dart';
+import 'package:openmusic/provider/metadata_plugin/metadata_plugin_provider.dart';
+import 'package:openmusic/provider/server/sourced_track_provider.dart';
+import 'package:openmusic/provider/skip_segments/skip_segments.dart';
+import 'package:openmusic/provider/scrobbler/scrobbler.dart';
+import 'package:openmusic/provider/user_preferences/user_preferences_provider.dart';
+import 'package:openmusic/services/audio_player/audio_player.dart';
+import 'package:openmusic/services/audio_services/audio_services.dart';
+import 'package:openmusic/services/logger/logger.dart';
 
 class AudioPlayerStreamListeners {
   final Ref ref;
@@ -198,7 +198,7 @@ class AudioPlayerStreamListeners {
             fillColor: theme.colorScheme.destructive,
             filled: true,
             child: Basic(
-              leading: const Icon(SpotubeIcons.error),
+              leading: const Icon(OpenMusicIcons.error),
               title: Text(
                 context.l10n.an_error_occurred,
                 style: theme.typography.normal.copyWith(

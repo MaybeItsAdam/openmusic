@@ -1,7 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
-import 'package:spotube/collections/spotube_icons.dart';
-import 'package:spotube/extensions/context.dart';
+import 'package:openmusic/collections/openmusic_icons.dart';
+import 'package:openmusic/extensions/context.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class LinkOpenPermissionDialog extends StatelessWidget {
@@ -16,7 +16,7 @@ class LinkOpenPermissionDialog extends StatelessWidget {
         title: Row(
           spacing: 8,
           children: [
-            const Icon(SpotubeIcons.warning),
+            const Icon(OpenMusicIcons.warning),
             Text(context.l10n.open_link_in_browser),
           ],
         ),

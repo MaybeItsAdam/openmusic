@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:spotube/models/metadata/metadata.dart';
-import 'package:spotube/provider/metadata_plugin/audio_source/quality_presets.dart';
-import 'package:spotube/provider/metadata_plugin/metadata_plugin_provider.dart';
-import 'package:spotube/services/sourced_track/sourced_track.dart';
+import 'package:openmusic/models/metadata/metadata.dart';
+import 'package:openmusic/provider/metadata_plugin/audio_source/quality_presets.dart';
+import 'package:openmusic/provider/metadata_plugin/metadata_plugin_provider.dart';
+import 'package:openmusic/services/sourced_track/sourced_track.dart';
 
 class SourcedTrackNotifier
     extends FamilyAsyncNotifier<SourcedTrack, SpotubeFullTrackObject> {

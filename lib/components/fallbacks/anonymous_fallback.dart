@@ -3,11 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_undraw/flutter_undraw.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 import 'package:shadcn_flutter/shadcn_flutter_extension.dart';
-import 'package:spotube/collections/routes.gr.dart';
-import 'package:spotube/extensions/context.dart';
-import 'package:spotube/provider/metadata_plugin/core/auth.dart';
+import 'package:openmusic/collections/routes.gr.dart';
+import 'package:openmusic/extensions/context.dart';
+import 'package:openmusic/provider/metadata_plugin/core/auth.dart';
 
-import 'package:spotube/utils/platform.dart';
+import 'package:openmusic/utils/platform.dart';
 
 class AnonymousFallback extends ConsumerWidget {
   final Widget? child;

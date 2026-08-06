@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:spotube/models/metadata/metadata.dart';
+import 'package:openmusic/models/metadata/metadata.dart';
 
 part 'track_sources.g.dart';
 

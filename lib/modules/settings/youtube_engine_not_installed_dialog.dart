@@ -5,13 +5,13 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 import 'package:shadcn_flutter/shadcn_flutter_extension.dart';
-import 'package:spotube/collections/spotube_icons.dart';
-import 'package:spotube/components/form/text_form_field.dart';
-import 'package:spotube/extensions/context.dart';
-import 'package:spotube/hooks/controllers/use_shadcn_text_editing_controller.dart';
-import 'package:spotube/models/database/database.dart';
-import 'package:spotube/services/kv_store/kv_store.dart';
-import 'package:spotube/utils/platform.dart';
+import 'package:openmusic/collections/openmusic_icons.dart';
+import 'package:openmusic/components/form/text_form_field.dart';
+import 'package:openmusic/extensions/context.dart';
+import 'package:openmusic/hooks/controllers/use_shadcn_text_editing_controller.dart';
+import 'package:openmusic/models/database/database.dart';
+import 'package:openmusic/services/kv_store/kv_store.dart';
+import 'package:openmusic/utils/platform.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:yt_dlp_dart/yt_dlp_dart.dart';
 
@@ -34,7 +34,7 @@ class YouTubeEngineNotInstalledDialog extends HookConsumerWidget {
         spacing: 8,
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Icon(SpotubeIcons.error, color: Colors.red),
+          const Icon(OpenMusicIcons.error, color: Colors.red),
           Text(
             context.l10n.youtube_engine_not_installed_title(engine.label),
             style: const TextStyle(color: Colors.red),

@@ -1,7 +1,7 @@
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 import 'package:shadcn_flutter/shadcn_flutter_extension.dart';
-import 'package:spotube/collections/spotube_icons.dart';
-import 'package:spotube/extensions/constrains.dart';
+import 'package:openmusic/collections/openmusic_icons.dart';
+import 'package:openmusic/extensions/constrains.dart';
 
 class AdaptiveMenuButton<T> extends MenuButton {
   final T? value;
@@ -145,7 +145,7 @@ class AdaptivePopSheetList<T> extends StatelessWidget {
         tooltip: TooltipContainer(child: Text(tooltip)).call,
         child: IconButton(
           variance: variance,
-          icon: icon ?? const Icon(SpotubeIcons.moreVertical),
+          icon: icon ?? const Icon(OpenMusicIcons.moreVertical),
           onPressed: () {
             final renderBox = context.findRenderObject() as RenderBox;
             final position = RelativeRect.fromRect(
@@ -183,7 +183,7 @@ class AdaptivePopSheetList<T> extends StatelessWidget {
       tooltip: TooltipContainer(child: Text(tooltip)).call,
       child: IconButton(
         variance: variance,
-        icon: icon ?? const Icon(SpotubeIcons.moreVertical),
+        icon: icon ?? const Icon(OpenMusicIcons.moreVertical),
         onPressed: () => showDropdownMenu(context, Offset.zero),
       ),
     );

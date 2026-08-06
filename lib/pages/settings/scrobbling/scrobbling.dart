@@ -4,10 +4,10 @@ import 'package:flutter/material.dart'
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 import 'package:shadcn_flutter/shadcn_flutter_extension.dart';
-import 'package:spotube/collections/routes.gr.dart';
-import 'package:spotube/collections/spotube_icons.dart';
-import 'package:spotube/components/titlebar/titlebar.dart';
-import 'package:spotube/extensions/context.dart';
+import 'package:openmusic/collections/routes.gr.dart';
+import 'package:openmusic/collections/openmusic_icons.dart';
+import 'package:openmusic/components/titlebar/titlebar.dart';
+import 'package:openmusic/extensions/context.dart';
 
 @RoutePage()
 class SettingsScrobblingPage extends HookConsumerWidget {
@@ -45,11 +45,11 @@ class SettingsScrobblingPage extends HookConsumerWidget {
                 Card(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: ListTile(
-                    leading: const Icon(SpotubeIcons.lastFm, color: Colors.red),
+                    leading: const Icon(OpenMusicIcons.lastFm, color: Colors.red),
                     title: Text(context.l10n.login_with_lastfm),
                     subtitle: Text(context.l10n.scrobble_to_lastfm),
                     trailing: Button.secondary(
-                      leading: const Icon(SpotubeIcons.lastFm),
+                      leading: const Icon(OpenMusicIcons.lastFm),
                       onPressed: () {
                         context.navigateTo(const LastFMLoginRoute());
                       },

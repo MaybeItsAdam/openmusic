@@ -1,12 +1,12 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 
-import 'package:spotube/components/heart_button/use_track_toggle_like.dart';
-import 'package:spotube/extensions/context.dart';
-import 'package:spotube/models/metadata/metadata.dart';
-import 'package:spotube/provider/metadata_plugin/core/auth.dart';
-import 'package:spotube/provider/metadata_plugin/library/tracks.dart';
-import 'package:spotube/provider/metadata_plugin/core/user.dart';
+import 'package:openmusic/components/heart_button/use_track_toggle_like.dart';
+import 'package:openmusic/extensions/context.dart';
+import 'package:openmusic/models/metadata/metadata.dart';
+import 'package:openmusic/provider/metadata_plugin/core/auth.dart';
+import 'package:openmusic/provider/metadata_plugin/library/tracks.dart';
+import 'package:openmusic/provider/metadata_plugin/core/user.dart';
 
 class HeartButton extends HookConsumerWidget {
   final bool isLiked;

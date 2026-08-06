@@ -1,19 +1,19 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 import 'package:skeletonizer/skeletonizer.dart';
-import 'package:spotube/collections/fake.dart';
-import 'package:spotube/components/dialogs/prompt_dialog.dart';
-import 'package:spotube/components/dialogs/select_device_dialog.dart';
-import 'package:spotube/components/fallbacks/error_box.dart';
-import 'package:spotube/components/track_tile/track_tile.dart';
-import 'package:spotube/extensions/context.dart';
-import 'package:spotube/models/connect/connect.dart';
-import 'package:spotube/modules/search/loading.dart';
-import 'package:spotube/pages/search/search.dart';
-import 'package:spotube/provider/audio_player/audio_player.dart';
-import 'package:spotube/provider/connect/connect.dart';
-import 'package:spotube/provider/metadata_plugin/search/tracks.dart';
-import 'package:spotube/provider/metadata_plugin/utils/common.dart';
+import 'package:openmusic/collections/fake.dart';
+import 'package:openmusic/components/dialogs/prompt_dialog.dart';
+import 'package:openmusic/components/dialogs/select_device_dialog.dart';
+import 'package:openmusic/components/fallbacks/error_box.dart';
+import 'package:openmusic/components/track_tile/track_tile.dart';
+import 'package:openmusic/extensions/context.dart';
+import 'package:openmusic/models/connect/connect.dart';
+import 'package:openmusic/modules/search/loading.dart';
+import 'package:openmusic/pages/search/search.dart';
+import 'package:openmusic/provider/audio_player/audio_player.dart';
+import 'package:openmusic/provider/connect/connect.dart';
+import 'package:openmusic/provider/metadata_plugin/search/tracks.dart';
+import 'package:openmusic/provider/metadata_plugin/utils/common.dart';
 import 'package:very_good_infinite_list/very_good_infinite_list.dart';
 
 class SearchPageTracksTab extends HookConsumerWidget {

@@ -11,26 +11,26 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 import 'package:shadcn_flutter/shadcn_flutter_extension.dart';
 import 'package:skeletonizer/skeletonizer.dart';
-import 'package:spotube/collections/fake.dart';
-import 'package:spotube/collections/spotube_icons.dart';
-import 'package:spotube/components/button/back_button.dart';
-import 'package:spotube/components/track_presentation/presentation_actions.dart';
-import 'package:spotube/extensions/constrains.dart';
-import 'package:spotube/extensions/string.dart';
-import 'package:spotube/hooks/controllers/use_shadcn_text_editing_controller.dart';
-import 'package:spotube/models/metadata/metadata.dart';
-import 'package:spotube/modules/library/local_folder/cache_export_dialog.dart';
-import 'package:spotube/pages/library/user_local_tracks/user_local_tracks.dart';
-import 'package:spotube/components/expandable_search/expandable_search.dart';
-import 'package:spotube/components/inter_scrollbar/inter_scrollbar.dart';
-import 'package:spotube/components/titlebar/titlebar.dart';
-import 'package:spotube/components/track_presentation/sort_tracks_dropdown.dart';
-import 'package:spotube/components/track_tile/track_tile.dart';
-import 'package:spotube/extensions/context.dart';
-import 'package:spotube/provider/local_tracks/local_tracks_provider.dart';
-import 'package:spotube/provider/audio_player/audio_player.dart';
-import 'package:spotube/provider/user_preferences/user_preferences_provider.dart';
-import 'package:spotube/utils/service_utils.dart';
+import 'package:openmusic/collections/fake.dart';
+import 'package:openmusic/collections/openmusic_icons.dart';
+import 'package:openmusic/components/button/back_button.dart';
+import 'package:openmusic/components/track_presentation/presentation_actions.dart';
+import 'package:openmusic/extensions/constrains.dart';
+import 'package:openmusic/extensions/string.dart';
+import 'package:openmusic/hooks/controllers/use_shadcn_text_editing_controller.dart';
+import 'package:openmusic/models/metadata/metadata.dart';
+import 'package:openmusic/modules/library/local_folder/cache_export_dialog.dart';
+import 'package:openmusic/pages/library/user_local_tracks/user_local_tracks.dart';
+import 'package:openmusic/components/expandable_search/expandable_search.dart';
+import 'package:openmusic/components/inter_scrollbar/inter_scrollbar.dart';
+import 'package:openmusic/components/titlebar/titlebar.dart';
+import 'package:openmusic/components/track_presentation/sort_tracks_dropdown.dart';
+import 'package:openmusic/components/track_tile/track_tile.dart';
+import 'package:openmusic/extensions/context.dart';
+import 'package:openmusic/provider/local_tracks/local_tracks_provider.dart';
+import 'package:openmusic/provider/audio_player/audio_player.dart';
+import 'package:openmusic/provider/user_preferences/user_preferences_provider.dart';
+import 'package:openmusic/utils/service_utils.dart';
 import 'package:auto_route/auto_route.dart';
 
 @RoutePage()
@@ -159,7 +159,7 @@ class LocalLibraryPage extends HookConsumerWidget {
                   icon: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Icon(SpotubeIcons.delete),
+                      const Icon(OpenMusicIcons.delete),
                       Text(context.l10n.clear_cache),
                     ],
                   ).xSmall().iconSmall(),
@@ -203,7 +203,7 @@ class LocalLibraryPage extends HookConsumerWidget {
                   icon: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Icon(SpotubeIcons.export),
+                      const Icon(OpenMusicIcons.export),
                       Text(context.l10n.export),
                     ],
                   ).xSmall().iconSmall(),
@@ -267,8 +267,8 @@ class LocalLibraryPage extends HookConsumerWidget {
                             : null,
                         icon: Icon(
                           isPlaylistPlaying
-                              ? SpotubeIcons.stop
-                              : SpotubeIcons.play,
+                              ? OpenMusicIcons.stop
+                              : OpenMusicIcons.play,
                         ),
                       ),
                     ),
@@ -293,7 +293,7 @@ class LocalLibraryPage extends HookConsumerWidget {
                               }
                             : null,
                         enabled: !isPlaylistPlaying,
-                        icon: const Icon(SpotubeIcons.shuffle),
+                        icon: const Icon(OpenMusicIcons.shuffle),
                       ),
                     ),
                     const Gap(5),
@@ -318,7 +318,7 @@ class LocalLibraryPage extends HookConsumerWidget {
                               }
                             : null,
                         enabled: !isPlaylistPlaying,
-                        icon: const Icon(SpotubeIcons.queueAdd),
+                        icon: const Icon(OpenMusicIcons.queueAdd),
                       ),
                     ),
                     const Spacer(),
@@ -350,7 +350,7 @@ class LocalLibraryPage extends HookConsumerWidget {
                     ),
                     const Gap(5),
                     IconButton.outline(
-                      icon: const Icon(SpotubeIcons.refresh),
+                      icon: const Icon(OpenMusicIcons.refresh),
                       onPressed: () {
                         ref.invalidate(localTracksProvider);
                       },

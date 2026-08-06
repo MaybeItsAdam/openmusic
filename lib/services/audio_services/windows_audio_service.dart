@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:smtc_windows/smtc_windows.dart';
-import 'package:spotube/models/metadata/metadata.dart';
-import 'package:spotube/provider/audio_player/audio_player.dart';
-import 'package:spotube/services/audio_player/audio_player.dart';
-import 'package:spotube/services/audio_player/playback_state.dart';
+import 'package:openmusic/models/metadata/metadata.dart';
+import 'package:openmusic/provider/audio_player/audio_player.dart';
+import 'package:openmusic/services/audio_player/audio_player.dart';
+import 'package:openmusic/services/audio_player/playback_state.dart';
 
 class WindowsAudioService {
   final SMTCWindows smtc;

@@ -4,18 +4,18 @@ import 'package:collection/collection.dart';
 import 'package:dio/dio.dart';
 import 'package:drift/drift.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:spotube/models/database/database.dart';
-import 'package:spotube/models/metadata/metadata.dart';
-import 'package:spotube/models/playback/track_sources.dart';
-import 'package:spotube/provider/database/database.dart';
-import 'package:spotube/provider/metadata_plugin/audio_source/quality_presets.dart';
-import 'package:spotube/provider/metadata_plugin/metadata_plugin_provider.dart';
-import 'package:spotube/services/dio/dio.dart';
-import 'package:spotube/services/logger/logger.dart';
-import 'package:spotube/services/metadata/errors/exceptions.dart';
+import 'package:openmusic/models/database/database.dart';
+import 'package:openmusic/models/metadata/metadata.dart';
+import 'package:openmusic/models/playback/track_sources.dart';
+import 'package:openmusic/provider/database/database.dart';
+import 'package:openmusic/provider/metadata_plugin/audio_source/quality_presets.dart';
+import 'package:openmusic/provider/metadata_plugin/metadata_plugin_provider.dart';
+import 'package:openmusic/services/dio/dio.dart';
+import 'package:openmusic/services/logger/logger.dart';
+import 'package:openmusic/services/metadata/errors/exceptions.dart';
 
-import 'package:spotube/services/sourced_track/exceptions.dart';
-import 'package:spotube/utils/service_utils.dart';
+import 'package:openmusic/services/sourced_track/exceptions.dart';
+import 'package:openmusic/utils/service_utils.dart';
 
 final officialMusicRegex = RegExp(
   r"official\s(video|audio|music\svideo|lyric\svideo|visualizer)",

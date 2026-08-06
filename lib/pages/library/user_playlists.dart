@@ -5,23 +5,23 @@ import 'package:collection/collection.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart' hide Image;
 import 'package:shadcn_flutter/shadcn_flutter_extension.dart';
-import 'package:spotube/collections/assets.gen.dart';
+import 'package:openmusic/collections/assets.gen.dart';
 
-import 'package:spotube/collections/spotube_icons.dart';
-import 'package:spotube/components/fallbacks/error_box.dart';
-import 'package:spotube/components/fallbacks/no_default_metadata_plugin.dart';
-import 'package:spotube/components/playbutton_view/playbutton_view.dart';
-import 'package:spotube/models/metadata/metadata.dart';
-import 'package:spotube/modules/playlist/playlist_create_dialog.dart';
-import 'package:spotube/components/inter_scrollbar/inter_scrollbar.dart';
-import 'package:spotube/components/fallbacks/anonymous_fallback.dart';
-import 'package:spotube/modules/playlist/playlist_card.dart';
-import 'package:spotube/extensions/context.dart';
-import 'package:spotube/provider/metadata_plugin/core/auth.dart';
-import 'package:spotube/provider/metadata_plugin/library/playlists.dart';
-import 'package:spotube/provider/metadata_plugin/core/user.dart';
+import 'package:openmusic/collections/openmusic_icons.dart';
+import 'package:openmusic/components/fallbacks/error_box.dart';
+import 'package:openmusic/components/fallbacks/no_default_metadata_plugin.dart';
+import 'package:openmusic/components/playbutton_view/playbutton_view.dart';
+import 'package:openmusic/models/metadata/metadata.dart';
+import 'package:openmusic/modules/playlist/playlist_create_dialog.dart';
+import 'package:openmusic/components/inter_scrollbar/inter_scrollbar.dart';
+import 'package:openmusic/components/fallbacks/anonymous_fallback.dart';
+import 'package:openmusic/modules/playlist/playlist_card.dart';
+import 'package:openmusic/extensions/context.dart';
+import 'package:openmusic/provider/metadata_plugin/core/auth.dart';
+import 'package:openmusic/provider/metadata_plugin/library/playlists.dart';
+import 'package:openmusic/provider/metadata_plugin/core/user.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:spotube/services/metadata/errors/exceptions.dart';
+import 'package:openmusic/services/metadata/errors/exceptions.dart';
 
 @RoutePage()
 class UserPlaylistsPage extends HookConsumerWidget {
@@ -123,7 +123,7 @@ class UserPlaylistsPage extends HookConsumerWidget {
                     onChanged: (value) => searchText.value = value,
                     placeholder: Text(context.l10n.filter_playlists),
                     features: const [
-                      InputFeature.leading(Icon(SpotubeIcons.filter)),
+                      InputFeature.leading(Icon(OpenMusicIcons.filter)),
                     ],
                   ),
                 ),
@@ -138,7 +138,7 @@ class UserPlaylistsPage extends HookConsumerWidget {
                         PlaylistCreateDialogButton(),
                         // const Gap(10),
                         // Button.primary(
-                        //   leading: const Icon(SpotubeIcons.magic),
+                        //   leading: const Icon(OpenMusicIcons.magic),
                         //   child: Text(context.l10n.generate),
                         //   onPressed: () {
                         //     context.navigateTo(const PlaylistGeneratorRoute());

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=OpenMusic
+Exec=/usr/bin/openmusic
+Icon=/usr/share/icons/openmusic/openmusic-logo.png
+Comment=A music streaming app combining the power of music metadata providers & YouTube
+Terminal=false
+Categories=Audio;Music;Player;AudioVideo;
+# MimeType=x-scheme-handler/spotify;

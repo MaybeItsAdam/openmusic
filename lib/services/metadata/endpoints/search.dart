@@ -1,6 +1,6 @@
 import 'package:hetu_script/hetu_script.dart';
 import 'package:hetu_script/values.dart';
-import 'package:spotube/models/metadata/metadata.dart';
+import 'package:openmusic/models/metadata/metadata.dart';
 
 class MetadataPluginSearchEndpoint {
   final Hetu hetu;

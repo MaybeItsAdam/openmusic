@@ -5,25 +5,25 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
-import 'package:spotube/collections/assets.gen.dart';
-import 'package:spotube/collections/routes.gr.dart';
-import 'package:spotube/collections/spotube_icons.dart';
-import 'package:spotube/components/framework/app_pop_scope.dart';
-import 'package:spotube/models/metadata/metadata.dart';
-import 'package:spotube/modules/player/player_actions.dart';
-import 'package:spotube/modules/player/player_controls.dart';
-import 'package:spotube/modules/player/volume_slider.dart';
-import 'package:spotube/components/dialogs/track_details_dialog.dart';
-import 'package:spotube/components/links/artist_link.dart';
-import 'package:spotube/components/titlebar/titlebar.dart';
-import 'package:spotube/components/image/universal_image.dart';
-import 'package:spotube/extensions/constrains.dart';
-import 'package:spotube/extensions/context.dart';
-import 'package:spotube/modules/root/spotube_navigation_bar.dart';
-import 'package:spotube/provider/audio_player/audio_player.dart';
-import 'package:spotube/provider/metadata_plugin/audio_source/quality_label.dart';
-import 'package:spotube/provider/server/active_track_sources.dart';
-import 'package:spotube/provider/volume_provider.dart';
+import 'package:openmusic/collections/assets.gen.dart';
+import 'package:openmusic/collections/routes.gr.dart';
+import 'package:openmusic/collections/openmusic_icons.dart';
+import 'package:openmusic/components/framework/app_pop_scope.dart';
+import 'package:openmusic/models/metadata/metadata.dart';
+import 'package:openmusic/modules/player/player_actions.dart';
+import 'package:openmusic/modules/player/player_controls.dart';
+import 'package:openmusic/modules/player/volume_slider.dart';
+import 'package:openmusic/components/dialogs/track_details_dialog.dart';
+import 'package:openmusic/components/links/artist_link.dart';
+import 'package:openmusic/components/titlebar/titlebar.dart';
+import 'package:openmusic/components/image/universal_image.dart';
+import 'package:openmusic/extensions/constrains.dart';
+import 'package:openmusic/extensions/context.dart';
+import 'package:openmusic/modules/root/openmusic_navigation_bar.dart';
+import 'package:openmusic/provider/audio_player/audio_player.dart';
+import 'package:openmusic/provider/metadata_plugin/audio_source/quality_label.dart';
+import 'package:openmusic/provider/server/active_track_sources.dart';
+import 'package:openmusic/provider/volume_provider.dart';
 
 class PlayerView extends HookConsumerWidget {
   final PanelController panelController;
@@ -104,7 +104,7 @@ class PlayerView extends HookConsumerWidget {
                 leading: [
                   IconButton.ghost(
                     size: const ButtonSize(1.2),
-                    icon: const Icon(SpotubeIcons.angleDown),
+                    icon: const Icon(OpenMusicIcons.angleDown),
                     onPressed: panelController.close,
                   ),
                 ],
@@ -116,7 +116,7 @@ class PlayerView extends HookConsumerWidget {
                       ).call,
                       child: IconButton.ghost(
                         size: const ButtonSize(1.2),
-                        icon: const Icon(SpotubeIcons.info),
+                        icon: const Icon(OpenMusicIcons.info),
                         onPressed: currentActiveTrackSource == null
                             ? null
                             : () {
@@ -220,7 +220,7 @@ class PlayerView extends HookConsumerWidget {
                       const SizedBox(width: 10),
                       Expanded(
                         child: OutlineButton(
-                          leading: const Icon(SpotubeIcons.queue),
+                          leading: const Icon(OpenMusicIcons.queue),
                           child: Text(context.l10n.queue),
                           onPressed: () {
                             context.pushRoute(const PlayerQueueRoute());
@@ -230,7 +230,7 @@ class PlayerView extends HookConsumerWidget {
                       const SizedBox(width: 10),
                       Expanded(
                         child: OutlineButton(
-                          leading: const Icon(SpotubeIcons.music),
+                          leading: const Icon(OpenMusicIcons.music),
                           child: Text(context.l10n.lyrics),
                           onPressed: () {
                             context.pushRoute(const PlayerLyricsRoute());
@@ -267,7 +267,7 @@ class PlayerView extends HookConsumerWidget {
                         return value.copyWith(fontWeight: FontWeight.w500);
                       },
                     ),
-                    leading: const Icon(SpotubeIcons.lightningOutlined),
+                    leading: const Icon(OpenMusicIcons.lightningOutlined),
                     child: Text(qualityLabel),
                   ),
                 ],

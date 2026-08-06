@@ -3,23 +3,23 @@ import 'dart:ui';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 import 'package:skeletonizer/skeletonizer.dart';
-import 'package:spotube/collections/fake.dart';
-import 'package:spotube/collections/routes.gr.dart';
-import 'package:spotube/collections/spotube_icons.dart';
-import 'package:spotube/components/heart_button/heart_button.dart';
-import 'package:spotube/components/image/universal_image.dart';
-import 'package:spotube/components/links/artist_link.dart';
-import 'package:spotube/components/links/link_text.dart';
-import 'package:spotube/components/titlebar/titlebar.dart';
-import 'package:spotube/components/track_tile/track_options_button.dart';
-import 'package:spotube/extensions/context.dart';
-import 'package:spotube/extensions/list.dart';
-import 'package:spotube/models/metadata/metadata.dart';
-import 'package:spotube/provider/audio_player/audio_player.dart';
-import 'package:spotube/provider/metadata_plugin/tracks/track.dart';
-import 'package:spotube/services/audio_player/audio_player.dart';
+import 'package:openmusic/collections/fake.dart';
+import 'package:openmusic/collections/routes.gr.dart';
+import 'package:openmusic/collections/openmusic_icons.dart';
+import 'package:openmusic/components/heart_button/heart_button.dart';
+import 'package:openmusic/components/image/universal_image.dart';
+import 'package:openmusic/components/links/artist_link.dart';
+import 'package:openmusic/components/links/link_text.dart';
+import 'package:openmusic/components/titlebar/titlebar.dart';
+import 'package:openmusic/components/track_tile/track_options_button.dart';
+import 'package:openmusic/extensions/context.dart';
+import 'package:openmusic/extensions/list.dart';
+import 'package:openmusic/models/metadata/metadata.dart';
+import 'package:openmusic/provider/audio_player/audio_player.dart';
+import 'package:openmusic/provider/metadata_plugin/tracks/track.dart';
+import 'package:openmusic/services/audio_player/audio_player.dart';
 
-import 'package:spotube/extensions/constrains.dart';
+import 'package:openmusic/extensions/constrains.dart';
 import 'package:auto_route/auto_route.dart';
 
 @RoutePage()
@@ -130,7 +130,7 @@ class TrackPage extends HookConsumerWidget {
                                 Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    const Icon(SpotubeIcons.album),
+                                    const Icon(OpenMusicIcons.album),
                                     const Gap(5),
                                     Flexible(
                                       child: LinkText(
@@ -148,7 +148,7 @@ class TrackPage extends HookConsumerWidget {
                                 Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    const Icon(SpotubeIcons.artist),
+                                    const Icon(OpenMusicIcons.artist),
                                     const Gap(5),
                                     Flexible(
                                       child: ArtistLink(
@@ -176,7 +176,7 @@ class TrackPage extends HookConsumerWidget {
                                           ))
                                         Button.outline(
                                           leading: const Icon(
-                                            SpotubeIcons.queueAdd,
+                                            OpenMusicIcons.queueAdd,
                                           ),
                                           child: Text(context.l10n.queue),
                                           onPressed: () {
@@ -195,7 +195,7 @@ class TrackPage extends HookConsumerWidget {
                                           ).call,
                                           child: IconButton.outline(
                                             icon: const Icon(
-                                              SpotubeIcons.lightning,
+                                              OpenMusicIcons.lightning,
                                             ),
                                             onPressed: () {
                                               playlistNotifier.addTracksAtFirst(
@@ -217,8 +217,8 @@ class TrackPage extends HookConsumerWidget {
                                           shape: ButtonShape.circle,
                                           icon: Icon(
                                             isActive
-                                                ? SpotubeIcons.pause
-                                                : SpotubeIcons.play,
+                                                ? OpenMusicIcons.pause
+                                                : OpenMusicIcons.play,
                                           ),
                                           onPressed: onPlay,
                                         ),

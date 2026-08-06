@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  OpenMusic — PLACEHOLDER logo mark.
+
+  This is a deliberately simple, hand-authored geometric placeholder that exists
+  so the app has a consistent, non-Spotube identity while a real designer
+  produces the final mark. Replace it; do not treat it as final brand art.
+
+  Concept: an "open" ring (a circle broken on the right) with a play triangle
+  whose tip points out through the opening.
+
+  Palette (flat, two colours):
+    ink    #242832  - background (also flutter_launcher_icons adaptive_icon_background)
+    accent #4DA3FF  - the mark
+
+  No text and no font dependencies: every shape is pure geometry, so this
+  renders identically on any machine.
+
+  Geometry notes for anyone regenerating variants:
+    artboard   512 x 512, mark centred on (256, 256)
+    ring       r = 150, stroke 40 -> outer extent 170 (66.4% of the artboard)
+    ring gap   80 degrees, centred on the +x axis
+    triangle   stays inside the ring's 130px inner radius
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <title>OpenMusic</title>
+  <rect width="512" height="512" fill="#242832"/>
+  <g stroke="#4DA3FF" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <!-- open ring: 280 degrees of arc, leaving an 80 degree gap on the right -->
+    <path d="M370.9 352.4 A150 150 0 1 1 370.9 159.6" stroke-width="40"/>
+    <!-- play triangle, tip aimed at the opening -->
+    <path d="M214 194 L332 256 L214 318 Z" stroke-width="26" fill="#4DA3FF"/>
+  </g>
+</svg>

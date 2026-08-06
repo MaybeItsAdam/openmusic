@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
-import 'package:spotube/models/database/database.dart';
-import 'package:spotube/provider/database/database.dart';
+import 'package:openmusic/models/database/database.dart';
+import 'package:openmusic/provider/database/database.dart';
 
 class RecentlyPlayedItemNotifier extends AsyncNotifier<List<HistoryTableData>> {
   @override

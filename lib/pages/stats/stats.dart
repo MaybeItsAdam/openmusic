@@ -1,10 +1,10 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
-import 'package:spotube/collections/routes.gr.dart';
-import 'package:spotube/components/titlebar/titlebar.dart';
-import 'package:spotube/modules/stats/summary/summary.dart';
-import 'package:spotube/modules/stats/top/top.dart';
-import 'package:spotube/utils/platform.dart';
+import 'package:openmusic/collections/routes.gr.dart';
+import 'package:openmusic/components/titlebar/titlebar.dart';
+import 'package:openmusic/modules/stats/summary/summary.dart';
+import 'package:openmusic/modules/stats/top/top.dart';
+import 'package:openmusic/utils/platform.dart';
 import 'package:auto_route/auto_route.dart';
 
 @RoutePage()

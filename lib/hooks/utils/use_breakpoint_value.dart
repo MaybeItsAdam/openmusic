@@ -1,6 +1,6 @@
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:spotube/extensions/constrains.dart';
+import 'package:openmusic/extensions/constrains.dart';
 
 T useBreakpointValue<T>({
   T? xs,

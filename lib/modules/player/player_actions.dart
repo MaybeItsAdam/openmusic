@@ -4,22 +4,22 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 import 'package:shadcn_flutter/shadcn_flutter_extension.dart';
-import 'package:spotube/collections/routes.gr.dart';
+import 'package:openmusic/collections/routes.gr.dart';
 
-import 'package:spotube/collections/spotube_icons.dart';
-import 'package:spotube/extensions/constrains.dart';
-import 'package:spotube/models/metadata/metadata.dart';
-import 'package:spotube/modules/player/player_queue.dart';
-import 'package:spotube/modules/player/sibling_tracks_sheet.dart';
-import 'package:spotube/components/adaptive/adaptive_pop_sheet_list.dart';
-import 'package:spotube/components/heart_button/heart_button.dart';
-import 'package:spotube/extensions/context.dart';
-import 'package:spotube/extensions/duration.dart';
-import 'package:spotube/provider/download_manager_provider.dart';
-import 'package:spotube/provider/audio_player/audio_player.dart';
-import 'package:spotube/provider/local_tracks/local_tracks_provider.dart';
-import 'package:spotube/provider/metadata_plugin/core/auth.dart';
-import 'package:spotube/provider/sleep_timer_provider.dart';
+import 'package:openmusic/collections/openmusic_icons.dart';
+import 'package:openmusic/extensions/constrains.dart';
+import 'package:openmusic/models/metadata/metadata.dart';
+import 'package:openmusic/modules/player/player_queue.dart';
+import 'package:openmusic/modules/player/sibling_tracks_sheet.dart';
+import 'package:openmusic/components/adaptive/adaptive_pop_sheet_list.dart';
+import 'package:openmusic/components/heart_button/heart_button.dart';
+import 'package:openmusic/extensions/context.dart';
+import 'package:openmusic/extensions/duration.dart';
+import 'package:openmusic/provider/download_manager_provider.dart';
+import 'package:openmusic/provider/audio_player/audio_player.dart';
+import 'package:openmusic/provider/local_tracks/local_tracks_provider.dart';
+import 'package:openmusic/provider/metadata_plugin/core/auth.dart';
+import 'package:openmusic/provider/sleep_timer_provider.dart';
 
 class PlayerActions extends HookConsumerWidget {
   final MainAxisAlignment mainAxisAlignment;
@@ -87,7 +87,7 @@ class PlayerActions extends HookConsumerWidget {
           Tooltip(
             tooltip: TooltipContainer(child: Text(context.l10n.queue)).call,
             child: IconButton.ghost(
-              icon: const Icon(SpotubeIcons.queue),
+              icon: const Icon(OpenMusicIcons.queue),
               enabled: playlist.activeTrack != null,
               onPressed: () {
                 openDrawer(
@@ -127,7 +127,7 @@ class PlayerActions extends HookConsumerWidget {
             ).call,
             child: IconButton.ghost(
               enabled: playlist.activeTrack != null,
-              icon: const Icon(SpotubeIcons.alternativeRoute),
+              icon: const Icon(OpenMusicIcons.alternativeRoute),
               onPressed: () {
                 final screenSize = MediaQuery.sizeOf(context);
                 if (screenSize.mdAndUp) {
@@ -167,7 +167,7 @@ class PlayerActions extends HookConsumerWidget {
               ).call,
               child: IconButton.ghost(
                 icon: Icon(
-                  isDownloaded ? SpotubeIcons.done : SpotubeIcons.download,
+                  isDownloaded ? OpenMusicIcons.done : OpenMusicIcons.download,
                 ),
                 onPressed: playlist.activeTrack != null
                     ? () => downloader.addToQueue(
@@ -185,7 +185,7 @@ class PlayerActions extends HookConsumerWidget {
           offset: Offset(0, -50 * (sleepTimerEntries.values.length + 2)),
           headings: [Text(context.l10n.sleep_timer)],
           icon: Icon(
-            SpotubeIcons.timer,
+            OpenMusicIcons.timer,
             color: sleepTimer != null ? Colors.red : null,
           ),
           onSelected: (value) {
@@ -214,7 +214,7 @@ class PlayerActions extends HookConsumerWidget {
                       return AlertDialog(
                         trailing: IconButton.ghost(
                           size: ButtonSize.xSmall,
-                          icon: const Icon(SpotubeIcons.close),
+                          icon: const Icon(OpenMusicIcons.close),
                           onPressed: () {
                             Navigator.of(context).pop();
                           },

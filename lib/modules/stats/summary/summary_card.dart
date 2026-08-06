@@ -2,7 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/foundation.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 import 'package:shadcn_flutter/shadcn_flutter_extension.dart';
-import 'package:spotube/collections/formatters.dart';
+import 'package:openmusic/collections/formatters.dart';
 
 class SummaryCard extends StatelessWidget {
   final String title;

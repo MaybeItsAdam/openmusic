@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:spotube/services/logger/logger.dart';
+import 'package:openmusic/services/logger/logger.dart';
 
 final logsProvider = StreamProvider.autoDispose((ref) async* {
   final file = await AppLogger.getLogsPath();

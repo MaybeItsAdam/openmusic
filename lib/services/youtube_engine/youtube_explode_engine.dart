@@ -1,7 +1,7 @@
 import 'dart:isolate';
 
 import 'package:flutter/foundation.dart';
-import 'package:spotube/services/youtube_engine/youtube_engine.dart';
+import 'package:openmusic/services/youtube_engine/youtube_engine.dart';
 // import 'package:youtube_explode_dart/solvers.dart';
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 

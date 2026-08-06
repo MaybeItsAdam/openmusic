@@ -2,15 +2,15 @@ import 'package:collection/collection.dart';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
-import 'package:spotube/components/dialogs/prompt_dialog.dart';
-import 'package:spotube/components/dialogs/select_device_dialog.dart';
-import 'package:spotube/components/track_tile/track_tile.dart';
-import 'package:spotube/extensions/context.dart';
-import 'package:spotube/models/connect/connect.dart';
-import 'package:spotube/pages/search/search.dart';
-import 'package:spotube/provider/connect/connect.dart';
-import 'package:spotube/provider/audio_player/audio_player.dart';
-import 'package:spotube/provider/metadata_plugin/search/all.dart';
+import 'package:openmusic/components/dialogs/prompt_dialog.dart';
+import 'package:openmusic/components/dialogs/select_device_dialog.dart';
+import 'package:openmusic/components/track_tile/track_tile.dart';
+import 'package:openmusic/extensions/context.dart';
+import 'package:openmusic/models/connect/connect.dart';
+import 'package:openmusic/pages/search/search.dart';
+import 'package:openmusic/provider/connect/connect.dart';
+import 'package:openmusic/provider/audio_player/audio_player.dart';
+import 'package:openmusic/provider/metadata_plugin/search/all.dart';
 
 class SearchTracksSection extends HookConsumerWidget {
   const SearchTracksSection({super.key});

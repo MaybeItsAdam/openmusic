@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:shadcn_flutter/shadcn_flutter.dart';
-import 'package:spotube/models/metadata/metadata.dart';
+import 'package:openmusic/models/metadata/metadata.dart';
 
 class PaginationProps {
   final bool hasNextPage;

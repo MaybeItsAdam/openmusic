@@ -19,7 +19,7 @@ final placeholderUrlMap = {
       "https://avatars.dicebear.com/api/bottts/${PrimitiveUtils.uuid.v4()}.png",
 };
 
-extension SpotubeImageExtensions on List<SpotubeImageObject>? {
+extension OpenMusicImageExtensions on List<SpotubeImageObject>? {
   /// Returns the URL of the image at the specified index.
   String asUrlString({int index = 1, required ImagePlaceholder placeholder}) {
     final sortedImage = this?.sorted(

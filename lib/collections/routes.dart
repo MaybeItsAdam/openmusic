@@ -2,9 +2,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:spotube/collections/routes.gr.dart';
-import 'package:spotube/provider/metadata_plugin/core/auth.dart';
-import 'package:spotube/services/kv_store/kv_store.dart';
+import 'package:openmusic/collections/routes.gr.dart';
+import 'package:openmusic/provider/metadata_plugin/core/auth.dart';
+import 'package:openmusic/services/kv_store/kv_store.dart';
 
 final rootNavigatorKey = GlobalKey<NavigatorState>();
 
@@ -72,7 +72,7 @@ class AppRouter extends RootStackRouter {
             ),
             AutoRoute(path: "settings/blacklist", page: BlackListRoute.page),
             if (!kIsWeb) AutoRoute(path: "settings/logs", page: LogsRoute.page),
-            AutoRoute(path: "settings/about", page: AboutSpotubeRoute.page),
+            AutoRoute(path: "settings/about", page: AboutOpenMusicRoute.page),
             AutoRoute(
               path: "settings/scrobbling",
               page: SettingsScrobblingRoute.page,

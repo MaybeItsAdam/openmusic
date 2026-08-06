@@ -1,16 +1,16 @@
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
-import 'package:spotube/components/fallbacks/not_found.dart';
-import 'package:spotube/components/image/universal_image.dart';
-import 'package:spotube/components/inter_scrollbar/inter_scrollbar.dart';
-import 'package:spotube/components/ui/button_tile.dart';
-import 'package:spotube/extensions/constrains.dart';
-import 'package:spotube/extensions/context.dart';
-import 'package:spotube/extensions/duration.dart';
-import 'package:spotube/models/metadata/metadata.dart';
-import 'package:spotube/provider/audio_player/audio_player.dart';
-import 'package:spotube/provider/server/sourced_track_provider.dart';
+import 'package:openmusic/components/fallbacks/not_found.dart';
+import 'package:openmusic/components/image/universal_image.dart';
+import 'package:openmusic/components/inter_scrollbar/inter_scrollbar.dart';
+import 'package:openmusic/components/ui/button_tile.dart';
+import 'package:openmusic/extensions/constrains.dart';
+import 'package:openmusic/extensions/context.dart';
+import 'package:openmusic/extensions/duration.dart';
+import 'package:openmusic/models/metadata/metadata.dart';
+import 'package:openmusic/provider/audio_player/audio_player.dart';
+import 'package:openmusic/provider/server/sourced_track_provider.dart';
 
 class SiblingTracksSheet extends HookConsumerWidget {
   final bool floating;

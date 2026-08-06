@@ -1,12 +1,12 @@
-name: spotube
-description: Open source extensible music streaming platform and app, based on BYOMM (Bring your own music metadata) concept
+name: openmusic
+description: OpenMusic - open source extensible music streaming platform and app, based on BYOMM (Bring your own music metadata) concept
 
 publish_to: "none"
 
 version: 5.1.2+45
 
-homepage: https://spotube.krtirtho.dev
-repository: https://github.com/KRTirtho/spotube
+homepage: https://github.com/MaybeItsAdam/openmusic
+repository: https://github.com/MaybeItsAdam/openmusic
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
@@ -246,9 +246,9 @@ flutter:
   assets:
     - assets/images/
     - assets/images/logos/
-    - assets/branding/spotube-logo.png
-    - assets/branding/spotube-logo-light.png
-    - assets/branding/spotube-logo.ico
+    - assets/branding/openmusic-logo.png
+    - assets/branding/openmusic-logo-light.png
+    - assets/branding/openmusic-logo.ico
     - assets/plugins/spotube-plugin-musicbrainz-listenbrainz/plugin.smplug
     - assets/plugins/spotube-plugin-youtube-audio/plugin.smplug
     - LICENSE
@@ -301,11 +301,11 @@ flutter_gen:
   output: lib/collections
 
 flutter_native_splash:
-  background_image: assets/bengali-patterns-bg.jpg
-  image: assets/spotube-logo.png
-  branding: assets/branding.png
+  background_image: assets/images/bengali-patterns-bg.jpg
+  image: assets/branding/openmusic-logo.png
+  branding: assets/branding/branding.png
   android_12:
-    image: assets/spotube-logo_android12.png
-    branding: assets/branding.png
+    image: assets/branding/openmusic-logo_android12.png
+    branding: assets/branding/branding.png
     color: "#000000"
     icon_background_color: "#000000"

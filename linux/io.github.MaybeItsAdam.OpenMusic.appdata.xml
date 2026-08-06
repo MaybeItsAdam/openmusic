@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.MaybeItsAdam.OpenMusic</id>
+  <name>OpenMusic</name>
+  <summary>
+    Freedom of music
+  </summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>BSD-4-Clause</project_license>
+  <recommends>
+    <control>pointing</control>
+    <control>keyboard</control>
+    <control>touch</control>
+  </recommends>
+  <developer_name>MaybeItsAdam</developer_name>
+  <url type="bugtracker">https://github.com/MaybeItsAdam/openmusic/issues</url>
+  <url type="homepage">https://github.com/MaybeItsAdam/openmusic</url>
+  <description>
+    <p>Open source music client that doesn't require Premium nor uses Electron! Available for
+      both desktop &amp; mobile!</p>
+    <p>Following are the features that currently OpenMusic offers:</p>
+    <ul>
+      <li>🚫 No ads, thanks to the use of public &amp; free music metadata providers and YT Music
+        APIs¹</li>
+      <li>⬇️ Downloadable tracks</li>
+      <li>🖥️ 📱 Cross-platform support</li>
+      <li>🪶 Small size &amp; less data usage</li>
+      <li>🕵️ Anonymous/guest login</li>
+      <li>🕒 Time synced lyrics</li>
+      <li>✋ No telemetry, diagnostics or user data collection</li>
+      <li>🚀 Native performance</li>
+      <li>📖 Open source/libre software</li>
+      <li>🔉 Playback control is done locally, not on the server</li>
+    </ul>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <image type="source">
+        https://rawcdn.githack.com/MaybeItsAdam/openmusic/refs/heads/master/assets/branding/openmusic-screenshot.png
+      </image>
+      <caption>OpenMusic screenshot</caption>
+    </screenshot>
+  </screenshots>
+  <launchable type="desktop-id">io.github.MaybeItsAdam.OpenMusic.desktop</launchable>
+  <releases> %{{APPDATA_RELEASE}}% <release version="2.6.0" date="2022-12-09" />
+    <release
+      version="2.5.0" date="2022-10-13" />
+    <release version="2.4.1" date="2022-09-13" />
+    <release
+      version="2.4.0" date="2022-09-09" />
+    <release version="2.3.1" date="2022-07-11" />
+    <release
+      version="2.2.1" date="2022-06-09" />
+    <release version="2.2.0" date="2022-06-05" />
+    <release
+      version="2.1.0" date="2022-05-10" />
+    <release version="2.0.0" date="2022-03-24" />
+    <release
+      version="1.2.0" date="2022-02-02" />
+    <release version="1.1.0" date="2022-01-27" />
+    <release
+      version="1.0.1" date="2022-01-15" />
+    <release version="1.0.0" date="2022-01-14" />
+    <release
+      version="0.0.3" date="2021-05-08" />
+    <release version="0.0.2" date="2021-03-31" />
+    <release
+      version="0.0.1" date="2021-03-20" />
+  </releases>
+  <content_rating type="oars-1.1" />
+</component>

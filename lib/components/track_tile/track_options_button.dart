@@ -3,13 +3,13 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 import 'package:shadcn_flutter/shadcn_flutter_extension.dart';
-import 'package:spotube/collections/routes.gr.dart';
-import 'package:spotube/collections/spotube_icons.dart';
-import 'package:spotube/components/image/universal_image.dart';
-import 'package:spotube/components/links/artist_link.dart';
-import 'package:spotube/components/track_tile/track_options.dart';
-import 'package:spotube/extensions/constrains.dart';
-import 'package:spotube/models/metadata/metadata.dart';
+import 'package:openmusic/collections/routes.gr.dart';
+import 'package:openmusic/collections/openmusic_icons.dart';
+import 'package:openmusic/components/image/universal_image.dart';
+import 'package:openmusic/components/links/artist_link.dart';
+import 'package:openmusic/components/track_tile/track_options.dart';
+import 'package:openmusic/extensions/constrains.dart';
+import 'package:openmusic/models/metadata/metadata.dart';
 
 class TrackOptionsButton extends HookConsumerWidget {
   final SpotubeTrackObject track;
@@ -62,7 +62,7 @@ class TrackOptionsButton extends HookConsumerWidget {
     );
 
     return IconButton.ghost(
-      icon: const Icon(SpotubeIcons.moreHorizontal),
+      icon: const Icon(OpenMusicIcons.moreHorizontal),
       onPressed: () {
         final mediaQuery = MediaQuery.sizeOf(context);
 

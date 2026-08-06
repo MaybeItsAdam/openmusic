@@ -1,8 +1,8 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
-import 'package:spotube/provider/server/routes/connect.dart';
-import 'package:spotube/provider/server/routes/playback.dart';
+import 'package:openmusic/provider/server/routes/connect.dart';
+import 'package:openmusic/provider/server/routes/playback.dart';
 
 final serverRouterProvider = Provider((ref) {
   final playbackRoutes = ref.watch(serverPlaybackRoutesProvider);

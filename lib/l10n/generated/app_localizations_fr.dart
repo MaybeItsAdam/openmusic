@@ -494,13 +494,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get about => 'À propos';
 
   @override
-  String get u_love_spotube => 'Nous savons que vous aimez Spotube';
+  String get u_love_spotube => 'Nous savons que vous aimez OpenMusic';
 
   @override
   String get check_for_updates => 'Vérifier les mises à jour';
 
   @override
-  String get about_spotube => 'À propos de Spotube';
+  String get about_spotube => 'À propos de OpenMusic';
 
   @override
   String get blacklist => 'Liste noire';
@@ -510,7 +510,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get spotube_description =>
-      'Spotube, un client Spotify léger, multiplateforme et gratuit pour tous';
+      'OpenMusic, un client Spotify léger, multiplateforme et gratuit pour tous';
 
   @override
   String get version => 'Version';
@@ -735,7 +735,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get download_ip_ban_warning =>
-      'Au fait, votre adresse IP peut être bloquée sur YouTube en raison d\'une demande excessive de téléchargements par rapport à la normale. Le blocage de l\'IP signifie que vous ne pourrez pas utiliser YouTube (même si vous êtes connecté) pendant au moins 2 à 3 mois à partir de cet appareil IP. Et Spotube ne peut être tenu responsable si cela se produit.';
+      'Au fait, votre adresse IP peut être bloquée sur YouTube en raison d\'une demande excessive de téléchargements par rapport à la normale. Le blocage de l\'IP signifie que vous ne pourrez pas utiliser YouTube (même si vous êtes connecté) pendant au moins 2 à 3 mois à partir de cet appareil IP. Et OpenMusic ne peut être tenu responsable si cela se produit.';
 
   @override
   String get by_clicking_accept_terms =>
@@ -751,7 +751,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get download_agreement_3 =>
-      'Je suis parfaitement conscient(e) que mon adresse IP peut être bloquée sur YouTube et je ne tiens pas Spotube ni ses propriétaires/contributeurs responsables de tout accident causé par mon action actuelle.';
+      'Je suis parfaitement conscient(e) que mon adresse IP peut être bloquée sur YouTube et je ne tiens pas OpenMusic ni ses propriétaires/contributeurs responsables de tout accident causé par mon action actuelle.';
 
   @override
   String get decline => 'Refuser';
@@ -833,7 +833,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get encryption_failed_warning =>
-      'Spotube utilise le cryptage pour stocker vos données en toute sécurité. Mais cela a échoué. Il basculera donc vers un stockage non sécurisé\nSi vous utilisez Linux, assurez-vous d\'avoir installé des services secrets tels que gnome-keyring, kde-wallet et keepassxc';
+      'OpenMusic utilise le cryptage pour stocker vos données en toute sécurité. Mais cela a échoué. Il basculera donc vers un stockage non sécurisé\nSi vous utilisez Linux, assurez-vous d\'avoir installé des services secrets tels que gnome-keyring, kde-wallet et keepassxc';
 
   @override
   String get querying_info => 'Interrogation des info...';
@@ -1014,7 +1014,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get choose_your_region_description =>
-      'Cela aidera Spotube à vous montrer le bon contenu pour votre emplacement.';
+      'Cela aidera OpenMusic à vous montrer le bon contenu pour votre emplacement.';
 
   @override
   String get choose_your_language => 'Choisissez votre langue';
@@ -1024,7 +1024,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get help_project_grow_description =>
-      'Spotube est un projet open-source. Vous pouvez aider ce projet à grandir en contribuant au projet, en signalant des bugs ou en suggérant de nouvelles fonctionnalités.';
+      'OpenMusic est un projet open-source. Vous pouvez aider ce projet à grandir en contribuant au projet, en signalant des bugs ou en suggérant de nouvelles fonctionnalités.';
 
   @override
   String get contribute_on_github => 'Contribuer sur GitHub';
@@ -1040,7 +1040,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get enable_connect_description =>
-      'Contrôlez Spotube depuis d\'autres appareils';
+      'Contrôlez OpenMusic depuis d\'autres appareils';
 
   @override
   String get devices => 'Appareils';
@@ -1088,19 +1088,19 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get spotube_has_an_update => 'Spotube a une mise à jour';
+  String get spotube_has_an_update => 'OpenMusic a une mise à jour';
 
   @override
   String get download_now => 'Télécharger maintenant';
 
   @override
   String nightly_version(Object nightlyBuildNum) {
-    return 'Spotube Nightly $nightlyBuildNum a été publié';
+    return 'OpenMusic Nightly $nightlyBuildNum a été publié';
   }
 
   @override
   String release_version(Object version) {
-    return 'Spotube v$version a été publié';
+    return 'OpenMusic v$version a été publié';
   }
 
   @override
@@ -1530,7 +1530,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get third_party_plugin_dmca_notice =>
-      'L\'équipe de Spotube n\'assume aucune responsabilité (y compris juridique) pour les plugins \"tiers\".\nVeuillez les utiliser à vos propres risques. Pour tout bug/problème, veuillez le signaler au dépôt du plugin.\n\nSi un plugin \"tiers\" enfreint les conditions d\'utilisation/DMCA d\'un service/entité juridique, veuillez demander à l\'auteur du plugin \"tiers\" ou à la plateforme d\'hébergement (par exemple GitHub/Codeberg) de prendre des mesures. Les plugins listés ci-dessus (étiquetés \"tiers\") sont tous des plugins publics/maintenus par la communauté. Nous ne les gérons pas, nous ne pouvons donc prendre aucune mesure à leur sujet.\n\n';
+      'L\'équipe de OpenMusic n\'assume aucune responsabilité (y compris juridique) pour les plugins \"tiers\".\nVeuillez les utiliser à vos propres risques. Pour tout bug/problème, veuillez le signaler au dépôt du plugin.\n\nSi un plugin \"tiers\" enfreint les conditions d\'utilisation/DMCA d\'un service/entité juridique, veuillez demander à l\'auteur du plugin \"tiers\" ou à la plateforme d\'hébergement (par exemple GitHub/Codeberg) de prendre des mesures. Les plugins listés ci-dessus (étiquetés \"tiers\") sont tous des plugins publics/maintenus par la communauté. Nous ne les gérons pas, nous ne pouvons donc prendre aucune mesure à leur sujet.\n\n';
 
   @override
   String get input_does_not_match_format =>

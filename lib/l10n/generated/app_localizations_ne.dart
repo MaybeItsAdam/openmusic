@@ -492,13 +492,13 @@ class AppLocalizationsNe extends AppLocalizations {
 
   @override
   String get u_love_spotube =>
-      'हामीले थाहा पारेका छौं तपाईंलाई Spotube मन पर्छ';
+      'हामीले थाहा पारेका छौं तपाईंलाई OpenMusic मन पर्छ';
 
   @override
   String get check_for_updates => 'अपडेटहरूको लागि जाँच गर्नुहोस्';
 
   @override
-  String get about_spotube => 'Spotube को बारेमा';
+  String get about_spotube => 'OpenMusic को बारेमा';
 
   @override
   String get blacklist => 'कालोसूची';
@@ -508,7 +508,7 @@ class AppLocalizationsNe extends AppLocalizations {
 
   @override
   String get spotube_description =>
-      'Spotube, एक हल्का, समृद्ध, स्वतन्त्र Spotify क्लाइयन';
+      'OpenMusic, एक हल्का, समृद्ध, स्वतन्त्र Spotify क्लाइयन';
 
   @override
   String get version => 'संस्करण';
@@ -733,7 +733,7 @@ class AppLocalizationsNe extends AppLocalizations {
 
   @override
   String get download_ip_ban_warning =>
-      'बितिएका डाउनलोड अनुरोधहरूका कारण तपाईंको आइपीले YouTube मा ब्लक हुन सक्छ। आइपी ब्लक भनेको कम्तीमा 2-3 महिनासम्म तपाईं त्यस आइपी यन्त्रबाट YouTube प्रयोग गर्न सक्नुहुन्छ। र यदि यो हुँदैछ भने स्पट्यूबले यसलाई कसैले गरेको बारेमा कुनै दायित्व लिन्छैन।';
+      'बितिएका डाउनलोड अनुरोधहरूका कारण तपाईंको आइपीले YouTube मा ब्लक हुन सक्छ। आइपी ब्लक भनेको कम्तीमा 2-3 महिनासम्म तपाईं त्यस आइपी यन्त्रबाट YouTube प्रयोग गर्न सक्नुहुन्छ। र यदि यो हुँदैछ भने OpenMusicले यसलाई कसैले गरेको बारेमा कुनै दायित्व लिन्छैन।';
 
   @override
   String get by_clicking_accept_terms =>
@@ -749,7 +749,7 @@ class AppLocalizationsNe extends AppLocalizations {
 
   @override
   String get download_agreement_3 =>
-      'म पूरा रूपमा जान्छु कि मेरो आइपी YouTube मा ब्लक हुन सक्छ र म मन्छेहरूले मेरो चासोबाट भएको कुनै दुर्घटनामा स्पट्यूब वा तिनीहरूको मालिकहरू/सहयोगीहरूलाई दायित्वी ठान्छुँभन्ने पूर्ण जानकारी छैन';
+      'म पूरा रूपमा जान्छु कि मेरो आइपी YouTube मा ब्लक हुन सक्छ र म मन्छेहरूले मेरो चासोबाट भएको कुनै दुर्घटनामा OpenMusic वा तिनीहरूको मालिकहरू/सहयोगीहरूलाई दायित्वी ठान्छुँभन्ने पूर्ण जानकारी छैन';
 
   @override
   String get decline => 'अस्वीकृत';
@@ -831,7 +831,7 @@ class AppLocalizationsNe extends AppLocalizations {
 
   @override
   String get encryption_failed_warning =>
-      'स्पट्यूबले तपाईंको डेटा सुरक्षित रूपमा स्टोर गर्नका लागि एन्क्रिप्ट गर्न खोजेको छ। तर यसले गरेको छैन। यसले असुरक्षित स्टोरेजमा फल्लब्याक गर्दछ\nयदि तपाईंले लिनक्स प्रयोग गरिरहेका छन् भने कृपया सुनिश्चित गर्नुहोस् कि तपाईंले कुनै सीक्रेट-सर्भिस (गोनोम-किरिङ, केडीइ-वालेट, किपासेक्ससि इत्यादि) इन्स्टल गरेका छौं';
+      'OpenMusicले तपाईंको डेटा सुरक्षित रूपमा स्टोर गर्नका लागि एन्क्रिप्ट गर्न खोजेको छ। तर यसले गरेको छैन। यसले असुरक्षित स्टोरेजमा फल्लब्याक गर्दछ\nयदि तपाईंले लिनक्स प्रयोग गरिरहेका छन् भने कृपया सुनिश्चित गर्नुहोस् कि तपाईंले कुनै सीक्रेट-सर्भिस (गोनोम-किरिङ, केडीइ-वालेट, किपासेक्ससि इत्यादि) इन्स्टल गरेका छौं';
 
   @override
   String get querying_info => 'जानकारी हेर्दै...';
@@ -1013,7 +1013,7 @@ class AppLocalizationsNe extends AppLocalizations {
 
   @override
   String get choose_your_region_description =>
-      'यो Spotubeलाई तपाईंको स्थानका लागि सहि सामग्री देखाउने मद्दत गर्नेछ।';
+      'यो OpenMusicलाई तपाईंको स्थानका लागि सहि सामग्री देखाउने मद्दत गर्नेछ।';
 
   @override
   String get choose_your_language => 'तपाईंको भाषा छनौट गर्नुहोस्';
@@ -1023,7 +1023,7 @@ class AppLocalizationsNe extends AppLocalizations {
 
   @override
   String get help_project_grow_description =>
-      'Spotube एक खुला स्रोतको परियोजना हो। तपाईं परियोजनामा योगदान गरेर, त्रुटिहरू सूचिकै, वा नयाँ सुविधाहरू सुझाव दिएर यस परियोजनामा वृद्धि गर्न सक्नुहुन्छ।';
+      'OpenMusic एक खुला स्रोतको परियोजना हो। तपाईं परियोजनामा योगदान गरेर, त्रुटिहरू सूचिकै, वा नयाँ सुविधाहरू सुझाव दिएर यस परियोजनामा वृद्धि गर्न सक्नुहुन्छ।';
 
   @override
   String get contribute_on_github => 'GitHubमा योगदान गर्नुहोस्';
@@ -1039,7 +1039,7 @@ class AppLocalizationsNe extends AppLocalizations {
 
   @override
   String get enable_connect_description =>
-      'अन्य उपकरणहरूबाट Spotube कन्ट्रोल गर्नुहोस्';
+      'अन्य उपकरणहरूबाट OpenMusic कन्ट्रोल गर्नुहोस्';
 
   @override
   String get devices => 'उपकरणहरू';
@@ -1087,19 +1087,19 @@ class AppLocalizationsNe extends AppLocalizations {
   }
 
   @override
-  String get spotube_has_an_update => 'Spotube मा अपडेट छ';
+  String get spotube_has_an_update => 'OpenMusic मा अपडेट छ';
 
   @override
   String get download_now => 'अहिले डाउनलोड गर्नुहोस्';
 
   @override
   String nightly_version(Object nightlyBuildNum) {
-    return 'Spotube Nightly $nightlyBuildNum रिलिज गरिएको छ';
+    return 'OpenMusic Nightly $nightlyBuildNum रिलिज गरिएको छ';
   }
 
   @override
   String release_version(Object version) {
-    return 'Spotube v$version रिलिज गरिएको छ';
+    return 'OpenMusic v$version रिलिज गरिएको छ';
   }
 
   @override
@@ -1526,7 +1526,7 @@ class AppLocalizationsNe extends AppLocalizations {
 
   @override
   String get third_party_plugin_dmca_notice =>
-      'स्पोट्यूब टोलीले कुनै पनि \"तेस्रो-पक्ष\" प्लगइनहरूको लागि कुनै जिम्मेवारी (कानुनी सहित) लिँदैन।\nकृपया तिनीहरूलाई आफ्नो जोखिममा प्रयोग गर्नुहोस्। कुनै पनि बग/समस्याहरूको लागि, कृपया तिनीहरूलाई प्लगइन रिपोसिटरीमा रिपोर्ट गर्नुहोस्।\n\nयदि कुनै \"तेस्रो-पक्ष\" प्लगइनले कुनै सेवा/कानुनी संस्थाको ToS/DMCA तोडिरहेको छ भने, कृपया \"तेस्रो-पक्ष\" प्लगइन लेखक वा होस्टिङ प्लेटफर्म e.g. GitHub/Codeberg लाई कारबाही गर्न अनुरोध गर्नुहोस्। माथि सूचीबद्ध (\"तेस्रो-पक्ष\" लेबल गरिएका) सबै सार्वजनिक/सामुदायिक रूपमा राखिएका प्लगइनहरू हुन्। हामी तिनीहरूलाई क्युरेट गरिरहेका छैनौं, त्यसैले हामी तिनीहरूमा कुनै कारबाही गर्न सक्दैनौं।\n\n';
+      'OpenMusic टोलीले कुनै पनि \"तेस्रो-पक्ष\" प्लगइनहरूको लागि कुनै जिम्मेवारी (कानुनी सहित) लिँदैन।\nकृपया तिनीहरूलाई आफ्नो जोखिममा प्रयोग गर्नुहोस्। कुनै पनि बग/समस्याहरूको लागि, कृपया तिनीहरूलाई प्लगइन रिपोसिटरीमा रिपोर्ट गर्नुहोस्।\n\nयदि कुनै \"तेस्रो-पक्ष\" प्लगइनले कुनै सेवा/कानुनी संस्थाको ToS/DMCA तोडिरहेको छ भने, कृपया \"तेस्रो-पक्ष\" प्लगइन लेखक वा होस्टिङ प्लेटफर्म e.g. GitHub/Codeberg लाई कारबाही गर्न अनुरोध गर्नुहोस्। माथि सूचीबद्ध (\"तेस्रो-पक्ष\" लेबल गरिएका) सबै सार्वजनिक/सामुदायिक रूपमा राखिएका प्लगइनहरू हुन्। हामी तिनीहरूलाई क्युरेट गरिरहेका छैनौं, त्यसैले हामी तिनीहरूमा कुनै कारबाही गर्न सक्दैनौं।\n\n';
 
   @override
   String get input_does_not_match_format => 'इनपुट आवश्यक ढाँचासँग मेल खाँदैन';

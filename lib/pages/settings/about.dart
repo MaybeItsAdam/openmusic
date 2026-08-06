@@ -1,13 +1,13 @@
 import 'package:flutter/services.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
-import 'package:spotube/collections/assets.gen.dart';
-import 'package:spotube/collections/env.dart';
-import 'package:spotube/components/button/back_button.dart';
-import 'package:spotube/components/image/universal_image.dart';
-import 'package:spotube/components/links/hyper_link.dart';
-import 'package:spotube/components/titlebar/titlebar.dart';
-import 'package:spotube/extensions/context.dart';
-import 'package:spotube/hooks/controllers/use_package_info.dart';
+import 'package:openmusic/collections/assets.gen.dart';
+import 'package:openmusic/collections/env.dart';
+import 'package:openmusic/components/button/back_button.dart';
+import 'package:openmusic/components/image/universal_image.dart';
+import 'package:openmusic/components/links/hyper_link.dart';
+import 'package:openmusic/components/titlebar/titlebar.dart';
+import 'package:openmusic/extensions/context.dart';
+import 'package:openmusic/hooks/controllers/use_package_info.dart';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -18,10 +18,10 @@ final _licenseProvider = FutureProvider<String>((ref) async {
 });
 
 @RoutePage()
-class AboutSpotubePage extends HookConsumerWidget {
+class AboutOpenMusicPage extends HookConsumerWidget {
   static const name = "about";
 
-  const AboutSpotubePage({super.key});
+  const AboutOpenMusicPage({super.key});
 
   @override
   Widget build(BuildContext context, ref) {
@@ -45,7 +45,7 @@ class AboutSpotubePage extends HookConsumerWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Column(
               children: [
-                Assets.branding.spotubeLogoPng.image(height: 200, width: 200),
+                Assets.branding.openmusicLogoPng.image(height: 200, width: 200),
                 Center(
                   child: Column(
                     children: [
@@ -102,8 +102,8 @@ class AboutSpotubePage extends HookConsumerWidget {
                               colon,
                               TableCell(
                                 child: Hyperlink(
-                                  "spotube.krtirtho.dev",
-                                  "https://spotube.krtirtho.dev",
+                                  "github.com/MaybeItsAdam/openmusic",
+                                  "https://github.com/MaybeItsAdam/openmusic",
                                 ),
                               ),
                             ],
@@ -114,8 +114,8 @@ class AboutSpotubePage extends HookConsumerWidget {
                               colon,
                               const TableCell(
                                 child: Hyperlink(
-                                  "github.com/KRTirtho/spotube",
-                                  "https://github.com/KRTirtho/spotube",
+                                  "github.com/MaybeItsAdam/openmusic",
+                                  "https://github.com/MaybeItsAdam/openmusic",
                                 ),
                               ),
                             ],
@@ -127,7 +127,7 @@ class AboutSpotubePage extends HookConsumerWidget {
                               const TableCell(
                                 child: Hyperlink(
                                   "BSD-4-Clause",
-                                  "https://raw.githubusercontent.com/KRTirtho/spotube/master/LICENSE",
+                                  "https://raw.githubusercontent.com/MaybeItsAdam/openmusic/master/LICENSE",
                                 ),
                               ),
                             ],

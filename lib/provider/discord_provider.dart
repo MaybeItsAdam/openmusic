@@ -2,12 +2,12 @@ import 'dart:async';
 
 import 'package:flutter_discord_rpc/flutter_discord_rpc.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:spotube/models/metadata/metadata.dart';
-import 'package:spotube/provider/audio_player/audio_player.dart';
-import 'package:spotube/provider/user_preferences/user_preferences_provider.dart';
-import 'package:spotube/services/audio_player/audio_player.dart';
-import 'package:spotube/services/logger/logger.dart';
-import 'package:spotube/utils/platform.dart';
+import 'package:openmusic/models/metadata/metadata.dart';
+import 'package:openmusic/provider/audio_player/audio_player.dart';
+import 'package:openmusic/provider/user_preferences/user_preferences_provider.dart';
+import 'package:openmusic/services/audio_player/audio_player.dart';
+import 'package:openmusic/services/logger/logger.dart';
+import 'package:openmusic/utils/platform.dart';
 
 class DiscordNotifier extends AsyncNotifier<void> {
   @override
@@ -90,10 +90,10 @@ class DiscordNotifier extends AsyncNotifier<void> {
               track.album.images.firstOrNull?.url ?? "spotube-logo-foreground",
           largeText: track.album.name,
           smallImage: "spotube-logo-foreground",
-          smallText: "Spotube",
+          smallText: "OpenMusic",
         ),
         buttons: [
-          RPCButton(label: "Listen on Spotube", url: track.externalUri),
+          RPCButton(label: "Listen on OpenMusic", url: track.externalUri),
         ],
         timestamps: RPCTimestamps(
           start: isPlaying

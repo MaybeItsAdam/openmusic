@@ -1,7 +1,7 @@
 import 'package:flutter_new_pipe_extractor/flutter_new_pipe_extractor.dart'
     hide Engagement;
-import 'package:spotube/services/youtube_engine/youtube_engine.dart';
-import 'package:spotube/utils/platform.dart';
+import 'package:openmusic/services/youtube_engine/youtube_engine.dart';
+import 'package:openmusic/utils/platform.dart';
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 import 'package:http_parser/http_parser.dart';
 

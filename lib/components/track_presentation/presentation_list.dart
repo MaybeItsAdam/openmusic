@@ -5,15 +5,15 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 import 'package:shadcn_flutter/shadcn_flutter_extension.dart';
 import 'package:skeletonizer/skeletonizer.dart';
-import 'package:spotube/collections/fake.dart';
-import 'package:spotube/components/fallbacks/error_box.dart';
-import 'package:spotube/components/track_presentation/presentation_props.dart';
-import 'package:spotube/components/track_presentation/presentation_state.dart';
-import 'package:spotube/components/track_presentation/use_track_tile_play_callback.dart';
-import 'package:spotube/components/track_tile/track_tile.dart';
-import 'package:spotube/components/track_presentation/use_is_user_playlist.dart';
-import 'package:spotube/extensions/context.dart';
-import 'package:spotube/provider/audio_player/audio_player.dart';
+import 'package:openmusic/collections/fake.dart';
+import 'package:openmusic/components/fallbacks/error_box.dart';
+import 'package:openmusic/components/track_presentation/presentation_props.dart';
+import 'package:openmusic/components/track_presentation/presentation_state.dart';
+import 'package:openmusic/components/track_presentation/use_track_tile_play_callback.dart';
+import 'package:openmusic/components/track_tile/track_tile.dart';
+import 'package:openmusic/components/track_presentation/use_is_user_playlist.dart';
+import 'package:openmusic/extensions/context.dart';
+import 'package:openmusic/provider/audio_player/audio_player.dart';
 import 'package:very_good_infinite_list/very_good_infinite_list.dart';
 
 class PresentationListSection extends HookConsumerWidget {

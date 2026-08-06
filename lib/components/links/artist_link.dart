@@ -1,9 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
-import 'package:spotube/collections/routes.gr.dart';
-import 'package:spotube/components/links/anchor_button.dart';
-import 'package:spotube/extensions/context.dart';
-import 'package:spotube/models/metadata/metadata.dart';
+import 'package:openmusic/collections/routes.gr.dart';
+import 'package:openmusic/components/links/anchor_button.dart';
+import 'package:openmusic/extensions/context.dart';
+import 'package:openmusic/models/metadata/metadata.dart';
 
 class ArtistLink extends StatelessWidget {
   final List<SpotubeSimpleArtistObject> artists;

@@ -5,12 +5,12 @@ import 'package:home_widget/home_widget.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:http/http.dart';
 import 'package:logger/logger.dart';
-import 'package:spotube/models/metadata/metadata.dart';
-import 'package:spotube/provider/audio_player/audio_player.dart';
-import 'package:spotube/provider/server/server.dart';
-import 'package:spotube/services/audio_player/audio_player.dart';
-import 'package:spotube/services/logger/logger.dart';
-import 'package:spotube/utils/platform.dart';
+import 'package:openmusic/models/metadata/metadata.dart';
+import 'package:openmusic/provider/audio_player/audio_player.dart';
+import 'package:openmusic/provider/server/server.dart';
+import 'package:openmusic/services/audio_player/audio_player.dart';
+import 'package:openmusic/services/logger/logger.dart';
+import 'package:openmusic/utils/platform.dart';
 
 @pragma("vm:entry-point")
 Future<void> glanceBackgroundCallback(Uri? data) async {
@@ -57,7 +57,7 @@ Future<void> _updateWidget() async {
       await HomeWidget.updateWidget(
         androidName: 'HomePlayerWidgetReceiver',
         qualifiedAndroidName:
-            'oss.krtirtho.spotube.glance.HomePlayerWidgetReceiver',
+            'io.github.maybeitsadam.openmusic.glance.HomePlayerWidgetReceiver',
       );
     }
     if (kIsIOS) {

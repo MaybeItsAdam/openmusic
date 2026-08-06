@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  OpenMusic Nightly — PLACEHOLDER adaptive-icon FOREGROUND layer.
+  Transparent background, mark scaled by 0.87 about the centre so it sits inside
+  the Android adaptive-icon safe circle. See openmusic-logo-foreground.svg for
+  the full safe-zone rationale.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <title>OpenMusic Nightly (adaptive icon foreground)</title>
+  <g transform="translate(256 256) scale(0.87) translate(-256 -256)">
+    <g stroke="#FF8A1F" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M370.9 352.4 A150 150 0 1 1 370.9 159.6" stroke-width="40"/>
+      <path d="M214 194 L332 256 L214 318 Z" stroke-width="26" fill="#FF8A1F"/>
+    </g>
+  </g>
+</svg>

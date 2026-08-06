@@ -4,13 +4,13 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 import 'package:shadcn_flutter/shadcn_flutter_extension.dart';
-import 'package:spotube/hooks/configurators/use_check_yt_dlp_installed.dart';
-import 'package:spotube/modules/root/bottom_player.dart';
-import 'package:spotube/modules/root/sidebar/sidebar.dart';
-import 'package:spotube/modules/root/spotube_navigation_bar.dart';
-import 'package:spotube/hooks/configurators/use_endless_playback.dart';
-import 'package:spotube/modules/root/use_global_subscriptions.dart';
-import 'package:spotube/provider/glance/glance.dart';
+import 'package:openmusic/hooks/configurators/use_check_yt_dlp_installed.dart';
+import 'package:openmusic/modules/root/bottom_player.dart';
+import 'package:openmusic/modules/root/sidebar/sidebar.dart';
+import 'package:openmusic/modules/root/openmusic_navigation_bar.dart';
+import 'package:openmusic/hooks/configurators/use_endless_playback.dart';
+import 'package:openmusic/modules/root/use_global_subscriptions.dart';
+import 'package:openmusic/provider/glance/glance.dart';
 
 @RoutePage()
 class RootAppPage extends HookConsumerWidget {
@@ -45,7 +45,7 @@ class RootAppPage extends HookConsumerWidget {
       child: SafeArea(
         top: false,
         child: Scaffold(
-          footers: const [BottomPlayer(), SpotubeNavigationBar()],
+          footers: const [BottomPlayer(), OpenMusicNavigationBar()],
           floatingFooter: true,
           child: Sidebar(
             child: MediaQuery(

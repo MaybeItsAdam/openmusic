@@ -1,6 +1,6 @@
 // Country Codes contributed by momobobe <https://github.com/momobobe>
 
-import 'package:spotube/models/metadata/market.dart';
+import 'package:openmusic/models/metadata/market.dart';
 
 final marketsMap = [
   (Market.AL, "Albania (AL)"),

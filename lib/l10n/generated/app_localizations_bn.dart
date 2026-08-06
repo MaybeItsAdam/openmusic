@@ -491,13 +491,13 @@ class AppLocalizationsBn extends AppLocalizations {
   String get about => 'বিস্তারিত';
 
   @override
-  String get u_love_spotube => 'আমরা জানি আপনি Spotube কে ভালবাসেন';
+  String get u_love_spotube => 'আমরা জানি আপনি OpenMusic কে ভালবাসেন';
 
   @override
   String get check_for_updates => 'আপডেট চেক করুন';
 
   @override
-  String get about_spotube => 'Spotube সম্পর্কে বিস্তারিত';
+  String get about_spotube => 'OpenMusic সম্পর্কে বিস্তারিত';
 
   @override
   String get blacklist => 'কালো তালিকা';
@@ -507,7 +507,7 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get spotube_description =>
-      'Spotube, একটি কর্মদক্ষ, ক্রস-প্ল্যাটফর্ম, বিনামূল্যের জন্য Spotify ক্লায়েন্ট';
+      'OpenMusic, একটি কর্মদক্ষ, ক্রস-প্ল্যাটফর্ম, বিনামূল্যের জন্য Spotify ক্লায়েন্ট';
 
   @override
   String get version => 'সংস্করণ';
@@ -729,7 +729,7 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get download_ip_ban_warning =>
-      'তথ্যবিশ্বস্ত করে নেওয়া যায় যে, আপনার IP ঠিকানাটি YouTube দ্বারা স্থানান্তরিত করা হতে পারে যখন সাধারন থেকে বেশি ডাউনলোড অনুরোধ হয়। IP ব্লকের মাধ্যমে আপনি কমপক্ষে ২-৩ মাস ধরে (ঐ IP ডিভাইস থেকে) YouTube ব্যবহার করতে পারবেন না। এবং Spotube কোনও দায়িত্ব সম্পর্কে দায়িত্ব বহন করে না যদি এটি ঘটে।';
+      'তথ্যবিশ্বস্ত করে নেওয়া যায় যে, আপনার IP ঠিকানাটি YouTube দ্বারা স্থানান্তরিত করা হতে পারে যখন সাধারন থেকে বেশি ডাউনলোড অনুরোধ হয়। IP ব্লকের মাধ্যমে আপনি কমপক্ষে ২-৩ মাস ধরে (ঐ IP ডিভাইস থেকে) YouTube ব্যবহার করতে পারবেন না। এবং OpenMusic কোনও দায়িত্ব সম্পর্কে দায়িত্ব বহন করে না যদি এটি ঘটে।';
 
   @override
   String get by_clicking_accept_terms =>
@@ -744,7 +744,7 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get download_agreement_3 =>
-      'আমি সম্পূর্ণরূপে জানি যে আমার IP YouTube-তে ব্লক হতে পারে এবং আমি Spotube বা তার মালিকানাধীন কোনও দায়িত্ব পেতে পারিনি আমার বর্তমান ক্রিয়াটি দ্বারা সৃষ্ট দুর্ঘটনা করার জন্য';
+      'আমি সম্পূর্ণরূপে জানি যে আমার IP YouTube-তে ব্লক হতে পারে এবং আমি OpenMusic বা তার মালিকানাধীন কোনও দায়িত্ব পেতে পারিনি আমার বর্তমান ক্রিয়াটি দ্বারা সৃষ্ট দুর্ঘটনা করার জন্য';
 
   @override
   String get decline => 'অগ্রায়ন করুন';
@@ -826,7 +826,7 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get encryption_failed_warning =>
-      'Spotube আপনার তথ্যগুলি নিরাপদভাবে স্টোর করতে এনক্রিপশন ব্যবহার করে। কিন্তু এটি ব্যর্থ হয়েছে। তাই এটি অনিরাপদ স্টোরে ফলফল হবে\nযদি আপনি Linux ব্যবহার করেন, তবে দয়া করে নিশ্চিত হউন যে আপনার কোনও সিক্রেট-সার্ভিস gnome-keyring, kde-wallet, keepassxc ইত্যাদি ইনস্টল করা আছে';
+      'OpenMusic আপনার তথ্যগুলি নিরাপদভাবে স্টোর করতে এনক্রিপশন ব্যবহার করে। কিন্তু এটি ব্যর্থ হয়েছে। তাই এটি অনিরাপদ স্টোরে ফলফল হবে\nযদি আপনি Linux ব্যবহার করেন, তবে দয়া করে নিশ্চিত হউন যে আপনার কোনও সিক্রেট-সার্ভিস gnome-keyring, kde-wallet, keepassxc ইত্যাদি ইনস্টল করা আছে';
 
   @override
   String get querying_info => 'তথ্য অনুসন্ধান করা হচ্ছে';
@@ -1005,7 +1005,7 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get choose_your_region_description =>
-      'এটি স্পটুবে আপনাকে আপনার অবস্থানের জন্য ঠিক কন্টেন্ট দেখানোর সাহায্য করবে।';
+      'এটি OpenMusic-কে আপনাকে আপনার অবস্থানের জন্য ঠিক কন্টেন্ট দেখানোর সাহায্য করবে।';
 
   @override
   String get choose_your_language => 'আপনার ভাষা নির্বাচন করুন';
@@ -1015,7 +1015,7 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get help_project_grow_description =>
-      'স্পটুব একটি ওপেন সোর্স প্রকল্প। আপনি প্রকল্পে অবদান রাখেন, বাগ রিপোর্ট করেন, বা নতুন বৈশিষ্ট্যগুলি সুপারিশ করেন।';
+      'OpenMusic একটি ওপেন সোর্স প্রকল্প। আপনি প্রকল্পে অবদান রাখেন, বাগ রিপোর্ট করেন, বা নতুন বৈশিষ্ট্যগুলি সুপারিশ করেন।';
 
   @override
   String get contribute_on_github => 'গিটহাবে অবদান রাখুন';
@@ -1031,7 +1031,7 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get enable_connect_description =>
-      'অন্যান্য ডিভাইস থেকে Spotube নিয়ন্ত্রণ করুন';
+      'অন্যান্য ডিভাইস থেকে OpenMusic নিয়ন্ত্রণ করুন';
 
   @override
   String get devices => 'ডিভাইস';
@@ -1079,19 +1079,19 @@ class AppLocalizationsBn extends AppLocalizations {
   }
 
   @override
-  String get spotube_has_an_update => 'স্পটিউবে একটি আপডেট আছে';
+  String get spotube_has_an_update => 'OpenMusic-এ একটি আপডেট আছে';
 
   @override
   String get download_now => 'এখনই ডাউনলোড করুন';
 
   @override
   String nightly_version(Object nightlyBuildNum) {
-    return 'স্পটিউব নাইটলি $nightlyBuildNum প্রকাশিত হয়েছে';
+    return 'OpenMusic নাইটলি $nightlyBuildNum প্রকাশিত হয়েছে';
   }
 
   @override
   String release_version(Object version) {
-    return 'স্পটিউব v$version প্রকাশিত হয়েছে';
+    return 'OpenMusic v$version প্রকাশিত হয়েছে';
   }
 
   @override
@@ -1513,7 +1513,7 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get third_party_plugin_dmca_notice =>
-      'Spotube দল কোনো “তৃতীয় পক্ষ” প্লাগইনের জন্য কোনো (আইনগত সহ) দায়িত্ব নেয় না। নিজের বিপদে ব্যবহার করুন। কোনো বাগ/সমস্যা হলে প্লাগইন রেপোজিটরিতে জানাতে অনুরোধ করা হচ্ছে।\n\nযদি কোনো “তৃতীয় পক্ষ” প্লাগইন কোনো পরিষেবা/আইনগত সংস্থার ToS/DMCA ভূঙ্গ করে, অনুগ্রহ করে “তৃতীয় পক্ষ” প্লাগইনের লেখক বা হোস্টিং প্ল্যাটফর্মে (যেমন GitHub/Codeberg) পদক্ষেপ নিতে বলুন। “তৃতীয় পক্ষ” লেবেলযুক্ত যুক্তিগুলি সকলই পাবলিক/কমিউনিটি দ্বারা রক্ষণাবেক্ষণ করা হয়; আমরা সেগুলি কিউরেট করি না, তাই আমরা কোনো পদক্ষেপ নিতে পারি না।\n\n';
+      'OpenMusic দল কোনো “তৃতীয় পক্ষ” প্লাগইনের জন্য কোনো (আইনগত সহ) দায়িত্ব নেয় না। নিজের বিপদে ব্যবহার করুন। কোনো বাগ/সমস্যা হলে প্লাগইন রেপোজিটরিতে জানাতে অনুরোধ করা হচ্ছে।\n\nযদি কোনো “তৃতীয় পক্ষ” প্লাগইন কোনো পরিষেবা/আইনগত সংস্থার ToS/DMCA ভূঙ্গ করে, অনুগ্রহ করে “তৃতীয় পক্ষ” প্লাগইনের লেখক বা হোস্টিং প্ল্যাটফর্মে (যেমন GitHub/Codeberg) পদক্ষেপ নিতে বলুন। “তৃতীয় পক্ষ” লেবেলযুক্ত যুক্তিগুলি সকলই পাবলিক/কমিউনিটি দ্বারা রক্ষণাবেক্ষণ করা হয়; আমরা সেগুলি কিউরেট করি না, তাই আমরা কোনো পদক্ষেপ নিতে পারি না।\n\n';
 
   @override
   String get input_does_not_match_format =>

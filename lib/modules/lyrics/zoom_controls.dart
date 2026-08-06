@@ -2,7 +2,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 import 'package:shadcn_flutter/shadcn_flutter_extension.dart';
 
-import 'package:spotube/collections/spotube_icons.dart';
+import 'package:openmusic/collections/openmusic_icons.dart';
 
 class ZoomControls extends HookWidget {
   final int value;
@@ -24,8 +24,8 @@ class ZoomControls extends HookWidget {
     this.min,
     this.max,
     this.interval = 10,
-    this.increaseIcon = const Icon(SpotubeIcons.zoomIn),
-    this.decreaseIcon = const Icon(SpotubeIcons.zoomOut),
+    this.increaseIcon = const Icon(OpenMusicIcons.zoomIn),
+    this.decreaseIcon = const Icon(OpenMusicIcons.zoomOut),
     this.direction = Axis.horizontal,
     this.unit = "%",
   });

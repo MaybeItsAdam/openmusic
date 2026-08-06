@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:spotube/utils/platform.dart';
+import 'package:openmusic/utils/platform.dart';
 import 'package:win32_registry/win32_registry.dart';
 
 Future<void> registerWindowsScheme(String scheme) async {

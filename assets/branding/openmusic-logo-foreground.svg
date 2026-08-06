@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  OpenMusic — PLACEHOLDER logo mark, Android adaptive-icon FOREGROUND layer.
+
+  Transparent background: the background layer is supplied by
+  flutter_launcher_icons (adaptive_icon_background: "#242832").
+
+  SAFE ZONE: Android masks an adaptive icon down to a 66dp circle inside a
+  108dp layer, so anything outside the centre ~61% can be cropped. The mark's
+  natural outer extent is 170/256 = 66.4% of the artboard radius, so it is
+  scaled by 0.87 about the centre, putting the outer edge at 57.8% of the
+  canvas width - comfortably inside the safe circle on every mask shape.
+
+  The same artboard is reused for the Android 12 splash icon, which has the
+  identical "inner two thirds is visible" rule.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <title>OpenMusic (adaptive icon foreground)</title>
+  <g transform="translate(256 256) scale(0.87) translate(-256 -256)">
+    <g stroke="#4DA3FF" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M370.9 352.4 A150 150 0 1 1 370.9 159.6" stroke-width="40"/>
+      <path d="M214 194 L332 256 L214 318 Z" stroke-width="26" fill="#4DA3FF"/>
+    </g>
+  </g>
+</svg>

@@ -1,9 +1,9 @@
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 import 'package:shadcn_flutter/shadcn_flutter_extension.dart';
-import 'package:spotube/collections/spotube_icons.dart';
-import 'package:spotube/components/image/universal_image.dart';
-import 'package:spotube/extensions/context.dart';
-import 'package:spotube/extensions/string.dart';
+import 'package:openmusic/collections/openmusic_icons.dart';
+import 'package:openmusic/components/image/universal_image.dart';
+import 'package:openmusic/extensions/context.dart';
+import 'package:openmusic/extensions/string.dart';
 
 class PlaybuttonTile extends StatelessWidget {
   final void Function()? onTap;
@@ -75,7 +75,7 @@ class PlaybuttonTile extends StatelessWidget {
               child: Text(context.l10n.add_to_queue),
             ).call,
             child: IconButton.outline(
-              icon: const Icon(SpotubeIcons.queueAdd),
+              icon: const Icon(OpenMusicIcons.queueAdd),
               onPressed: onAddToQueuePressed,
               enabled: !isLoading,
             ),
@@ -86,8 +86,8 @@ class PlaybuttonTile extends StatelessWidget {
             child: IconButton.secondary(
               icon: switch ((isLoading, isPlaying)) {
                 (true, _) => const CircularProgressIndicator(size: 22),
-                (false, false) => const Icon(SpotubeIcons.play),
-                (false, true) => const Icon(SpotubeIcons.pause),
+                (false, false) => const Icon(OpenMusicIcons.play),
+                (false, true) => const Icon(OpenMusicIcons.pause),
               },
               onPressed: onPlaybuttonPressed,
               enabled: !isLoading,

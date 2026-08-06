@@ -1,17 +1,17 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 import 'package:shadcn_flutter/shadcn_flutter_extension.dart';
-import 'package:spotube/collections/spotube_icons.dart';
-import 'package:spotube/components/adaptive/adaptive_pop_sheet_list.dart';
-import 'package:spotube/components/dialogs/confirm_download_dialog.dart';
-import 'package:spotube/components/dialogs/playlist_add_track_dialog.dart';
-import 'package:spotube/components/track_presentation/presentation_props.dart';
-import 'package:spotube/components/track_presentation/presentation_state.dart';
-import 'package:spotube/extensions/context.dart';
-import 'package:spotube/models/metadata/metadata.dart';
-import 'package:spotube/provider/download_manager_provider.dart';
-import 'package:spotube/provider/history/history.dart';
-import 'package:spotube/provider/audio_player/audio_player.dart';
+import 'package:openmusic/collections/openmusic_icons.dart';
+import 'package:openmusic/components/adaptive/adaptive_pop_sheet_list.dart';
+import 'package:openmusic/components/dialogs/confirm_download_dialog.dart';
+import 'package:openmusic/components/dialogs/playlist_add_track_dialog.dart';
+import 'package:openmusic/components/track_presentation/presentation_props.dart';
+import 'package:openmusic/components/track_presentation/presentation_state.dart';
+import 'package:openmusic/extensions/context.dart';
+import 'package:openmusic/models/metadata/metadata.dart';
+import 'package:openmusic/provider/download_manager_provider.dart';
+import 'package:openmusic/provider/history/history.dart';
+import 'package:openmusic/provider/audio_player/audio_player.dart';
 
 ToastOverlay showToastForAction(
   BuildContext context,
@@ -19,20 +19,20 @@ ToastOverlay showToastForAction(
   int count,
 ) {
   final message = switch (action) {
-    "download" => (context.l10n.download_count(count), SpotubeIcons.download),
+    "download" => (context.l10n.download_count(count), OpenMusicIcons.download),
     "add-to-playlist" => (
         context.l10n.add_count_to_playlist(count),
-        SpotubeIcons.playlistAdd,
+        OpenMusicIcons.playlistAdd,
       ),
     "add-to-queue" => (
         context.l10n.add_count_to_queue(count),
-        SpotubeIcons.queueAdd,
+        OpenMusicIcons.queueAdd,
       ),
     "play-next" => (
         context.l10n.play_count_next(count),
-        SpotubeIcons.lightning,
+        OpenMusicIcons.lightning,
       ),
-    _ => ("", SpotubeIcons.error),
+    _ => ("", OpenMusicIcons.error),
   };
 
   return showToast(
@@ -46,7 +46,7 @@ ToastOverlay showToastForAction(
           leadingAlignment: Alignment.center,
           trailing: IconButton.ghost(
             size: ButtonSize.small,
-            icon: const Icon(SpotubeIcons.close),
+            icon: const Icon(OpenMusicIcons.close),
             onPressed: () {
               overlay.close();
             },
@@ -179,12 +179,12 @@ class TrackPresentationActionsSection extends HookConsumerWidget {
 
         if (!context.mounted) return;
       },
-      icon: const Icon(SpotubeIcons.moreVertical),
+      icon: const Icon(OpenMusicIcons.moreVertical),
       variance: ButtonVariance.outline,
       items: (context) => [
         AdaptiveMenuButton(
           value: "download",
-          leading: const Icon(SpotubeIcons.download),
+          leading: const Icon(OpenMusicIcons.download),
           child: selectedTracks.isEmpty ||
                   selectedTracks.length == options.tracks.length
               ? Text(context.l10n.download_all)
@@ -192,7 +192,7 @@ class TrackPresentationActionsSection extends HookConsumerWidget {
         ),
         AdaptiveMenuButton(
           value: "add-to-playlist",
-          leading: const Icon(SpotubeIcons.playlistAdd),
+          leading: const Icon(OpenMusicIcons.playlistAdd),
           child: selectedTracks.isEmpty ||
                   selectedTracks.length == options.tracks.length
               ? Text(context.l10n.add_all_to_playlist)
@@ -200,7 +200,7 @@ class TrackPresentationActionsSection extends HookConsumerWidget {
         ),
         AdaptiveMenuButton(
           value: "add-to-queue",
-          leading: const Icon(SpotubeIcons.queueAdd),
+          leading: const Icon(OpenMusicIcons.queueAdd),
           child: selectedTracks.isEmpty ||
                   selectedTracks.length == options.tracks.length
               ? Text(context.l10n.add_all_to_queue)
@@ -208,7 +208,7 @@ class TrackPresentationActionsSection extends HookConsumerWidget {
         ),
         AdaptiveMenuButton(
           value: "play-next",
-          leading: const Icon(SpotubeIcons.lightning),
+          leading: const Icon(OpenMusicIcons.lightning),
           child: selectedTracks.isEmpty ||
                   selectedTracks.length == options.tracks.length
               ? Text(context.l10n.play_all_next)

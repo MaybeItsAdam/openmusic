@@ -8,7 +8,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logger/logger.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:spotube/utils/platform.dart';
+import 'package:openmusic/utils/platform.dart';
 import 'package:logging/logging.dart' as logging;
 
 final _loggingToLoggerLevel = {
@@ -96,10 +96,10 @@ class AppLogger {
     }
 
     if (kIsLinux) {
-      dir = join(_getXdgStateHome(), "spotube");
+      dir = join(_getXdgStateHome(), "openmusic");
     }
 
-    final file = File(join(dir, ".spotube_logs"));
+    final file = File(join(dir, ".openmusic_logs"));
     if (!await file.exists()) {
       await file.create(recursive: true);
     }

@@ -2,13 +2,13 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
-import 'package:spotube/collections/intents.dart';
-import 'package:spotube/collections/spotube_icons.dart';
-import 'package:spotube/modules/player/player_track_details.dart';
-import 'package:spotube/modules/root/spotube_navigation_bar.dart';
-import 'package:spotube/provider/audio_player/audio_player.dart';
-import 'package:spotube/provider/audio_player/querying_track_info.dart';
-import 'package:spotube/services/audio_player/audio_player.dart';
+import 'package:openmusic/collections/intents.dart';
+import 'package:openmusic/collections/openmusic_icons.dart';
+import 'package:openmusic/modules/player/player_track_details.dart';
+import 'package:openmusic/modules/root/openmusic_navigation_bar.dart';
+import 'package:openmusic/provider/audio_player/audio_player.dart';
+import 'package:openmusic/provider/audio_player/querying_track_info.dart';
+import 'package:openmusic/services/audio_player/audio_player.dart';
 
 class PlayerOverlayCollapsedSection extends HookConsumerWidget {
   final PanelController panelController;
@@ -69,7 +69,7 @@ class PlayerOverlayCollapsedSection extends HookConsumerWidget {
                           Row(
                             children: [
                               IconButton.ghost(
-                                icon: const Icon(SpotubeIcons.skipBack),
+                                icon: const Icon(OpenMusicIcons.skipBack),
                                 onPressed: isFetchingActiveTrack
                                     ? null
                                     : audioPlayer.skipToPrevious,
@@ -85,8 +85,8 @@ class PlayerOverlayCollapsedSection extends HookConsumerWidget {
                                           )
                                         : Icon(
                                             playing
-                                                ? SpotubeIcons.pause
-                                                : SpotubeIcons.play,
+                                                ? OpenMusicIcons.pause
+                                                : OpenMusicIcons.play,
                                           ),
                                     onPressed: Actions.handler<PlayPauseIntent>(
                                       context,
@@ -96,7 +96,7 @@ class PlayerOverlayCollapsedSection extends HookConsumerWidget {
                                 },
                               ),
                               IconButton.ghost(
-                                icon: const Icon(SpotubeIcons.skipForward),
+                                icon: const Icon(OpenMusicIcons.skipForward),
                                 onPressed: isFetchingActiveTrack
                                     ? null
                                     : audioPlayer.skipToNext,

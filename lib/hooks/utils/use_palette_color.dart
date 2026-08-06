@@ -3,7 +3,7 @@ import 'package:shadcn_flutter/shadcn_flutter.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:palette_generator/palette_generator.dart';
-import 'package:spotube/components/image/universal_image.dart';
+import 'package:openmusic/components/image/universal_image.dart';
 
 final _paletteColorState = StateProvider<PaletteColor>((ref) {
   return PaletteColor(Colors.gray[300], 0);

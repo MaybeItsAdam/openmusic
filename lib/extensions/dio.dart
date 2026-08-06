@@ -22,7 +22,7 @@ extension ChunkDownloaderDioExtension on Dio {
     final tempSaveDir = Directory(
       join(
         tempRootDir.path,
-        'Spotube',
+        'OpenMusic',
         '.chunk_dl_${targetFile.uri.pathSegments.last}',
       ),
     );

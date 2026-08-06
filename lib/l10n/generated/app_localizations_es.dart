@@ -491,13 +491,13 @@ class AppLocalizationsEs extends AppLocalizations {
   String get about => 'Acerca de';
 
   @override
-  String get u_love_spotube => 'Sabemos que te encanta Spotube';
+  String get u_love_spotube => 'Sabemos que te encanta OpenMusic';
 
   @override
   String get check_for_updates => 'Buscar actualizaciones';
 
   @override
-  String get about_spotube => 'Acerca de Spotube';
+  String get about_spotube => 'Acerca de OpenMusic';
 
   @override
   String get blacklist => 'Lista negra';
@@ -507,7 +507,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get spotube_description =>
-      'Spotube, un cliente ligero, multiplataforma y gratuito de Spotify';
+      'OpenMusic, un cliente ligero, multiplataforma y gratuito de Spotify';
 
   @override
   String get version => 'Versión';
@@ -732,7 +732,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get download_ip_ban_warning =>
-      'Por cierto, tu IP puede ser bloqueada en YouTube debido a solicitudes de descarga excesivas. El bloqueo de IP significa que no podrás usar YouTube (incluso si has iniciado sesión) durante al menos 2-3 meses desde esa dirección IP. Y Spotube no se hace responsable si esto ocurre alguna vez';
+      'Por cierto, tu IP puede ser bloqueada en YouTube debido a solicitudes de descarga excesivas. El bloqueo de IP significa que no podrás usar YouTube (incluso si has iniciado sesión) durante al menos 2-3 meses desde esa dirección IP. Y OpenMusic no se hace responsable si esto ocurre alguna vez';
 
   @override
   String get by_clicking_accept_terms =>
@@ -747,7 +747,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get download_agreement_3 =>
-      'Soy completamente consciente de que mi IP puede ser bloqueada en YouTube y no responsabilizo a Spotube ni a sus dueños/contribuyentes por cualquier incidente causado por mi acción actual';
+      'Soy completamente consciente de que mi IP puede ser bloqueada en YouTube y no responsabilizo a OpenMusic ni a sus dueños/contribuyentes por cualquier incidente causado por mi acción actual';
 
   @override
   String get decline => 'Rechazar';
@@ -829,7 +829,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get encryption_failed_warning =>
-      'Spotube utiliza el cifrado para almacenar sus datos de forma segura. Pero ha fallado. Por lo tanto, volverá a un almacenamiento no seguro\nSi está utilizando Linux, asegúrese de tener instalados servicios secretos como gnome-keyring, kde-wallet y keepassxc';
+      'OpenMusic utiliza el cifrado para almacenar sus datos de forma segura. Pero ha fallado. Por lo tanto, volverá a un almacenamiento no seguro\nSi está utilizando Linux, asegúrese de tener instalados servicios secretos como gnome-keyring, kde-wallet y keepassxc';
 
   @override
   String get querying_info => 'Consultando información...';
@@ -1011,7 +1011,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get choose_your_region_description =>
-      'Esto ayudará a Spotube a mostrarte el contenido adecuado\npara tu ubicación.';
+      'Esto ayudará a OpenMusic a mostrarte el contenido adecuado\npara tu ubicación.';
 
   @override
   String get choose_your_language => 'Elige tu idioma';
@@ -1021,7 +1021,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get help_project_grow_description =>
-      'Spotube es un proyecto de código abierto. Puedes ayudar a que este proyecto crezca contribuyendo al proyecto, informando errores o sugiriendo nuevas funciones.';
+      'OpenMusic es un proyecto de código abierto. Puedes ayudar a que este proyecto crezca contribuyendo al proyecto, informando errores o sugiriendo nuevas funciones.';
 
   @override
   String get contribute_on_github => 'Contribuir en GitHub';
@@ -1037,7 +1037,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get enable_connect_description =>
-      'Controla Spotube desde otros dispositivos';
+      'Controla OpenMusic desde otros dispositivos';
 
   @override
   String get devices => 'Dispositivos';
@@ -1085,19 +1085,19 @@ class AppLocalizationsEs extends AppLocalizations {
   }
 
   @override
-  String get spotube_has_an_update => 'Spotube tiene una actualización';
+  String get spotube_has_an_update => 'OpenMusic tiene una actualización';
 
   @override
   String get download_now => 'Descargar ahora';
 
   @override
   String nightly_version(Object nightlyBuildNum) {
-    return 'Spotube Nightly $nightlyBuildNum ha sido lanzado';
+    return 'OpenMusic Nightly $nightlyBuildNum ha sido lanzado';
   }
 
   @override
   String release_version(Object version) {
-    return 'Spotube v$version ha sido lanzado';
+    return 'OpenMusic v$version ha sido lanzado';
   }
 
   @override
@@ -1527,7 +1527,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get third_party_plugin_dmca_notice =>
-      'El equipo de Spotube no asume ninguna responsabilidad (incluida la legal) por complementos de \"terceros\". Úsalos bajo tu propio riesgo. Para errores o problemas, repórtalos en el repositorio del complemento.\n\nSi algún complemento de “terceros” infringe los ToS/DMCA de algún servicio o entidad legal, por favor, solicita al autor del complemento o a la plataforma de alojamiento (p. ej., GitHub/Codeberg) que tome medidas. Los complementos etiquetados como “de terceros” son mantenidos públicamente por la comunidad; no los gestionamos y no podemos intervenir.\n\n';
+      'El equipo de OpenMusic no asume ninguna responsabilidad (incluida la legal) por complementos de \"terceros\". Úsalos bajo tu propio riesgo. Para errores o problemas, repórtalos en el repositorio del complemento.\n\nSi algún complemento de “terceros” infringe los ToS/DMCA de algún servicio o entidad legal, por favor, solicita al autor del complemento o a la plataforma de alojamiento (p. ej., GitHub/Codeberg) que tome medidas. Los complementos etiquetados como “de terceros” son mantenidos públicamente por la comunidad; no los gestionamos y no podemos intervenir.\n\n';
 
   @override
   String get input_does_not_match_format =>

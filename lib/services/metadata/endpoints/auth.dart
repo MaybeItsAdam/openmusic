@@ -2,7 +2,7 @@ import 'package:desktop_webview_window/desktop_webview_window.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:hetu_script/hetu_script.dart';
 import 'package:hetu_std/hetu_std.dart';
-import 'package:spotube/utils/platform.dart';
+import 'package:openmusic/utils/platform.dart';
 
 class MetadataAuthEndpoint {
   final Hetu hetu;

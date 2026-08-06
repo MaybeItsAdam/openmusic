@@ -4,15 +4,15 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 import 'package:shadcn_flutter/shadcn_flutter_extension.dart';
 import 'package:skeletonizer/skeletonizer.dart';
-import 'package:spotube/collections/fake.dart';
-import 'package:spotube/components/fallbacks/error_box.dart';
-import 'package:spotube/components/waypoint.dart';
-import 'package:spotube/extensions/constrains.dart';
-import 'package:spotube/extensions/context.dart';
-import 'package:spotube/modules/artist/artist_card.dart';
-import 'package:spotube/modules/search/loading.dart';
-import 'package:spotube/pages/search/search.dart';
-import 'package:spotube/provider/metadata_plugin/search/artists.dart';
+import 'package:openmusic/collections/fake.dart';
+import 'package:openmusic/components/fallbacks/error_box.dart';
+import 'package:openmusic/components/waypoint.dart';
+import 'package:openmusic/extensions/constrains.dart';
+import 'package:openmusic/extensions/context.dart';
+import 'package:openmusic/modules/artist/artist_card.dart';
+import 'package:openmusic/modules/search/loading.dart';
+import 'package:openmusic/pages/search/search.dart';
+import 'package:openmusic/provider/metadata_plugin/search/artists.dart';
 
 class SearchPageArtistsTab extends HookConsumerWidget {
   const SearchPageArtistsTab({super.key});

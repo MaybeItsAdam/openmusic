@@ -15,37 +15,37 @@ import 'package:local_notifier/local_notifier.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:metadata_god/metadata_god.dart';
 import 'package:smtc_windows/smtc_windows.dart';
-import 'package:spotube/collections/env.dart';
-import 'package:spotube/collections/intents.dart';
-import 'package:spotube/collections/routes.dart';
-import 'package:spotube/hooks/configurators/use_close_behavior.dart';
-import 'package:spotube/hooks/configurators/use_deep_linking.dart';
-import 'package:spotube/hooks/configurators/use_disable_battery_optimizations.dart';
-import 'package:spotube/hooks/configurators/use_fix_window_stretching.dart';
-import 'package:spotube/hooks/configurators/use_get_storage_perms.dart';
-import 'package:spotube/hooks/configurators/use_has_touch.dart';
-import 'package:spotube/models/database/database.dart';
-import 'package:spotube/modules/settings/color_scheme_picker_dialog.dart';
-import 'package:spotube/provider/audio_player/audio_player_streams.dart';
-import 'package:spotube/provider/database/database.dart';
-import 'package:spotube/provider/glance/glance.dart';
-import 'package:spotube/provider/metadata_plugin/metadata_plugin_provider.dart';
-import 'package:spotube/provider/metadata_plugin/updater/update_checker.dart';
-import 'package:spotube/provider/server/bonsoir.dart';
-import 'package:spotube/provider/server/server.dart';
-import 'package:spotube/provider/tray_manager/tray_manager.dart';
-import 'package:spotube/l10n/l10n.dart';
-import 'package:spotube/provider/connect/clients.dart';
-import 'package:spotube/provider/user_preferences/user_preferences_provider.dart';
-import 'package:spotube/services/audio_player/audio_player.dart';
-import 'package:spotube/services/cli/cli.dart';
-import 'package:spotube/services/kv_store/encrypted_kv_store.dart';
-import 'package:spotube/services/kv_store/kv_store.dart';
-import 'package:spotube/services/logger/logger.dart';
-import 'package:spotube/services/wm_tools/wm_tools.dart';
-import 'package:spotube/utils/migrations/encryption.dart';
-import 'package:spotube/utils/migrations/sandbox.dart';
-import 'package:spotube/utils/platform.dart';
+import 'package:openmusic/collections/env.dart';
+import 'package:openmusic/collections/intents.dart';
+import 'package:openmusic/collections/routes.dart';
+import 'package:openmusic/hooks/configurators/use_close_behavior.dart';
+import 'package:openmusic/hooks/configurators/use_deep_linking.dart';
+import 'package:openmusic/hooks/configurators/use_disable_battery_optimizations.dart';
+import 'package:openmusic/hooks/configurators/use_fix_window_stretching.dart';
+import 'package:openmusic/hooks/configurators/use_get_storage_perms.dart';
+import 'package:openmusic/hooks/configurators/use_has_touch.dart';
+import 'package:openmusic/models/database/database.dart';
+import 'package:openmusic/modules/settings/color_scheme_picker_dialog.dart';
+import 'package:openmusic/provider/audio_player/audio_player_streams.dart';
+import 'package:openmusic/provider/database/database.dart';
+import 'package:openmusic/provider/glance/glance.dart';
+import 'package:openmusic/provider/metadata_plugin/metadata_plugin_provider.dart';
+import 'package:openmusic/provider/metadata_plugin/updater/update_checker.dart';
+import 'package:openmusic/provider/server/bonsoir.dart';
+import 'package:openmusic/provider/server/server.dart';
+import 'package:openmusic/provider/tray_manager/tray_manager.dart';
+import 'package:openmusic/l10n/l10n.dart';
+import 'package:openmusic/provider/connect/clients.dart';
+import 'package:openmusic/provider/user_preferences/user_preferences_provider.dart';
+import 'package:openmusic/services/audio_player/audio_player.dart';
+import 'package:openmusic/services/cli/cli.dart';
+import 'package:openmusic/services/kv_store/encrypted_kv_store.dart';
+import 'package:openmusic/services/kv_store/kv_store.dart';
+import 'package:openmusic/services/logger/logger.dart';
+import 'package:openmusic/services/wm_tools/wm_tools.dart';
+import 'package:openmusic/utils/migrations/encryption.dart';
+import 'package:openmusic/utils/migrations/sandbox.dart';
+import 'package:openmusic/utils/platform.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
 import 'package:timezone/data/latest.dart' as tz;
@@ -116,7 +116,7 @@ Future<void> main(List<String> rawArgs) async {
     await migrateLegacyEncryptedValues(database);
 
     if (kIsDesktop) {
-      await localNotifier.setup(appName: "Spotube");
+      await localNotifier.setup(appName: "OpenMusic");
       await WindowManagerTools.initialize();
     }
 
@@ -128,14 +128,14 @@ Future<void> main(List<String> rawArgs) async {
       ProviderScope(
         overrides: [databaseProvider.overrideWith((ref) => database)],
         observers: const [AppLoggerProviderObserver()],
-        child: const Spotube(),
+        child: const OpenMusic(),
       ),
     );
   });
 }
 
-class Spotube extends HookConsumerWidget {
-  const Spotube({super.key});
+class OpenMusic extends HookConsumerWidget {
+  const OpenMusic({super.key});
 
   @override
   Widget build(BuildContext context, ref) {
@@ -191,7 +191,7 @@ class Spotube extends HookConsumerWidget {
       ],
       routerConfig: router.config(),
       debugShowCheckedModeBanner: false,
-      title: 'Spotube',
+      title: 'OpenMusic',
       builder: (context, child) {
         child = ScrollConfiguration(
           behavior: ScrollConfiguration.of(context).copyWith(

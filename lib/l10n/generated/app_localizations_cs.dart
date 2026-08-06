@@ -487,13 +487,13 @@ class AppLocalizationsCs extends AppLocalizations {
   String get about => 'O aplikaci';
 
   @override
-  String get u_love_spotube => 'Víme, že milujete Spotube';
+  String get u_love_spotube => 'Víme, že milujete OpenMusic';
 
   @override
   String get check_for_updates => 'Zkontrolovat aktualizace';
 
   @override
-  String get about_spotube => 'O Spotube';
+  String get about_spotube => 'O OpenMusic';
 
   @override
   String get blacklist => 'Černá listina';
@@ -503,7 +503,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get spotube_description =>
-      'Spotube, rychlý, multiplatformní, bezplatný Spotify klient';
+      'OpenMusic, rychlý, multiplatformní, bezplatný Spotify klient';
 
   @override
   String get version => 'Verze';
@@ -725,7 +725,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get download_ip_ban_warning =>
-      'Mimochodem, vaše IP může být na YouTube zablokována kvůli nadměrným požadavkům na stahování. Blokování IP znamená, že nemůžete používat YouTube (i když jste přihlášeni) alespoň 2-3 měsíce ze zařízení s touto IP. A Spotube nenese žádnou odpovědnost, pokud se to někdy stane';
+      'Mimochodem, vaše IP může být na YouTube zablokována kvůli nadměrným požadavkům na stahování. Blokování IP znamená, že nemůžete používat YouTube (i když jste přihlášeni) alespoň 2-3 měsíce ze zařízení s touto IP. A OpenMusic nenese žádnou odpovědnost, pokud se to někdy stane';
 
   @override
   String get by_clicking_accept_terms =>
@@ -822,7 +822,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get encryption_failed_warning =>
-      'Spotube používá šifrování k bezpečnému ukládání vašich dat. Ale selhalo. Takže se vrátí k nezabezpečenému úložišti\nPokud používáte linux, ujistěte se, že máte nainstalovanou jakoukoli službu k ukládání bezpečnostních pověření (gnome-keyring, kde-wallet, keepassxc atd.)';
+      'OpenMusic používá šifrování k bezpečnému ukládání vašich dat. Ale selhalo. Takže se vrátí k nezabezpečenému úložišti\nPokud používáte linux, ujistěte se, že máte nainstalovanou jakoukoli službu k ukládání bezpečnostních pověření (gnome-keyring, kde-wallet, keepassxc atd.)';
 
   @override
   String get querying_info => 'Získávání informací...';
@@ -1002,7 +1002,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get choose_your_region_description =>
-      'To pomůže Spotube ukázat vám správný obsah\npro vaši lokalitu.';
+      'To pomůže OpenMusic ukázat vám správný obsah\npro vaši lokalitu.';
 
   @override
   String get choose_your_language => 'Vyberte svůj jazyk';
@@ -1012,7 +1012,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get help_project_grow_description =>
-      'Spotube je open-source projekt. Můžete pomoci tomuto projektu růst tím, že přispějete do projektu, nahlásíte chyby nebo navrhnete nové funkce.';
+      'OpenMusic je open-source projekt. Můžete pomoci tomuto projektu růst tím, že přispějete do projektu, nahlásíte chyby nebo navrhnete nové funkce.';
 
   @override
   String get contribute_on_github => 'Přispějte na GitHub';
@@ -1028,7 +1028,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get enable_connect_description =>
-      'Ovládejte Spotube z jiného zařízení';
+      'Ovládejte OpenMusic z jiného zařízení';
 
   @override
   String get devices => 'Zařízení';
@@ -1076,19 +1076,19 @@ class AppLocalizationsCs extends AppLocalizations {
   }
 
   @override
-  String get spotube_has_an_update => 'Spotube má aktualizaci';
+  String get spotube_has_an_update => 'OpenMusic má aktualizaci';
 
   @override
   String get download_now => 'Stáhnout nyní';
 
   @override
   String nightly_version(Object nightlyBuildNum) {
-    return 'Byla vydána noční verze Spotube $nightlyBuildNum';
+    return 'Byla vydána noční verze OpenMusic $nightlyBuildNum';
   }
 
   @override
   String release_version(Object version) {
-    return 'Byla vydána verze Spotube v$version';
+    return 'Byla vydána verze OpenMusic v$version';
   }
 
   @override
@@ -1513,7 +1513,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get third_party_plugin_dmca_notice =>
-      'Tým Spotube nenese žádnou odpovědnost (včetně právní) za pluginy „třetích stran“.\nPoužívejte je na vlastní riziko. Pro chyby/problémy je nahlaste do repozitáře pluginu.\n\nPokud jakýkoli plugin „třetí strany“ porušuje podmínky služby nebo DMCA kteréhokoli poskytovatele či právního subjektu, požádejte autora pluginu nebo hostingovou platformu (např. GitHub/Codeberg), aby podnikla kroky. Pluginy označené jako „třetí strana“ jsou otevřené a spravovány komunitou; nespravujeme je, tudíž nemůžeme jednat.\n\n';
+      'Tým OpenMusic nenese žádnou odpovědnost (včetně právní) za pluginy „třetích stran“.\nPoužívejte je na vlastní riziko. Pro chyby/problémy je nahlaste do repozitáře pluginu.\n\nPokud jakýkoli plugin „třetí strany“ porušuje podmínky služby nebo DMCA kteréhokoli poskytovatele či právního subjektu, požádejte autora pluginu nebo hostingovou platformu (např. GitHub/Codeberg), aby podnikla kroky. Pluginy označené jako „třetí strana“ jsou otevřené a spravovány komunitou; nespravujeme je, tudíž nemůžeme jednat.\n\n';
 
   @override
   String get input_does_not_match_format =>

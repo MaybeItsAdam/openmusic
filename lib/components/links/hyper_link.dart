@@ -1,5 +1,5 @@
 import 'package:shadcn_flutter/shadcn_flutter.dart';
-import 'package:spotube/components/links/anchor_button.dart';
+import 'package:openmusic/components/links/anchor_button.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class Hyperlink extends StatelessWidget {

@@ -3,12 +3,12 @@ import 'dart:async';
 import 'package:app_links/app_links.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:spotube/collections/routes.dart';
-import 'package:spotube/collections/routes.gr.dart';
+import 'package:openmusic/collections/routes.dart';
+import 'package:openmusic/collections/routes.gr.dart';
 import 'package:flutter_sharing_intent/flutter_sharing_intent.dart';
 import 'package:flutter_sharing_intent/model/sharing_file.dart';
-import 'package:spotube/services/logger/logger.dart';
-import 'package:spotube/utils/platform.dart';
+import 'package:openmusic/services/logger/logger.dart';
+import 'package:openmusic/utils/platform.dart';
 
 final appLinks = AppLinks();
 final linkStream = appLinks.stringLinkStream.asBroadcastStream();
