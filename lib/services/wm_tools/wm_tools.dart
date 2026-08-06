@@ -41,7 +41,7 @@ class WindowManagerTools with WidgetsBindingObserver {
     await windowManager.waitUntilReadyToShow(
       const WindowOptions(
         title: "OpenMusic",
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.black,
         minimumSize: Size(300, 700),
         titleBarStyle: TitleBarStyle.hidden,
         center: true,

@@ -50,7 +50,7 @@ class SearchPlaceholder extends HookConsumerWidget {
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w900,
-                  color: theme.colorScheme.foreground.withValues(alpha: 0.7),
+                  color: theme.colorScheme.mutedForeground,
                 ),
               ),
               const SizedBox(height: 20),

@@ -196,7 +196,7 @@ class SettingsPlaybackSection extends HookConsumerWidget {
                   onPressed: () {
                     showDialog(
                       context: context,
-                      barrierColor: Colors.black.withValues(alpha: 0.5),
+                      barrierColor: Colors.black,
                       builder: (context) =>
                           const SettingsPlaybackEditConnectPortDialog(),
                     );

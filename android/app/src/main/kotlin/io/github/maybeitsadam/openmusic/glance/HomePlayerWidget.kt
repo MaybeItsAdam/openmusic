@@ -123,9 +123,7 @@ class HomePlayerWidget : GlanceAppWidget() {
                 Box(
                     modifier = GlanceModifier
                         .background(
-                            color =
-                            GlanceTheme.colors.surface.getColor(context)
-                                .copy(alpha = 0.5f),
+                            color = GlanceTheme.colors.surface.getColor(context),
                         )
                         .fillMaxSize(),
                 ) {}

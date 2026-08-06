@@ -340,7 +340,7 @@ class ConnectControlPage extends HookConsumerWidget {
                                   transformBackdrop: false,
                                   position: OverlayPosition.bottom,
                                   surfaceBlur: context.theme.surfaceBlur,
-                                  surfaceOpacity: 0.7,
+                                  surfaceOpacity: 1,
                                   expands: true,
                                   builder: (context) {
                                     return ConstrainedBox(

@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -58,196 +56,161 @@ class TrackPage extends HookConsumerWidget {
           TitleBar(backgroundColor: Colors.transparent, surfaceBlur: 0),
         ],
         floatingHeader: true,
-        child: Stack(
-          children: [
-            Positioned.fill(
-              child: Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: UniversalImage.imageProvider(
-                      track.album.images.asUrlString(
-                        placeholder: ImagePlaceholder.albumArt,
+        child: Skeletonizer(
+          enabled: trackQuery.isLoading,
+          child: Container(
+            alignment: Alignment.topCenter,
+            color: colorScheme.background,
+            child: SafeArea(
+              child: Wrap(
+                spacing: 20,
+                runSpacing: 20,
+                alignment: WrapAlignment.center,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                runAlignment: WrapAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: UniversalImage(
+                        path: track.album.images.asUrlString(
+                          placeholder: ImagePlaceholder.albumArt,
+                        ),
+                        height: 200,
+                        width: 200,
                       ),
                     ),
-                    fit: BoxFit.cover,
-                    colorFilter: ColorFilter.mode(
-                      colorScheme.background.withValues(alpha: 0.5),
-                      BlendMode.srcOver,
-                    ),
-                    alignment: Alignment.topCenter,
                   ),
-                ),
-              ),
-            ),
-            Positioned.fill(
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                child: Skeletonizer(
-                  enabled: trackQuery.isLoading,
-                  child: Container(
-                    alignment: Alignment.topCenter,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [colorScheme.background, Colors.transparent],
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        stops: const [0.2, 1],
-                      ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16.0,
                     ),
-                    child: SafeArea(
-                      child: Wrap(
-                        spacing: 20,
-                        runSpacing: 20,
-                        alignment: WrapAlignment.center,
-                        crossAxisAlignment: WrapCrossAlignment.center,
-                        runAlignment: WrapAlignment.center,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 20),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
-                              child: UniversalImage(
-                                path: track.album.images.asUrlString(
-                                  placeholder: ImagePlaceholder.albumArt,
+                    child: Column(
+                      crossAxisAlignment: mediaQuery.smAndDown
+                          ? CrossAxisAlignment.center
+                          : CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(track.name).large().semiBold(),
+                        const Gap(10),
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Icon(OpenMusicIcons.album),
+                            const Gap(5),
+                            Flexible(
+                              child: LinkText(
+                                track.album.name,
+                                AlbumRoute(
+                                  id: track.album.id,
+                                  album: track.album,
                                 ),
-                                height: 200,
-                                width: 200,
+                                push: true,
                               ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 16.0,
+                          ],
+                        ),
+                        const Gap(10),
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Icon(OpenMusicIcons.artist),
+                            const Gap(5),
+                            Flexible(
+                              child: ArtistLink(
+                                artists: track.artists,
+                                hideOverflowArtist: false,
+                              ),
                             ),
-                            child: Column(
-                              crossAxisAlignment: mediaQuery.smAndDown
-                                  ? CrossAxisAlignment.center
-                                  : CrossAxisAlignment.start,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text(track.name).large().semiBold(),
-                                const Gap(10),
-                                Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    const Icon(OpenMusicIcons.album),
-                                    const Gap(5),
-                                    Flexible(
-                                      child: LinkText(
-                                        track.album.name,
-                                        AlbumRoute(
-                                          id: track.album.id,
-                                          album: track.album,
-                                        ),
-                                        push: true,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                const Gap(10),
-                                Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    const Icon(OpenMusicIcons.artist),
-                                    const Gap(5),
-                                    Flexible(
-                                      child: ArtistLink(
-                                        artists: track.artists,
-                                        hideOverflowArtist: false,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                const Gap(10),
-                                ConstrainedBox(
-                                  constraints: const BoxConstraints(
-                                    maxWidth: 350,
+                          ],
+                        ),
+                        const Gap(10),
+                        ConstrainedBox(
+                          constraints: const BoxConstraints(
+                            maxWidth: 350,
+                          ),
+                          child: Row(
+                            mainAxisSize: mediaQuery.smAndDown
+                                ? MainAxisSize.max
+                                : MainAxisSize.min,
+                            children: [
+                              const Gap(5),
+                              if (!isActive &&
+                                  !playlist.tracks.containsBy(
+                                    track,
+                                    (t) => t.id,
+                                  ))
+                                Button.outline(
+                                  leading: const Icon(
+                                    OpenMusicIcons.queueAdd,
                                   ),
-                                  child: Row(
-                                    mainAxisSize: mediaQuery.smAndDown
-                                        ? MainAxisSize.max
-                                        : MainAxisSize.min,
-                                    children: [
-                                      const Gap(5),
-                                      if (!isActive &&
-                                          !playlist.tracks.containsBy(
-                                            track,
-                                            (t) => t.id,
-                                          ))
-                                        Button.outline(
-                                          leading: const Icon(
-                                            OpenMusicIcons.queueAdd,
-                                          ),
-                                          child: Text(context.l10n.queue),
-                                          onPressed: () {
-                                            playlistNotifier.addTrack(track);
-                                          },
-                                        ),
-                                      const Gap(5),
-                                      if (!isActive &&
-                                          !playlist.tracks.containsBy(
-                                            track,
-                                            (t) => t.id,
-                                          ))
-                                        Tooltip(
-                                          tooltip: TooltipContainer(
-                                            child: Text(context.l10n.play_next),
-                                          ).call,
-                                          child: IconButton.outline(
-                                            icon: const Icon(
-                                              OpenMusicIcons.lightning,
-                                            ),
-                                            onPressed: () {
-                                              playlistNotifier.addTracksAtFirst(
-                                                [track],
-                                              );
-                                            },
-                                          ),
-                                        ),
-                                      const Gap(5),
-                                      Tooltip(
-                                        tooltip: TooltipContainer(
-                                          child: Text(
-                                            isActive
-                                                ? context.l10n.pause_playback
-                                                : context.l10n.play,
-                                          ),
-                                        ).call,
-                                        child: IconButton.primary(
-                                          shape: ButtonShape.circle,
-                                          icon: Icon(
-                                            isActive
-                                                ? OpenMusicIcons.pause
-                                                : OpenMusicIcons.play,
-                                          ),
-                                          onPressed: onPlay,
-                                        ),
-                                      ),
-                                      const Gap(5),
-                                      if (mediaQuery.smAndDown)
-                                        const Spacer()
-                                      else
-                                        const Gap(20),
-                                      TrackHeartButton(track: track),
-                                      TrackOptionsButton(
-                                        track: track,
-                                        userPlaylist: false,
-                                      ),
-                                      const Gap(5),
-                                    ],
+                                  child: Text(context.l10n.queue),
+                                  onPressed: () {
+                                    playlistNotifier.addTrack(track);
+                                  },
+                                ),
+                              const Gap(5),
+                              if (!isActive &&
+                                  !playlist.tracks.containsBy(
+                                    track,
+                                    (t) => t.id,
+                                  ))
+                                Tooltip(
+                                  tooltip: TooltipContainer(
+                                    child: Text(context.l10n.play_next),
+                                  ).call,
+                                  child: IconButton.outline(
+                                    icon: const Icon(
+                                      OpenMusicIcons.lightning,
+                                    ),
+                                    onPressed: () {
+                                      playlistNotifier.addTracksAtFirst(
+                                        [track],
+                                      );
+                                    },
                                   ),
                                 ),
-                              ],
-                            ),
+                              const Gap(5),
+                              Tooltip(
+                                tooltip: TooltipContainer(
+                                  child: Text(
+                                    isActive
+                                        ? context.l10n.pause_playback
+                                        : context.l10n.play,
+                                  ),
+                                ).call,
+                                child: IconButton.primary(
+                                  shape: ButtonShape.circle,
+                                  icon: Icon(
+                                    isActive
+                                        ? OpenMusicIcons.pause
+                                        : OpenMusicIcons.play,
+                                  ),
+                                  onPressed: onPlay,
+                                ),
+                              ),
+                              const Gap(5),
+                              if (mediaQuery.smAndDown)
+                                const Spacer()
+                              else
+                                const Gap(20),
+                              TrackHeartButton(track: track),
+                              TrackOptionsButton(
+                                track: track,
+                                userPlaylist: false,
+                              ),
+                              const Gap(5),
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
-                ),
+                ],
               ),
             ),
-          ],
+          ),
         ),
       ),
     );

@@ -33,7 +33,7 @@ class ArtistPageFooter extends ConsumerWidget {
         borderRadius: BorderRadius.circular(10),
         image: DecorationImage(
           colorFilter: ColorFilter.mode(
-            Colors.black.withValues(alpha: 0.5),
+            Colors.gray[800],
             BlendMode.darken,
           ),
           image: UniversalImage.imageProvider(

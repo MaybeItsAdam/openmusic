@@ -59,7 +59,7 @@ class MiniLyricsPage extends HookConsumerWidget {
               areaActive.value = false;
             },
       child: Scaffold(
-        backgroundColor: theme.colorScheme.background.withValues(alpha: 0.4),
+        backgroundColor: theme.colorScheme.background,
         headers: [
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -214,7 +214,7 @@ class MiniLyricsPage extends HookConsumerWidget {
                                 transformBackdrop: false,
                                 position: OverlayPosition.bottom,
                                 surfaceBlur: context.theme.surfaceBlur,
-                                surfaceOpacity: 0.7,
+                                surfaceOpacity: 1,
                                 expands: true,
                                 builder: (context) => Consumer(
                                   builder: (context, ref, _) {
