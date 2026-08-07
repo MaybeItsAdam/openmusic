@@ -765,6 +765,27 @@ class $PreferencesTableTable extends PreferencesTable
           GeneratedColumn.constraintIsAlways('CHECK ("cache_music" IN (0, 1))'),
       defaultValue: const Constant(true));
   @override
+  late final GeneratedColumnWithTypeConverter<List<String>, String>
+      lyricsProviderOrder = GeneratedColumn<String>(
+              'lyrics_provider_order', aliasedName, false,
+              type: DriftSqlType.string,
+              requiredDuringInsert: false,
+              defaultValue: const Constant(
+                  "betterLyrics,lrclib,kugou,paxsenix,lyricsPlus,"
+                  "youtubeSubtitle,youtubeMusic"))
+          .withConverter<List<String>>(
+              $PreferencesTableTable.$converterlyricsProviderOrder);
+  @override
+  late final GeneratedColumnWithTypeConverter<List<String>, String>
+      lyricsProvidersEnabled = GeneratedColumn<String>(
+              'lyrics_providers_enabled', aliasedName, false,
+              type: DriftSqlType.string,
+              requiredDuringInsert: false,
+              defaultValue: const Constant(
+                  "betterLyrics,lrclib,kugou,youtubeSubtitle,youtubeMusic"))
+          .withConverter<List<String>>(
+              $PreferencesTableTable.$converterlyricsProvidersEnabled);
+  @override
   List<GeneratedColumn> get $columns => [
         id,
         albumColorSync,
@@ -789,7 +810,9 @@ class $PreferencesTableTable extends PreferencesTable
         endlessPlayback,
         enableConnect,
         connectPort,
-        cacheMusic
+        cacheMusic,
+        lyricsProviderOrder,
+        lyricsProvidersEnabled
       ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -956,6 +979,13 @@ class $PreferencesTableTable extends PreferencesTable
           .read(DriftSqlType.int, data['${effectivePrefix}connect_port'])!,
       cacheMusic: attachedDatabase.typeMapping
           .read(DriftSqlType.bool, data['${effectivePrefix}cache_music'])!,
+      lyricsProviderOrder: $PreferencesTableTable.$converterlyricsProviderOrder
+          .fromSql(attachedDatabase.typeMapping.read(DriftSqlType.string,
+              data['${effectivePrefix}lyrics_provider_order'])!),
+      lyricsProvidersEnabled: $PreferencesTableTable
+          .$converterlyricsProvidersEnabled
+          .fromSql(attachedDatabase.typeMapping.read(DriftSqlType.string,
+              data['${effectivePrefix}lyrics_providers_enabled'])!),
     );
   }
 
@@ -984,6 +1014,10 @@ class $PreferencesTableTable extends PreferencesTable
   static JsonTypeConverter2<YoutubeClientEngine, String, String>
       $converteryoutubeClientEngine =
       const EnumNameConverter<YoutubeClientEngine>(YoutubeClientEngine.values);
+  static TypeConverter<List<String>, String> $converterlyricsProviderOrder =
+      const StringListConverter();
+  static TypeConverter<List<String>, String> $converterlyricsProvidersEnabled =
+      const StringListConverter();
 }
 
 class PreferencesTableData extends DataClass
@@ -1012,6 +1046,8 @@ class PreferencesTableData extends DataClass
   final bool enableConnect;
   final int connectPort;
   final bool cacheMusic;
+  final List<String> lyricsProviderOrder;
+  final List<String> lyricsProvidersEnabled;
   const PreferencesTableData(
       {required this.id,
       required this.albumColorSync,
@@ -1036,7 +1072,9 @@ class PreferencesTableData extends DataClass
       required this.endlessPlayback,
       required this.enableConnect,
       required this.connectPort,
-      required this.cacheMusic});
+      required this.cacheMusic,
+      required this.lyricsProviderOrder,
+      required this.lyricsProvidersEnabled});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -1096,6 +1134,16 @@ class PreferencesTableData extends DataClass
     map['enable_connect'] = Variable<bool>(enableConnect);
     map['connect_port'] = Variable<int>(connectPort);
     map['cache_music'] = Variable<bool>(cacheMusic);
+    {
+      map['lyrics_provider_order'] = Variable<String>($PreferencesTableTable
+          .$converterlyricsProviderOrder
+          .toSql(lyricsProviderOrder));
+    }
+    {
+      map['lyrics_providers_enabled'] = Variable<String>($PreferencesTableTable
+          .$converterlyricsProvidersEnabled
+          .toSql(lyricsProvidersEnabled));
+    }
     return map;
   }
 
@@ -1127,6 +1175,8 @@ class PreferencesTableData extends DataClass
       enableConnect: Value(enableConnect),
       connectPort: Value(connectPort),
       cacheMusic: Value(cacheMusic),
+      lyricsProviderOrder: Value(lyricsProviderOrder),
+      lyricsProvidersEnabled: Value(lyricsProvidersEnabled),
     );
   }
 
@@ -1166,6 +1216,10 @@ class PreferencesTableData extends DataClass
       enableConnect: serializer.fromJson<bool>(json['enableConnect']),
       connectPort: serializer.fromJson<int>(json['connectPort']),
       cacheMusic: serializer.fromJson<bool>(json['cacheMusic']),
+      lyricsProviderOrder:
+          serializer.fromJson<List<String>>(json['lyricsProviderOrder']),
+      lyricsProvidersEnabled:
+          serializer.fromJson<List<String>>(json['lyricsProvidersEnabled']),
     );
   }
   @override
@@ -1204,6 +1258,10 @@ class PreferencesTableData extends DataClass
       'enableConnect': serializer.toJson<bool>(enableConnect),
       'connectPort': serializer.toJson<int>(connectPort),
       'cacheMusic': serializer.toJson<bool>(cacheMusic),
+      'lyricsProviderOrder':
+          serializer.toJson<List<String>>(lyricsProviderOrder),
+      'lyricsProvidersEnabled':
+          serializer.toJson<List<String>>(lyricsProvidersEnabled),
     };
   }
 
@@ -1231,7 +1289,9 @@ class PreferencesTableData extends DataClass
           bool? endlessPlayback,
           bool? enableConnect,
           int? connectPort,
-          bool? cacheMusic}) =>
+          bool? cacheMusic,
+          List<String>? lyricsProviderOrder,
+          List<String>? lyricsProvidersEnabled}) =>
       PreferencesTableData(
         id: id ?? this.id,
         albumColorSync: albumColorSync ?? this.albumColorSync,
@@ -1258,6 +1318,9 @@ class PreferencesTableData extends DataClass
         enableConnect: enableConnect ?? this.enableConnect,
         connectPort: connectPort ?? this.connectPort,
         cacheMusic: cacheMusic ?? this.cacheMusic,
+        lyricsProviderOrder: lyricsProviderOrder ?? this.lyricsProviderOrder,
+        lyricsProvidersEnabled:
+            lyricsProvidersEnabled ?? this.lyricsProvidersEnabled,
       );
   PreferencesTableData copyWithCompanion(PreferencesTableCompanion data) {
     return PreferencesTableData(
@@ -1320,6 +1383,12 @@ class PreferencesTableData extends DataClass
           data.connectPort.present ? data.connectPort.value : this.connectPort,
       cacheMusic:
           data.cacheMusic.present ? data.cacheMusic.value : this.cacheMusic,
+      lyricsProviderOrder: data.lyricsProviderOrder.present
+          ? data.lyricsProviderOrder.value
+          : this.lyricsProviderOrder,
+      lyricsProvidersEnabled: data.lyricsProvidersEnabled.present
+          ? data.lyricsProvidersEnabled.value
+          : this.lyricsProvidersEnabled,
     );
   }
 
@@ -1349,7 +1418,9 @@ class PreferencesTableData extends DataClass
           ..write('endlessPlayback: $endlessPlayback, ')
           ..write('enableConnect: $enableConnect, ')
           ..write('connectPort: $connectPort, ')
-          ..write('cacheMusic: $cacheMusic')
+          ..write('cacheMusic: $cacheMusic, ')
+          ..write('lyricsProviderOrder: $lyricsProviderOrder, ')
+          ..write('lyricsProvidersEnabled: $lyricsProvidersEnabled')
           ..write(')'))
         .toString();
   }
@@ -1379,7 +1450,9 @@ class PreferencesTableData extends DataClass
         endlessPlayback,
         enableConnect,
         connectPort,
-        cacheMusic
+        cacheMusic,
+        lyricsProviderOrder,
+        lyricsProvidersEnabled
       ]);
   @override
   bool operator ==(Object other) =>
@@ -1408,7 +1481,9 @@ class PreferencesTableData extends DataClass
           other.endlessPlayback == this.endlessPlayback &&
           other.enableConnect == this.enableConnect &&
           other.connectPort == this.connectPort &&
-          other.cacheMusic == this.cacheMusic);
+          other.cacheMusic == this.cacheMusic &&
+          other.lyricsProviderOrder == this.lyricsProviderOrder &&
+          other.lyricsProvidersEnabled == this.lyricsProvidersEnabled);
 }
 
 class PreferencesTableCompanion extends UpdateCompanion<PreferencesTableData> {
@@ -1436,6 +1511,8 @@ class PreferencesTableCompanion extends UpdateCompanion<PreferencesTableData> {
   final Value<bool> enableConnect;
   final Value<int> connectPort;
   final Value<bool> cacheMusic;
+  final Value<List<String>> lyricsProviderOrder;
+  final Value<List<String>> lyricsProvidersEnabled;
   const PreferencesTableCompanion({
     this.id = const Value.absent(),
     this.albumColorSync = const Value.absent(),
@@ -1461,6 +1538,8 @@ class PreferencesTableCompanion extends UpdateCompanion<PreferencesTableData> {
     this.enableConnect = const Value.absent(),
     this.connectPort = const Value.absent(),
     this.cacheMusic = const Value.absent(),
+    this.lyricsProviderOrder = const Value.absent(),
+    this.lyricsProvidersEnabled = const Value.absent(),
   });
   PreferencesTableCompanion.insert({
     this.id = const Value.absent(),
@@ -1487,6 +1566,8 @@ class PreferencesTableCompanion extends UpdateCompanion<PreferencesTableData> {
     this.enableConnect = const Value.absent(),
     this.connectPort = const Value.absent(),
     this.cacheMusic = const Value.absent(),
+    this.lyricsProviderOrder = const Value.absent(),
+    this.lyricsProvidersEnabled = const Value.absent(),
   });
   static Insertable<PreferencesTableData> custom({
     Expression<int>? id,
@@ -1513,6 +1594,8 @@ class PreferencesTableCompanion extends UpdateCompanion<PreferencesTableData> {
     Expression<bool>? enableConnect,
     Expression<int>? connectPort,
     Expression<bool>? cacheMusic,
+    Expression<String>? lyricsProviderOrder,
+    Expression<String>? lyricsProvidersEnabled,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -1542,6 +1625,10 @@ class PreferencesTableCompanion extends UpdateCompanion<PreferencesTableData> {
       if (enableConnect != null) 'enable_connect': enableConnect,
       if (connectPort != null) 'connect_port': connectPort,
       if (cacheMusic != null) 'cache_music': cacheMusic,
+      if (lyricsProviderOrder != null)
+        'lyrics_provider_order': lyricsProviderOrder,
+      if (lyricsProvidersEnabled != null)
+        'lyrics_providers_enabled': lyricsProvidersEnabled,
     });
   }
 
@@ -1569,7 +1656,9 @@ class PreferencesTableCompanion extends UpdateCompanion<PreferencesTableData> {
       Value<bool>? endlessPlayback,
       Value<bool>? enableConnect,
       Value<int>? connectPort,
-      Value<bool>? cacheMusic}) {
+      Value<bool>? cacheMusic,
+      Value<List<String>>? lyricsProviderOrder,
+      Value<List<String>>? lyricsProvidersEnabled}) {
     return PreferencesTableCompanion(
       id: id ?? this.id,
       albumColorSync: albumColorSync ?? this.albumColorSync,
@@ -1595,6 +1684,9 @@ class PreferencesTableCompanion extends UpdateCompanion<PreferencesTableData> {
       enableConnect: enableConnect ?? this.enableConnect,
       connectPort: connectPort ?? this.connectPort,
       cacheMusic: cacheMusic ?? this.cacheMusic,
+      lyricsProviderOrder: lyricsProviderOrder ?? this.lyricsProviderOrder,
+      lyricsProvidersEnabled:
+          lyricsProvidersEnabled ?? this.lyricsProvidersEnabled,
     );
   }
 
@@ -1686,6 +1778,16 @@ class PreferencesTableCompanion extends UpdateCompanion<PreferencesTableData> {
     if (cacheMusic.present) {
       map['cache_music'] = Variable<bool>(cacheMusic.value);
     }
+    if (lyricsProviderOrder.present) {
+      map['lyrics_provider_order'] = Variable<String>($PreferencesTableTable
+          .$converterlyricsProviderOrder
+          .toSql(lyricsProviderOrder.value));
+    }
+    if (lyricsProvidersEnabled.present) {
+      map['lyrics_providers_enabled'] = Variable<String>($PreferencesTableTable
+          .$converterlyricsProvidersEnabled
+          .toSql(lyricsProvidersEnabled.value));
+    }
     return map;
   }
 
@@ -1715,7 +1817,9 @@ class PreferencesTableCompanion extends UpdateCompanion<PreferencesTableData> {
           ..write('endlessPlayback: $endlessPlayback, ')
           ..write('enableConnect: $enableConnect, ')
           ..write('connectPort: $connectPort, ')
-          ..write('cacheMusic: $cacheMusic')
+          ..write('cacheMusic: $cacheMusic, ')
+          ..write('lyricsProviderOrder: $lyricsProviderOrder, ')
+          ..write('lyricsProvidersEnabled: $lyricsProvidersEnabled')
           ..write(')'))
         .toString();
   }
@@ -3315,8 +3419,16 @@ class $LyricsTableTable extends LyricsTable
       GeneratedColumn<String>('data', aliasedName, false,
               type: DriftSqlType.string, requiredDuringInsert: true)
           .withConverter<SubtitleSimple>($LyricsTableTable.$converterdata);
+  static const VerificationMeta _offsetMsMeta =
+      const VerificationMeta('offsetMs');
   @override
-  List<GeneratedColumn> get $columns => [id, trackId, data];
+  late final GeneratedColumn<int> offsetMs = GeneratedColumn<int>(
+      'offset_ms', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultValue: const Constant(0));
+  @override
+  List<GeneratedColumn> get $columns => [id, trackId, data, offsetMs];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -3336,6 +3448,10 @@ class $LyricsTableTable extends LyricsTable
     } else if (isInserting) {
       context.missing(_trackIdMeta);
     }
+    if (data.containsKey('offset_ms')) {
+      context.handle(_offsetMsMeta,
+          offsetMs.isAcceptableOrUnknown(data['offset_ms']!, _offsetMsMeta));
+    }
     return context;
   }
 
@@ -3352,6 +3468,8 @@ class $LyricsTableTable extends LyricsTable
       data: $LyricsTableTable.$converterdata.fromSql(attachedDatabase
           .typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}data'])!),
+      offsetMs: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}offset_ms'])!,
     );
   }
 
@@ -3366,10 +3484,21 @@ class $LyricsTableTable extends LyricsTable
 
 class LyricsTableData extends DataClass implements Insertable<LyricsTableData> {
   final int id;
+
+  /// Unique, so `InsertMode.replace` actually replaces. Without a conflict
+  /// target the autoincrement primary key means every insert appends a new
+  /// row, and a track with two rows makes `getSingleOrNull` throw forever.
   final String trackId;
   final SubtitleSimple data;
+
+  /// Per-song lyrics offset in milliseconds, applied to the playback position
+  /// before looking up the current line. Positive values pull lyrics earlier.
+  final int offsetMs;
   const LyricsTableData(
-      {required this.id, required this.trackId, required this.data});
+      {required this.id,
+      required this.trackId,
+      required this.data,
+      required this.offsetMs});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -3379,6 +3508,7 @@ class LyricsTableData extends DataClass implements Insertable<LyricsTableData> {
       map['data'] =
           Variable<String>($LyricsTableTable.$converterdata.toSql(data));
     }
+    map['offset_ms'] = Variable<int>(offsetMs);
     return map;
   }
 
@@ -3387,6 +3517,7 @@ class LyricsTableData extends DataClass implements Insertable<LyricsTableData> {
       id: Value(id),
       trackId: Value(trackId),
       data: Value(data),
+      offsetMs: Value(offsetMs),
     );
   }
 
@@ -3397,6 +3528,7 @@ class LyricsTableData extends DataClass implements Insertable<LyricsTableData> {
       id: serializer.fromJson<int>(json['id']),
       trackId: serializer.fromJson<String>(json['trackId']),
       data: serializer.fromJson<SubtitleSimple>(json['data']),
+      offsetMs: serializer.fromJson<int>(json['offsetMs']),
     );
   }
   @override
@@ -3406,20 +3538,24 @@ class LyricsTableData extends DataClass implements Insertable<LyricsTableData> {
       'id': serializer.toJson<int>(id),
       'trackId': serializer.toJson<String>(trackId),
       'data': serializer.toJson<SubtitleSimple>(data),
+      'offsetMs': serializer.toJson<int>(offsetMs),
     };
   }
 
-  LyricsTableData copyWith({int? id, String? trackId, SubtitleSimple? data}) =>
+  LyricsTableData copyWith(
+          {int? id, String? trackId, SubtitleSimple? data, int? offsetMs}) =>
       LyricsTableData(
         id: id ?? this.id,
         trackId: trackId ?? this.trackId,
         data: data ?? this.data,
+        offsetMs: offsetMs ?? this.offsetMs,
       );
   LyricsTableData copyWithCompanion(LyricsTableCompanion data) {
     return LyricsTableData(
       id: data.id.present ? data.id.value : this.id,
       trackId: data.trackId.present ? data.trackId.value : this.trackId,
       data: data.data.present ? data.data.value : this.data,
+      offsetMs: data.offsetMs.present ? data.offsetMs.value : this.offsetMs,
     );
   }
 
@@ -3428,55 +3564,66 @@ class LyricsTableData extends DataClass implements Insertable<LyricsTableData> {
     return (StringBuffer('LyricsTableData(')
           ..write('id: $id, ')
           ..write('trackId: $trackId, ')
-          ..write('data: $data')
+          ..write('data: $data, ')
+          ..write('offsetMs: $offsetMs')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(id, trackId, data);
+  int get hashCode => Object.hash(id, trackId, data, offsetMs);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       (other is LyricsTableData &&
           other.id == this.id &&
           other.trackId == this.trackId &&
-          other.data == this.data);
+          other.data == this.data &&
+          other.offsetMs == this.offsetMs);
 }
 
 class LyricsTableCompanion extends UpdateCompanion<LyricsTableData> {
   final Value<int> id;
   final Value<String> trackId;
   final Value<SubtitleSimple> data;
+  final Value<int> offsetMs;
   const LyricsTableCompanion({
     this.id = const Value.absent(),
     this.trackId = const Value.absent(),
     this.data = const Value.absent(),
+    this.offsetMs = const Value.absent(),
   });
   LyricsTableCompanion.insert({
     this.id = const Value.absent(),
     required String trackId,
     required SubtitleSimple data,
+    this.offsetMs = const Value.absent(),
   })  : trackId = Value(trackId),
         data = Value(data);
   static Insertable<LyricsTableData> custom({
     Expression<int>? id,
     Expression<String>? trackId,
     Expression<String>? data,
+    Expression<int>? offsetMs,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
       if (trackId != null) 'track_id': trackId,
       if (data != null) 'data': data,
+      if (offsetMs != null) 'offset_ms': offsetMs,
     });
   }
 
   LyricsTableCompanion copyWith(
-      {Value<int>? id, Value<String>? trackId, Value<SubtitleSimple>? data}) {
+      {Value<int>? id,
+      Value<String>? trackId,
+      Value<SubtitleSimple>? data,
+      Value<int>? offsetMs}) {
     return LyricsTableCompanion(
       id: id ?? this.id,
       trackId: trackId ?? this.trackId,
       data: data ?? this.data,
+      offsetMs: offsetMs ?? this.offsetMs,
     );
   }
 
@@ -3493,6 +3640,9 @@ class LyricsTableCompanion extends UpdateCompanion<LyricsTableData> {
       map['data'] =
           Variable<String>($LyricsTableTable.$converterdata.toSql(data.value));
     }
+    if (offsetMs.present) {
+      map['offset_ms'] = Variable<int>(offsetMs.value);
+    }
     return map;
   }
 
@@ -3501,7 +3651,8 @@ class LyricsTableCompanion extends UpdateCompanion<LyricsTableData> {
     return (StringBuffer('LyricsTableCompanion(')
           ..write('id: $id, ')
           ..write('trackId: $trackId, ')
-          ..write('data: $data')
+          ..write('data: $data, ')
+          ..write('offsetMs: $offsetMs')
           ..write(')'))
         .toString();
   }
@@ -4143,6 +4294,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $PluginsTableTable pluginsTable = $PluginsTableTable(this);
   late final Index uniqueBlacklist = Index('unique_blacklist',
       'CREATE UNIQUE INDEX unique_blacklist ON blacklist_table (element_type, element_id)');
+  late final Index uniqLyricsTrackId = Index('uniq_lyrics_track_id',
+      'CREATE UNIQUE INDEX uniq_lyrics_track_id ON lyrics_table (track_id)');
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -4158,7 +4311,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         historyTable,
         lyricsTable,
         pluginsTable,
-        uniqueBlacklist
+        uniqueBlacklist,
+        uniqLyricsTrackId
       ];
 }
 
@@ -4506,6 +4660,8 @@ typedef $$PreferencesTableTableCreateCompanionBuilder
   Value<bool> enableConnect,
   Value<int> connectPort,
   Value<bool> cacheMusic,
+  Value<List<String>> lyricsProviderOrder,
+  Value<List<String>> lyricsProvidersEnabled,
 });
 typedef $$PreferencesTableTableUpdateCompanionBuilder
     = PreferencesTableCompanion Function({
@@ -4533,6 +4689,8 @@ typedef $$PreferencesTableTableUpdateCompanionBuilder
   Value<bool> enableConnect,
   Value<int> connectPort,
   Value<bool> cacheMusic,
+  Value<List<String>> lyricsProviderOrder,
+  Value<List<String>> lyricsProvidersEnabled,
 });
 
 class $$PreferencesTableTableFilterComposer
@@ -4642,6 +4800,16 @@ class $$PreferencesTableTableFilterComposer
 
   ColumnFilters<bool> get cacheMusic => $composableBuilder(
       column: $table.cacheMusic, builder: (column) => ColumnFilters(column));
+
+  ColumnWithTypeConverterFilters<List<String>, List<String>, String>
+      get lyricsProviderOrder => $composableBuilder(
+          column: $table.lyricsProviderOrder,
+          builder: (column) => ColumnWithTypeConverterFilters(column));
+
+  ColumnWithTypeConverterFilters<List<String>, List<String>, String>
+      get lyricsProvidersEnabled => $composableBuilder(
+          column: $table.lyricsProvidersEnabled,
+          builder: (column) => ColumnWithTypeConverterFilters(column));
 }
 
 class $$PreferencesTableTableOrderingComposer
@@ -4739,6 +4907,14 @@ class $$PreferencesTableTableOrderingComposer
 
   ColumnOrderings<bool> get cacheMusic => $composableBuilder(
       column: $table.cacheMusic, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get lyricsProviderOrder => $composableBuilder(
+      column: $table.lyricsProviderOrder,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get lyricsProvidersEnabled => $composableBuilder(
+      column: $table.lyricsProvidersEnabled,
+      builder: (column) => ColumnOrderings(column));
 }
 
 class $$PreferencesTableTableAnnotationComposer
@@ -4827,6 +5003,14 @@ class $$PreferencesTableTableAnnotationComposer
 
   GeneratedColumn<bool> get cacheMusic => $composableBuilder(
       column: $table.cacheMusic, builder: (column) => column);
+
+  GeneratedColumnWithTypeConverter<List<String>, String>
+      get lyricsProviderOrder => $composableBuilder(
+          column: $table.lyricsProviderOrder, builder: (column) => column);
+
+  GeneratedColumnWithTypeConverter<List<String>, String>
+      get lyricsProvidersEnabled => $composableBuilder(
+          column: $table.lyricsProvidersEnabled, builder: (column) => column);
 }
 
 class $$PreferencesTableTableTableManager extends RootTableManager<
@@ -4882,6 +5066,8 @@ class $$PreferencesTableTableTableManager extends RootTableManager<
             Value<bool> enableConnect = const Value.absent(),
             Value<int> connectPort = const Value.absent(),
             Value<bool> cacheMusic = const Value.absent(),
+            Value<List<String>> lyricsProviderOrder = const Value.absent(),
+            Value<List<String>> lyricsProvidersEnabled = const Value.absent(),
           }) =>
               PreferencesTableCompanion(
             id: id,
@@ -4908,6 +5094,8 @@ class $$PreferencesTableTableTableManager extends RootTableManager<
             enableConnect: enableConnect,
             connectPort: connectPort,
             cacheMusic: cacheMusic,
+            lyricsProviderOrder: lyricsProviderOrder,
+            lyricsProvidersEnabled: lyricsProvidersEnabled,
           ),
           createCompanionCallback: ({
             Value<int> id = const Value.absent(),
@@ -4935,6 +5123,8 @@ class $$PreferencesTableTableTableManager extends RootTableManager<
             Value<bool> enableConnect = const Value.absent(),
             Value<int> connectPort = const Value.absent(),
             Value<bool> cacheMusic = const Value.absent(),
+            Value<List<String>> lyricsProviderOrder = const Value.absent(),
+            Value<List<String>> lyricsProvidersEnabled = const Value.absent(),
           }) =>
               PreferencesTableCompanion.insert(
             id: id,
@@ -4961,6 +5151,8 @@ class $$PreferencesTableTableTableManager extends RootTableManager<
             enableConnect: enableConnect,
             connectPort: connectPort,
             cacheMusic: cacheMusic,
+            lyricsProviderOrder: lyricsProviderOrder,
+            lyricsProvidersEnabled: lyricsProvidersEnabled,
           ),
           withReferenceMapper: (p0) => p0
               .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
@@ -5873,12 +6065,14 @@ typedef $$LyricsTableTableCreateCompanionBuilder = LyricsTableCompanion
   Value<int> id,
   required String trackId,
   required SubtitleSimple data,
+  Value<int> offsetMs,
 });
 typedef $$LyricsTableTableUpdateCompanionBuilder = LyricsTableCompanion
     Function({
   Value<int> id,
   Value<String> trackId,
   Value<SubtitleSimple> data,
+  Value<int> offsetMs,
 });
 
 class $$LyricsTableTableFilterComposer
@@ -5900,6 +6094,9 @@ class $$LyricsTableTableFilterComposer
       get data => $composableBuilder(
           column: $table.data,
           builder: (column) => ColumnWithTypeConverterFilters(column));
+
+  ColumnFilters<int> get offsetMs => $composableBuilder(
+      column: $table.offsetMs, builder: (column) => ColumnFilters(column));
 }
 
 class $$LyricsTableTableOrderingComposer
@@ -5919,6 +6116,9 @@ class $$LyricsTableTableOrderingComposer
 
   ColumnOrderings<String> get data => $composableBuilder(
       column: $table.data, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get offsetMs => $composableBuilder(
+      column: $table.offsetMs, builder: (column) => ColumnOrderings(column));
 }
 
 class $$LyricsTableTableAnnotationComposer
@@ -5938,6 +6138,9 @@ class $$LyricsTableTableAnnotationComposer
 
   GeneratedColumnWithTypeConverter<SubtitleSimple, String> get data =>
       $composableBuilder(column: $table.data, builder: (column) => column);
+
+  GeneratedColumn<int> get offsetMs =>
+      $composableBuilder(column: $table.offsetMs, builder: (column) => column);
 }
 
 class $$LyricsTableTableTableManager extends RootTableManager<
@@ -5969,21 +6172,25 @@ class $$LyricsTableTableTableManager extends RootTableManager<
             Value<int> id = const Value.absent(),
             Value<String> trackId = const Value.absent(),
             Value<SubtitleSimple> data = const Value.absent(),
+            Value<int> offsetMs = const Value.absent(),
           }) =>
               LyricsTableCompanion(
             id: id,
             trackId: trackId,
             data: data,
+            offsetMs: offsetMs,
           ),
           createCompanionCallback: ({
             Value<int> id = const Value.absent(),
             required String trackId,
             required SubtitleSimple data,
+            Value<int> offsetMs = const Value.absent(),
           }) =>
               LyricsTableCompanion.insert(
             id: id,
             trackId: trackId,
             data: data,
+            offsetMs: offsetMs,
           ),
           withReferenceMapper: (p0) => p0
               .map((e) => (e.readTable(table), BaseReferences(db, table, e)))

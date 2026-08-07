@@ -208,6 +208,22 @@ class UserPreferencesNotifier extends Notifier<PreferencesTableData> {
     setData(PreferencesTableCompanion(youtubeClientEngine: Value(engine)));
   }
 
+  void setLyricsProviderOrder(List<LyricsProviderId> order) {
+    setData(
+      PreferencesTableCompanion(
+        lyricsProviderOrder: Value(order.map((e) => e.name).toList()),
+      ),
+    );
+  }
+
+  void setLyricsProvidersEnabled(Set<LyricsProviderId> enabled) {
+    setData(
+      PreferencesTableCompanion(
+        lyricsProvidersEnabled: Value(enabled.map((e) => e.name).toList()),
+      ),
+    );
+  }
+
   void setSystemTitleBar(bool isSystemTitleBar) {
     setData(PreferencesTableCompanion(systemTitleBar: Value(isSystemTitleBar)));
   }

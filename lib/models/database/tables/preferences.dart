@@ -44,6 +44,49 @@ enum YoutubeClientEngine {
       isAvailableForPlatform() ? this : defaultForPlatform;
 }
 
+/// The lyrics sources the app can query, in the order they are tried.
+///
+/// Persisted by [name] in [PreferencesTable.lyricsProviderOrder] and
+/// [PreferencesTable.lyricsProvidersEnabled], so renaming a value orphans a
+/// user's stored preference — [fromNameOrNull] tolerates that by skipping
+/// unknown entries.
+enum LyricsProviderId {
+  betterLyrics("BetterLyrics"),
+  lrclib("LRCLib"),
+  kugou("KuGou"),
+  paxsenix("Paxsenix"),
+  lyricsPlus("LyricsPlus"),
+  youtubeSubtitle("YouTube Subtitle"),
+  youtubeMusic("YouTube Music");
+
+  final String label;
+
+  const LyricsProviderId(this.label);
+
+  /// Providers that reach an endpoint nobody officially publishes, and are
+  /// therefore liable to break without notice. Surfaced in settings and off by
+  /// default.
+  bool get isUnofficial =>
+      this == LyricsProviderId.paxsenix || this == LyricsProviderId.lyricsPlus;
+
+  static LyricsProviderId? fromNameOrNull(String name) {
+    for (final value in LyricsProviderId.values) {
+      if (value.name == name) return value;
+    }
+    return null;
+  }
+
+  /// Full priority order. Anything absent from a user's stored order is
+  /// appended in this order, so a newly added provider isn't invisible.
+  static List<String> get defaultOrder =>
+      LyricsProviderId.values.map((e) => e.name).toList();
+
+  static List<String> get defaultEnabled => LyricsProviderId.values
+      .where((e) => !e.isUnofficial)
+      .map((e) => e.name)
+      .toList();
+}
+
 enum SearchMode {
   youtube._("YouTube"),
   youtubeMusic._("YouTube Music");
@@ -108,6 +151,21 @@ class PreferencesTable extends Table {
       boolean().withDefault(const Constant(false))();
   IntColumn get connectPort => integer().withDefault(const Constant(-1))();
   BoolColumn get cacheMusic => boolean().withDefault(const Constant(true))();
+  TextColumn get lyricsProviderOrder => text()
+      .withDefault(
+        const Constant(
+          "betterLyrics,lrclib,kugou,paxsenix,lyricsPlus,"
+          "youtubeSubtitle,youtubeMusic",
+        ),
+      )
+      .map(const StringListConverter())();
+  TextColumn get lyricsProvidersEnabled => text()
+      .withDefault(
+        const Constant(
+          "betterLyrics,lrclib,kugou,youtubeSubtitle,youtubeMusic",
+        ),
+      )
+      .map(const StringListConverter())();
 
   // Default values as PreferencesTableData
   static PreferencesTableData defaults() {
@@ -136,6 +194,8 @@ class PreferencesTable extends Table {
       enableConnect: false,
       cacheMusic: true,
       connectPort: -1,
+      lyricsProviderOrder: LyricsProviderId.defaultOrder,
+      lyricsProvidersEnabled: LyricsProviderId.defaultEnabled,
     );
   }
 }

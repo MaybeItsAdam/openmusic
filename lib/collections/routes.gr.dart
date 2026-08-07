@@ -11,8 +11,6 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i41;
 import 'package:flutter/material.dart' as _i42;
-import 'package:openmusic/pages/settings/about.dart' as _i1;
-import 'package:shadcn_flutter/shadcn_flutter.dart' as _i44;
 import 'package:openmusic/models/metadata/metadata.dart' as _i43;
 import 'package:openmusic/pages/album/album.dart' as _i2;
 import 'package:openmusic/pages/artist/artist.dart' as _i3;
@@ -41,6 +39,7 @@ import 'package:openmusic/pages/playlist/playlist.dart' as _i20;
 import 'package:openmusic/pages/profile/profile.dart' as _i21;
 import 'package:openmusic/pages/root/root_app.dart' as _i22;
 import 'package:openmusic/pages/search/search.dart' as _i23;
+import 'package:openmusic/pages/settings/about.dart' as _i1;
 import 'package:openmusic/pages/settings/blacklist.dart' as _i4;
 import 'package:openmusic/pages/settings/logs.dart' as _i14;
 import 'package:openmusic/pages/settings/metadata/metadata_form.dart' as _i24;
@@ -55,6 +54,7 @@ import 'package:openmusic/pages/stats/playlists/playlists.dart' as _i32;
 import 'package:openmusic/pages/stats/stats.dart' as _i31;
 import 'package:openmusic/pages/stats/streams/streams.dart' as _i34;
 import 'package:openmusic/pages/track/track.dart' as _i35;
+import 'package:shadcn_flutter/shadcn_flutter.dart' as _i44;
 
 /// generated route for
 /// [_i1.AboutOpenMusicPage]

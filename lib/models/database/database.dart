@@ -95,7 +95,7 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase([QueryExecutor? executor]) : super(executor ?? _openConnection());
 
   @override
-  int get schemaVersion => 10;
+  int get schemaVersion => 11;
 
   @override
   MigrationStrategy get migration {
@@ -278,6 +278,39 @@ class AppDatabase extends _$AppDatabase {
           await _tolerating(
             () => m.dropColumn(schema.sourceMatchTable, "source_id"),
             const [_noSuchColumn],
+          );
+        },
+        from10To11: (m, schema) async {
+          await _tolerating(
+            () => m.addColumn(schema.lyricsTable, schema.lyricsTable.offsetMs),
+            const [_duplicateColumn],
+          );
+          await _tolerating(
+            () => m.addColumn(
+              schema.preferencesTable,
+              schema.preferencesTable.lyricsProviderOrder,
+            ),
+            const [_duplicateColumn],
+          );
+          await _tolerating(
+            () => m.addColumn(
+              schema.preferencesTable,
+              schema.preferencesTable.lyricsProvidersEnabled,
+            ),
+            const [_duplicateColumn],
+          );
+
+          // Up to v10 `track_id` had no unique constraint, so `InsertMode
+          // .replace` appended rather than replaced and a track could end up
+          // with several rows. Those rows make `getSingleOrNull` throw, and
+          // they also block the index below. Keep the newest row per track.
+          await customStatement(
+            "DELETE FROM lyrics_table WHERE id NOT IN "
+            "(SELECT MAX(id) FROM lyrics_table GROUP BY track_id);",
+          );
+          await _tolerating(
+            () => m.createIndex(schema.uniqLyricsTrackId),
+            const [_tableAlreadyExists],
           );
         },
       ),

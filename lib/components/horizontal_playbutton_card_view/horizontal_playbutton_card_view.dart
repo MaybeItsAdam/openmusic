@@ -9,6 +9,7 @@ import 'package:openmusic/models/metadata/metadata.dart';
 import 'package:openmusic/modules/album/album_card.dart';
 import 'package:openmusic/modules/artist/artist_card.dart';
 import 'package:openmusic/modules/playlist/playlist_card.dart';
+import 'package:openmusic/modules/track/track_card.dart';
 import 'package:very_good_infinite_list/very_good_infinite_list.dart';
 
 class HorizontalPlaybuttonCardView<T> extends HookWidget {
@@ -34,7 +35,8 @@ class HorizontalPlaybuttonCardView<T> extends HookWidget {
             (item) =>
                 item is SpotubeSimpleAlbumObject ||
                 item is SpotubeSimplePlaylistObject ||
-                item is SpotubeFullArtistObject,
+                item is SpotubeFullArtistObject ||
+                item is SpotubeFullTrackObject,
           ),
         );
 
@@ -43,6 +45,10 @@ class HorizontalPlaybuttonCardView<T> extends HookWidget {
     final scrollController = useScrollController();
     final isArtist = items.every((s) => s is SpotubeFullArtistObject);
     final scale = context.theme.scaling;
+    final trackQueue = useMemoized(
+      () => items.whereType<SpotubeFullTrackObject>().toList(),
+      [items],
+    );
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -113,6 +119,12 @@ class HorizontalPlaybuttonCardView<T> extends HookWidget {
                                 ),
                               SpotubeFullArtistObject() => ArtistCard(
                                   item as SpotubeFullArtistObject,
+                                ),
+                              // Tracks play on into the rest of the row, so a
+                              // recommendation row behaves like a playlist.
+                              SpotubeFullTrackObject() => TrackCard(
+                                  item as SpotubeFullTrackObject,
+                                  queue: trackQueue,
                                 ),
                               _ => const SizedBox.shrink(),
                             };

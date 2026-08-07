@@ -219,6 +219,24 @@ abstract class AppLocalizations {
   /// **'New Releases'**
   String get new_releases;
 
+  /// No description provided for @made_for_you.
+  ///
+  /// In en, this message translates to:
+  /// **'Made for You'**
+  String get made_for_you;
+
+  /// No description provided for @because_you_listened_to.
+  ///
+  /// In en, this message translates to:
+  /// **'Because you listened to {track}'**
+  String because_you_listened_to(Object track);
+
+  /// No description provided for @artists_you_might_like.
+  ///
+  /// In en, this message translates to:
+  /// **'Artists You Might Like'**
+  String get artists_you_might_like;
+
   /// No description provided for @songs.
   ///
   /// In en, this message translates to:
@@ -2246,6 +2264,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Powered by {providerName}'**
   String powered_by_provider(Object providerName);
+
+  /// No description provided for @lyrics_providers.
+  ///
+  /// In en, this message translates to:
+  /// **'Lyrics providers'**
+  String get lyrics_providers;
+
+  /// No description provided for @lyrics_providers_description.
+  ///
+  /// In en, this message translates to:
+  /// **'Sources are tried in order until one has lyrics'**
+  String get lyrics_providers_description;
+
+  /// No description provided for @lyrics_provider_unofficial.
+  ///
+  /// In en, this message translates to:
+  /// **'Uses an unofficial endpoint and may stop working'**
+  String get lyrics_provider_unofficial;
+
+  /// No description provided for @refetch_lyrics.
+  ///
+  /// In en, this message translates to:
+  /// **'Refetch lyrics'**
+  String get refetch_lyrics;
+
+  /// No description provided for @search_lyrics.
+  ///
+  /// In en, this message translates to:
+  /// **'Search lyrics'**
+  String get search_lyrics;
+
+  /// No description provided for @copy_lyrics.
+  ///
+  /// In en, this message translates to:
+  /// **'Copy lyrics'**
+  String get copy_lyrics;
+
+  /// No description provided for @lyrics_copied.
+  ///
+  /// In en, this message translates to:
+  /// **'Lyrics copied to clipboard'**
+  String get lyrics_copied;
+
+  /// No description provided for @searching_lyrics_providers.
+  ///
+  /// In en, this message translates to:
+  /// **'Searching all providers…'**
+  String get searching_lyrics_providers;
+
+  /// No description provided for @no_lyrics_found_anywhere.
+  ///
+  /// In en, this message translates to:
+  /// **'No provider had lyrics for this track'**
+  String get no_lyrics_found_anywhere;
+
+  /// No description provided for @lyrics_word_synced.
+  ///
+  /// In en, this message translates to:
+  /// **'Word synced'**
+  String get lyrics_word_synced;
+
+  /// No description provided for @lyrics_line_synced.
+  ///
+  /// In en, this message translates to:
+  /// **'Synced'**
+  String get lyrics_line_synced;
+
+  /// No description provided for @lyrics_plain.
+  ///
+  /// In en, this message translates to:
+  /// **'Plain'**
+  String get lyrics_plain;
+
+  /// No description provided for @lyrics_line_count.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} lines'**
+  String lyrics_line_count(Object count);
 
   /// No description provided for @email.
   ///

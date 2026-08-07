@@ -7,9 +7,9 @@ import 'package:openmusic/collections/routes.gr.dart';
 import 'package:openmusic/collections/openmusic_icons.dart';
 import 'package:openmusic/models/database/database.dart';
 import 'package:openmusic/modules/connect/connect_device.dart';
-import 'package:openmusic/modules/home/sections/featured.dart';
 import 'package:openmusic/modules/home/sections/sections.dart';
 import 'package:openmusic/modules/home/sections/new_releases.dart';
+import 'package:openmusic/modules/home/sections/recommendations.dart';
 import 'package:openmusic/modules/home/sections/recent.dart';
 import 'package:openmusic/components/titlebar/titlebar.dart';
 import 'package:openmusic/extensions/constrains.dart';
@@ -66,17 +66,16 @@ class HomePage extends HookConsumerWidget {
             else if (kIsMacOS)
               const SliverGap(10),
             const SliverGap(10),
-            SliverList.builder(
-              itemCount: 3,
-              itemBuilder: (context, index) {
-                return switch (index) {
-                  // 0 => const HomeGenresSection(),
-                  0 => const HomeRecentlyPlayedSection(),
-                  1 => const HomeFeaturedSection(),
-                  // 3 => const HomePageFriendsSection(),
-                  _ => const HomeNewReleasesSection(),
-                };
-              },
+            SliverList.list(
+              children: const [
+                HomeRecentlyPlayedSection(),
+                // YouTube Music's suggestions, resolved to the active metadata
+                // plugin. Sits above the plugin's own sections because it is
+                // the only part of the page built from what you actually play.
+                HomeMadeForYouSection(),
+                HomeNewReleasesSection(),
+                HomeSimilarArtistsSection(),
+              ],
             ),
             const SliverSafeArea(sliver: HomePageBrowseSection()),
           ],

@@ -42,6 +42,17 @@ class AppLocalizationsTa extends AppLocalizations {
   String get new_releases => 'புதிய வெளியீடுகள்';
 
   @override
+  String get made_for_you => 'Made for You';
+
+  @override
+  String because_you_listened_to(Object track) {
+    return 'Because you listened to $track';
+  }
+
+  @override
+  String get artists_you_might_like => 'Artists You Might Like';
+
+  @override
   String get songs => 'பாடல்கள்';
 
   @override
@@ -1155,6 +1166,50 @@ class AppLocalizationsTa extends AppLocalizations {
   @override
   String powered_by_provider(Object providerName) {
     return '$providerName ஆல் இயக்கப்படுகிறது';
+  }
+
+  @override
+  String get lyrics_providers => 'Lyrics providers';
+
+  @override
+  String get lyrics_providers_description =>
+      'Sources are tried in order until one has lyrics';
+
+  @override
+  String get lyrics_provider_unofficial =>
+      'Uses an unofficial endpoint and may stop working';
+
+  @override
+  String get refetch_lyrics => 'Refetch lyrics';
+
+  @override
+  String get search_lyrics => 'Search lyrics';
+
+  @override
+  String get copy_lyrics => 'Copy lyrics';
+
+  @override
+  String get lyrics_copied => 'Lyrics copied to clipboard';
+
+  @override
+  String get searching_lyrics_providers => 'Searching all providers…';
+
+  @override
+  String get no_lyrics_found_anywhere =>
+      'No provider had lyrics for this track';
+
+  @override
+  String get lyrics_word_synced => 'Word synced';
+
+  @override
+  String get lyrics_line_synced => 'Synced';
+
+  @override
+  String get lyrics_plain => 'Plain';
+
+  @override
+  String lyrics_line_count(Object count) {
+    return '$count lines';
   }
 
   @override

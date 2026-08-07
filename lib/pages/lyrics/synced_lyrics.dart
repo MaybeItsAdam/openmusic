@@ -6,6 +6,7 @@ import 'package:palette_generator/palette_generator.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 import 'package:openmusic/collections/openmusic_icons.dart';
 import 'package:openmusic/models/metadata/metadata.dart';
+import 'package:openmusic/modules/lyrics/lyrics_line.dart';
 import 'package:openmusic/modules/lyrics/zoom_controls.dart';
 import 'package:openmusic/components/shimmers/shimmer_lyrics.dart';
 import 'package:openmusic/extensions/constrains.dart';
@@ -17,6 +18,11 @@ import 'package:openmusic/provider/audio_player/audio_player.dart';
 import 'package:openmusic/provider/lyrics/synced.dart';
 import 'package:openmusic/services/audio_player/audio_player.dart';
 import 'package:openmusic/services/logger/logger.dart';
+
+/// Scrolling a fraction ahead of the beat keeps the active line from arriving
+/// at the centre late. Only applied when there are no word timings — with them
+/// the fill already telegraphs where the line is going.
+const _scrollLookAhead = Duration(milliseconds: 250);
 
 class SyncedLyrics extends HookConsumerWidget {
   final PaletteColor palette;
@@ -36,28 +42,34 @@ class SyncedLyrics extends HookConsumerWidget {
     final theme = Theme.of(context);
 
     final playlist = ref.watch(audioPlayerProvider);
+    final activeTrack = playlist.activeTrack;
 
     final controller = useAutoScrollController();
 
-    final delay = ref.watch(syncedLyricsDelayProvider);
+    final offset = ref.watch(lyricsOffsetProvider(activeTrack)).asData?.value ?? 0;
 
-    final timedLyricsQuery = ref.watch(
-      syncedLyricsProvider(playlist.activeTrack),
-    );
-
+    final timedLyricsQuery = ref.watch(syncedLyricsProvider(activeTrack));
     final lyricValue = timedLyricsQuery.asData?.value;
+    final lines = lyricValue?.lyrics ?? const [];
 
-    final lyricsState = ref.watch(
-      syncedLyricsMapProvider(playlist.activeTrack),
+    final isPlaying = ref.watch(
+      audioPlayerProvider.select((s) => s.playing),
     );
-    final currentTime = useSyncedLyrics(
-      ref,
-      lyricsState.asData?.value.lyricsMap ?? {},
-      delay,
-    );
+    final position = useSmoothPosition(isPlaying: isPlaying);
+
+    final hasWordTimings = lyricValue?.hasWordTimings ?? false;
+    final scrollPosition =
+        hasWordTimings ? position : position + _scrollLookAhead;
+
+    final active = useActiveLyricLines(lines, position, offset);
+    final scrollTarget =
+        useActiveLyricLines(lines, scrollPosition, offset).current;
+
     final textZoomLevel = useState<int>(defaultTextZoom);
 
     final typography = Theme.of(context).typography;
+
+    final isStatic = lyricValue != null && !lyricValue.isSynced;
 
     ref.listen(audioPlayerProvider.select((s) => s.activeTrack), (
       previous,
@@ -68,7 +80,6 @@ class SyncedLyrics extends HookConsumerWidget {
         duration: const Duration(milliseconds: 500),
         curve: Curves.easeInOut,
       );
-      ref.read(syncedLyricsDelayProvider.notifier).state = 0;
     });
 
     final headlineTextStyle = (mediaQuery.mdAndUp
@@ -80,6 +91,7 @@ class SyncedLyrics extends HookConsumerWidget {
       color: palette.bodyTextColor,
     );
 
+    // Keep the view pinned to the top when playback restarts from zero.
     useEffect(() {
       StreamSubscription? subscription;
       WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -100,6 +112,21 @@ class SyncedLyrics extends HookConsumerWidget {
       return subscription?.cancel;
     }, [controller]);
 
+    // Scroll when the target line changes, rather than while building each
+    // item — doing it per item ran a scroll for every rebuild of the active row.
+    useEffect(() {
+      if (scrollTarget < 0 || isStatic) return null;
+
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!controller.hasClients) return;
+        controller.scrollToIndex(
+          scrollTarget,
+          preferPosition: AutoScrollPosition.middle,
+        );
+      });
+      return null;
+    }, [scrollTarget, isStatic]);
+
     return Stack(
       children: [
         CustomScrollView(
@@ -111,91 +138,73 @@ class SyncedLyrics extends HookConsumerWidget {
                 backgroundColor: Colors.transparent,
                 centerTitle: true,
                 title: Text(
-                  playlist.activeTrack?.name ?? context.l10n.not_playing,
+                  activeTrack?.name ?? context.l10n.not_playing,
                   style: headlineTextStyle,
                 ),
                 bottom: PreferredSize(
                   preferredSize: const Size.fromHeight(40),
                   child: Text(
-                    playlist.activeTrack?.artists.asString() ?? "",
+                    activeTrack?.artists.asString() ?? "",
                     style:
                         mediaQuery.mdAndUp ? typography.h4 : typography.x2Large,
                   ),
                 ),
               ),
-            if (lyricValue != null &&
-                lyricValue.lyrics.isNotEmpty &&
-                lyricsState.asData?.value.static != true)
+            if (lines.isNotEmpty && !isStatic)
               SliverList.builder(
-                itemCount: lyricValue.lyrics.length,
+                itemCount: lines.length,
                 itemBuilder: (context, index) {
-                  final lyricSlice = lyricValue.lyrics[index];
-                  final isActive = lyricSlice.time.inSeconds == currentTime;
+                  final lyricSlice = lines[index];
+                  final isActive = active.active.contains(index) ||
+                      index == active.current;
 
-                  if (isActive) {
-                    controller.scrollToIndex(
-                      index,
-                      preferPosition: AutoScrollPosition.middle,
-                    );
-                  }
                   return AutoScrollTag(
                     key: ValueKey(index),
                     index: index,
                     controller: controller,
                     child: lyricSlice.text.isEmpty
                         ? Container(
-                            padding: index == lyricValue.lyrics.length - 1
+                            padding: index == lines.length - 1
                                 ? EdgeInsets.only(bottom: mediaQuery.height / 2)
                                 : null,
                           )
                         : Center(
                             child: Padding(
-                              padding: index == lyricValue.lyrics.length - 1
+                              padding: index == lines.length - 1
                                   ? const EdgeInsets.all(
                                       8.0,
                                     ).copyWith(bottom: 100)
                                   : const EdgeInsets.all(8.0),
-                              child: AnimatedDefaultTextStyle(
-                                duration: const Duration(milliseconds: 250),
-                                style: TextStyle(
-                                  color: isActive
-                                      ? theme.colorScheme.foreground
-                                      : theme.colorScheme.mutedForeground,
-                                  fontWeight: isActive
-                                      ? FontWeight.w500
-                                      : FontWeight.normal,
-                                  fontSize: (isActive ? 28 : 26) *
-                                      (textZoomLevel.value / 100),
-                                ),
-                                textAlign: TextAlign.center,
-                                child: MouseRegion(
-                                  cursor: SystemMouseCursors.click,
-                                  child: GestureDetector(
-                                    onTap: () async {
-                                      final time = Duration(
-                                        seconds:
-                                            lyricSlice.time.inSeconds - delay,
-                                      );
-                                      if (time > audioPlayer.duration ||
-                                          time.isNegative) {
-                                        return;
-                                      }
-                                      audioPlayer.seek(time);
-                                    },
-                                    child: Text(lyricSlice.text),
-                                  ),
-                                ),
+                              child: LyricsLine(
+                                slice: lyricSlice,
+                                isActive: isActive,
+                                position: position +
+                                    Duration(seconds: offset),
+                                activeColor: theme.colorScheme.foreground,
+                                inactiveColor:
+                                    theme.colorScheme.mutedForeground,
+                                fontSize: (isActive ? 28 : 26) *
+                                    (textZoomLevel.value / 100),
+                                onTap: () async {
+                                  final time =
+                                      lyricSlice.time -
+                                          Duration(seconds: offset);
+                                  if (time > audioPlayer.duration ||
+                                      time.isNegative) {
+                                    return;
+                                  }
+                                  audioPlayer.seek(time);
+                                },
                               ),
                             ),
                           ),
                   );
                 },
               ),
-            if (playlist.activeTrack != null &&
+            if (activeTrack != null &&
                 (timedLyricsQuery.isLoading || timedLyricsQuery.isRefreshing))
               const SliverToBoxAdapter(child: ShimmerLyrics())
-            else if (playlist.activeTrack != null &&
-                (timedLyricsQuery.hasError)) ...[
+            else if (activeTrack != null && timedLyricsQuery.hasError) ...[
               SliverToBoxAdapter(
                 child: Container(
                   alignment: Alignment.center,
@@ -211,7 +220,7 @@ class SyncedLyrics extends HookConsumerWidget {
               const SliverToBoxAdapter(
                 child: Icon(OpenMusicIcons.noLyrics, size: 60),
               ),
-            ] else if (lyricsState.asData?.value.static == true)
+            ] else if (isStatic)
               SliverFillRemaining(
                 child: Center(
                   child: RichText(
@@ -243,10 +252,10 @@ class SyncedLyrics extends HookConsumerWidget {
             builder: (context) {
               final actions = [
                 ZoomControls(
-                  value: delay,
+                  value: offset,
                   onChanged: (value) => ref
-                      .read(syncedLyricsDelayProvider.notifier)
-                      .state = value,
+                      .read(lyricsOffsetProvider(activeTrack).notifier)
+                      .set(value),
                   interval: 1,
                   unit: "s",
                   increaseIcon: const Icon(OpenMusicIcons.add),

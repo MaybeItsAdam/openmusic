@@ -8,6 +8,7 @@ import 'package:openmusic/components/image/universal_image.dart';
 import 'package:openmusic/extensions/context.dart';
 import 'package:openmusic/hooks/utils/use_palette_color.dart';
 import 'package:openmusic/models/metadata/metadata.dart';
+import 'package:openmusic/modules/lyrics/lyrics_actions_menu.dart';
 import 'package:openmusic/pages/lyrics/plain_lyrics.dart';
 import 'package:openmusic/pages/lyrics/synced_lyrics.dart';
 import 'package:openmusic/provider/audio_player/audio_player.dart';
@@ -67,6 +68,7 @@ class LyricsPage extends HookConsumerWidget {
           },
         ),
         const Gap(5),
+        const LyricsActionsMenu(),
       ],
     );
 

@@ -8,6 +8,7 @@ import 'package:openmusic/collections/routes.gr.dart';
 import 'package:openmusic/collections/openmusic_icons.dart';
 import 'package:openmusic/components/adaptive/adaptive_select_tile.dart';
 import 'package:openmusic/models/database/database.dart';
+import 'package:openmusic/modules/settings/lyrics_provider_order_dialog.dart';
 import 'package:openmusic/modules/settings/playback/edit_connect_port_dialog.dart';
 import 'package:openmusic/modules/settings/section_card_with_heading.dart';
 import 'package:openmusic/extensions/context.dart';
@@ -174,6 +175,19 @@ class SettingsPlaybackSection extends HookConsumerWidget {
             value: preferences.endlessPlayback,
             onChanged: preferencesNotifier.setEndlessPlayback,
           ),
+        ),
+        ListTile(
+          leading: const Icon(OpenMusicIcons.lyrics),
+          title: Text(context.l10n.lyrics_providers),
+          subtitle: Text(context.l10n.lyrics_providers_description),
+          onTap: () {
+            showDialog(
+              context: context,
+              barrierColor: Colors.black,
+              builder: (context) => const LyricsProviderOrderDialog(),
+            );
+          },
+          trailing: const Icon(OpenMusicIcons.angleRight),
         ),
         ListTile(
           title: Text(context.l10n.enable_connect),
