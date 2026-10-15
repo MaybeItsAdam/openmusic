@@ -1,0 +1,72 @@
+# Store releases are cut from the "stable" flavor (iOS scheme "stable",
+# Android productFlavor "stable"). Version name/code come from Tramline.
+#
+#   bundle exec fastlane ios beta version_name:5.1.3 version_code:46
+#   bundle exec fastlane android build version_name:5.1.3 version_code:46
+
+FLAVOR = "stable"
+IOS_APP_ID = "io.github.maybeitsadam.openmusic.stable"
+IOS_TARGET = "stable"
+IOS_CONFIGURATION = "Release-stable"
+TEAM_ID = ENV.fetch("TEAM_ID", "6NQNU5YSC2")
+
+def require_version!(options)
+  name = options[:version_name].to_s
+  code = options[:version_code].to_s
+  UI.user_error!("version_name is required") if name.empty?
+  UI.user_error!("version_code must be an integer") unless code.match?(/\A\d+\z/)
+  [name, code]
+end
+
+platform :ios do
+  desc "Build the stable flavor, sign with match and upload to TestFlight"
+  lane :beta do |options|
+    version_name, version_code = require_version!(options)
+
+    setup_ci
+
+    key = app_store_connect_api_key(
+      key_id: ENV["ASC_KEY_ID"],
+      issuer_id: ENV["ASC_ISSUER_ID"],
+      key_content: ENV["ASC_KEY_CONTENT"],
+      is_key_content_base64: true,
+    )
+
+    match(type: "appstore", readonly: true, app_identifier: IOS_APP_ID, team_id: TEAM_ID, api_key: key)
+
+    update_code_signing_settings(
+      path: "ios/Runner.xcodeproj",
+      use_automatic_signing: false,
+      team_id: TEAM_ID,
+      code_sign_identity: "Apple Distribution",
+      profile_name: "match AppStore #{IOS_APP_ID}",
+      targets: [IOS_TARGET],
+      build_configurations: [IOS_CONFIGURATION],
+    )
+
+    sh(
+      "cd .. && flutter build ipa --release --flavor #{FLAVOR} " \
+      "--build-name=#{version_name} --build-number=#{version_code} " \
+      "--export-options-plist=ios/ExportOptions.plist"
+    )
+
+    upload_to_testflight(
+      api_key: key,
+      ipa: Dir["../build/ios/ipa/*.ipa"].first,
+      skip_waiting_for_build_processing: true,
+      distribute_external: false,
+    )
+  end
+end
+
+platform :android do
+  desc "Build a signed stable-flavor release .aab (Tramline uploads it to Play)"
+  lane :build do |options|
+    version_name, version_code = require_version!(options)
+
+    sh(
+      "cd .. && flutter build appbundle --release --flavor #{FLAVOR} " \
+      "--build-name=#{version_name} --build-number=#{version_code}"
+    )
+  end
+end

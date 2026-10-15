@@ -1,0 +1,5 @@
+storage_mode "git"
+git_url ENV["MATCH_GIT_URL"]
+type "appstore"
+app_identifier ["io.github.maybeitsadam.openmusic.stable"]
+team_id "6NQNU5YSC2"

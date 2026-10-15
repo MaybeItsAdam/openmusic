@@ -1,0 +1,6 @@
+# Store builds use the "stable" flavor. Its iOS bundle ID carries a ".stable"
+# suffix (target "stable", config "Release-stable"); its Android applicationId
+# has no suffix.
+app_identifier "io.github.maybeitsadam.openmusic.stable"
+package_name "io.github.maybeitsadam.openmusic"
+team_id "6NQNU5YSC2"
